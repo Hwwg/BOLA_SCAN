@@ -1,0 +1,1479 @@
+{
+  "context": "click-SPAN-菜单项-Community-23",
+  "timestamp": "2026-01-16T14:54:24.837Z",
+  "count": 48,
+  "requests": [
+    {
+      "id": "078xy7jwg7pw",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575094848,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "x72tooz24vj",
+      "requestId": "sf50i69sek",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575094862,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 1007,
+      "body": "{\"posts\":[{\"id\":\"CttRP9QYPv5PSXaztPgMhD\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.625Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-01-16T14:44:28.625Z\"},{\"id\":\"k7aU7GVD5EnTsdZtWMZCaR\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.624Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-01-16T14:44:28.624Z\"},{\"id\":\"8UrAi2B2cMuuo54HHD3SkX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.612Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-01-16T14:44:28.612Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "CttRP9QYPv5PSXaztPgMhD",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.625Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-01-16T14:44:28.625Z"
+          },
+          {
+            "id": "k7aU7GVD5EnTsdZtWMZCaR",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.624Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-01-16T14:44:28.624Z"
+          },
+          {
+            "id": "8UrAi2B2cMuuo54HHD3SkX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.612Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-01-16T14:44:28.612Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      }
+    },
+    {
+      "id": "e0t6lvh2n0m",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095138,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "l9sum2kgm3s",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095145,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "qlihvs2t0ka",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095149,
+      "context": "click-SPAN-菜单项-Community-23",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "rqw8p8fq7t",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095170,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "dpy0mt38piu",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095200,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "ee3b9fcnzv",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575095201,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 0
+    },
+    {
+      "id": "7dawn30aiqs",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575095270,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "sz2w0smwzwg",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095270,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "hj1fwx5xven",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095271,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "6nkyizoprjf",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095398,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "evpa3h6jcdc",
+      "requestId": "sf50i69sek",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095408,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 1007,
+      "body": "{\"posts\":[{\"id\":\"CttRP9QYPv5PSXaztPgMhD\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.625Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-01-16T14:44:28.625Z\"},{\"id\":\"k7aU7GVD5EnTsdZtWMZCaR\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.624Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-01-16T14:44:28.624Z\"},{\"id\":\"8UrAi2B2cMuuo54HHD3SkX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.612Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-01-16T14:44:28.612Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "CttRP9QYPv5PSXaztPgMhD",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.625Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-01-16T14:44:28.625Z"
+          },
+          {
+            "id": "k7aU7GVD5EnTsdZtWMZCaR",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.624Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-01-16T14:44:28.624Z"
+          },
+          {
+            "id": "8UrAi2B2cMuuo54HHD3SkX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.612Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-01-16T14:44:28.612Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      }
+    },
+    {
+      "id": "apho3a6fjuq",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095555,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "ut8rm115q8n",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095556,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "jhmbln3jt3",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095559,
+      "context": "click-SPAN-菜单项-Community-23",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "7ku6hs90sni",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/images/audi-rs7.jpg",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "referer": "http://10.15.196.160:8888/"
+      },
+      "timestamp": 1768575095559,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "ywrj3rbafd",
+      "requestId": "2246n6wx6mn",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/images/audi-rs7.jpg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "69467",
+        "date": "Fri, 16 Jan 2026 14:49:57 GMT",
+        "etag": "\"68d18f7b-10f5b\"",
+        "content-type": "image/jpeg",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/jpeg",
+      "timestamp": 1768575095560,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 0
+    },
+    {
+      "id": "dtrz5h406tg",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095574,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "owzil1jkylq",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095574,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "w4pdmqdh9o",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575095574,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 0
+    },
+    {
+      "id": "g12hqwbwck8",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575095576,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "gqdfhennzuh",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095576,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "ecjnix9c074",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:35 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095589,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "ykmbvj3askk",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095646,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "62g69ads8q4",
+      "requestId": "sf50i69sek",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095712,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 1007,
+      "body": "{\"posts\":[{\"id\":\"CttRP9QYPv5PSXaztPgMhD\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.625Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-01-16T14:44:28.625Z\"},{\"id\":\"k7aU7GVD5EnTsdZtWMZCaR\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.624Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-01-16T14:44:28.624Z\"},{\"id\":\"8UrAi2B2cMuuo54HHD3SkX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.612Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-01-16T14:44:28.612Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "CttRP9QYPv5PSXaztPgMhD",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.625Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-01-16T14:44:28.625Z"
+          },
+          {
+            "id": "k7aU7GVD5EnTsdZtWMZCaR",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.624Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-01-16T14:44:28.624Z"
+          },
+          {
+            "id": "8UrAi2B2cMuuo54HHD3SkX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.612Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-01-16T14:44:28.612Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      }
+    },
+    {
+      "id": "73kvrucurts",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095845,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "q381exx085k",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095851,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "4l9vpxhc1t4",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095865,
+      "context": "click-SPAN-菜单项-Community-23",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "xyl3kj5hmfq",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095866,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "hfjofonkkgp",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575095867,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "cui10iq44u",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575095867,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 0
+    },
+    {
+      "id": "3prkrx27zhg",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575095868,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "35znowemnpb",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095868,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "j5dse77z9yj",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575095926,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "p6j0j7p5n0b",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095927,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "eb10wlnhpe",
+      "requestId": "sf50i69sek",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575095977,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 1007,
+      "body": "{\"posts\":[{\"id\":\"CttRP9QYPv5PSXaztPgMhD\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.625Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-01-16T14:44:28.625Z\"},{\"id\":\"k7aU7GVD5EnTsdZtWMZCaR\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.624Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-01-16T14:44:28.624Z\"},{\"id\":\"8UrAi2B2cMuuo54HHD3SkX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.612Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-01-16T14:44:28.612Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "CttRP9QYPv5PSXaztPgMhD",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.625Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-01-16T14:44:28.625Z"
+          },
+          {
+            "id": "k7aU7GVD5EnTsdZtWMZCaR",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.624Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-01-16T14:44:28.624Z"
+          },
+          {
+            "id": "8UrAi2B2cMuuo54HHD3SkX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.612Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-01-16T14:44:28.612Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      }
+    },
+    {
+      "id": "o1oghgx0qt8",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575096113,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "dzpfezoaai",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575096125,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "etb7ok4qc6b",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575096125,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "r4mkpzpzgg",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575096125,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 0
+    },
+    {
+      "id": "t6kj4maf2pg",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575096126,
+      "context": "click-SPAN-菜单项-Community-23",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "yxbrnvylw8q",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575096128,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "ne9lvnbsius",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575096131,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "t5mjky9m4ms",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575096131,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "1n9zivwqrb7",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575096131,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "gugdt95m6gd",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575096186,
+      "context": "click-SPAN-菜单项-Community-23"
+    },
+    {
+      "id": "ci4g6qeccn",
+      "requestId": "sf50i69sek",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:36 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575096203,
+      "context": "click-SPAN-菜单项-Community-23",
+      "size": 1007,
+      "body": "{\"posts\":[{\"id\":\"CttRP9QYPv5PSXaztPgMhD\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.625Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-01-16T14:44:28.625Z\"},{\"id\":\"k7aU7GVD5EnTsdZtWMZCaR\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.624Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-01-16T14:44:28.624Z\"},{\"id\":\"8UrAi2B2cMuuo54HHD3SkX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-01-16T14:44:28.612Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-01-16T14:44:28.612Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "CttRP9QYPv5PSXaztPgMhD",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.625Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-01-16T14:44:28.625Z"
+          },
+          {
+            "id": "k7aU7GVD5EnTsdZtWMZCaR",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.624Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-01-16T14:44:28.624Z"
+          },
+          {
+            "id": "8UrAi2B2cMuuo54HHD3SkX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-01-16T14:44:28.612Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-01-16T14:44:28.612Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      }
+    }
+  ]
+}

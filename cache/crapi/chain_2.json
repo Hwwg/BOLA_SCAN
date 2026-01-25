@@ -1,0 +1,528 @@
+{
+    "identity/api/v2/user/pictures/upload": [
+        {},
+        {},
+        {
+            "vin": {
+                "startpoints": [
+                    [
+                        {
+                            "POST /identity/api/v2/user/pictures": "add"
+                        },
+                        {
+                            "POST /workshop/api/merchant/contact_mechanic": "add"
+                        },
+                        {
+                            "GET /identity/api/v2/vehicle/vehicles": "list query"
+                        }
+                    ]
+                ],
+                "middle_chains": [
+                    {
+                        "POST /identity/api/v2/vehicle/add_vehicle": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /workshop/api/mechanic/receive_report": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "file": {}
+        },
+        {
+            "repeat_request_if_failed": {}
+        },
+        {
+            "number_of_repeats": {}
+        },
+        {
+            "mechanic_api": {}
+        }
+    ],
+    "identity/api/v2/user/pictures/login": [
+        {
+            "email": {
+                "startpoints": [
+                    [
+                        {
+                            "POST /identity/api/auth/login": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/signup": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                        },
+                        {
+                            "GET /identity/api/v2/vehicle/vehicles": "list query"
+                        }
+                    ],
+                    [
+                        {
+                            "POST /identity/api/auth/login": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/signup": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                        },
+                        {
+                            "GET /community/api/v2/community/posts/recent": "list query"
+                        }
+                    ]
+                ],
+                "middle_chains": [
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "POST /identity/api/v2/user/reset-password": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/change-email": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/verify-email-token": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/forget-password": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2/check-otp": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2.7/user/login-with-token": "unknown"
+                    },
+                    {
+                        "POST /identity/api/auth/v3/check-otp": "unknown"
+                    }
+                ]
+            }
+        },
+        {
+            "name": {}
+        },
+        {
+            "number": {
+                "startpoints": [
+                    [
+                        {
+                            "POST /identity/api/auth/login": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/signup": "add"
+                        },
+                        {
+                            "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                        },
+                        {
+                            "GET /identity/api/v2/vehicle/vehicles": "list query"
+                        }
+                    ]
+                ],
+                "middle_chains": [
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "POST /identity/api/v2/user/reset-password": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/change-email": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/verify-email-token": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/forget-password": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2/check-otp": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2.7/user/login-with-token": "unknown"
+                    },
+                    {
+                        "POST /identity/api/auth/v3/check-otp": "unknown"
+                    }
+                ]
+            }
+        },
+        {
+            "token": {}
+        },
+        {
+            "password": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/auth/login": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "GET /identity/api/v2/user/dashboard": "query"
+                    }
+                ]
+            }
+        }
+    ],
+    "identity/api/v2/user/pictures/signup": [
+        {
+            "name": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /identity/api/v2/user/pictures": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /identity/api/v2/user/dashboard": "query"
+                    },
+                    {
+                        "GET /workshop/api/shop/orders/{order_id}": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "password": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/auth/login": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "GET /identity/api/v2/user/dashboard": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "number": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/auth/login": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /workshop/api/mechanic/mechanic_report": "query"
+                    },
+                    {
+                        "GET /identity/api/v2/user/dashboard": "query"
+                    },
+                    {
+                        "GET /identity/api/v2/user/videos/{video_id}": "query"
+                    },
+                    {
+                        "GET /workshop/api/shop/orders/{order_id}": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "mechanic_code": {
+                "startpoints": [
+                    {
+                        "POST /workshop/api/merchant/contact_mechanic": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "GET /workshop/api/mechanic/mechanic_report": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "email": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/auth/login": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                    },
+                    {
+                        "POST /workshop/api/mechanic/signup": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    },
+                    {
+                        "POST /community/api/v2/community/posts/{postId}/comment": "add"
+                    },
+                    {
+                        "POST /community/api/v2/community/posts": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /workshop/api/mechanic/mechanic_report": "query"
+                    },
+                    {
+                        "GET /identity/api/v2/user/dashboard": "query"
+                    },
+                    {
+                        "GET /identity/api/v2/user/videos/{video_id}": "query"
+                    },
+                    {
+                        "GET /community/api/v2/community/posts/{postId}": "query"
+                    },
+                    {
+                        "GET /workshop/api/shop/orders/{order_id}": "query"
+                    }
+                ]
+            }
+        }
+    ],
+    "identity/api/v2/user/videos": [
+        {
+            "conversion_params": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "PUT /identity/api/v2/user/videos/{video_id}": "update"
+                    }
+                ]
+            }
+        },
+        {
+            "video_id": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /identity/api/auth/login": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/signup": "add"
+                    },
+                    {
+                        "POST /identity/api/auth/v4.0/user/login-with-token": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "POST /identity/api/v2/user/reset-password": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/change-email": "update"
+                    },
+                    {
+                        "POST /identity/api/v2/user/verify-email-token": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/forget-password": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2/check-otp": "update"
+                    },
+                    {
+                        "POST /identity/api/auth/v2.7/user/login-with-token": "unknown"
+                    },
+                    {
+                        "POST /identity/api/auth/v3/check-otp": "unknown"
+                    },
+                    {
+                        "GET /identity/api/v2/user/videos/{video_id}": "query"
+                    },
+                    {
+                        "PUT /identity/api/v2/user/videos/{video_id}": "update"
+                    },
+                    {
+                        "DELETE /identity/api/v2/user/videos/{video_id}": "delete"
+                    },
+                    {
+                        "GET /identity/api/v2/user/videos/convert_video": "query"
+                    },
+                    {
+                        "DELETE /identity/api/v2/admin/videos/{video_id}": "delete"
+                    }
+                ]
+            }
+        },
+        {
+            "file": {}
+        }
+    ],
+    "identity/api/v2/vehicle": [
+        {
+            "pincode": {}
+        },
+        {
+            "vehicle_id": {
+                "startpoints": [
+                    [
+                        {
+                            "POST /identity/api/v2/vehicle/add_vehicle": "add"
+                        },
+                        {
+                            "GET /identity/api/v2/vehicle/vehicles": "list query"
+                        }
+                    ]
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "GET /identity/api/v2/vehicle/{vehicleId}/location": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "vin": {
+                "startpoints": [
+                    [
+                        {
+                            "POST /identity/api/v2/vehicle/add_vehicle": "add"
+                        },
+                        {
+                            "GET /identity/api/v2/vehicle/vehicles": "list query"
+                        }
+                    ]
+                ],
+                "middle_chains": [
+                    {
+                        "POST /workshop/api/merchant/contact_mechanic": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /workshop/api/mechanic/receive_report": "query"
+                    }
+                ]
+            }
+        }
+    ],
+    "community/api/v2/community": [
+        {
+            "content": {}
+        },
+        {
+            "post_id": {
+                "startpoints": [
+                    {
+                        "POST /community/api/v2/community/posts": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /community/api/v2/community/posts/{postId}/comment": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /community/api/v2/community/posts/{postId}": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "title": {}
+        }
+    ],
+    "community/api/v2/coupon": [
+        {
+            "amount": {}
+        },
+        {
+            "coupon_code": {}
+        }
+    ],
+    "workshop/api/shop/orders": [
+        {
+            "order_id": {
+                "startpoints": [
+                    {
+                        "POST /workshop/api/shop/orders": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "PUT /workshop/api/shop/orders/{order_id}": "update"
+                    },
+                    {
+                        "GET /workshop/api/shop/orders/{order_id}": "query"
+                    },
+                    {
+                        "POST /workshop/api/shop/orders/return_order": "update"
+                    }
+                ]
+            }
+        },
+        {},
+        {
+            "product_id": {}
+        }
+    ]
+}

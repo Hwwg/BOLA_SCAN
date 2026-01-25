@@ -1,0 +1,1834 @@
+[
+    {
+        "identity/api/v2/user/pictures/upload": {
+            "POST /identity/api/v2/user/pictures": {
+                "request_parameters": {
+                    "file": {
+                        "type": "file",
+                        "required": false,
+                        "in": "formdata"
+                    }
+                },
+                "response_parameters": {
+                    "available_credit": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "picture": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "GET /workshop/api/mechanic/mechanic_report": {
+                "request_parameters": {
+                    "report_id": {
+                        "type": "integer",
+                        "example": "<integer>",
+                        "required": false,
+                        "in": "params"
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "mechanic.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "mechanic.mechanic_code": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "mechanic.user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "mechanic.user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicle.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicle.vin": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicle.owner.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicle.owner.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "problem_details": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "created_on": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "GET /workshop/api/mechanic/receive_report": {
+                "request_parameters": {
+                    "mechanic_code": {
+                        "type": "string",
+                        "example": "<string>",
+                        "required": false,
+                        "in": "params"
+                    },
+                    "problem_details": {
+                        "type": "string",
+                        "example": "<string>",
+                        "required": false,
+                        "in": "params"
+                    },
+                    "vin": {
+                        "type": "string",
+                        "example": "<string>",
+                        "required": false,
+                        "in": "params"
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "sent": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "report_link": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "key_0": {
+                        "type": "integer",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    },
+                    "key_1": {
+                        "type": "integer",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    },
+                    "key_2": {
+                        "type": "string",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "POST /workshop/api/merchant/contact_mechanic": {
+                "request_parameters": {
+                    "mechanic_api": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "mechanic_code": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "number_of_repeats": {
+                        "type": "number",
+                        "example": "number",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "problem_details": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "repeat_request_if_failed": {
+                        "type": "boolean",
+                        "example": "boolean",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "vin": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "response_from_mechanic_api.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "response_from_mechanic_api.sent": {
+                        "type": "boolean",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "response_from_mechanic_api.report_link": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "503",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "POST /workshop/api/shop/apply_coupon": {
+                "request_parameters": {
+                    "amount": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "coupon_code": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "credit": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "GET /workshop/api/shop/return_qr_code": {
+                "request_parameters": {},
+                "response_parameters": {},
+                "type": "query"
+            }
+        }
+    },
+    {
+        "identity/api/v2/user/pictures/login": {
+            "POST /identity/api/v2/user/reset-password": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "POST /identity/api/v2/user/change-email": {
+                "request_parameters": {
+                    "new_email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "old_email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "POST /identity/api/v2/user/verify-email-token": {
+                "request_parameters": {
+                    "old_email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "new_email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "GET /identity/api/v2/user/dashboard": {
+                "request_parameters": {},
+                "response_parameters": {
+                    "available_credit": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "role": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video_id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "POST /identity/api/auth/forget-password": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "POST /identity/api/auth/login": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "token": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "type": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "role": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "POST /identity/api/auth/signup": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "number": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "POST /identity/api/auth/v2/check-otp": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "otp": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "*/*"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "*/*"
+                    }
+                },
+                "type": "update"
+            },
+            "POST /identity/api/auth/v2.7/user/login-with-token": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "token": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "*/*"
+                    },
+                    "type": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "*/*"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "*/*"
+                    },
+                    "role": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "*/*"
+                    }
+                }
+            },
+            "POST /identity/api/auth/v3/check-otp": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "otp": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "503",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "503",
+                        "content_type": "application/json"
+                    }
+                }
+            },
+            "POST /identity/api/auth/v4.0/user/login-with-token": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "403",
+                        "content_type": "*/*"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "403",
+                        "content_type": "*/*"
+                    }
+                },
+                "type": "add"
+            }
+        }
+    },
+    {
+        "identity/api/v2/user/pictures/signup": {
+            "POST /workshop/api/mechanic/signup": {
+                "request_parameters": {
+                    "email": {
+                        "type": "string",
+                        "example": "email",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "mechanic_code": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "number": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            }
+        }
+    },
+    {
+        "identity/api/v2/user/videos": {
+            "POST /identity/api/v2/user/videos": {
+                "request_parameters": {
+                    "file": {
+                        "type": "file",
+                        "required": true,
+                        "in": "formdata"
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video_name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "conversion_params": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "GET /identity/api/v2/user/videos/{video_id}": {
+                "request_parameters": {
+                    "video_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video_name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "conversion_params": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "204",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "204",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "PUT /identity/api/v2/user/videos/{video_id}": {
+                "request_parameters": {
+                    "video_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    },
+                    "id": {
+                        "type": "integer",
+                        "example": "long",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "videoName": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "video_url": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "conversion_params": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video_name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "video": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "conversion_params": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "204",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "204",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "DELETE /identity/api/v2/user/videos/{video_id}": {
+                "request_parameters": {
+                    "video_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "delete"
+            },
+            "GET /identity/api/v2/user/videos/convert_video": {
+                "request_parameters": {
+                    "video_id": {
+                        "type": "integer",
+                        "example": "<long>",
+                        "required": false,
+                        "in": "params"
+                    }
+                },
+                "response_parameters": {},
+                "type": "query"
+            },
+            "DELETE /identity/api/v2/admin/videos/{video_id}": {
+                "request_parameters": {
+                    "video_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "delete"
+            }
+        }
+    },
+    {
+        "identity/api/v2/vehicle": {
+            "GET /identity/api/v2/vehicle/vehicles": {
+                "request_parameters": {},
+                "response_parameters": {
+                    "[].id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.fuel_type": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.model": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.vehicle_img": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.vehiclecompany.id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].model.vehiclecompany.name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].owner.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].owner.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].pincode": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].status": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].uuid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].vehicleLocation.id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].vehicleLocation.latitude": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].vehicleLocation.longitude": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].vin": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].year": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "list query"
+            },
+            "POST /identity/api/v2/vehicle/add_vehicle": {
+                "request_parameters": {
+                    "pincode": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "vin": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "403",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "403",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "GET /identity/api/v2/vehicle/{vehicleId}/location": {
+                "request_parameters": {
+                    "vehicleId": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "carId": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicleLocation.id": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicleLocation.latitude": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "vehicleLocation.longitude": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "404",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "POST /identity/api/v2/vehicle/resend_email": {
+                "request_parameters": {},
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "status_code": "500",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            }
+        }
+    },
+    {
+        "community/api/v2/community": {
+            "GET /community/api/v2/community/posts/{postId}": {
+                "request_parameters": {
+                    "postId": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "title": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "content": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.nickname": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.vehicleid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.profile_pic_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.created_at": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[]": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "authorid": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "CreatedAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "POST /community/api/v2/community/posts/{postId}/comment": {
+                "request_parameters": {
+                    "postId": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "CreatedAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.created_at": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.nickname": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.profile_pic_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.vehicleid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "authorid": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].CreatedAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].author.created_at": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].author.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].author.nickname": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].author.profile_pic_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].author.vehicleid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].content": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[].id": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "content": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "id": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "title": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "POST /community/api/v2/community/posts": {
+                "request_parameters": {
+                    "content": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "CreatedAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.created_at": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.nickname": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.profile_pic_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "author.vehicleid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "authorid": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "comments[]": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "content": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "id": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "title": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "GET /community/api/v2/community/posts/recent": {
+                "request_parameters": {
+                    "limit": {
+                        "type": "integer",
+                        "example": "<integer>",
+                        "required": false,
+                        "in": "params"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "example": "<integer>",
+                        "required": false,
+                        "in": "params"
+                    }
+                },
+                "response_parameters": {
+                    "[].id": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].title": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].content": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].author.nickname": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].author.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].author.vehicleid": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].author.profile_pic_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].author.created_at": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].comments[]": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].authorid": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "[].CreatedAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "list query"
+            }
+        }
+    },
+    {
+        "community/api/v2/coupon": {
+            "POST /community/api/v2/coupon/new-coupon": {
+                "request_parameters": {
+                    "coupon_code": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "amount": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "amount": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "coupon_code": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "POST /community/api/v2/coupon/validate-coupon": {
+                "request_parameters": {
+                    "coupon_code": {
+                        "type": "string",
+                        "example": "string",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "amount": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "coupon_code": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            }
+        }
+    },
+    {
+        "workshop/api/shop/orders": {
+            "POST /workshop/api/shop/orders": {
+                "request_parameters": {
+                    "product_id": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "400",
+                        "content_type": "application/json"
+                    },
+                    "credit": {
+                        "type": "number",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "add"
+            },
+            "PUT /workshop/api/shop/orders/{order_id}": {
+                "request_parameters": {
+                    "order_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    },
+                    "product_id": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": "integer",
+                        "required": true,
+                        "in": "body"
+                    }
+                },
+                "response_parameters": {
+                    "orders.created_on": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.image_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.price": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.quantity": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.status": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "403",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            },
+            "GET /workshop/api/shop/orders/{order_id}": {
+                "request_parameters": {
+                    "order_id": {
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": {
+                            "content": "(Required) ",
+                            "type": "text/plain"
+                        }
+                    }
+                },
+                "response_parameters": {
+                    "orders.created_on": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.image_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.product.price": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.quantity": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "orders.status": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "message": {
+                        "type": "string",
+                        "status_code": "403",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "query"
+            },
+            "POST /workshop/api/shop/orders/return_order": {
+                "request_parameters": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": "<integer>",
+                        "required": false,
+                        "in": "params"
+                    }
+                },
+                "response_parameters": {
+                    "message": {
+                        "type": "string",
+                        "status_code": "403",
+                        "content_type": "application/json"
+                    },
+                    "order.created_on": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.product.id": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.product.image_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.product.name": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.product.price": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.user.email": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.user.number": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.quantity": {
+                        "type": "integer",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "order.status": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    },
+                    "qr_code_url": {
+                        "type": "string",
+                        "status_code": "200",
+                        "content_type": "application/json"
+                    }
+                },
+                "type": "update"
+            }
+        }
+    }
+]

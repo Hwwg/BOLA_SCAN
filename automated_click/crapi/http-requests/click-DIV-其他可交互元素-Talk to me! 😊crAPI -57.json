@@ -1,0 +1,206 @@
+{
+  "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57",
+  "timestamp": "2026-01-16T14:54:24.845Z",
+  "count": 7,
+  "requests": [
+    {
+      "id": "pvgatkw4fa",
+      "type": "request",
+      "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+      "method": "POST",
+      "resourceType": "xhr",
+      "headers": {
+        "x-goog-maps-api-signature": "36429",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "x-user-agent": "grpc-web-javascript/0.1",
+        "referer": "https://www.google.com/",
+        "x-goog-gmp-client-signals": "CAkqCDMuNjMuMTBhWg4SDAjwoanLBhCA9um8AQ==",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "x-goog-maps-client-id": "google-maps-embed",
+        "sec-ch-ua-mobile": "?0",
+        "x-goog-maps-api-salt": "QDReDccIn",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json+protobuf",
+        "x-goog-maps-session-id": "3FBB2FCE-1AB8-4449-933F-072E2BBB19CF"
+      },
+      "timestamp": 1768575216397,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57",
+      "postData": "[[[37.39874198463942,-94.71556812314633],[37.41480495573125,-94.69535986919209]],13,null,\"zh-CN\",2,null,0,0,null,null,289,1,\"https://www.google.com/maps/embed\",1]",
+      "jsonData": [
+        [
+          [
+            37.39874198463942,
+            -94.71556812314633
+          ],
+          [
+            37.41480495573125,
+            -94.69535986919209
+          ]
+        ],
+        13,
+        null,
+        "zh-CN",
+        2,
+        null,
+        0,
+        0,
+        null,
+        null,
+        289,
+        1,
+        "https://www.google.com/maps/embed",
+        1
+      ]
+    },
+    {
+      "id": "adbbyx74km",
+      "type": "request",
+      "url": "https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i1940!3i3177!4i256!2m1!1e1!3m12!2szh-CN!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&client=google-maps-embed&token=15770",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "timestamp": 1768575216404,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57"
+    },
+    {
+      "id": "rzxnkl1zore",
+      "type": "request",
+      "url": "https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i1940!3i3176!4i256!2m1!1e1!3m12!2szh-CN!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&client=google-maps-embed&token=5365",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "timestamp": 1768575216419,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57"
+    },
+    {
+      "id": "0vp61izxs3",
+      "requestId": "2s5gk9m169e",
+      "type": "response",
+      "url": "https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i1940!3i3176!4i256!2m1!1e1!3m12!2szh-CN!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&client=google-maps-embed&token=5365",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "x-server-version-bin": "CgoIBBDh0qLLBhgB",
+        "report-to": "{\"group\":\"mspthpsdsghrhc:124:0\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/scaffolding/mspthpsdsghrhc:124:0\"}],}",
+        "x-content-type-options": "nosniff",
+        "expires": "Wed, 30 Sep 2026 19:40:29 GMT",
+        "server-timing": "gfet4t7; dur=18",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "date": "Fri, 16 Jan 2026 14:50:07 GMT",
+        "content-type": "image/jpeg",
+        "x-frame-options": "SAMEORIGIN",
+        "content-security-policy": "script-src 'none'; object-src 'none'; base-uri 'none'",
+        "cache-control": "public, max-age=22222222",
+        "cross-origin-resource-policy": "cross-origin",
+        "content-security-policy-report-only": "script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/scaffolding/mspthpsdsghrhc:124:0",
+        "access-control-allow-origin": "*",
+        "cross-origin-opener-policy-report-only": "same-origin; report-to=mspthpsdsghrhc:124:0",
+        "content-length": "18006",
+        "x-xss-protection": "0",
+        "server": "scaffolding on HTTPServer2"
+      },
+      "method": "GET",
+      "contentType": "image/jpeg",
+      "timestamp": 1768575216419,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57",
+      "size": 0
+    },
+    {
+      "id": "9pyluo19yvp",
+      "requestId": "os6986ub6c",
+      "type": "response",
+      "url": "https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i1940!3i3177!4i256!2m1!1e1!3m12!2szh-CN!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&client=google-maps-embed&token=15770",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "x-server-version-bin": "CgoIBBDh0qLLBhgB",
+        "report-to": "{\"group\":\"mspthpsdsghrhc:124:0\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/scaffolding/mspthpsdsghrhc:124:0\"}],}",
+        "x-content-type-options": "nosniff",
+        "expires": "Wed, 30 Sep 2026 19:40:29 GMT",
+        "server-timing": "gfet4t7; dur=19",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "date": "Fri, 16 Jan 2026 14:50:07 GMT",
+        "content-type": "image/jpeg",
+        "x-frame-options": "SAMEORIGIN",
+        "content-security-policy": "script-src 'none'; object-src 'none'; base-uri 'none'",
+        "cache-control": "public, max-age=22222222",
+        "cross-origin-resource-policy": "cross-origin",
+        "content-security-policy-report-only": "script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/scaffolding/mspthpsdsghrhc:124:0",
+        "access-control-allow-origin": "*",
+        "cross-origin-opener-policy-report-only": "same-origin; report-to=mspthpsdsghrhc:124:0",
+        "content-length": "17061",
+        "x-xss-protection": "0",
+        "server": "scaffolding on HTTPServer2"
+      },
+      "method": "GET",
+      "contentType": "image/jpeg",
+      "timestamp": 1768575216420,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57",
+      "size": 0
+    },
+    {
+      "id": "azmw4evjqpi",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/merchant/service_requests/7WU0NE12M691M4A69",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/vehicle-service-dashboard?VIN=7WU0NE12M691M4A69",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575216571,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57"
+    },
+    {
+      "id": "1pcd2mk70kk",
+      "requestId": "fb8vycb20mw",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/merchant/service_requests/7WU0NE12M691M4A69",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:53:36 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575216584,
+      "context": "click-DIV-其他可交互元素-Talk to me! 😊crAPI -57",
+      "size": 75,
+      "body": "{\"service_requests\":[],\"next_offset\":null,\"previous_offset\":null,\"count\":0}",
+      "jsonData": {
+        "service_requests": [],
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 0
+      }
+    }
+  ]
+}

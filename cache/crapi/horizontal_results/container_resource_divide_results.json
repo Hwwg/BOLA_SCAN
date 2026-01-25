@@ -1,0 +1,63 @@
+{
+    "ou_id": [],
+    "resource_id": [
+        {
+            "community/api/v2/coupon": [
+                "coupon_code"
+            ]
+        },
+        {
+            "identity/api/v2/user/videos": [
+                "id",
+                "video_id"
+            ]
+        },
+        {
+            "identity/api/v2/user/pictures/login": [
+                "name",
+                "email",
+                "token"
+            ]
+        },
+        {
+            "identity/api/v2/user/pictures/signup": [
+                "mechanic_code",
+                "email",
+                "name",
+                "number"
+            ]
+        },
+        {
+            "workshop/api/shop/orders": [
+                "order_id",
+                "product_id"
+            ]
+        },
+        {
+            "community/api/v2/community": [
+                "postId"
+            ]
+        },
+        {
+            "identity/api/v2/vehicle": [
+                "vehicleId"
+            ]
+        },
+        {
+            "identity/api/v2/user/pictures/upload": [
+                "report_id",
+                "mechanic_code",
+                "vin",
+                "mechanic_api",
+                "number_of_repeats",
+                "coupon_code"
+            ]
+        }
+    ],
+    "filterd_resource_id": [
+        "id",
+        "coupon_code",
+        "order_id",
+        "product_id"
+    ]
+}

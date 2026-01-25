@@ -1,0 +1,1370 @@
+{
+  "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+  "timestamp": "2026-01-16T14:54:24.838Z",
+  "count": 50,
+  "requests": [
+    {
+      "id": "0px74gwr3d6d",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102376,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "0255t0rweh9a",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575102556,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "kulbh41qt6",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102557,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "baol7ovlzru",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102557,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "7u93rmsip8n",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102559,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "zfusobowvdb",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575102559,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "bxpu96ie1t",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575102559,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "vc14d8aq6np",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:42 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575102562,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "7fg6argeqtx",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:42 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102562,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "tp5uesc9g3m",
+      "requestId": "h1wnl3ep5qg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:51:42 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102562,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      }
+    },
+    {
+      "id": "n1916xya4um",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102615,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "i1vzy5vsu6l",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/images/wheel.svg",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "referer": "http://10.15.196.160:8888/shop"
+      },
+      "timestamp": 1768575102615,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "nemrsyol63e",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/images/seat.svg",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "referer": "http://10.15.196.160:8888/shop"
+      },
+      "timestamp": 1768575102615,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "bpo5gk6lfpf",
+      "requestId": "wctb66s096o",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/images/wheel.svg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "13708",
+        "date": "Fri, 16 Jan 2026 14:50:17 GMT",
+        "etag": "\"68d18f7b-358c\"",
+        "content-type": "image/svg+xml",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml",
+      "timestamp": 1768575102615,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "3vvruudxnsw",
+      "requestId": "ha7qadsli5m",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/images/seat.svg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "7844",
+        "date": "Fri, 16 Jan 2026 14:50:17 GMT",
+        "etag": "\"68d18f7b-1ea4\"",
+        "content-type": "image/svg+xml",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml",
+      "timestamp": 1768575102615,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "qcjzbj04lm8",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:42 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102616,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "1mcf0nu70im",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575102796,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "xn9flzm8yah",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102797,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "7jwmezxsnrm",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102798,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "5ua4yqezum",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575102798,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "0zawmh0ncu9",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575102808,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "kj3ahzr1yjb",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102809,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "dilauvxjoeb",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575102811,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "4n64x5mzy2c",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102811,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "fm3v3154czv",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102812,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "w49qopyktgj",
+      "requestId": "h1wnl3ep5qg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575102813,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      }
+    },
+    {
+      "id": "dba7cklhvrm",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575102864,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "7t61au91tng",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575103045,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "npw1b0zo9es",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103046,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "b8ovpmbc5jg",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103047,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "8b25il5dawa",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575103057,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "z2qboi6hszf",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575103057,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "9qzfy6r27jt",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103057,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "lzfraius0jk",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575103062,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "zc7gujpq7dm",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103062,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "aoclg7j2x74",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103062,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "hsni7zaipho",
+      "requestId": "h1wnl3ep5qg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103062,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      }
+    },
+    {
+      "id": "7v2hrt0abty",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103122,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "zfyig30gsm",
+      "type": "request",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575103319,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "s8ruul5m66s",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103321,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "r8v7jw2df4i",
+      "type": "request",
+      "url": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+      "method": "GET",
+      "resourceType": "document",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "referer": "http://10.15.196.160:8888/",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not.A/Brand\";v=\"99\", \"Chromium\";v=\"136\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+      },
+      "timestamp": 1768575103330,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "i5kruwh4ilp",
+      "requestId": "wdndbozphsd",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=37.406769,-94.705528&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Fri, 16 Jan 2026 14:49:58 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s37.406769,-94.705528",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=15",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1768575103330,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 0
+    },
+    {
+      "id": "x7ubxjzwnlf",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "referer": "http://10.15.196.160:8888/",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103330,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "postData": "{\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q\"}",
+      "jsonData": {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q"
+      }
+    },
+    {
+      "id": "pslrqkzr82",
+      "requestId": "928epwiaj65",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1768575103334,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      }
+    },
+    {
+      "id": "fyznb9lhj4",
+      "requestId": "h1wnl3ep5qg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103334,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      }
+    },
+    {
+      "id": "a273c1w8ae7",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103393,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "u1irv9q38ck",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575103394,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24"
+    },
+    {
+      "id": "qhr5rkwo4bd",
+      "requestId": "2a9jif55zmg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103395,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 185,
+      "body": "{\"id\":8,\"name\":\"huangweigang\",\"email\":\"123@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangweigang",
+        "email": "123@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      }
+    },
+    {
+      "id": "xxgnys79ghp",
+      "requestId": "ivj3przi4j",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:51:43 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103478,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 367,
+      "body": "[{\"id\":6,\"uuid\":\"aa36d3dd-1ee2-471e-93bc-0001332968e2\",\"pincode\":\"3637\",\"vin\":\"7WU0NE12M691M4A69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":5,\"model\":\"RS7\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/audi-rs7.jpg\",\"vehiclecompany\":{\"id\":5,\"name\":\"Audi\"}},\"vehicleLocation\":{\"id\":5,\"latitude\":\"37.406769\",\"longitude\":\"-94.705528\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "aa36d3dd-1ee2-471e-93bc-0001332968e2",
+          "pincode": "3637",
+          "vin": "7WU0NE12M691M4A69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 5,
+            "model": "RS7",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/audi-rs7.jpg",
+            "vehiclecompany": {
+              "id": 5,
+              "name": "Audi"
+            }
+          },
+          "vehicleLocation": {
+            "id": 5,
+            "latitude": "37.406769",
+            "longitude": "-94.705528"
+          },
+          "owner": null
+        }
+      ]
+    },
+    {
+      "id": "bm9372eqhqh",
+      "requestId": "h1wnl3ep5qg",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:51:44 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575103623,
+      "context": "click-DIV-其他可交互元素-<div role=\"menuitem\"-24",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      }
+    }
+  ]
+}

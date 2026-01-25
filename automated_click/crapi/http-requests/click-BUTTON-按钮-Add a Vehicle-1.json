@@ -1,0 +1,80 @@
+{
+  "context": "click-BUTTON-按钮-Add a Vehicle-1",
+  "timestamp": "2026-01-16T14:54:24.823Z",
+  "count": 4,
+  "requests": [
+    {
+      "id": "g90i4fzluf",
+      "type": "request",
+      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='a' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M10 0H0v10' fill='none' stroke='rgba(255,255,255,0.1)'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M0 0h100v100H0z'/%3E%3C/svg%3E",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "referer": "http://10.15.196.160:8888/"
+      },
+      "timestamp": 1768574973995,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1"
+    },
+    {
+      "id": "izgc9dqz",
+      "requestId": "v57kt2pr9t7",
+      "type": "response",
+      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='a' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M10 0H0v10' fill='none' stroke='rgba(255,255,255,0.1)'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M0 0h100v100H0z'/%3E%3C/svg%3E",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "content-type": "image/svg+xml;charset=utf-8"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml;charset=utf-8",
+      "timestamp": 1768574973995,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 0
+    },
+    {
+      "id": "yd6itneatt",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/chatbot/genai/state",
+      "method": "GET",
+      "resourceType": "xhr",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/verify-vehicle",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "accept": "application/json",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+      },
+      "timestamp": 1768574974848,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1"
+    },
+    {
+      "id": "23ncobz07ka",
+      "requestId": "0yi7ktp27hx",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Fri, 16 Jan 2026 14:49:35 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=3a83b355-4718-44e1-9155-c324a7377ceb; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768574974908,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      }
+    }
+  ]
+}

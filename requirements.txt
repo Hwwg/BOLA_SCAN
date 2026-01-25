@@ -1,0 +1,16 @@
+# BOLAScan v4 - Python Dependencies
+# BOLA (Broken Object Level Authorization) 漏洞自动检测工具
+
+# LLM API 调用
+openai>=1.0.0
+
+# HTTP 请求库
+requests>=2.31.0
+
+# URL 处理（requests的依赖，显式声明以确保兼容性）
+urllib3>=2.0.0
+
+# 注意：以下是Python标准库，无需额外安装
+# - logging, threading, concurrent.futures
+# - sys, os, json, copy, dataclasses, typing
+# - urllib.parse, base64, io, time, re, itertools, hashlib

@@ -1,0 +1,56 @@
+{
+  "context": "click-DIV-其他可交互元素-VIN: 7WU0NE12M691M4A-47",
+  "timestamp": "2026-01-16T14:54:24.845Z",
+  "count": 2,
+  "requests": [
+    {
+      "id": "iyyq8ltv8is",
+      "type": "request",
+      "url": "http://10.15.196.160:8888/workshop/api/merchant/service_requests/7WU0NE12M691M4A69",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc0OTU4LCJleHAiOjE3NjkxNzk3NTgsInJvbGUiOiJ1c2VyIn0.TBLJU3-WnWzzxfYYmx1oOC6dby4TIzhQpaJKyULwVkrq1c7-zTFDurAdHAeKsMGP7nQv58s6SiIroaNKOOv5Il_h5OvxTGRRQcgJx-Fam8x7AySB-duM8782Y126TUwxUqs86mT6XmQ-0ExW8o5kNvtlMfUr5FhtlT2zdoTAYFN34vKXqFTD1linoTUq4AcHHacbyw_buxWkj9WwPsIxZfW2Ef3eyiAv8HrPvuTs-uy81VLmVYxwXZHYG-_VmqV8pcApwMOhuri2BqQXrXKZUSZ0Noo17x7YYEav8a9GJy_4aZ9dzXdAX6pXljNzgQeUTx6gWX7D7q6s-6ZTfPha3Q",
+        "referer": "http://10.15.196.160:8888/vehicle-service-dashboard?VIN=7WU0NE12M691M4A69",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1768575203230,
+      "context": "click-DIV-其他可交互元素-VIN: 7WU0NE12M691M4A-47"
+    },
+    {
+      "id": "77bfi84c68q",
+      "requestId": "fb8vycb20mw",
+      "type": "response",
+      "url": "http://10.15.196.160:8888/workshop/api/merchant/service_requests/7WU0NE12M691M4A69",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Fri, 16 Jan 2026 14:53:23 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1768575203234,
+      "context": "click-DIV-其他可交互元素-VIN: 7WU0NE12M691M4A-47",
+      "size": 75,
+      "body": "{\"service_requests\":[],\"next_offset\":null,\"previous_offset\":null,\"count\":0}",
+      "jsonData": {
+        "service_requests": [],
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 0
+      }
+    }
+  ]
+}
