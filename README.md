@@ -162,51 +162,60 @@ BOLASCAN/
 
 ## Example Output
 
-Detection result JSON format:
+Detection result JSON format (simplified example from `cache/crapi/bola_horizontal_results.json`):
 
 ```json
 {
-  "api_path": "/api/v1/user/profile/{id}",
-  "method": "GET",
-  "vulnerability_detected": true,
-  "severity": "high",
-  "description": "Horizontal privilege escalation detected: User A can access User B's profile",
-  "test_cases": [
-    {
-      "attacker_account": "test_account",
-      "victim_resource_id": "victim_user_id_123",
-      "status_code": 200,
-      "unauthorized_access": true
+  "resource_id": {
+    "identity/api/v2/vehicle": {
+      "vehicleId": {
+        "cross": [
+          {
+            "GET:/identity/api/v2/vehicle/{vehicleId}/location": {
+              "conclusion": "BOLA Found",
+              "reason": "The Attacker was able to access the Victim's vehicle location data without permission.",
+              "test_type": {
+                "category": "resource_id",
+                "case_type": "overprivilege",
+                "position_mode": "single",
+                "value_source": "A",
+                "strategy": "BOLA_SingleLoc_Query_Target:A",
+                "group_name": "identity/api/v2/vehicle",
+                "param_name": "vehicleId"
+              },
+              "details": {
+                "data": {
+                  "request_params": {
+                    "method": "GET",
+                    "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5/location"
+                  },
+                  "response_params": {
+                    "carId": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+                    "vehicleLocation": {
+                      "latitude": "37.746880",
+                      "longitude": "-84.301460"
+                    }
+                  }
+                },
+                "test": {
+                  "request_params": {
+                    "method": "GET",
+                    "url": "http://10.15.196.160:8888/identity/api/v2/vehicle/4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5/location"
+                  },
+                  "response_params": {
+                    "carId": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+                    "vehicleLocation": {
+                      "latitude": "37.746880",
+                      "longitude": "-84.301460"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
     }
-  ]
+  }
 }
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## License
-
-This tool is provided for security research and authorized testing purposes only. Do not use on unauthorized systems.
-
-## Citation
-
-If you use BOLASCAN in your research, please cite our paper:
-
-```bibtex
-@article{bolascan2025,
-  title={BOLASCAN: Automated Detection of BOLA Vulnerabilities in Web Applications},
-  author={[Authors]},
-  journal={[Journal/Conference]},
-  year={2025}
-}
-```
-
-## Contact
-
-For installation issues or technical support, please contact the authors or open an issue on GitHub.
-
----
-
-**Disclaimer**: This tool is intended for security research and authorized penetration testing only. Users are responsible for ensuring they have proper authorization before testing any systems.
