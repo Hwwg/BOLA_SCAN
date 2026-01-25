@@ -1812,30 +1812,34 @@ class CaseGeneration:
         """
         测试用例打包输出的主要流程
         """
+        import os
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        cache_dir = os.path.join(project_root, 'cache', self.project_name)
+        
         case_hadling_from_click_data_resutls = self.case_hadling_from_click_data_initial()
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/case_hadling_from_click_data_resutls.json",case_hadling_from_click_data_resutls)
-        # case_hadling_from_click_data_resutls = self.jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/case_hadling_from_click_data_resutls.json")
+        self.jsontools.write_json(os.path.join(cache_dir, "case_hadling_from_click_data_resutls.json"), case_hadling_from_click_data_resutls)
+        # case_hadling_from_click_data_resutls = self.jsontools.read_json(os.path.join(cache_dir, "case_hadling_from_click_data_resutls.json"))
 
         dependency_chain_with_parameters_results = self.dependency_chain_with_parameters()
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/dependency_chain_with_parameters_results.json",dependency_chain_with_parameters_results)
+        self.jsontools.write_json(os.path.join(cache_dir, "dependency_chain_with_parameters_results.json"), dependency_chain_with_parameters_results)
 
-        add_type_api_packages_results = self.add_type_api_packages(dependency_chain_with_parameters_results,case_hadling_from_click_data_resutls)
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/add_type_api_packages_results.json",add_type_api_packages_results)
+        add_type_api_packages_results = self.add_type_api_packages(dependency_chain_with_parameters_results, case_hadling_from_click_data_resutls)
+        self.jsontools.write_json(os.path.join(cache_dir, "add_type_api_packages_results.json"), add_type_api_packages_results)
 
-        add_parameters_from_click_data = self.add_parameters_from_click_data(add_type_api_packages_results,case_hadling_from_click_data_resutls)
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/add_parameters_from_click_data.json",add_parameters_from_click_data)
+        add_parameters_from_click_data = self.add_parameters_from_click_data(add_type_api_packages_results, case_hadling_from_click_data_resutls)
+        self.jsontools.write_json(os.path.join(cache_dir, "add_parameters_from_click_data.json"), add_parameters_from_click_data)
 
         create_request_data_packages_results = self.create_request_data_packages(add_parameters_from_click_data)
         
         # 序列化包含文件对象的请求参数，确保可以保存到JSON（递归处理所有深层嵌套和循环引用）
         serialized_results = _make_json_serializable(create_request_data_packages_results)
         
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/create_request_data_packages_results.json", serialized_results)
+        self.jsontools.write_json(os.path.join(cache_dir, "create_request_data_packages_results.json"), serialized_results)
         logger.info("create_request_data_packages_results successful")
 
         # wheel_execution_packages_results = self.wheel_exectuion_pacakges_create(url,data_account,create_request_data_packages_results)
         # 将执行后的结果写到缓存，便于查看响应
-        # self.jsontools.write_json("/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/newbee_mall/wheel_execution_packages_results.json", wheel_execution_packages_results)
+        # self.jsontools.write_json(os.path.join(cache_dir, "wheel_execution_packages_results.json"), wheel_execution_packages_results)
 
 
         # case_generation_results = self.wheel_running_packages(url,data_account,add_parameters_from_click_data)
@@ -1853,10 +1857,13 @@ if __name__ == "__main__":
         project_name = "gin_vue_admin"
 
         js = JsonTools()
-        # 固定项目路径与文件位置（用户提供的绝对路径）
-        api_doc_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/api_doc_with_type.json"
-        case_file_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/automated_click/{project_name}/http-requests.json"
-        # add_type_path = "/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/mall/add_type_api_packages_results.json"
+        # 获取项目根目录
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        
+        # 固定项目路径与文件位置
+        api_doc_path = os.path.join(project_root, 'cache', project_name, "api_doc_with_type.json")
+        case_file_path = os.path.join(project_root, 'automated_click', project_name, "http-requests.json")
+        # add_type_path = os.path.join(project_root, 'cache', project_name, "add_type_api_packages_results.json")
         chain_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/dependency_chains_results.json"
         output_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/case_execution_packages.json"
 

@@ -1850,35 +1850,45 @@ class DependencyChain:
         """
         返回构建好的依赖链条
         """
+        import os
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        cache_dir = os.path.join(project_root, 'cache', self.project_name)
+        
         chain_1 = self.dependency_construction_v1()
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/chain_1.json", chain_1)
+        self.jsontools.write_json(os.path.join(cache_dir, "chain_1.json"), chain_1)
         chain_2 = self.dependency_construction_v2()
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/chain_2.json", chain_2)
+        self.jsontools.write_json(os.path.join(cache_dir, "chain_2.json"), chain_2)
 
         merged_results = self.merged_dependencychain(chain_1, chain_2)
-        self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/merged_results.json", merged_results)
+        self.jsontools.write_json(os.path.join(cache_dir, "merged_results.json"), merged_results)
 
         dfs_dependency_chain_results = self.dfs_dependency_chain(merged_results)
-        # dfs_dependency_chain_results = self.jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/dependency_chains_results.json")
+        # dfs_dependency_chain_results = self.jsontools.read_json(os.path.join(cache_dir, "dependency_chains_results.json"))
         remove_duplicated_chains_results = self.remove_duplicated_chains(dfs_dependency_chain_results)
 
         # query_routes_additional_data = self.add_query_routs_data(remove_duplicated_chains_results)
 
         # llm_review_chains_results = self.llm_review_chains(remove_duplicated_chains_results)
-        # self.jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/dependency_chains_results.json",dfs_dependency_chain_results)
+        # self.jsontools.write_json(os.path.join(cache_dir, "dependency_chains_results.json"), dfs_dependency_chain_results)
         return remove_duplicated_chains_results
 
 
 # 再多加一个：针对跨功能组下的依赖关系让LLM进行判断，如果不是的话，就直接删除了，可以直接放在foramted的时候
 if __name__ == "__main__":
     import json
+    import os
     project_name = "newbee_mall_plus"
     jsontools = JsonTools()
-    api_doc_type_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/api_doc_with_type.json"
-    params_dict = jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/parameters_dict_all.json")
+    
+    # 获取项目根目录
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    cache_dir = os.path.join(project_root, 'cache', project_name)
+    
+    api_doc_type_path = os.path.join(cache_dir, "api_doc_with_type.json")
+    params_dict = jsontools.read_json(os.path.join(cache_dir, "parameters_dict_all.json"))
 
-    dependencychain = DependencyChain(api_doc_type_path, "gpt-4o-mini", params_dict,project_name)
-    jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/dependency_chains_results.json", dependencychain.chains_construction_results())
+    dependencychain = DependencyChain(api_doc_type_path, "gpt-4o-mini", params_dict, project_name)
+    jsontools.write_json(os.path.join(cache_dir, "dependency_chains_results.json"), dependencychain.chains_construction_results())
 
 
 

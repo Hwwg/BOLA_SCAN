@@ -2953,7 +2953,8 @@ class HorizontalVuln:
             return total
 
         import os
-        progress_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/execution_progress.json"
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        progress_path = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results', 'execution_progress.json')
         total_chains = _count_total_chains(resource_dict, ou_dict)
         progress = {"total": total_chains, "completed": 0, "by_group": {}}
         progress_lock = __import__("threading").Lock()
@@ -4193,7 +4194,8 @@ class HorizontalVuln:
 
         # === 判定阶段进度条初始化 ===
         import time
-        progress_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/judgement_progress.json"
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        progress_path = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results', 'judgement_progress.json')
         progress_lock = threading.Lock()
         start_time = time.time()
 
@@ -5086,9 +5088,12 @@ class HorizontalVuln:
         5. 执行测试（execution_packages）
         6. 判断漏洞（bola_vul_judgement）
         """
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        horizontal_results_dir = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results')
+        
         data_resource_id_result = self.data_resource()
 
-        self.jsontool.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/data_resource_id_result.json",data_resource_id_result)
+        self.jsontool.write_json(os.path.join(horizontal_results_dir, "data_resource_id_result.json"), data_resource_id_result)
         container_reoust_id_result = self.data_container_resource()
         # print(container_reoust_id_result)
         # 提取并缓存容器参数名集合，供后续 bola_vul_judgement 使用
@@ -5110,39 +5115,38 @@ class HorizontalVuln:
                 self.container_param_set = set()
         except Exception:
             self.container_param_set = set()
-        self.jsontool.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/container_reoust_id_result.json",container_reoust_id_result)
+        self.jsontool.write_json(os.path.join(horizontal_results_dir, "container_reoust_id_result.json"), container_reoust_id_result)
         logger.info(f"container_reoust_id_result:{container_reoust_id_result}")
-        # data_resource_id_result = self.jsontool.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/data_resource_id_result.json")
-        # container_reoust_id_result = self.jsontool.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/container_reoust_id_result.json")
+        # data_resource_id_result = self.jsontool.read_json(os.path.join(horizontal_results_dir, "data_resource_id_result.json"))
+        # container_reoust_id_result = self.jsontool.read_json(os.path.join(horizontal_results_dir, "container_reoust_id_result.json"))
         
         container_resource_divide_results = self.resource_package_generation(data_resource_id_result,container_reoust_id_result)
         logger.info(f"container_resource_divide_results:{container_resource_divide_results}")
-        self.jsontool.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/container_resource_divide_results.json",container_resource_divide_results)
+        self.jsontool.write_json(os.path.join(horizontal_results_dir, "container_resource_divide_results.json"), container_resource_divide_results)
         # 缓存容器参数映射：按 route(group前缀)→param 集合精确定义（供执行/判定使用）
         try:
             self.container_params_by_group = self.build_container_params_by_group(container_resource_divide_results)
         except Exception:
             self.container_params_by_group = {"ou_id": {}, "resource_id": {}}
-        # container_resource_divide_results = self.jsontool.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/container_resource_divide_results.json")
+        # container_resource_divide_results = self.jsontool.read_json(os.path.join(horizontal_results_dir, "container_resource_divide_results.json"))
         dependency_execution_reoutes_packages = self.dependency_chain_package_generation(container_resource_divide_results)
         # 序列化后再写入 JSON
         self.jsontool.write_json(
-            f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/dependency_execution_reoutes_packages.json",
+            os.path.join(horizontal_results_dir, "dependency_execution_reoutes_packages.json"),
             make_json_serializable(dependency_execution_reoutes_packages)
         )
         logger.info(f"dependency_execution_reoutes_packages finished")
-        # dependency_execution_reoutes_packages = self.jsontool.read_json(
-        #     f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/dependency_execution_reoutes_packages.json")
+        # dependency_execution_reoutes_packages = self.jsontool.read_json(os.path.join(horizontal_results_dir, "dependency_execution_reoutes_packages.json"))
         all_acount_execution_results = self.execution_packages(url,acount_dict,dependency_execution_reoutes_packages,container_resource_divide_results)
         logger.info(f"all_acount_execution_results finished")
         # 序列化后再写入 JSON（关键修复：避免 BytesIO 无法序列化）
         serializable_results = make_json_serializable(all_acount_execution_results)
         self.jsontool.write_json(
-            f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/all_acount_execution_results.json",
+            os.path.join(horizontal_results_dir, "all_acount_execution_results.json"),
             serializable_results
         )
 
-        # all_acount_execution_results = self.jsontool.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{self.project_name}/horizontal_results/all_acount_execution_results.json")
+        # all_acount_execution_results = self.jsontool.read_json(os.path.join(horizontal_results_dir, "all_acount_execution_results.json"))
 
         vulnerability_results = self.bola_vul_judgement(serializable_results)
         # vulnerability_results = {}
@@ -5153,24 +5157,31 @@ class HorizontalVuln:
 if __name__ == "__main__":
     jsontools = JsonTools()
     project_name = "crapi"
-    case_generation_results_packages = jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/create_request_data_packages_results.json")
-    params_dict = jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/parameters_dict_all.json")
-    true_params = jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/api_doc_with_type.json")
-    horiontest = HorizontalVuln("gpt-4o-mini",params_dict,case_generation_results_packages,project_name,true_params)
-    url = "http://10.15.196.160:8888/"
-    auth_type =  {
-                    "test_account":{
-                        "auth":{
-                        "authorization":"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0NTdAcXEuY29tIiwiaWF0IjoxNzY1NjE1OTI2LCJleHAiOjE3NjYyMjA3MjYsInJvbGUiOiJ1c2VyIn0.OiVhOAD5Gr_jTCOrg6QgjX_rO6iKrox1nIHUkO03vECdMl75Y1SxN7YPqTc6OBZ0pxqk0szzVsjiIE6gu9VENi-zgk-9qaqXpax8tPCZujtT7s0iV4iHlqRag3P0EEvpaZq0K6H9sME5nUUvllCakfC7W7NqbJG2h7a1UOD0oJ-4GN_djMJ6Bvbh2LZc5WVy0fhddpWtM5bqMnI6ZeQ5mj-fiPVvgdCaAG-Du1HIJ19ERrLpN9vbCzL6thq6d3Ers9f7D_luyiRZPBSIDnBzG_IRKJKSKL8sq3W9FbSQGMy86DHzSS32JHhVuRZolRCMj2v6VBPJYIPK5CMEJivh9g"
-                        }
-                    },
-                    "data_account":{
-                        "auth":{
-                        "authorization":"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0NTZAcXEuY29tIiwiaWF0IjoxNzY1NjE1ODQ4LCJleHAiOjE3NjYyMjA2NDgsInJvbGUiOiJ1c2VyIn0.TaFrm7QVyFfagGm3ZAAZ6ru560BnKDY013Uta0LOcAVQ8kiVqnobsm1VelWGN01k3pHTPs3pDOEBjEfD9v6086NrUHBQ9zAD_F3YobRIUdCUmgooa2nJNDPSFXxGkO7C-R_khCNBgRvYyvFhkcNPmMaLhHgP67rkrarn0-imiksK8yj0Ld3lZP7YLDlodpF53jq2SCYluTUGeDHwttoLawxw4viiPnfbgOAIbMfG1DciMxHbwV_lLfoq2tU46ZDBp4Cv_wORquxvnVFuI7f1qSWvniSSqpNaiyfZnsX5jiij60Xl9Hj39qI8NsHI0LhP_6ZQgBrU5qBkvoFsyYKeWg"
-                        }
-                    }
-                }
-    jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/bola_horizontal_results.json",horiontest.horizontal_bola_workflow(url,auth_type))
+    
+    # 获取项目根目录
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    cache_dir = os.path.join(project_root, 'cache', project_name)
+    
+    case_generation_results_packages = jsontools.read_json(os.path.join(cache_dir, "create_request_data_packages_results.json"))
+    params_dict = jsontools.read_json(os.path.join(cache_dir, "parameters_dict_all.json"))
+    true_params = jsontools.read_json(os.path.join(cache_dir, "api_doc_with_type.json"))
+    horiontest = HorizontalVuln("gpt-4o-mini", params_dict, case_generation_results_packages, project_name, true_params)
+    
+    # 配置测试参数（请根据实际情况修改）
+    url = "http://your-target-app-url:port/"
+    auth_type = {
+        "test_account": {
+            "auth": {
+                "authorization": "Bearer <your-test-account-token>"
+            }
+        },
+        "data_account": {
+            "auth": {
+                "authorization": "Bearer <your-data-account-token>"
+            }
+        }
+    }
+    jsontools.write_json(os.path.join(cache_dir, "bola_horizontal_results.json"), horiontest.horizontal_bola_workflow(url, auth_type))
 
 
     

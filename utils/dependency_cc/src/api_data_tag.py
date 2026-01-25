@@ -636,19 +636,24 @@ class ApiDataTagging:
         return merged_api_doc_type_results
 
 if __name__ == "__main__":
+    import os
     jsontools = JsonTools()
     project_name = "mall"
-    api_doc_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/openapi_formated.json"
+    
+    # 获取项目根目录
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    cache_dir = os.path.join(project_root, 'cache', project_name)
+    
+    api_doc_path = os.path.join(cache_dir, "openapi_formated.json")
     model = "gpt-4o-mini"
     
     grouping_strategy = "resource_crud"
     api_data_tag = ApiDataTagging(api_doc_path, model, grouping_strategy)
     
-    
     api_doc_with_types = api_data_tag.complete_api_tagging_process(max_workers=5)
-    # api_doc_with_types = jsontools.read_json( "/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/newbee_mall/api_doc_with_type.json")
+    # api_doc_with_types = jsontools.read_json(os.path.join(cache_dir, "api_doc_with_type.json"))
     api_match_results = api_data_tag.api_tag_results_review(api_doc_with_types)
     
-    output_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/api_doc_with_type.json"
+    output_path = os.path.join(cache_dir, "api_doc_with_type.json")
     jsontools.write_json(output_path, api_match_results)
     print(f"Full API type tagging data saved to: {output_path}")

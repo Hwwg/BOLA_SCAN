@@ -1179,15 +1179,21 @@ class ParaNormalize:
 
 
 if __name__ == "__main__":
+    import os
     project_name = "mall"
     jsontools = JsonTools()
-    api_doc_type_path = jsontools.read_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/api_doc_with_type.json")
-    paranor_tool = ParaNormalize(api_doc_type_path,"gpt-4o-mini")
+    
+    # 获取项目根目录
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    cache_dir = os.path.join(project_root, 'cache', project_name)
+    
+    api_doc_type_path = jsontools.read_json(os.path.join(cache_dir, "api_doc_with_type.json"))
+    paranor_tool = ParaNormalize(api_doc_type_path, "gpt-4o-mini")
     parameters_extraction_results = paranor_tool.parameters_extraction(include_path_params=True)
 
-        # normalized_params是进行替换后的参数，normalized_params_process_data是后续用于参考的参数
-    results= paranor_tool.parameters_results_packages()
-    jsontools.write_json(f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/parameters_dict_all.json",results)
+    # normalized_params是进行替换后的参数，normalized_params_process_data是后续用于参考的参数
+    results = paranor_tool.parameters_results_packages()
+    jsontools.write_json(os.path.join(cache_dir, "parameters_dict_all.json"), results)
 
 
         

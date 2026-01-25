@@ -179,28 +179,38 @@ class DependencyGeneration:
 if __name__ == "__main__":
     # 与各模块 __main__ 中的路径保持一致，便于直接运行
     # "mall","jeecg","youlai_mall","newbee_mall_plus","mall_swarm","newbee_mall","openemr","gin_vue_blog","pybbs","time_sea_chatgpt","ctfd"
+    
+    # 获取项目根目录
+    project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
+    
     project_name_list = ["crapi"]
     for project_name in project_name_list:
-        # project_name = "gin_vue_blog"
-        os.system(f"openapi2postmanv2 -s /Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/{project_name}_openapi.json -o /Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/openapi_formated.json -p -O folderStrategy=Paths")
-        api_doc_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/{project_name}/openapi_formated.json"
+        # 构建基于项目根目录的路径
+        openapi_src = os.path.join(project_root, 'cache', project_name, f'{project_name}_openapi.json')
+        openapi_dst = os.path.join(project_root, 'cache', project_name, 'openapi_formated.json')
+        
+        os.system(f"openapi2postmanv2 -s {openapi_src} -o {openapi_dst} -p -O folderStrategy=Paths")
+        
+        api_doc_path = openapi_dst
         model = "gpt-4o-mini"
-        case_file_path = f"/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/automated_click/{project_name}/http-requests.json"
-        url = "http://10.15.196.160:8888/"
-        auth_type =  {
-                    "test_account":{
-                        "auth":{
-                        "authorization":"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0QHFxLmNvbSIsImlhdCI6MTc2ODU3NTMzNSwiZXhwIjoxNzY5MTgwMTM1LCJyb2xlIjoidXNlciJ9.oHeAoJkpJ-_GYyjkflf1Jn2kCgeEdGa3XXMCUvyMOM7tAwEXOBSyMpFotGe8ws5w6XLtTuwtzEnIlZ_zMlFmNbXge_68Lr-59vqLYDsytGADwCfX1Sx3Uv7vzpwjPx4Rnsri_7ovag1BS6o9aL41tk3XLObrYNSEdvIT-XGuaOmKYKqse2yiw285TeDzwv45zAxyW4ru1CN-CtdY7FisGNoFw_tT39a2ePZ5AoSEPdVehKyQ0n1ETXhkvFFnngBQqUVyyCtVTnjYRgBhRnFH8edfDN9u-3FOBQmUmLoJucnw1UlpvtLsHAbMq2JmvRCyLvM4tEik6IvANvm00K6-jw"
-                        }
-                    },
-                    "data_account":{
-                        "auth":{
-                        "authorization":"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwiaWF0IjoxNzY4NTc1Mjg1LCJleHAiOjE3NjkxODAwODUsInJvbGUiOiJ1c2VyIn0.FEj9PykcF0LWttYEcpezZ24JSjq_3S4m80D3Aa7QVS4uKNWnqZAHKRolcHqdyXmOtfJ_3VHkpCf5-4ES3cq0uL8Ac4gow6EGawGg8pdjRBnXgt5RHB8SOplLrS9gMkdN8MYj1yx1Vq0T4PjJsrHhHJdB-8wPJ1RwOcPWSCOz22JhMrejX78y5OTYgskZ8-jmETZIDryKHGyGaYvCAck1qKwhI3YOAklrJI-6Y3qI7DkZ3rOVUrER-6EOXp3zIIunneO3EqJGsrl3oo_xTsJUUi-h5PmpsRE7jtWVsaGrCAkgKnOWqT_TAtVpX05s01tHnyI4q9dIvsh6HsYOs1yhMw"
-                        }
-                    }
+        case_file_path = os.path.join(project_root, 'automated_click', project_name, 'http-requests.json')
+        
+        # 配置测试参数（请根据实际情况修改）
+        url = "http://your-target-app-url:port/"
+        auth_type = {
+            "test_account": {
+                "auth": {
+                    "authorization": "Bearer <your-test-account-token>"
                 }
+            },
+            "data_account": {
+                "auth": {
+                    "authorization": "Bearer <your-data-account-token>"
+                }
+            }
+        }
 
-        DependencyGeneration(api_doc_path, model, case_file_path, url, auth_type,project_name)
+        DependencyGeneration(api_doc_path, model, case_file_path, url, auth_type, project_name)
     # 目标结果：create_request_data_packages_results.json 已由 CaseGeneration 内部流程生成到 cache/{project_name} 目录
 
 

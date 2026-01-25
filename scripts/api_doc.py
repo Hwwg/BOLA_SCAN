@@ -727,12 +727,14 @@ class ApiDoc:
         return converted_data
 
 if __name__ == "__main__":
+    import os
     # 读取postman collection文件
-    postman_path = "/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/postman_test.json"
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    postman_path = os.path.join(project_root, "postman_test.json")
     apidoc = ApiDoc(postman_path)
     
     # # 转换并保存结果到项目约定路径
-    # output_path = "/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/mall/api_doc_with_type.json"
+    # output_path = os.path.join(project_root, 'cache', 'mall', 'api_doc_with_type.json')
     # converted_data = apidoc.convert_and_save(output_path)
     
     # print(f"转换完成！共提取了 {sum(len(group_data) for group_dict in converted_data for group_data in group_dict.values())} 个API")
