@@ -5,7 +5,7 @@ const { OpenAI } = require('openai');
 class LLMBridge {
     constructor(apiKey) {
         this.openai = new OpenAI({
-            apiKey: "sk-QgQpdAHHgwuSHpJ7HtKAKaZTTpgXYItcFvthhwW4Ee5oo72m",
+            apiKey: "",
             baseURL: 'https://open.xiaojingai.com/v1',
         });
         this.model = "gpt-4o-mini";
