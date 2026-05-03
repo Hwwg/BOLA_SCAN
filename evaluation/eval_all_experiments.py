@@ -9,11 +9,9 @@ from itertools import combinations
 from pathlib import Path
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_IDENTIFIER_GOLD = (
-    DEFAULT_ROOT.parent
-    / "dataset_identifier_parameters"
-    / "identifier_parameters_unique_project_parameter.csv"
-)
+DEFAULT_EVALUATION_DIR = Path(__file__).resolve().parent
+DEFAULT_OUTPUT_DIR = "evaluation/outputs"
+DEFAULT_IDENTIFIER_GOLD = DEFAULT_EVALUATION_DIR / "identifier_parameters_all_projects.csv"
 
 
 def parse_args() -> argparse.Namespace:
@@ -25,15 +23,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--root", default=str(DEFAULT_ROOT))
     parser.add_argument(
         "--gold-groups",
-        default="scripts/manual_label_api_group_ground_truth.csv",
+        default="evaluation/manual_label_api_group_ground_truth.csv",
     )
     parser.add_argument(
         "--gold-type",
-        default="scripts/manual_label_api_type_ground_truth.csv",
+        default="evaluation/manual_label_api_type_ground_truth.csv",
     )
     parser.add_argument(
         "--gold-mapping",
-        default="scripts/manual_label_param_mapping_ground_truth.csv",
+        default="evaluation/manual_label_param_mapping_ground_truth.csv",
     )
     parser.add_argument(
         "--gold-identifiers",
@@ -41,37 +39,37 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--gold-cads",
-        default="scripts/manual_label_cads_dependency_pairs_ground_truth.csv",
+        default="evaluation/manual_label_cads_dependency_pairs_ground_truth.csv",
     )
     parser.add_argument("--mapping-topk", type=int, default=3)
     parser.add_argument("--debug", action="store_true")
     parser.add_argument(
         "--debug-out-dir",
-        default="scripts/eval_debug_cases",
+        default=f"{DEFAULT_OUTPUT_DIR}/debug_cases",
     )
     parser.add_argument(
         "--out-summary-csv",
-        default="scripts/eval_all_experiments_summary.csv",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_all_experiments_summary.csv",
     )
     parser.add_argument(
         "--out-summary-md",
-        default="scripts/eval_all_experiments_summary.md",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_all_experiments_summary.md",
     )
     parser.add_argument(
         "--out-overview-csv",
-        default="scripts/eval_all_experiments_overview.csv",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_all_experiments_overview.csv",
     )
     parser.add_argument(
         "--out-identifier-gt-report-csv",
-        default="scripts/identifier_ground_truth_hit_report.csv",
+        default=f"{DEFAULT_OUTPUT_DIR}/identifier_ground_truth_hit_report.csv",
     )
     parser.add_argument(
         "--out-identifier-gt-missed-all-csv",
-        default="scripts/identifier_ground_truth_missed_all_models.csv",
+        default=f"{DEFAULT_OUTPUT_DIR}/identifier_ground_truth_missed_all_models.csv",
     )
     parser.add_argument(
         "--out-identifier12-summary-csv",
-        default="scripts/eval_identifier12_summary.csv",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_identifier12_summary.csv",
     )
     parser.add_argument(
         "--out-overview-md",
@@ -79,14 +77,16 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--out-overview-html",
-        default="scripts/eval_all_experiments_overview.html",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_all_experiments_overview.html",
     )
     parser.add_argument("--print-overview-table", action="store_true")
     parser.add_argument(
         "--out-json",
-        default="scripts/eval_all_experiments_result.json",
+        default=f"{DEFAULT_OUTPUT_DIR}/eval_all_experiments_result.json",
     )
-    parser.add_argument("--no-version-drift-plot", action="store_true")
+    parser.set_defaults(no_version_drift_plot=True)
+    parser.add_argument("--version-drift-plot", dest="no_version_drift_plot", action="store_false")
+    parser.add_argument("--no-version-drift-plot", dest="no_version_drift_plot", action="store_true")
     parser.add_argument("--benchmark-prec", default="")
     parser.add_argument("--benchmark-acc", default="79.31,80.00,80.00,80.00,80.00")
     parser.add_argument("--benchmark-rec", default="69.70,72.73,72.73,72.73,72.73")
@@ -1726,65 +1726,71 @@ def main() -> int:
                 labels.append("v1" if idx == 0 else m)
 
         base_name = (versions[0] if versions else "model").replace("/", "_")
-        out_version_table = root / f"scripts/version_drift_{base_name}_table.csv"
-        out_version_pdf = root / f"scripts/version_drift_{base_name}_with_benchmark.pdf"
-        scripts_dir = Path(__file__).resolve().parent
+        out_version_table = root / f"{DEFAULT_OUTPUT_DIR}/version_drift_{base_name}_table.csv"
+        out_version_pdf = root / f"{DEFAULT_OUTPUT_DIR}/version_drift_{base_name}_with_benchmark.pdf"
+        scripts_dir = DEFAULT_ROOT / "scripts"
         export_script = scripts_dir / "export_version_drift_table.py"
         plot_script = scripts_dir / "plot_version_drift_pdf.py"
 
-        cmd_export = [
-            sys.executable,
-            str(export_script),
-            "--in-overview-csv",
-            str(overview_csv_fp),
-            "--out-csv",
-            str(out_version_table),
-            "--versions",
-            ",".join(versions),
-            "--labels",
-            ",".join(labels),
-        ]
-        r1 = subprocess.run(cmd_export, capture_output=True, text=True)
-        if r1.returncode != 0:
-            err = (r1.stderr or r1.stdout or "").strip()
-            print(f"[warn] version drift table generation failed: {err}")
-        else:
-            print(f"[ok] version drift table (csv) -> {out_version_table}")
-            bench_prec = (
-                args.benchmark_prec
-                if (args.benchmark_prec or "").strip()
-                else (args.benchmark_acc or "")
+        if not export_script.exists() or not plot_script.exists():
+            print(
+                "[warn] version drift plot skipped: helper scripts are not available "
+                f"({export_script}, {plot_script})"
             )
-            cmd_plot = [
+        else:
+            cmd_export = [
                 sys.executable,
-                str(plot_script),
-                "--in-csv",
+                str(export_script),
+                "--in-overview-csv",
+                str(overview_csv_fp),
+                "--out-csv",
                 str(out_version_table),
-                "--out-pdf",
-                str(out_version_pdf),
                 "--versions",
                 ",".join(versions),
                 "--labels",
                 ",".join(labels),
-                "--benchmark-prec",
-                str(bench_prec),
-                "--benchmark-rec",
-                str(args.benchmark_rec),
-                "--testset-csv",
-                str(root / args.testset_csv) if not Path(args.testset_csv).is_absolute() else str(args.testset_csv),
-                "--testset-fp-p",
-                str(args.testset_fp_p),
-                "--testset-mode",
-                str(args.testset_mode),
             ]
-            r2 = subprocess.run(cmd_plot, capture_output=True, text=True)
-            if r2.returncode != 0:
-                err = (r2.stderr or r2.stdout or "").strip()
-                print(f"[warn] version drift pdf generation failed: {err}")
-                if "No module named 'matplotlib'" in err or 'No module named "matplotlib"' in err:
-                    print("[hint] install matplotlib in the current python environment: python3 -m pip install matplotlib")
+            r1 = subprocess.run(cmd_export, capture_output=True, text=True)
+            if r1.returncode != 0:
+                err = (r1.stderr or r1.stdout or "").strip()
+                print(f"[warn] version drift table generation failed: {err}")
             else:
-                print(f"[ok] version drift pdf -> {out_version_pdf}")
+                print(f"[ok] version drift table (csv) -> {out_version_table}")
+                bench_prec = (
+                    args.benchmark_prec
+                    if (args.benchmark_prec or "").strip()
+                    else (args.benchmark_acc or "")
+                )
+                cmd_plot = [
+                    sys.executable,
+                    str(plot_script),
+                    "--in-csv",
+                    str(out_version_table),
+                    "--out-pdf",
+                    str(out_version_pdf),
+                    "--versions",
+                    ",".join(versions),
+                    "--labels",
+                    ",".join(labels),
+                    "--benchmark-prec",
+                    str(bench_prec),
+                    "--benchmark-rec",
+                    str(args.benchmark_rec),
+                    "--testset-csv",
+                    str(root / args.testset_csv) if not Path(args.testset_csv).is_absolute() else str(args.testset_csv),
+                    "--testset-fp-p",
+                    str(args.testset_fp_p),
+                    "--testset-mode",
+                    str(args.testset_mode),
+                ]
+                r2 = subprocess.run(cmd_plot, capture_output=True, text=True)
+                if r2.returncode != 0:
+                    err = (r2.stderr or r2.stdout or "").strip()
+                    print(f"[warn] version drift pdf generation failed: {err}")
+                    if "No module named 'matplotlib'" in err or 'No module named "matplotlib"' in err:
+                        print("[hint] install matplotlib in the current python environment: python3 -m pip install matplotlib")
+                else:
+                    print(f"[ok] version drift pdf -> {out_version_pdf}")
 
     if identifier12_summary_rows:
         identifier12_summary_fp = root / args.out_identifier12_summary_csv

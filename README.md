@@ -186,6 +186,16 @@ Sanitized crAPI artifacts are included in `cache_gpt-4o-mini/crapi/` for
 experiment reproduction. Runtime credentials and live target URLs should stay in
 local `project.json`, not in Git.
 
+## Evaluation
+
+The evaluation entry point and labeled test sets live in `evaluation/`.
+Generated summaries, mismatch reports, and plots are written to
+`evaluation/outputs/` by default and are intentionally ignored by Git.
+
+```bash
+python evaluation/eval_all_experiments.py --models gpt-4o-mini
+```
+
 ## Project Structure
 
 ```
@@ -196,10 +206,13 @@ BOLASCAN/
 │   │   └── src/               # Core algorithms
 │   └── bola_vulner/           # BOLA vulnerability detection
 │       └── horizontal/        # Horizontal privilege escalation detection
-├── scripts/                    # Utility scripts
+├── scripts/                    # Runtime and dependency-generation scripts
 │   ├── api_doc.py             # API documentation processing
 │   ├── jsontools.py           # JSON utilities
 │   └── refine_api_groups.py   # API grouping refinement
+├── evaluation/                 # Evaluation entry point and labeled test sets
+│   ├── eval_all_experiments.py
+│   └── manual_label_*.csv
 ├── prompt/                     # Prompt templates for LLM
 ├── gptreply/                   # LLM interface wrapper
 │   └── gpt_con.py             # GPT connection handler

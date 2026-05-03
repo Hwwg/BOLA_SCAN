@@ -4,6 +4,30 @@ backups/
 backup*/
 *_backup/
 horizontal_results/
+evaluation/outputs/
+evaluation/debug_cases/
+scripts/eval_*_result.json
+scripts/eval_*_summary.csv
+scripts/eval_*_summary.md
+scripts/eval_*_overview.csv
+scripts/eval_*_overview.html
+scripts/eval_*_overview.md
+scripts/eval_all_experiments_overview*
+scripts/eval_all_experiments_result*
+scripts/eval_all_experiments_summary*
+scripts/eval_keep_pra_mismatch_records.csv
+scripts/eval_debug_cases*/
+scripts/identifier_ground_truth_*.csv
+scripts/identifier_value.csv
+scripts/identifier_closed_set_*.csv
+scripts/llm_error_propagation*/
+scripts/project_api_samples/
+scripts/test_sets_mapping_parameters/
+scripts/version_drift_*
+scripts/sheet3_with_probe_multiid.csv
+scripts/*.xlsx
+scripts/denpendency_chain.csv
+scripts/llm_error_propagation_experiment.md
 
 # Logs and local run artifacts
 *.log
