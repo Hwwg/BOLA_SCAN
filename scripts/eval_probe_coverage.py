@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_BLOCKED_STATUS = {404, 500}
+DEFAULT_ALLOWED_STATUS = {200, 201, 202, 204}
 DEFAULT_TARGET_CSV = (
     Path(__file__).resolve().parents[2]
     / "dataset_identifier_parameters"
@@ -65,9 +65,15 @@ def parse_args() -> argparse.Namespace:
         help="Per-probe output path, relative to project_cache unless absolute.",
     )
     parser.add_argument(
+        "--allowed-status",
+        default=",".join(str(code) for code in sorted(DEFAULT_ALLOWED_STATUS)),
+        help="Comma-separated whitelist of status codes counted as covered probing results.",
+    )
+    parser.add_argument(
         "--blocked-status",
-        default=",".join(str(code) for code in sorted(DEFAULT_BLOCKED_STATUS)),
-        help="Comma-separated status codes treated as uncovered probing failures.",
+        dest="deprecated_blocked_status",
+        default="",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--include-missing-status",
@@ -87,14 +93,14 @@ def load_json(path: Path) -> Any:
         return json.load(f)
 
 
-def parse_blocked_status(raw: str) -> set[int]:
+def parse_allowed_status(raw: str) -> set[int]:
     statuses: set[int] = set()
     for part in (raw or "").split(","):
         part = part.strip()
         if not part:
             continue
         statuses.add(int(part))
-    return statuses or set(DEFAULT_BLOCKED_STATUS)
+    return statuses or set(DEFAULT_ALLOWED_STATUS)
 
 
 def normalize_identifier_candidates(data: Any) -> dict[str, set[str]]:
@@ -307,12 +313,12 @@ def target_api_keys_from_meta(test_meta: dict[str, Any]) -> set[str]:
 
 def status_is_covered(
     status_code: int | None,
-    blocked_status: set[int],
+    allowed_status: set[int],
     include_missing_status: bool,
 ) -> bool:
     if status_code is None:
         return include_missing_status
-    return status_code not in blocked_status
+    return status_code in allowed_status
 
 
 def evaluate_ground_truth_coverage(
@@ -321,7 +327,7 @@ def evaluate_ground_truth_coverage(
     target_interface_params: set[tuple[str, str]],
     target_csv_path: Path,
     project_name: str,
-    blocked_status: set[int],
+    allowed_status: set[int],
     include_missing_status: bool,
     execution_path: Path,
     identifier_path: Path,
@@ -365,7 +371,7 @@ def evaluate_ground_truth_coverage(
                             status_counter[str(status_code)] = status_counter.get(str(status_code), 0) + 1
                             status_covered = status_is_covered(
                                 status_code,
-                                blocked_status,
+                                allowed_status,
                                 include_missing_status,
                             )
                             for target_parameter in sorted(by_api[api_key]):
@@ -378,8 +384,10 @@ def evaluate_ground_truth_coverage(
                                     continue
                                 case_has_value = True
                                 attempted_interface_params.add((api_key, target_parameter))
-                                blocked_by_auth = status_code in blocked_status
-                                if blocked_by_auth:
+                                excluded_by_status_whitelist = (
+                                    status_code is not None and status_code not in allowed_status
+                                )
+                                if excluded_by_status_whitelist:
                                     blocked_api_keys.add(api_key)
                                 if status_covered:
                                     case_covered = True
@@ -400,7 +408,8 @@ def evaluate_ground_truth_coverage(
                                         "target_api_keys": api_key,
                                         "observed_api_keys": api_key,
                                         "observed_status_codes": "" if status_code is None else str(status_code),
-                                        "blocked_by_auth_status": blocked_by_auth,
+                                        "blocked_by_auth_status": excluded_by_status_whitelist,
+                                        "excluded_by_status_whitelist": excluded_by_status_whitelist,
                                         "covered": bool(status_covered),
                                     }
                                 )
@@ -415,7 +424,7 @@ def evaluate_ground_truth_coverage(
         "execution_results": str(execution_path),
         "identifier_results": str(identifier_path),
         "target_csv": str(target_csv_path),
-        "blocked_status": sorted(blocked_status),
+        "allowed_status": sorted(allowed_status),
         "target_interface_parameters": len(target_interface_params),
         "attempted_interface_parameters": len(attempted_interface_params),
         "covered_interface_parameters": len(covered_interface_params),
@@ -451,7 +460,8 @@ def evaluate(project_cache: Path, args: argparse.Namespace) -> tuple[dict[str, A
     identifier_path = resolve_path(project_cache, args.identifier_results)
     target_csv_path = resolve_path(Path.cwd(), args.target_csv)
     project_name = args.project.strip() or project_cache.name
-    blocked_status = parse_blocked_status(args.blocked_status)
+    raw_allowed_status = args.allowed_status or args.deprecated_blocked_status
+    allowed_status = parse_allowed_status(raw_allowed_status)
 
     execution_data = load_json(execution_path)
     identifiers = normalize_identifier_candidates(load_json(identifier_path))
@@ -463,7 +473,7 @@ def evaluate(project_cache: Path, args: argparse.Namespace) -> tuple[dict[str, A
             target_interface_params=target_interface_params,
             target_csv_path=target_csv_path,
             project_name=project_name,
-            blocked_status=blocked_status,
+            allowed_status=allowed_status,
             include_missing_status=args.include_missing_status,
             execution_path=execution_path,
             identifier_path=identifier_path,
@@ -545,11 +555,11 @@ def evaluate(project_cache: Path, args: argparse.Namespace) -> tuple[dict[str, A
                                 observed_api_keys.add(api_key)
                                 all_target_api_keys.add(api_key)
                             status_counter[str(status_code)] = status_counter.get(str(status_code), 0) + 1
-                            if status_code in blocked_status:
+                            if status_code is not None and status_code not in allowed_status:
                                 case_blocked = True
                                 if api_key:
                                     blocked_api_keys.add(api_key)
-                            if status_is_covered(status_code, blocked_status, args.include_missing_status):
+                            if status_is_covered(status_code, allowed_status, args.include_missing_status):
                                 case_covered = True
                                 if api_key:
                                     covered_api_keys.add(api_key)
@@ -586,6 +596,7 @@ def evaluate(project_cache: Path, args: argparse.Namespace) -> tuple[dict[str, A
                                 "observed_api_keys": ";".join(sorted(observed_api_keys)),
                                 "observed_status_codes": ";".join("" if s is None else str(s) for s in observed_statuses),
                                 "blocked_by_auth_status": case_blocked,
+                                "excluded_by_status_whitelist": case_blocked,
                                 "covered": bool(identifier_values and case_covered),
                             }
                         )
@@ -596,7 +607,7 @@ def evaluate(project_cache: Path, args: argparse.Namespace) -> tuple[dict[str, A
         "execution_results": str(execution_path),
         "identifier_results": str(identifier_path),
         "target_csv": str(target_csv_path) if target_csv_path.exists() else "",
-        "blocked_status": sorted(blocked_status),
+        "allowed_status": sorted(allowed_status),
         "target_interface_parameters": len(target_interface_params),
         "attempted_interface_parameters": len(attempted_interface_params),
         "covered_interface_parameters": len(covered_interface_params),
@@ -652,6 +663,7 @@ def write_outputs(project_cache: Path, args: argparse.Namespace, summary: dict[s
         "observed_api_keys",
         "observed_status_codes",
         "blocked_by_auth_status",
+        "excluded_by_status_whitelist",
         "covered",
     ]
     with out_csv.open("w", encoding="utf-8", newline="") as f:
