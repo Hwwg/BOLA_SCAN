@@ -1,0 +1,111 @@
+{
+    "by_group": {
+        "other/vehicle": [
+            "carId",
+            "id",
+            "uuid",
+            "vehicleId"
+        ],
+        "other/community": [
+            "authorid",
+            "id",
+            "postId",
+            "vehicleid"
+        ],
+        "other/shop/orders": [
+            "id",
+            "order_id",
+            "product_id"
+        ],
+        "other/mechanic": [
+            "id",
+            "mechanic_code",
+            "report_id"
+        ],
+        "other/merchant": [
+            "id"
+        ],
+        "other/user/videos": [
+            "id",
+            "video_id"
+        ],
+        "other/user": [
+            "email",
+            "id",
+            "video_id"
+        ],
+        "other/admin": [
+            "video_id"
+        ]
+    },
+    "rule_by_group": {
+        "other/vehicle": [
+            "carId",
+            "id",
+            "uuid",
+            "vehicleId"
+        ],
+        "other/community": [
+            "authorid",
+            "id",
+            "postId",
+            "vehicleid"
+        ],
+        "other/shop/orders": [
+            "id",
+            "order_id",
+            "product_id"
+        ],
+        "other/mechanic": [
+            "id",
+            "report_id"
+        ],
+        "other/merchant": [
+            "id"
+        ],
+        "other/user/videos": [
+            "id",
+            "video_id"
+        ],
+        "other/user": [
+            "id",
+            "video_id"
+        ],
+        "other/admin": [
+            "video_id"
+        ]
+    },
+    "llm_by_group": {
+        "other/community": [
+            "authorid",
+            "id",
+            "postId"
+        ],
+        "other/mechanic": [
+            "mechanic_code",
+            "report_id"
+        ],
+        "other/user/videos": [
+            "id",
+            "video_id"
+        ],
+        "other/user": [
+            "email"
+        ]
+    },
+    "all": [
+        "authorid",
+        "carId",
+        "email",
+        "id",
+        "mechanic_code",
+        "order_id",
+        "postId",
+        "product_id",
+        "report_id",
+        "uuid",
+        "vehicleId",
+        "vehicleid",
+        "video_id"
+    ]
+}

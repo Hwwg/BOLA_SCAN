@@ -3,8 +3,25 @@
 const path = require('path');
 const MainModule = require('./modules/main-module');
 
+const DEFAULT_MAX_DURATION_MS = 3 * 60 * 1000;
+
+function loadRuntimeConfig() {
+    try {
+        return require('./config/config');
+    } catch (error) {
+        console.warn(`[System] 加载配置文件失败，使用默认扫描时长: ${error.message}`);
+        return {};
+    }
+}
+
+function toPositiveInt(value, fallback) {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
 function parseArguments() {
     const argv = process.argv.slice(2);
+    const runtimeConfig = loadRuntimeConfig();
     const args = {
         url: '',
         depth: 2,
@@ -19,7 +36,11 @@ function parseArguments() {
         tokenCookieName: null,
         mode: 'desktop', // 新增：运行模式，desktop 或 mobile
         fastMode: false, // 快速并行扫描模式
-        parallelPages: 3 // 并行扫描页面数量
+        parallelPages: 3, // 并行扫描页面数量
+        maxDurationMs: toPositiveInt(
+            runtimeConfig?.scanControl?.defaultMaxDurationMs,
+            DEFAULT_MAX_DURATION_MS
+        )
     };
     for (let i = 0; i < argv.length; i++) {
         if (argv[i] === '--url' && argv[i + 1]) args.url = argv[++i];
@@ -65,9 +86,15 @@ function parseArguments() {
         else if (argv[i] === '--parallel-pages' && argv[i + 1]) {
             args.parallelPages = parseInt(argv[++i], 10);
         }
+        else if (argv[i] === '--max-duration-ms' && argv[i + 1]) {
+            args.maxDurationMs = toPositiveInt(argv[++i], args.maxDurationMs);
+        }
+        else if (argv[i] === '--max-duration-seconds' && argv[i + 1]) {
+            args.maxDurationMs = toPositiveInt(argv[++i], Math.floor(args.maxDurationMs / 1000)) * 1000;
+        }
     }
     if (!args.url) {
-        console.error('Usage: node index.js --url <target_url> [--depth <max_depth>] [--output <output_path>] [--username <username>] [--password <password>] [--format <json|csv>] [--token <token>] [--token-header <headerName>] [--token-prefix <prefix>] [--token-storage-key <key>] [--token-storage-target <local|session>] [--token-cookie-name <name>] [--mode <desktop|mobile>] [--fast-mode] [--parallel-pages <number>]');
+        console.error('Usage: node index.js --url <target_url> [--depth <max_depth>] [--output <output_path>] [--username <username>] [--password <password>] [--format <json|csv>] [--token <token>] [--token-header <headerName>] [--token-prefix <prefix>] [--token-storage-key <key>] [--token-storage-target <local|session>] [--token-cookie-name <name>] [--mode <desktop|mobile>] [--fast-mode] [--parallel-pages <number>] [--max-duration-ms <number>] [--max-duration-seconds <number>]');
         process.exit(1);
     }
     return args;
@@ -95,28 +122,89 @@ function initialize(args) {
     };
 }
 
+async function saveCapturedRequests(mainModule, args, reason) {
+    if (!mainModule.requestCapture) {
+        return;
+    }
+
+    try {
+        console.log(`[System] ${reason}，正在保存捕获的请求数据...`);
+        await mainModule.requestCapture.saveResults(args.output);
+        mainModule.requestCapture.cleanup && mainModule.requestCapture.cleanup();
+        console.log('[System] 已保存请求数据到', args.output);
+    } catch (error) {
+        console.error('[System] 保存请求数据失败:', error);
+    }
+}
+
+async function closeBrowser(mainModule) {
+    try {
+        if (mainModule._userActivityTimer) {
+            clearInterval(mainModule._userActivityTimer);
+            mainModule._userActivityTimer = null;
+        }
+        if (mainModule.pageWrapper && typeof mainModule.pageWrapper.close === 'function') {
+            await mainModule.pageWrapper.close();
+        }
+    } catch (error) {
+        console.error('[System] 关闭浏览器失败:', error);
+    }
+}
+
+async function generateReport(mainModule) {
+    try {
+        if (mainModule.resultManager && typeof mainModule.resultManager.generateScanReport === 'function') {
+            await mainModule.resultManager.generateScanReport();
+        }
+    } catch (error) {
+        console.error('[System] 生成扫描报告失败:', error);
+    }
+}
+
 async function startScan(mainModule, args) {
+    let shutdownStarted = false;
+    let scanTimer = null;
+
+    const shutdown = async (exitCode, reason) => {
+        if (shutdownStarted) {
+            return;
+        }
+        shutdownStarted = true;
+
+        if (scanTimer) {
+            clearTimeout(scanTimer);
+            scanTimer = null;
+        }
+
+        await saveCapturedRequests(mainModule, args, reason);
+        await generateReport(mainModule);
+        await closeBrowser(mainModule);
+        process.exit(exitCode);
+    };
+
     try {
         // 注册进程结束前的保存操作
         process.on('SIGINT', async () => {
-            console.log('\n[System] 检测到用户中断，正在保存捕获的请求数据...');
-            if (mainModule.requestCapture) {
-                await mainModule.requestCapture.saveResults(args.output);
-                console.log('[System] 已保存请求数据到', args.output);
-            }
-            process.exit(0);
+            console.log('\n[System] 检测到用户中断');
+            await shutdown(0, '检测到用户中断');
         });
         
         // 注册未处理的异常处理器
         process.on('uncaughtException', async (err) => {
             console.error('[System] 未捕获的异常:', err);
-            console.log('[System] 正在尝试保存已捕获的请求数据...');
-            if (mainModule.requestCapture) {
-                await mainModule.requestCapture.saveResults(args.output);
-                console.log('[System] 已保存请求数据到', args.output);
-            }
-            process.exit(1);
+            await shutdown(1, '发生未捕获异常');
         });
+
+        scanTimer = setTimeout(async () => {
+            console.log(`\n[System] 已达到最大扫描时长 ${Math.floor(args.maxDurationMs / 1000)} 秒，自动停止 autoclick`);
+            await shutdown(0, '达到最大扫描时长');
+        }, args.maxDurationMs);
+
+        if (typeof scanTimer.unref === 'function') {
+            scanTimer.unref();
+        }
+
+        console.log(`[System] autoclick 最大运行时长: ${Math.floor(args.maxDurationMs / 1000)} 秒`);
         
         // 根据模式选择扫描方法
         if (args.fastMode) {
@@ -125,16 +213,21 @@ async function startScan(mainModule, args) {
         } else {
             await mainModule.scan(mainModule.options.startUrl, mainModule.options.maxDepth);
         }
+
+        if (scanTimer) {
+            clearTimeout(scanTimer);
+            scanTimer = null;
+        }
+
         mainModule.resultManager.exportResults && mainModule.resultManager.exportResults(args.format);
         console.log('扫描完成！');
     } catch (err) {
-        console.error('扫描过程中发生错误:', err);
-        // 发生错误时也尝试保存已捕获的请求
-        if (mainModule.requestCapture) {
-            console.log('[System] 正在保存捕获的请求数据...');
-            await mainModule.requestCapture.saveResults(args.output);
-            console.log('[System] 已保存请求数据到', args.output);
+        if (scanTimer) {
+            clearTimeout(scanTimer);
+            scanTimer = null;
         }
+        console.error('扫描过程中发生错误:', err);
+        await saveCapturedRequests(mainModule, args, '扫描过程中发生错误');
     }
 }
 

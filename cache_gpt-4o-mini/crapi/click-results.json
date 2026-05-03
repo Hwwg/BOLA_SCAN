@@ -1,0 +1,324 @@
+{
+  "http://example.test/": [
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v > div.ant-card.ant-card-bordered.vehicle-card.css-1m63z2v > div.ant-card-body > div.ant-card-meta > div.ant-card-meta-detail > div.ant-card-meta-title:nth-child(1) > div.ant-page-header.css-1m63z2v.dashboard-header.ant-page-header-ghost > div.ant-page-header-heading.css-1m63z2v > span.ant-page-header-heading-extra.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small > div.ant-space-item:nth-child(1) > button.ant-btn.css-1m63z2v.ant-btn-round.ant-btn-primary.ant-btn-color-primary.ant-btn-variant-solid.ant-btn-lg",
+        "tag": "BUTTON",
+        "text": "Vehicle Service History",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/vehicle-service-dashboard?VIN=896480MP7DZHB9D69",
+        "realUrl": "http://example.test/vehicle-service-dashboard?VIN=896480MP7DZHB9D69",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v > div.ant-card.ant-card-bordered.vehicle-card.css-1m63z2v > div.ant-card-body > div.ant-card-meta > div.ant-card-meta-detail > div.ant-card-meta-title:nth-child(1) > div.ant-page-header.css-1m63z2v.dashboard-header.ant-page-header-ghost > div.ant-page-header-heading.css-1m63z2v > span.ant-page-header-heading-extra.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small > div.ant-space-item:nth-child(1) > button.ant-btn.css-1m63z2v.ant-btn-round.ant-btn-primary.ant-btn-color-primary.ant-btn-variant-solid.ant-btn-lg > span:nth-child(2)",
+        "tag": "SPAN",
+        "text": "Vehicle Service History",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/vehicle-service-dashboard?VIN=896480MP7DZHB9D69",
+        "realUrl": "http://example.test/vehicle-service-dashboard?VIN=896480MP7DZHB9D69",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v > div.ant-card.ant-card-bordered.vehicle-card.css-1m63z2v > div.ant-card-body > div.ant-card-meta > div.ant-card-meta-detail > div.ant-card-meta-title:nth-child(1) > div.ant-page-header.css-1m63z2v.dashboard-header.ant-page-header-ghost > div.ant-page-header-heading.css-1m63z2v > span.ant-page-header-heading-extra.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small > div.ant-space-item:nth-child(2) > button.ant-btn.css-1m63z2v.ant-btn-round.ant-btn-primary.ant-btn-color-primary.ant-btn-variant-solid.ant-btn-lg",
+        "tag": "BUTTON",
+        "text": "Contact Mechanic",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/contact-mechanic?VIN=896480MP7DZHB9D69",
+        "realUrl": "http://example.test/contact-mechanic?VIN=896480MP7DZHB9D69",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v > div.ant-card.ant-card-bordered.vehicle-card.css-1m63z2v > div.ant-card-body > div.ant-card-meta > div.ant-card-meta-detail > div.ant-card-meta-title:nth-child(1) > div.ant-page-header.css-1m63z2v.dashboard-header.ant-page-header-ghost > div.ant-page-header-heading.css-1m63z2v > span.ant-page-header-heading-extra.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small > div.ant-space-item:nth-child(2) > button.ant-btn.css-1m63z2v.ant-btn-round.ant-btn-primary.ant-btn-color-primary.ant-btn-variant-solid.ant-btn-lg > span:nth-child(2)",
+        "tag": "SPAN",
+        "text": "Contact Mechanic",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/contact-mechanic?VIN=896480MP7DZHB9D69",
+        "realUrl": "http://example.test/contact-mechanic?VIN=896480MP7DZHB9D69",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v > div.ant-card.ant-card-bordered.vehicle-card.css-1m63z2v > div.ant-card-body > div.ant-card-meta > div.ant-card-meta-detail > div.ant-card-meta-description:nth-child(2) > div.ant-row.css-1m63z2v > div.ant-col.css-1m63z2v:nth-child(3) > div.ant-row.css-1m63z2v > div.ant-col.ant-col-24.css-1m63z2v:nth-child(2) > button.ant-btn.css-1m63z2v.ant-btn-round.ant-btn-primary.ant-btn-color-primary.ant-btn-variant-solid.ant-btn-lg",
+        "tag": "BUTTON",
+        "text": "Refresh Location",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": false,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/",
+        "realUrl": "http://example.test/",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-left:nth-child(1) > div.ant-space-item:nth-child(2) > ul.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark.css-1m63z2v > li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child:nth-child(1)",
+        "tag": "LI",
+        "text": "Dashboard",
+        "href": "",
+        "role": "menuitem",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": false,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/",
+        "realUrl": "http://example.test/",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-left:nth-child(1) > div.ant-space-item:nth-child(2) > ul.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark.css-1m63z2v > li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child:nth-child(2)",
+        "tag": "LI",
+        "text": "Shop",
+        "href": "",
+        "role": "menuitem",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/shop",
+        "realUrl": "http://example.test/shop",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-left:nth-child(1) > div.ant-space-item:nth-child(2) > ul.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark.css-1m63z2v > li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child:nth-child(3)",
+        "tag": "LI",
+        "text": "Community",
+        "href": "",
+        "role": "menuitem",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "clickResult": {
+        "success": true,
+        "routeChanged": true,
+        "urlChanged": false,
+        "beforeUrl": "http://example.test/",
+        "newUrl": "http://example.test/forum",
+        "realUrl": "http://example.test/forum",
+        "hasPopup": false,
+        "popupInfo": null,
+        "newTabOpened": false,
+        "newTabUrl": null,
+        "newTabTitle": null,
+        "newTabClosed": false
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger",
+        "tag": "DIV",
+        "text": "huangtestaaaa",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.avatarContainer:nth-child(1)",
+        "tag": "DIV",
+        "text": "",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.avatarContainer:nth-child(1) > span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-image.avatar.css-1m63z2v",
+        "tag": "SPAN",
+        "text": "",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.avatarContainer:nth-child(1) > span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-image.avatar.css-1m63z2v > img",
+        "tag": "IMG",
+        "text": "",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.dropdown-info:nth-child(2)",
+        "tag": "DIV",
+        "text": "huangtestaaaa",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.dropdown-info:nth-child(2) > span.user-name:nth-child(1)",
+        "tag": "SPAN",
+        "text": "huangtestaaaa",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-right:nth-child(2) > div.ant-space-item:nth-child(2) > div.ant-dropdown-trigger.profile-dropdown-trigger > div.dropdown-info:nth-child(2) > span.anticon.anticon-caret-down.dropdown-arrow:nth-child(2)",
+        "tag": "SPAN",
+        "text": "",
+        "href": "",
+        "role": "img",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "form"
+      },
+      "submitResult": {
+        "success": true,
+        "newUrl": "http://example.test/"
+      }
+    }
+  ]
+}

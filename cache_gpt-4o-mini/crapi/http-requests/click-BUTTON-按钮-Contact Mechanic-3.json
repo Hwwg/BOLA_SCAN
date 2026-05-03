@@ -1,0 +1,52 @@
+{
+  "context": "click-BUTTON-按钮-Contact Mechanic-3",
+  "timestamp": "2026-04-29T08:20:59.657Z",
+  "count": 2,
+  "requests": [
+    {
+      "id": "9o06ym349um",
+      "type": "request",
+      "url": "http://example.test/workshop/api/mechanic",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/contact-mechanic?VIN=896480MP7DZHB9D69",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1777450693043,
+      "context": "click-BUTTON-按钮-Contact Mechanic-3",
+      "signature": "GET|/workshop/api/mechanic|"
+    },
+    {
+      "id": "pxmdb9l8oa8",
+      "requestId": "bmbm54bd8ph",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:13 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=7ca5becd-c682-48e1-a235-2e2b8227c2fb; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450693595,
+      "context": "click-BUTTON-按钮-Contact Mechanic-3",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

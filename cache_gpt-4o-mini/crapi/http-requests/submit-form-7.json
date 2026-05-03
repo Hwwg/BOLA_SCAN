@@ -1,0 +1,64 @@
+{
+  "context": "submit-form-7",
+  "timestamp": "2026-04-29T08:13:25.284Z",
+  "count": 2,
+  "requests": [
+    {
+      "id": "e561etqxcj",
+      "type": "request",
+      "url": "http://example.test/identity/api/v2/vehicle/add_vehicle",
+      "method": "POST",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/verify-vehicle",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1777450338798,
+      "context": "submit-form-7",
+      "signature": "POST|/identity/api/v2/vehicle/add_vehicle||{\"vin\":\"896480MP7DZHB9D69\",\"pincode\":\"0588\"}",
+      "postData": "{\"vin\":\"896480MP7DZHB9D69\",\"pincode\":\"0588\"}",
+      "jsonData": {
+        "vin": "896480MP7DZHB9D69",
+        "pincode": "0588"
+      }
+    },
+    {
+      "id": "rnvu7t3k1tr",
+      "requestId": "e561etqxcj",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/add_vehicle",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:12:18 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450338883,
+      "context": "submit-form-7",
+      "size": 54,
+      "body": "{\"message\":\"Vehicle save successfully..\",\"status\":200}",
+      "jsonData": {
+        "message": "Vehicle save successfully..",
+        "status": 200
+      },
+      "isListQuery": false
+    }
+  ]
+}

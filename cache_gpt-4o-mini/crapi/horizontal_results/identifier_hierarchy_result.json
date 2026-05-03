@@ -1,0 +1,654 @@
+{
+    "authorid": [
+        {
+            "name": "authorid",
+            "location": "response",
+            "canonical_path": "authorid",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/{postId}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "authorid",
+            "location": "response",
+            "canonical_path": "authorid",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "authorid",
+            "location": "response",
+            "canonical_path": "authorid",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "authorid",
+            "location": "response",
+            "canonical_path": "[].authorid",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/recent",
+            "method": "GET",
+            "api_type": "list query"
+        }
+    ],
+    "carId": [
+        {
+            "name": "carId",
+            "location": "response",
+            "canonical_path": "carId",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/{vehicleId}/location",
+            "method": "GET",
+            "api_type": "query"
+        }
+    ],
+    "id": [
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "[].id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/vehicles",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "[].model.id",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/vehicles",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "[].model.vehiclecompany.id",
+            "structural_level": 4,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/vehicles",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "[].vehicleLocation.id",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/vehicles",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "vehicleLocation.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/{vehicleId}/location",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/{postId}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "comments[].id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "[].id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/recent",
+            "method": "GET",
+            "api_type": "list query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/shop/orders",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "orders.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "PUT /workshop/api/shop/orders/{order_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "orders.product.id",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "PUT /workshop/api/shop/orders/{order_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "orders.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/shop/orders/{order_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "orders.product.id",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/shop/orders/{order_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "order.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/shop/orders/return_order",
+            "method": "POST",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "order.product.id",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/shop/orders/return_order",
+            "method": "POST",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/mechanic/receive_report",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/mechanic/mechanic_report",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "mechanic.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/mechanic/mechanic_report",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "vehicle.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/mechanic/mechanic_report",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "response_from_mechanic_api.id",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/merchant/contact_mechanic",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /identity/api/v2/user/videos",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/user/videos/{video_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "body",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "PUT /identity/api/v2/user/videos/{video_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "PUT /identity/api/v2/user/videos/{video_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/user/dashboard",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "id",
+            "location": "response",
+            "canonical_path": "id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /identity/api/v2/user/pictures",
+            "method": "POST",
+            "api_type": "add"
+        }
+    ],
+    "order_id": [
+        {
+            "name": "order_id",
+            "location": "path",
+            "canonical_path": "order_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "PUT /workshop/api/shop/orders/{order_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "order_id",
+            "location": "path",
+            "canonical_path": "order_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "PUT /workshop/api/shop/orders/{order_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "order_id",
+            "location": "path",
+            "canonical_path": "order_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /workshop/api/shop/orders/{order_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "order_id",
+            "location": "path",
+            "canonical_path": "order_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /workshop/api/shop/orders/{order_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "order_id",
+            "location": "params",
+            "canonical_path": "order_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/shop/orders/return_order",
+            "method": "POST",
+            "api_type": "update"
+        }
+    ],
+    "postId": [
+        {
+            "name": "postId",
+            "location": "path",
+            "canonical_path": "postId",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /community/api/v2/community/posts/{postId}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "postId",
+            "location": "path",
+            "canonical_path": "postId",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /community/api/v2/community/posts/{postId}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "postId",
+            "location": "path",
+            "canonical_path": "postId",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "postId",
+            "location": "path",
+            "canonical_path": "postId",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        }
+    ],
+    "product_id": [
+        {
+            "name": "product_id",
+            "location": "body",
+            "canonical_path": "product_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "POST /workshop/api/shop/orders",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "product_id",
+            "location": "body",
+            "canonical_path": "product_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "PUT /workshop/api/shop/orders/{order_id}",
+            "method": "PUT",
+            "api_type": "update"
+        }
+    ],
+    "report_id": [
+        {
+            "name": "report_id",
+            "location": "params",
+            "canonical_path": "report_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /workshop/api/mechanic/mechanic_report",
+            "method": "GET",
+            "api_type": "query"
+        }
+    ],
+    "uuid": [
+        {
+            "name": "uuid",
+            "location": "response",
+            "canonical_path": "[].uuid",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/vehicle/vehicles",
+            "method": "GET",
+            "api_type": "query"
+        }
+    ],
+    "vehicleId": [
+        {
+            "name": "vehicleId",
+            "location": "path",
+            "canonical_path": "vehicleId",
+            "structural_level": 1,
+            "resource_level": 2,
+            "endpoint": "GET /identity/api/v2/vehicle/{vehicleId}/location",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "vehicleId",
+            "location": "path",
+            "canonical_path": "vehicleId",
+            "structural_level": 1,
+            "resource_level": 2,
+            "endpoint": "GET /identity/api/v2/vehicle/{vehicleId}/location",
+            "method": "GET",
+            "api_type": "query"
+        }
+    ],
+    "vehicleid": [
+        {
+            "name": "vehicleid",
+            "location": "response",
+            "canonical_path": "author.vehicleid",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/{postId}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "vehicleid",
+            "location": "response",
+            "canonical_path": "author.vehicleid",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "vehicleid",
+            "location": "response",
+            "canonical_path": "author.vehicleid",
+            "structural_level": 2,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "vehicleid",
+            "location": "response",
+            "canonical_path": "comments[].author.vehicleid",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "POST /community/api/v2/community/posts/{postId}/comment",
+            "method": "POST",
+            "api_type": "add"
+        },
+        {
+            "name": "vehicleid",
+            "location": "response",
+            "canonical_path": "[].author.vehicleid",
+            "structural_level": 3,
+            "resource_level": 1,
+            "endpoint": "GET /community/api/v2/community/posts/recent",
+            "method": "GET",
+            "api_type": "list query"
+        }
+    ],
+    "video_id": [
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /identity/api/v2/user/videos/{video_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "GET /identity/api/v2/user/videos/{video_id}",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "PUT /identity/api/v2/user/videos/{video_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "PUT /identity/api/v2/user/videos/{video_id}",
+            "method": "PUT",
+            "api_type": "update"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "DELETE /identity/api/v2/user/videos/{video_id}",
+            "method": "DELETE",
+            "api_type": "delete"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "DELETE /identity/api/v2/user/videos/{video_id}",
+            "method": "DELETE",
+            "api_type": "delete"
+        },
+        {
+            "name": "video_id",
+            "location": "params",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/user/videos/convert_video",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "video_id",
+            "location": "response",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 1,
+            "endpoint": "GET /identity/api/v2/user/dashboard",
+            "method": "GET",
+            "api_type": "query"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "DELETE /identity/api/v2/admin/videos/{video_id}",
+            "method": "DELETE",
+            "api_type": "delete"
+        },
+        {
+            "name": "video_id",
+            "location": "path",
+            "canonical_path": "video_id",
+            "structural_level": 1,
+            "resource_level": 3,
+            "endpoint": "DELETE /identity/api/v2/admin/videos/{video_id}",
+            "method": "DELETE",
+            "api_type": "delete"
+        }
+    ]
+}

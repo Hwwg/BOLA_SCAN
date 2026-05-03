@@ -1,4 +1,7 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 // 页面交互封装
 
@@ -16,9 +19,62 @@ class PageWrapper {
         this.page = null;
     }
 
+    _resolveExecutablePath() {
+        const explicitPath = process.env.PUPPETEER_EXECUTABLE_PATH || process.env.BOLASCAN_CHROME_PATH;
+        if (explicitPath && fs.existsSync(explicitPath)) {
+            return explicitPath;
+        }
+
+        const homeDir = os.homedir();
+        const chromeCacheDir = path.join(homeDir, '.cache', 'puppeteer', 'chrome');
+        if (!fs.existsSync(chromeCacheDir)) {
+            return null;
+        }
+
+        const candidates = [];
+        const versions = fs.readdirSync(chromeCacheDir, { withFileTypes: true })
+            .filter((entry) => entry.isDirectory())
+            .map((entry) => entry.name);
+
+        for (const version of versions) {
+            const versionDir = path.join(chromeCacheDir, version);
+            const macCandidate = path.join(
+                versionDir,
+                'chrome-mac-arm64',
+                'Google Chrome for Testing.app',
+                'Contents',
+                'MacOS',
+                'Google Chrome for Testing'
+            );
+            const macIntelCandidate = path.join(
+                versionDir,
+                'chrome-mac-x64',
+                'Google Chrome for Testing.app',
+                'Contents',
+                'MacOS',
+                'Google Chrome for Testing'
+            );
+            const linuxCandidate = path.join(versionDir, 'chrome-linux64', 'chrome');
+            const winCandidate = path.join(versionDir, 'chrome-win64', 'chrome.exe');
+
+            for (const candidate of [macCandidate, macIntelCandidate, linuxCandidate, winCandidate]) {
+                if (fs.existsSync(candidate)) {
+                    candidates.push(candidate);
+                }
+            }
+        }
+
+        if (candidates.length === 0) {
+            return null;
+        }
+
+        candidates.sort().reverse();
+        return candidates[0];
+    }
+
     async init() {
         if (!this.browser) {
-            this.browser = await puppeteer.launch({ 
+            const launchOptions = { 
                 headless: false,
                 // 兼容本地开发环境的跨私网请求与自签证书，避免因安全策略导致资源阻塞
                 args: [
@@ -28,7 +84,13 @@ class PageWrapper {
                     '--no-sandbox',
                     '--disable-setuid-sandbox'
                 ]
-            });
+            };
+            const executablePath = this._resolveExecutablePath();
+            if (executablePath) {
+                launchOptions.executablePath = executablePath;
+                console.log(`[PageWrapper] 使用本地 Chrome 可执行文件: ${executablePath}`);
+            }
+            this.browser = await puppeteer.launch(launchOptions);
         }
         if (!this.page) {
             this.page = await this.browser.newPage();

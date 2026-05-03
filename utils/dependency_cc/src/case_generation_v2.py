@@ -3,6 +3,8 @@ from scripts.api_doc import ApiDoc
 from scripts.jsontools import JsonTools
 from prompt.synthesis_prompt import SyntheticPrompt
 from gptreply.gpt_con import GPTReply
+from utils.cache_utils import get_project_cache_dir
+from utils.param_path import is_identifier_name, nested_set
 
 import requests
 import itertools
@@ -51,6 +53,12 @@ def _make_json_serializable(obj, seen=None):
         return base64.b64encode(obj.read()).decode('utf-8')
     elif isinstance(obj, io.StringIO):
         return obj.getvalue()
+    elif isinstance(obj, io.IOBase):
+        return {
+            "__file__": True,
+            "name": getattr(obj, "name", None),
+            "mode": getattr(obj, "mode", None),
+        }
     elif isinstance(obj, bytes):
         return base64.b64encode(obj).decode('utf-8')
     
@@ -60,13 +68,19 @@ def _make_json_serializable(obj, seen=None):
     
     try:
         if isinstance(obj, dict):
-            return {key: _make_json_serializable(value, seen) for key, value in obj.items()}
+            return {str(key): _make_json_serializable(value, seen) for key, value in obj.items()}
         elif isinstance(obj, list):
             return [_make_json_serializable(item, seen) for item in obj]
         elif isinstance(obj, tuple):
             return tuple(_make_json_serializable(item, seen) for item in obj)
-        else:
+        elif isinstance(obj, (str, int, float, bool)) or obj is None:
             return obj
+        else:
+            try:
+                json.dumps(obj)
+                return obj
+            except TypeError:
+                return str(obj)
     finally:
         # 清理标记
         if isinstance(obj, (dict, list, tuple)):
@@ -621,24 +635,54 @@ class CaseGeneration:
                             api_lookup[api_path] = dict(api_info) if isinstance(api_info, dict) else {"raw": api_info}
                             api_lookup[api_path]["functional_group"] = category_name
         
+        def semantic_default_value(param_name, param_info):
+            name = str(param_name or "").lower()
+            param_type = param_info.get("type") if isinstance(param_info, dict) else None
+            if is_identifier_name(param_name):
+                return "1"
+            if "email" in name:
+                return "test@example.com"
+            if "phone" in name or "mobile" in name or "tel" in name:
+                return "13800138000"
+            if "password" in name or name in {"pwd", "pass"}:
+                return "Test123456!"
+            if "uuid" in name or "guid" in name:
+                return "00000000-0000-4000-8000-000000000001"
+            if name.endswith("url") or "url" in name or "link" in name:
+                return "https://example.com/test"
+            if "datetime" in name or "timestamp" in name or name.endswith("_at"):
+                return "2026-01-01T00:00:00Z"
+            if param_type == "string" and name in {"start", "end", "from", "to", "begin", "finish"}:
+                return "2026-01-01T00:00:00Z"
+            if "date" in name:
+                return "2026-01-01"
+            if "image" in name or "avatar" in name or "photo" in name:
+                return io.BytesIO(b"\x89PNG\r\n\x1a\n")
+            if "file" in name or "upload" in name:
+                return io.BytesIO(b"bolascan test file")
+            return None
+
         # 生成参数的默认值（递归支持 object/array 的嵌套）
-        def default_value_by_type(param_info):
+        def default_value_by_type(param_info, param_name=""):
+            semantic = semantic_default_value(param_name, param_info)
+            if semantic is not None:
+                return semantic
             t = None
             if isinstance(param_info, dict):
                 t = param_info.get("type")
                 # 兼容 schema 场景
                 if not t and isinstance(param_info.get("schema"), dict):
-                    return default_value_by_type(param_info["schema"])
+                    return default_value_by_type(param_info["schema"], param_name)
             
             if t == "string":
-                return ""
+                return "test"
             if t in ("integer", "number", "long", "float", "double"):
-                return 0
+                return 1
             if t == "boolean":
-                return False
+                return True
             if t == "array":
                 items = param_info.get("items") if isinstance(param_info, dict) else None
-                item_default = default_value_by_type(items) if items else ""
+                item_default = default_value_by_type(items, param_name) if items else "test"
                 return [item_default]
             if t == "object":
                 # 根据 properties 递归生成嵌套对象
@@ -647,14 +691,16 @@ class CaseGeneration:
                     properties = param_info.get("properties", {})
                     if isinstance(properties, dict) and properties:
                         for pname, pinfo in properties.items():
-                            props[pname] = default_value_by_type(pinfo)
+                            props[pname] = default_value_by_type(pinfo, pname)
                     else:
                         ap = param_info.get("additionalProperties")
                         if ap:
-                            props["key"] = default_value_by_type(ap)
+                            props["key"] = default_value_by_type(ap, "key")
+                        else:
+                            props["key"] = "test"
                 return props
             # 未知类型，兜底为字符串
-            return ""
+            return "test"
         
         # 将请求参数按位置分组，并保留嵌套结构
         def build_params_grouped(request_params):
@@ -737,7 +783,7 @@ class CaseGeneration:
                         value = ""
                     else:
                         location = param_info.get("in", "body")
-                        value = default_value_by_type(param_info)
+                        value = default_value_by_type(param_info, param_name)
 
                     if location not in grouped:
                         grouped[location] = {}
@@ -1499,6 +1545,31 @@ class CaseGeneration:
                     continue
             return req_params
 
+        def fill_missing_params_from_library(req_params, api_data, missing_params):
+            unresolved = []
+            for param_name in missing_params:
+                param_def = _get_param_definition_from_api_doc(
+                    api_data.get("route"),
+                    api_data.get("method"),
+                    param_name,
+                ) or {}
+                value = default_value_by_type(param_def, param_name)
+                applied = False
+                for bucket in ("params", "json", "data"):
+                    container = req_params.get(bucket)
+                    if not isinstance(container, dict):
+                        continue
+                    if param_name in container:
+                        container[param_name] = value
+                        applied = True
+                    elif "." in str(param_name) or "[]" in str(param_name):
+                        applied = nested_set(container, param_name, value) or applied
+                    if applied:
+                        break
+                if not applied:
+                    unresolved.append(param_name)
+            return req_params, unresolved
+
         def _build_request_obj(api_data):
             """将单个 API 数据转换为 case_generation_results 的请求对象。"""
             if not isinstance(api_data, dict):
@@ -1586,10 +1657,12 @@ class CaseGeneration:
             if files_params:
                 req_params["files"] = files_params
 
-            # 当无法提取到参数值时，调用LLM进行补全
+            # 当无法提取到参数值时，优先用语义/类型默认值库补全；LLM脚本仅作为复杂fallback。
             if len(missing_params) > 0:
                 try:
-                    req_params = generation_parameters_from_llm(req_params, api_data, list(missing_params))
+                    req_params, unresolved = fill_missing_params_from_library(req_params, api_data, list(missing_params))
+                    if unresolved:
+                        req_params = generation_parameters_from_llm(req_params, api_data, unresolved)
                 except Exception as _:
                     pass
 
@@ -1814,20 +1887,29 @@ class CaseGeneration:
         """
         import os
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-        cache_dir = os.path.join(project_root, 'cache', self.project_name)
+        cache_dir = get_project_cache_dir(self.project_name, project_root)
         
         case_hadling_from_click_data_resutls = self.case_hadling_from_click_data_initial()
         self.jsontools.write_json(os.path.join(cache_dir, "case_hadling_from_click_data_resutls.json"), case_hadling_from_click_data_resutls)
         # case_hadling_from_click_data_resutls = self.jsontools.read_json(os.path.join(cache_dir, "case_hadling_from_click_data_resutls.json"))
 
         dependency_chain_with_parameters_results = self.dependency_chain_with_parameters()
-        self.jsontools.write_json(os.path.join(cache_dir, "dependency_chain_with_parameters_results.json"), dependency_chain_with_parameters_results)
+        self.jsontools.write_json(
+            os.path.join(cache_dir, "dependency_chain_with_parameters_results.json"),
+            _make_json_serializable(dependency_chain_with_parameters_results),
+        )
 
         add_type_api_packages_results = self.add_type_api_packages(dependency_chain_with_parameters_results, case_hadling_from_click_data_resutls)
-        self.jsontools.write_json(os.path.join(cache_dir, "add_type_api_packages_results.json"), add_type_api_packages_results)
+        self.jsontools.write_json(
+            os.path.join(cache_dir, "add_type_api_packages_results.json"),
+            _make_json_serializable(add_type_api_packages_results),
+        )
 
         add_parameters_from_click_data = self.add_parameters_from_click_data(add_type_api_packages_results, case_hadling_from_click_data_resutls)
-        self.jsontools.write_json(os.path.join(cache_dir, "add_parameters_from_click_data.json"), add_parameters_from_click_data)
+        self.jsontools.write_json(
+            os.path.join(cache_dir, "add_parameters_from_click_data.json"),
+            _make_json_serializable(add_parameters_from_click_data),
+        )
 
         create_request_data_packages_results = self.create_request_data_packages(add_parameters_from_click_data)
         

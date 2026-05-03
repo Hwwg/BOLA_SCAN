@@ -1,100 +1,70 @@
-# Python
+# Experiment caches and generated outputs
+cache*/
+backups/
+backup*/
+*_backup/
+horizontal_results/
+
+# Logs and local run artifacts
+*.log
+*.bak
+*.bak*
+*_backup.py
+batch_depen_gen.log
+judgement_progress.json
+execution_progress.json
+llm_usage.json
+
+# Python caches and virtual environments
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Build and packaging artifacts
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-
-# Node.js
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
+node_modules*/
+automated_click/node_modules/
+automated_click/backup/
+automated_click/*/
+!automated_click/config/
+!automated_click/llm/
+!automated_click/modules/
+!automated_click/prompt/
+!automated_click/storage/
+!automated_click/utils/
 
-# IDE
-.vscode/
+# IDE/editor files
 .idea/
+.vscode/
+.trae/
 *.swp
 *.swo
-*~
 
-# OS
+# OS metadata
 .DS_Store
 Thumbs.db
 
-# Project specific
-automated_click/backup/
-automated_click/node_modules/
-automated_click/pybbs/
-automated_click/results/
-automated_click/results_limesurvey/
-automated_click/results_limesurvey_v1/
-automated_click/results_mall/
-automated_click/results_v1/
-automated_click/time_sea_chatgpt/
-automated_click/ctfd/
-automated_click/easyappointments/
-automated_click/gin_vue_admin/
-automated_click/gin_vue_blog/
-automated_click/gin_vuez_blog/
-automated_click/jeecg/
-automated_click/mall/
-automated_click/mall_swarm/
-automated_click/newbee_mall/
-automated_click/newbee_mall_plus/
-automated_click/openemr/
-automated_click/youlai_mall/
-cache/*
-!cache/crapi/
-cache/crapi/*.log
-full_debug_v2.log
-debug_pool.log
-test_diagnosis.log
-*.log
+# Local environment secrets
+.env
+.env.*
+env.sh
+project.json
 
-# Backup files
-*_backup/
-*_backup.py
-backup_*/
-automated_click_backup/
-backup_cn_keys/
-backup_prompt/
+# Ad-hoc local test assets
+test.png
+test_image.png
 
-# Additional project files to exclude
-ARTIFACT_AVAILABILITY.md
-cache_deepseek/
-cache_gpt_4o_mini/
-cache_gpt-5-mini/
-evaluation/
-paper/
-postman_test.json
-.pytest_cache/
-.trae/
-check_proc_type.py
-test_*.py
-verify_*.py
-method.latex
-workflow.md
-VERIFICATION_REPORT.md
-one-hot*.md
-patent_*.md
-BOLA_validation_and_judgement.md
-UTILS_*.md
-*.latex
-取值关系
+# Duplicate local package files
+package 2.json
+package-lock 2.json

@@ -1,0 +1,182 @@
+{
+    "other/vehicle": [
+        {},
+        {},
+        {}
+    ],
+    "other/auth": [
+        {
+            "email": {}
+        },
+        {
+            "name": {}
+        },
+        {
+            "number": {}
+        },
+        {
+            "password": {}
+        }
+    ],
+    "other/community": [
+        {
+            "content": {}
+        },
+        {
+            "post_id": {
+                "startpoints": [
+                    {
+                        "POST /community/api/v2/community/posts": "add"
+                    }
+                ],
+                "middle_chains": [
+                    {
+                        "POST /community/api/v2/community/posts/{postId}/comment": "add"
+                    }
+                ],
+                "endpoints": [
+                    {
+                        "GET /community/api/v2/community/posts/{postId}": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "title": {}
+        }
+    ],
+    "other/shop/orders": [
+        {
+            "order_id": {
+                "startpoints": [
+                    {
+                        "POST /workshop/api/shop/orders": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "PUT /workshop/api/shop/orders/{order_id}": "update"
+                    },
+                    {
+                        "GET /workshop/api/shop/orders/{order_id}": "query"
+                    },
+                    {
+                        "POST /workshop/api/shop/orders/return_order": "update"
+                    }
+                ]
+            }
+        },
+        {},
+        {}
+    ],
+    "other/shop": [],
+    "other/mechanic": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            "name": {}
+        },
+        {
+            "password": {}
+        }
+    ],
+    "other/coupon": [
+        {
+            "amount": {}
+        },
+        {
+            "coupon_code": {}
+        }
+    ],
+    "other/merchant": [
+        {
+            "mechanic_api": {}
+        },
+        {
+            "mechanic_code": {}
+        },
+        {
+            "number_of_repeats": {}
+        },
+        {
+            "problem_details": {}
+        },
+        {
+            "repeat_request_if_failed": {}
+        },
+        {
+            "vin": {}
+        }
+    ],
+    "other/user/videos": [
+        {
+            "conversion_params": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "PUT /identity/api/v2/user/videos/{video_id}": "update"
+                    }
+                ]
+            }
+        },
+        {
+            "videoName": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "PUT /identity/api/v2/user/videos/{video_id}": "update"
+                    }
+                ]
+            }
+        },
+        {
+            "video_id": {
+                "startpoints": [
+                    {
+                        "POST /identity/api/v2/user/videos": "add"
+                    }
+                ],
+                "middle_chains": [],
+                "endpoints": [
+                    {
+                        "GET /identity/api/v2/user/videos/{video_id}": "query"
+                    },
+                    {
+                        "PUT /identity/api/v2/user/videos/{video_id}": "update"
+                    },
+                    {
+                        "DELETE /identity/api/v2/user/videos/{video_id}": "delete"
+                    },
+                    {
+                        "GET /identity/api/v2/user/videos/convert_video": "query"
+                    }
+                ]
+            }
+        },
+        {
+            "file": {}
+        }
+    ],
+    "other/user": [
+        {},
+        {},
+        {
+            "file": {}
+        }
+    ],
+    "other/admin": []
+}

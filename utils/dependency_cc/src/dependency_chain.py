@@ -5,12 +5,15 @@ import itertools
 import json
 from prompt.synthesis_prompt import SyntheticPrompt
 from gptreply.gpt_con import GPTReply
+from utils.cache_utils import get_project_cache_dir
+from utils.param_path import any_param_matches, param_matches
 
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import copy
 import sys,os
+import re
 
 # 配置全局日志
 logging.basicConfig(
@@ -46,7 +49,21 @@ class DependencyChain:
         self.syn_prompt = SyntheticPrompt()
         self.initial_test_info_dict = {
         }
+        self._param_match_cache = {}
+        self._param_alias_cache = {}
+        self._route_index_source_id = None
+        self._route_index = None
         # logger.info("DependencyChain初始化完成")
+
+    def _iter_route_entries(self, routes):
+        if not isinstance(routes, list):
+            return
+        for route_info in routes:
+            if not isinstance(route_info, dict):
+                continue
+            for route_path, route_data in route_info.items():
+                if isinstance(route_data, dict):
+                    yield route_path, route_data
 
     # ========= 嵌套参数匹配工具（与 para_normalize 保持一致）=========
     def _normalize_response_field(self, field: str) -> str:
@@ -63,6 +80,11 @@ class DependencyChain:
 
     def _response_matches_request(self, req_field: str, resp_field: str) -> bool:
         """基于'.'分割的包含式匹配：请求字段的最后一个token出现在候选字段token集合中即认为命中。"""
+        try:
+            if param_matches(req_field, resp_field):
+                return True
+        except Exception:
+            pass
         if not isinstance(req_field, str):
             req_field = str(req_field)
         if not isinstance(resp_field, str):
@@ -80,42 +102,207 @@ class DependencyChain:
         resp_tokens = set([p for p in resp_norm.split(".") if p])
         return last in resp_tokens
 
+    def _base_param_name(self, field: str) -> str:
+        """提取字段的基础参数名，去掉嵌套路径和数组标记。"""
+        if not isinstance(field, str):
+            field = str(field)
+        base = field.strip().split(".")[-1]
+        return base.replace("[]", "")
+
+    def _to_snake_case(self, name: str) -> str:
+        """将 camelCase / PascalCase 转换为 snake_case。"""
+        if not isinstance(name, str):
+            name = str(name)
+        name = self._base_param_name(name)
+        if not name:
+            return ""
+        s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
+        s2 = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1)
+        return s2.replace("-", "_").lower()
+
+    def _expand_param_variants(self, name: str):
+        """展开同一参数的常见命名变体。"""
+        if not isinstance(name, str):
+            name = str(name)
+        base = self._base_param_name(name)
+        snake = self._to_snake_case(base)
+        compact = snake.replace("_", "")
+        parts = [p for p in snake.split("_") if p]
+        camel = parts[0] + "".join(p.capitalize() for p in parts[1:]) if parts else snake
+        variants = {base, snake, compact, camel}
+        return {v for v in variants if v}
+
+    def _param_names_equivalent(self, left: str, right: str) -> bool:
+        """判断两个字段名是否只是命名风格不同。"""
+        left_variants = self._expand_param_variants(left)
+        right_variants = self._expand_param_variants(right)
+        return bool(left_variants & right_variants)
+
     def _get_param_aliases(self, group_name, param_name):
-        """获取参数的所有别名（包括自身）"""
-        aliases = {param_name}
+        """获取参数的安全别名：只保留命名风格变体，不跨语义扩散。"""
+        cache_key = (group_name or "", str(param_name))
+        if cache_key in self._param_alias_cache:
+            return self._param_alias_cache[cache_key]
+        aliases = set(self._expand_param_variants(param_name))
         
         # 从 params_dict 的 normalized_params_process_data 中获取别名配置
         all_params = self.params_dict.get("normalized_params_process_data", [])
         
         for item in all_params:
+            if not isinstance(item, dict):
+                continue
             if item.get("group") == group_name:
                 for data in item.get("data", []):
+                    if not isinstance(data, dict):
+                        continue
                     params_config = data.get("parameters_name", {})
+                    if not isinstance(params_config, dict):
+                        continue
                     keep_param = params_config.get("keep_pra")
                     replace_params = params_config.get("replace_para", [])
-                    
-                    # 如果 param_name 是主参数，添加所有替换参数作为别名
-                    if param_name == keep_param:
-                        aliases.update(replace_params)
-                    
-                    # 如果 param_name 是替换参数之一，添加主参数作为别名
-                    if param_name in replace_params:
-                        aliases.add(keep_param)
-                        aliases.update(replace_params)
+
+                    related_params = []
+                    if keep_param:
+                        related_params.append(keep_param)
+                    if isinstance(replace_params, list):
+                        related_params.extend(replace_params)
+
+                    for candidate in related_params:
+                        if candidate and self._param_names_equivalent(param_name, candidate):
+                            aliases.update(self._expand_param_variants(candidate))
         
-        return list(aliases)
+        result = list(aliases)
+        self._param_alias_cache[cache_key] = result
+        return result
+
+    def _flatten_field_values(self, values):
+        flat = []
+        def visit(value):
+            if value is None:
+                return
+            if isinstance(value, str):
+                flat.append(value)
+            elif isinstance(value, dict):
+                name = value.get("name")
+                if isinstance(name, str):
+                    flat.append(name)
+                else:
+                    for item in value.keys():
+                        if isinstance(item, str):
+                            flat.append(item)
+            elif isinstance(value, (list, tuple, set)):
+                for item in value:
+                    visit(item)
+            else:
+                flat.append(str(value))
+        visit(values)
+        return flat
+
+    def _field_lookup_keys(self, field):
+        keys = set()
+        text = str(field or "").strip()
+        if not text:
+            return keys
+        keys.update(self._expand_param_variants(text))
+        parts = [p.replace("[]", "").strip("{}") for p in text.split(".") if p]
+        for part in parts:
+            keys.update(self._expand_param_variants(part))
+        if len(parts) >= 2:
+            last = self._to_snake_case(parts[-1])
+            prev = self._to_snake_case(parts[-2])
+            if last in {"id", "uuid", "guid", "identifier", "code", "name"} and prev:
+                for suffix in ("id", "uuid", "guid", "identifier", "code", "name"):
+                    keys.update(self._expand_param_variants(f"{prev}_{suffix}"))
+        return {k for k in keys if k}
+
+    def _lookup_keys_for_param(self, group_name, param_name):
+        keys = set(self._expand_param_variants(param_name))
+        if group_name:
+            for alias in self._get_param_aliases(group_name, param_name):
+                keys.update(self._expand_param_variants(alias))
+        return {k for k in keys if k}
+
+    def _ensure_route_index(self, routes_packages_normalized=None):
+        routes = routes_packages_normalized or self.params_dict.get("normalized_params", {})
+        source_id = id(routes)
+        if self._route_index is not None and self._route_index_source_id == source_id:
+            return self._route_index
+
+        index = {
+            "request": {},
+            "response": {},
+            "endpoint": {},
+            "endpoint_to_group": {},
+            "group_add": {},
+        }
+
+        def add_index(kind, key, entry):
+            index[kind].setdefault(key, []).append(entry)
+
+        for group_name, group_routes in (routes or {}).items():
+            for endpoint, route_data in self._iter_route_entries(group_routes):
+                entry = {
+                    "group": group_name,
+                    "endpoint": endpoint,
+                    "type": route_data.get("type", "unknown"),
+                    "data": route_data,
+                }
+                index["endpoint"][endpoint] = entry
+                index["endpoint_to_group"][endpoint] = group_name
+                if route_data.get("type") == "add":
+                    index["group_add"].setdefault(group_name, []).append(endpoint)
+
+                for field in self._flatten_field_values(route_data.get("request_para", [])):
+                    for key in self._field_lookup_keys(field):
+                        add_index("request", key, entry)
+                for field in self._flatten_field_values(route_data.get("response_para", [])):
+                    for key in self._field_lookup_keys(field):
+                        add_index("response", key, entry)
+
+        self._route_index = index
+        self._route_index_source_id = source_id
+        return index
+
+    def _lookup_param_entries(self, kind, param_name, group_name=None, routes_packages_normalized=None):
+        index = self._ensure_route_index(routes_packages_normalized)
+        candidates = []
+        seen = set()
+        for key in self._lookup_keys_for_param(group_name, param_name):
+            for entry in index.get(kind, {}).get(key, []):
+                if group_name and entry.get("group") != group_name:
+                    continue
+                sig = (entry.get("group"), entry.get("endpoint"))
+                if sig in seen:
+                    continue
+                fields_key = "request_para" if kind == "request" else "response_para"
+                if self._param_in_list(param_name, entry.get("data", {}).get(fields_key, []), entry.get("group")):
+                    candidates.append(entry)
+                    seen.add(sig)
+        return candidates
 
     def _param_in_list(self, param_name, fields, group_name=None) -> bool:
         """判断 param_name 是否命中给定字段列表（支持嵌套/模糊匹配/别名匹配）。"""
         if not fields:
             return False
+        flat_fields = tuple(self._flatten_field_values(fields))
+        cache_key = (str(param_name), flat_fields, group_name or "")
+        if cache_key in self._param_match_cache:
+            return self._param_match_cache[cache_key]
+        try:
+            if any_param_matches(param_name, flat_fields):
+                self._param_match_cache[cache_key] = True
+                return True
+        except Exception:
+            pass
         
         # 1. 直接匹配和嵌套匹配（原有逻辑）
-        for f in fields:
+        for f in flat_fields:
             try:
                 if param_name == f:
+                    self._param_match_cache[cache_key] = True
                     return True
                 if self._response_matches_request(param_name, f):
+                    self._param_match_cache[cache_key] = True
                     return True
             except Exception:
                 continue
@@ -124,13 +311,15 @@ class DependencyChain:
         if group_name and self.params_dict:
             aliases = self._get_param_aliases(group_name, param_name)
             for alias in aliases:
-                for f in fields:
+                for f in flat_fields:
                     try:
                         if alias == f or self._response_matches_request(alias, f):
+                            self._param_match_cache[cache_key] = True
                             return True
                     except Exception:
                         continue
         
+        self._param_match_cache[cache_key] = False
         return False
 
     def find_location_in_routes(self,group_name,parameters_item,routes_packages_normalized):
@@ -156,19 +345,27 @@ class DependencyChain:
         # 检查group_name是否存在
         if group_name not in routes_packages_normalized:
             return result
-            
-        # 遍历该组下的所有接口
+
+        req_entries = self._lookup_param_entries("request", parameters_item, group_name, routes_packages_normalized)
+        resp_entries = self._lookup_param_entries("response", parameters_item, group_name, routes_packages_normalized)
+        if req_entries or resp_entries:
+            result["request_location_path"] = [
+                {entry["endpoint"]: entry.get("type", "unknown")}
+                for entry in req_entries
+            ]
+            result["response_location_path"] = [
+                {entry["endpoint"]: entry.get("type", "unknown")}
+                for entry in resp_entries
+            ]
+            return result
+
+        # 索引未命中时保守回退，避免漏掉极端的模糊匹配。
         group_routes = routes_packages_normalized[group_name]
-        for route_info in group_routes:
-            # 每个route_info是一个字典，包含一个接口的信息
-            for route_path, route_data in route_info.items():
-                # 检查参数是否在请求参数中（支持嵌套/模糊匹配/别名匹配）
-                if self._param_in_list(parameters_item, route_data.get("request_para", []), group_name):
-                    result["request_location_path"].append({route_path: route_data.get("type", "unknown")})
-                    
-                # 检查参数是否在响应参数中（支持嵌套/模糊匹配/别名匹配）
-                if self._param_in_list(parameters_item, route_data.get("response_para", []), group_name):
-                    result["response_location_path"].append({route_path: route_data.get("type", "unknown")})
+        for route_path, route_data in self._iter_route_entries(group_routes):
+            if self._param_in_list(parameters_item, route_data.get("request_para", []), group_name):
+                result["request_location_path"].append({route_path: route_data.get("type", "unknown")})
+            if self._param_in_list(parameters_item, route_data.get("response_para", []), group_name):
+                result["response_location_path"].append({route_path: route_data.get("type", "unknown")})
                     
         return result
 
@@ -181,28 +378,32 @@ class DependencyChain:
             "response_location_path": []
         }
         
-        # 检查parameters_extraction_results是否存在
-        # if "parameters_extraction_results" not in routes_packages_normalized:
-        #     return result
-            
-        # extraction_results = routes_packages_normalized["normalized_"]
-        
-        # 遍历所有功能组（不区分功能组）
+        req_entries = []
+        resp_entries = []
+        for current_group_name in (routes_packages_normalized or {}).keys():
+            req_entries.extend(
+                self._lookup_param_entries("request", parameters_item, current_group_name, routes_packages_normalized)
+            )
+            resp_entries.extend(
+                self._lookup_param_entries("response", parameters_item, current_group_name, routes_packages_normalized)
+            )
+        if req_entries or resp_entries:
+            result["request_location_path"] = [
+                {entry["endpoint"]: entry.get("type", "unknown")}
+                for entry in req_entries
+            ]
+            result["response_location_path"] = [
+                {entry["endpoint"]: entry.get("type", "unknown")}
+                for entry in resp_entries
+            ]
+            return result
+
         for current_group_name, group_routes in routes_packages_normalized.items():
-                
-            # 遍历该组下的所有接口
-            for route_info in group_routes:
-                # 每个route_info是一个字典，包含一个接口的信息
-                for route_path, route_data in route_info.items():
-                    # 检查参数是否在请求参数中（支持嵌套/模糊匹配/别名匹配）
-                    if self._param_in_list(parameters_item, route_data.get("request_para", []), current_group_name):
-                        # 获取参数位置信息
-                        param_location = route_data.get("param_locations", {}).get(parameters_item, "unknown")
-                        result["request_location_path"].append({route_path: route_data.get("type", "unknown")})
-                        
-                    # 检查参数是否在响应参数中（支持嵌套/模糊匹配/别名匹配）
-                    if self._param_in_list(parameters_item, route_data.get("response_para", []), current_group_name):
-                        result["response_location_path"].append({route_path: route_data.get("type", "unknown")})
+            for route_path, route_data in self._iter_route_entries(group_routes):
+                if self._param_in_list(parameters_item, route_data.get("request_para", []), current_group_name):
+                    result["request_location_path"].append({route_path: route_data.get("type", "unknown")})
+                if self._param_in_list(parameters_item, route_data.get("response_para", []), current_group_name):
+                    result["response_location_path"].append({route_path: route_data.get("type", "unknown")})
                         
         return result
 
@@ -223,9 +424,9 @@ class DependencyChain:
             # 辅助函数：判断路由是否属于当前功能组
             def _in_current_group(route_path: str) -> bool:
                 group_routes = routes_packages_normalized.get(group_name, [])
-                for route_info in group_routes:
-                    if route_path in route_info:
-                            return True
+                for ep, _ in self._iter_route_entries(group_routes):
+                    if route_path == ep:
+                        return True
                 return False
             
             # 1. 确定终点：从request_location_path中筛选出type不是add类型的接口（仅当前功能组）
@@ -233,7 +434,7 @@ class DependencyChain:
             for route_dict in routes_relation_item["request_location_path"]:
                 for route_path, route_type in route_dict.items():
                     # if route_type != "add" and route_type != "list query" and (_in_current_group(route_path)^is_cross):
-                    if route_type != "add" and route_type != "list query":
+                    if route_type != "add":
                         endpoints.append({route_path: route_type})
             
             # 2. 确定起点：从response_location_path中选择请求参数中没有该parameters_item且路由类型是add的（仅当前功能组）
@@ -244,9 +445,8 @@ class DependencyChain:
                     if route_type == "add":
                         # 检查该路由的请求参数中是否没有parameters_item（支持嵌套/模糊匹配/别名匹配）
                         route_found = False
-                        for route_info in routes_packages_normalized.get(group_name, []):
-                            if route_path in route_info:
-                                route_data = route_info[route_path]
+                        for ep, route_data in self._iter_route_entries(routes_packages_normalized.get(group_name, [])):
+                            if route_path == ep:
                                 if not self._param_in_list(parameters_item, route_data.get("request_para", []), group_name):
                                     # 去重：按“整体起点”去重。仅当与已有起点的“签名”完全一致时才视为重复
                                     existing_signatures = set()
@@ -280,10 +480,9 @@ class DependencyChain:
                     group_routes = normalized_params.get(group_name, [])
                     # 收集同组 add 接口
                     add_api_paths = []
-                    for route_info in group_routes:
-                        for add_path, add_data in route_info.items():
-                            if add_data.get("type") == "add":
-                                add_api_paths.append(add_path)
+                    for add_path, add_data in self._iter_route_entries(group_routes):
+                        if add_data.get("type") == "add":
+                            add_api_paths.append(add_path)
                     # 如果该功能组中没有找到 add 类型的接口，则不添加
                     if not add_api_paths:
                         continue
@@ -343,8 +542,8 @@ class DependencyChain:
             # 辅助函数：判断路由是否属于当前功能组
             def _in_current_group(route_path: str) -> bool:
                 group_routes = routes_packages_normalized.get(group_name, [])
-                for route_info in group_routes:
-                    if route_path in route_info:
+                for ep, _ in self._iter_route_entries(group_routes):
+                    if route_path == ep:
                         return True
                 return False
             
@@ -366,22 +565,29 @@ class DependencyChain:
                         if new_sig not in existing_signatures:
                             startpoints.append({route_path: route_type})
 
-            # 2. 确定终点：从request_location_path和response_location_path中筛选出type是query类型的接口（仅限当前功能组）
+            # 2. 确定终点：query 与 list query 都可以作为查询末端。
+            # list query 只有在请求参数命中当前交集参数时才作为末端，避免纯列表页误入链尾。
             endpoints = []
-            
-            # 从request_location_path中找query类型（仅当前组）
-            # for route_dict in routes_relation_item["request_location_path"]:
-            #     for route_path, route_type in route_dict.items():
-            #         # if route_type == "query" and _in_current_group(route_path):
-            #         if route_type == "query" and _in_current_group(route_path):
-            #             endpoints.append({route_path: route_type})
-            
-            # 从response_location_path中找query类型（仅当前组）
+
+            def _route_request_contains(route_path: str) -> bool:
+                for ep, route_data in self._iter_route_entries(routes_packages_normalized.get(group_name, [])):
+                    if route_path == ep:
+                        return self._param_in_list(parameters_item, route_data.get("request_para", []), group_name)
+                return False
+
+            for route_dict in routes_relation_item["request_location_path"]:
+                for route_path, route_type in route_dict.items():
+                    route_type_norm = str(route_type or "").strip().lower()
+                    if route_type_norm in ("query", "list query") and {route_path: route_type} not in endpoints:
+                        if route_type_norm == "query" or _route_request_contains(route_path):
+                            endpoints.append({route_path: route_type})
+
             for route_dict in routes_relation_item["response_location_path"]:
                 for route_path, route_type in route_dict.items():
-                    # if route_type == "query" and _in_current_group(route_path) and {route_path: route_type} not in endpoints:
-                    if route_type == "query"  and {route_path: route_type} not in endpoints:
-                        endpoints.append({route_path: route_type})
+                    route_type_norm = str(route_type or "").strip().lower()
+                    if route_type_norm in ("query", "list query") and {route_path: route_type} not in endpoints:
+                        if route_type_norm == "query" or _route_request_contains(route_path):
+                            endpoints.append({route_path: route_type})
 
             # 3. 确定中间链条：从request_location_path和response_location_path中找add类型的接口
             middle_chains = []
@@ -490,14 +696,14 @@ class DependencyChain:
             
                 tmp_dependencychain_results = self.dependencychain_construction("A-(A-B)",routes_relation[parameters_item],group_name,parameters_item,routes_packages_normalized,False)
                 dependencychain_results[group_name].append(tmp_dependencychain_results)
-                logger.info(f"{parameters_item}\r\n:"+str(tmp_dependencychain_results)+"\r\n")
+                logger.debug("%s dependency candidates: %s", parameters_item, tmp_dependencychain_results)
                 # print('a')
             for parameters_item in group_data["A-B-add"]:
                 routes_relation[parameters_item] = self.find_location_in_routes(group_name,parameters_item,routes_packages_normalized)
                 # logger.info(f"{parameters_item}这个参数的所在路由位置情况："+json.dumps(routes_relation[parameters_item]))
                 tmp_dependencychain_results = self.dependencychain_construction("A-B-add",routes_relation[parameters_item],group_name,parameters_item,routes_packages_normalized,False)
                 dependencychain_results[group_name].append(tmp_dependencychain_results)
-                logger.info(f"A_B_add_{parameters_item}\r\n:"+str(tmp_dependencychain_results)+"\r\n")
+                logger.debug("A_B_add_%s dependency candidates: %s", parameters_item, tmp_dependencychain_results)
                 # logger.info("A-B-add"+str(dependencychain_results[group_name]))
         return dependencychain_results
 
@@ -517,13 +723,13 @@ class DependencyChain:
                 # logger.info(f"{parameters_item}这个参数的所在路由位置情况："+json.dumps(routes_relation[parameters_item]))
                 tmp_dependencychain_results = self.dependencychain_construction("A-(A-B)",routes_relation[parameters_item],group_name,parameters_item,routes_packages_normalized,True)
                 dependencychain_results[group_name].append(tmp_dependencychain_results)
-                logger.info(f"A_B{parameters_item}\r\n:"+str(tmp_dependencychain_results)+"\r\n")
+                logger.debug("A_B%s dependency candidates: %s", parameters_item, tmp_dependencychain_results)
             for parameters_item in group_data["A-B-add"]:
                 routes_relation[parameters_item] = self.find_location_in_cross_routes(group_name,parameters_item,routes_packages_normalized)
                 # logger.info(f"{parameters_item}这个参数的所在路由位置情况："+json.dumps(routes_relation[parameters_item]))
                 tmp_dependencychain_results = self.dependencychain_construction("A-B-add",routes_relation[parameters_item],group_name,parameters_item,routes_packages_normalized,True)
                 dependencychain_results[group_name].append(tmp_dependencychain_results)
-                logger.info(f"A_B_add_{parameters_item}\r\n:"+str(tmp_dependencychain_results)+"\r\n")
+                logger.debug("A_B_add_%s dependency candidates: %s", parameters_item, tmp_dependencychain_results)
   
         
         return dependencychain_results
@@ -547,11 +753,11 @@ class DependencyChain:
                 result[group_name] = []
                 
                 for item in group_data:
-                    if not item:  # 跳过空字典
+                    if not isinstance(item, dict) or not item:  # 跳过空字典
                         continue
                         
                     for param_name, param_data in item.items():
-                        if not param_data:  # 跳过空的参数数据
+                        if not isinstance(param_data, dict) or not param_data:  # 跳过空的参数数据
                             continue
                             
                         # 获取startpoints（起始点）
@@ -620,6 +826,8 @@ class DependencyChain:
                                         # 将 List[dict] 按类型拆分，add 优先且多个并联为列表，其后为其他类型顺序执行
                                         typed_items = []
                                         for d in start_item:
+                                            if not isinstance(d, dict) or not d:
+                                                continue
                                             route = list(d.keys())[0]
                                             rtype = d[route]
                                             typed_items.append((route, rtype))
@@ -643,12 +851,16 @@ class DependencyChain:
                                         step_no += 1
                                     else:
                                         # 单独的起始路由沿用原逻辑
+                                        if not isinstance(start_item, dict) or not start_item:
+                                            continue
                                         route = list(start_item.keys())[0]
                                         combination[str(step_no)] = route
                                         step_no += 1
                                     
                                     # 添加 middle_chains
                                     for middle_item in middle_perm:
+                                        if not isinstance(middle_item, dict) or not middle_item:
+                                            continue
                                         middle_route = list(middle_item.keys())[0]
                                         combination[str(step_no)] = middle_route
                                         step_no += 1
@@ -673,11 +885,11 @@ class DependencyChain:
                 result[group_name] = []
                 
                 for item in group_data:
-                    if not item:  # 跳过空字典
+                    if not isinstance(item, dict) or not item:  # 跳过空字典
                         continue
                     
                     for param_name, param_data in item.items():
-                        if not param_data:  # 跳过空的参数数据
+                        if not isinstance(param_data, dict) or not param_data:  # 跳过空的参数数据
                             continue
                         
                         startpoints = param_data.get('startpoints', [])
@@ -738,6 +950,8 @@ class DependencyChain:
                                     if isinstance(start_item, list):
                                         typed_items = []
                                         for d in start_item:
+                                            if not isinstance(d, dict) or not d:
+                                                continue
                                             route = list(d.keys())[0]
                                             rtype = d[route]
                                             typed_items.append((route, rtype))
@@ -761,12 +975,16 @@ class DependencyChain:
                                         step_no += 1
                                     else:
                                         # 单独的起始路由沿用原逻辑
+                                        if not isinstance(start_item, dict) or not start_item:
+                                            continue
                                         route = list(start_item.keys())[0]
                                         combination[str(step_no)] = route
                                         step_no += 1
                                     
                                     # 添加 middle_chains
                                     for middle_item in middle_perm:
+                                        if not isinstance(middle_item, dict) or not middle_item:
+                                            continue
                                         middle_route = list(middle_item.keys())[0]
                                         combination[str(step_no)] = middle_route
                                         step_no += 1
@@ -823,7 +1041,7 @@ class DependencyChain:
                 merged_results[group_name] = []
                 
                 for chain in chains:
-                    if not chain:  # 跳过空字典
+                    if not isinstance(chain, dict) or not chain:  # 跳过空字典
                         continue
                         
                     # 获取链中的接口序列
@@ -843,9 +1061,9 @@ class DependencyChain:
                     for api_endpoint in middle_apis:
                         # 在normalized_params中查找该接口的请求参数
                         for group_params in normalized_params.values():
-                            for api_group in group_params:
-                                if api_endpoint in api_group:
-                                    request_params = api_group[api_endpoint].get('request_para', [])
+                            for ep, api_data in self._iter_route_entries(group_params):
+                                if api_endpoint == ep:
+                                    request_params = api_data.get('request_para', [])
                                     
                                     # 在chain_1和chain_2中查找这些参数的startpoints
                                     for param in request_params:
@@ -878,6 +1096,8 @@ class DependencyChain:
             for group_name, chains in merged_results.items():
                 deduplicated_results[group_name] = []
                 for chain in chains:
+                    if not isinstance(chain, dict):
+                        continue
                     # 将链条转换为可哈希的字符串表示
                     chain_str = str(sorted(chain.items()))
                     if chain_str not in seen_chains:
@@ -895,6 +1115,8 @@ class DependencyChain:
                 for item in group_data:
                     if param_name in item:
                         param_data = item[param_name]
+                        if not isinstance(param_data, dict):
+                            continue
                         if 'startpoints' in param_data:
                             for startpoint in param_data['startpoints']:
                                 if isinstance(startpoint, list):
@@ -910,6 +1132,8 @@ class DependencyChain:
                 for item in group_data:
                     if param_name in item:
                         param_data = item[param_name]
+                        if not isinstance(param_data, dict):
+                            continue
                         if 'startpoints' in param_data:
                             for startpoint in param_data['startpoints']:
                                 if isinstance(startpoint, list):
@@ -957,6 +1181,8 @@ class DependencyChain:
                 return tuple()
 
             def _rest_part(chain):
+                if not isinstance(chain, dict):
+                    return {}
                 rest = {k: v for k, v in chain.items() if k != '1'}
                 return rest
 
@@ -968,6 +1194,8 @@ class DependencyChain:
 
             # 先收集可合并的链条
             for chain in chains:
+                if not isinstance(chain, dict):
+                    continue
                 step1 = chain.get('1')
                 if isinstance(step1, dict):
                     add_val = step1.get('1')
@@ -1115,7 +1343,7 @@ class DependencyChain:
         results_chain_2_filtered = remove_duplicates(results_chain_1_filtered, results_chain_2_filtered)
 
         # self.jsontools.write_json("/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/newbee_mall/formated_chain_3.json", results_chain_2_filtered)
-        logger.info(results_chain_2_filtered)
+        logger.debug("cross dependency candidates after dedupe: %s", results_chain_2_filtered)
         
         # 应用并联关系合并
         merged_results = {}
@@ -1141,45 +1369,50 @@ class DependencyChain:
 
     def dfs_dependency_chain(self,merged_results):
         normalized_params = self.params_dict.get("normalized_params", {})
+        route_index = self._ensure_route_index(normalized_params)
         set_calc_v3 = self.params_dict.get("set_calculate_results_v3", {})
         # 汇总所有功能组的 A-(A-B) 参数集合（跨组）
         aab_params_all = set()
         for _, group_data in set_calc_v3.items():
+            if not isinstance(group_data, dict):
+                continue
             aab_params_all.update(group_data.get("A-(A-B)", []))
-
-        # 根据 normalized_params 预构建 endpoint->group 映射，避免使用静态路径规则
-        endpoint_to_group = {}
-        for g, routes in normalized_params.items():
-            for ri in routes:
-                for ep in ri.keys():
-                    endpoint_to_group[ep] = g
 
         def parse_group_from_endpoint(endpoint: str):
             # 直接使用 parameters_dict_all.json 中定义的功能组名称
-            return endpoint_to_group.get(endpoint)
+            return route_index["endpoint_to_group"].get(endpoint)
         
         def find_route_data(group: str, endpoint: str):
-            for route_info in normalized_params.get(group, []):
-                if endpoint in route_info:
-                    return route_info[endpoint]
+            entry = route_index["endpoint"].get(endpoint)
+            if entry and (not group or entry.get("group") == group):
+                return entry.get("data")
             return None
+
+        request_params_cache = {}
+        response_params_cache = {}
+        combo_endpoint_cache = {}
+        combo_complexity_cache = {}
         
         def collect_request_params_for_endpoint(endpoint: str):
+            if endpoint in request_params_cache:
+                return request_params_cache[endpoint]
             group = parse_group_from_endpoint(endpoint)
             rd = find_route_data(group, endpoint) if group else None
             if rd:
-                return rd.get("request_para", [])
-            return []
+                params = rd.get("request_para", [])
+            else:
+                params = []
+            request_params_cache[endpoint] = params
+            return params
         
         def find_response_endpoints_for_param(param: str):
-            eps = []
-            for g, routes in normalized_params.items():
-                for ri in routes:
-                    for ep, rd in ri.items():
-                        resp = rd.get("response_para", [])
-                        if self._param_in_list(param, resp, g):
-                            eps.append((g, ep, rd.get("type", "unknown")))
-            return eps
+            entries = []
+            for group_name in normalized_params.keys():
+                entries.extend(self._lookup_param_entries("response", param, group_name, normalized_params))
+            return [
+                (entry.get("group"), entry.get("endpoint"), entry.get("type", "unknown"))
+                for entry in entries
+            ]
         
         def find_add_endpoints_in_group(group: str, exclude_param: str = None):
             """
@@ -1188,19 +1421,20 @@ class DependencyChain:
             （因为这些接口本身需要该参数，不能作为该参数的起点）。
             """
             adds = []
-            for ri in normalized_params.get(group, []):
-                for ep, rd in ri.items():
-                    if rd.get("type") == "add":
-                        # 如果指定了 exclude_param，检查该接口是否需要该参数
-                        if exclude_param:
-                            req_params = rd.get("request_para", [])
-                            if self._param_in_list(exclude_param, req_params, group):
-                                # 该接口需要 exclude_param，跳过
-                                continue
-                        adds.append(ep)
+            for ep in route_index["group_add"].get(group, []):
+                rd = find_route_data(group, ep)
+                if not rd:
+                    continue
+                if exclude_param:
+                    req_params = rd.get("request_para", [])
+                    if self._param_in_list(exclude_param, req_params, group):
+                        continue
+                adds.append(ep)
             return adds
         
         def chain_has_combo(chain: dict, combo: dict):
+            if not isinstance(chain, dict):
+                return False
             # 检查链中是否已存在相同组合，避免重复添加
             for k, v in chain.items():
                 if isinstance(v, dict):
@@ -1214,6 +1448,8 @@ class DependencyChain:
         
         def collect_chain_endpoints(chain: dict):
             eps = []
+            if not isinstance(chain, dict):
+                return eps
             for k in sorted(chain.keys(), key=lambda x: int(x) if str(x).isdigit() else 9999):
                 v = chain[k]
                 if isinstance(v, dict):
@@ -1242,6 +1478,8 @@ class DependencyChain:
 
         # 新增：根据要前移/删除的端点，剪枝旧链条中对应的元素或组合
         def prune_chain_by_endpoints(chain: dict, endpoints_to_prune: set):
+            if not isinstance(chain, dict):
+                return chain
             def contains(val):
                 if isinstance(val, str):
                     return val in endpoints_to_prune
@@ -1285,6 +1523,8 @@ class DependencyChain:
 
         # 新增：根据完整组合字典匹配，剪枝旧链条中已出现的相同组合
         def prune_chain_by_combo(chain: dict, combo: dict):
+            if not isinstance(chain, dict):
+                return chain
             def is_same_combo(d: dict) -> bool:
                 return isinstance(d, dict) and d.get("1") == combo.get("1") and d.get("2") == combo.get("2")
             new_chain = {}
@@ -1310,6 +1550,8 @@ class DependencyChain:
             pass
 
         def augment_once(chain: dict):
+            if not isinstance(chain, dict):
+                return chain, False
             original_endpoints = collect_chain_endpoints(chain)
             new_combos = []
             combos_to_prune = []
@@ -1352,10 +1594,9 @@ class DependencyChain:
                         self.pending_group_matches = {}
                     related_groups = set()
                     for g, routes in normalized_params.items():
-                        for ri in routes:
-                            for ep2, rd2 in ri.items():
-                                if self._param_in_list(p, rd2.get("request_para", []), g):
-                                    related_groups.add(g)
+                        for _, rd2 in self._iter_route_entries(routes):
+                            if self._param_in_list(p, rd2.get("request_para", []), g):
+                                related_groups.add(g)
                     self.pending_group_matches[p] = list(related_groups)
                     continue
                 for g, ep_resp, t in resp_eps:
@@ -1398,6 +1639,9 @@ class DependencyChain:
             # === 新增：对 new_combos 进行依赖排序 ===
             def extract_endpoints_from_combo(combo):
                 """从 combo 结构中提取所有端点"""
+                cache_key = json.dumps(combo, sort_keys=True, ensure_ascii=False)
+                if cache_key in combo_endpoint_cache:
+                    return combo_endpoint_cache[cache_key]
                 eps = []
                 for k, v in combo.items():
                     if isinstance(v, str):
@@ -1406,18 +1650,47 @@ class DependencyChain:
                         for item in v:
                             if isinstance(item, str):
                                 eps.append(item)
+                combo_endpoint_cache[cache_key] = eps
                 return eps
             
             def collect_response_params_for_endpoint(endpoint: str):
                 """获取端点的响应参数"""
+                if endpoint in response_params_cache:
+                    return response_params_cache[endpoint]
                 group = parse_group_from_endpoint(endpoint)
                 rd = find_route_data(group, endpoint) if group else None
                 if rd:
                     resp = rd.get("response_para", [])
+                    response_params_cache[endpoint] = resp
                     return resp
                 # 调试：如果找不到数据，记录日志
-                logger.info(f"[Combo-Debug] 未找到响应参数: endpoint={endpoint}, group={group}")
+                logger.debug(f"[Combo-Debug] 未找到响应参数: endpoint={endpoint}, group={group}")
+                response_params_cache[endpoint] = []
                 return []
+
+            def endpoint_request_param_set(endpoint: str):
+                cache_key = ("req-set", endpoint)
+                if cache_key in request_params_cache:
+                    return request_params_cache[cache_key]
+                result = set()
+                for p in collect_request_params_for_endpoint(endpoint) or []:
+                    param_name = p if isinstance(p, str) else p.get("name", "") if isinstance(p, dict) else ""
+                    if param_name:
+                        result.add(param_name.lower())
+                request_params_cache[cache_key] = result
+                return result
+
+            def endpoint_response_param_set(endpoint: str):
+                cache_key = ("resp-set", endpoint)
+                if cache_key in response_params_cache:
+                    return response_params_cache[cache_key]
+                result = set()
+                for p in collect_response_params_for_endpoint(endpoint) or []:
+                    param_name = p if isinstance(p, str) else p.get("name", "") if isinstance(p, dict) else ""
+                    if param_name:
+                        result.add(param_name.lower())
+                response_params_cache[cache_key] = result
+                return result
             
             def combo_depends_on(combo_a, combo_b):
                 """检查 combo_a 是否依赖于 combo_b（即 A 的请求参数与 B 的响应参数有交集）"""
@@ -1427,29 +1700,24 @@ class DependencyChain:
                 # 收集 A 中所有端点的请求参数
                 req_params_a = set()
                 for ep in eps_a:
-                    params = collect_request_params_for_endpoint(ep)
-                    for p in (params or []):
-                        param_name = p if isinstance(p, str) else p.get("name", "") if isinstance(p, dict) else ""
-                        if param_name:
-                            req_params_a.add(param_name.lower())
+                    req_params_a.update(endpoint_request_param_set(ep))
                 
                 # 收集 B 中所有端点的响应参数
                 resp_params_b = set()
                 for ep in eps_b:
-                    params = collect_response_params_for_endpoint(ep)
-                    for p in (params or []):
-                        param_name = p if isinstance(p, str) else p.get("name", "") if isinstance(p, dict) else ""
-                        if param_name:
-                            resp_params_b.add(param_name.lower())
+                    resp_params_b.update(endpoint_response_param_set(ep))
                 
                 # 当 A 的请求参数与 B 的响应参数有交集时，存在依赖
                 intersection = req_params_a & resp_params_b
                 if intersection:
-                    logger.info(f"[Combo-Dependency] A请求:{req_params_a}, B响应:{resp_params_b}, 交集:{intersection}")
+                    logger.debug(f"[Combo-Dependency] A请求:{req_params_a}, B响应:{resp_params_b}, 交集:{intersection}")
                 return bool(intersection)
             
             def get_combo_complexity(combo):
                 """计算 combo 的复杂度（请求参数数量 + 路径参数数量 * 10）"""
+                cache_key = json.dumps(combo, sort_keys=True, ensure_ascii=False)
+                if cache_key in combo_complexity_cache:
+                    return combo_complexity_cache[cache_key]
                 import re
                 eps = extract_endpoints_from_combo(combo)
                 total_req_params = 0
@@ -1462,7 +1730,9 @@ class DependencyChain:
                     params = collect_request_params_for_endpoint(ep)
                     total_req_params += len(params or [])
                 # 路径参数权重更高（乘以10），因为有路径参数意味着需要依赖其他接口
-                return total_req_params + total_path_params * 10
+                complexity = total_req_params + total_path_params * 10
+                combo_complexity_cache[cache_key] = complexity
+                return complexity
             
             def break_cycle_dependency(combo_a, combo_b):
                 """当 A 和 B 互相依赖时，判断应该保留哪个方向的依赖。
@@ -1477,6 +1747,15 @@ class DependencyChain:
                 """对 combos 进行拓扑排序，返回分层列表"""
                 if len(combos) <= 1:
                     return [combos] if combos else []
+
+                try:
+                    max_topo_combos = int(os.getenv("BOLASCAN_MAX_TOPO_COMBOS", "80"))
+                except Exception:
+                    max_topo_combos = 80
+                if len(combos) > max_topo_combos:
+                    # 大批量 combo 做 O(n^2) 拓扑排序收益很低，直接按复杂度稳定排序并分层。
+                    sorted_combos = sorted(combos, key=get_combo_complexity)
+                    return [sorted_combos]
                 
                 n = len(combos)
                 
@@ -1504,17 +1783,17 @@ class DependencyChain:
                                     graph[j].append(i)
                                     in_degree[i] += 1
                                     dependencies_found = True
-                                    logger.info(f"[Topo-Sort] 循环依赖打破: combo[{i}] 依赖于 combo[{j}] (复杂度 {get_combo_complexity(combos[i])} > {get_combo_complexity(combos[j])})")
+                                    logger.debug(f"[Topo-Sort] 循环依赖打破: combo[{i}] 依赖于 combo[{j}] (复杂度 {get_combo_complexity(combos[i])} > {get_combo_complexity(combos[j])})")
                                 # 否则不添加这个方向的依赖，等反向遍历时添加
                             else:
                                 # 单向依赖，直接添加
                                 graph[j].append(i)
                                 in_degree[i] += 1
                                 dependencies_found = True
-                                logger.info(f"[Topo-Sort] 发现依赖: combo[{i}] 依赖于 combo[{j}]")
+                                logger.debug(f"[Topo-Sort] 发现依赖: combo[{i}] 依赖于 combo[{j}]")
                 
                 if not dependencies_found and n > 1:
-                    logger.info(f"[Topo-Sort] 未发现任何依赖关系，共 {n} 个 combos")
+                    logger.debug(f"[Topo-Sort] 未发现任何依赖关系，共 {n} 个 combos")
                 
                 # 第三步：分层拓扑排序（Kahn 算法）
                 layers = []
@@ -1528,7 +1807,7 @@ class DependencyChain:
                         remaining_list = list(remaining)
                         remaining_list.sort(key=lambda x: get_combo_complexity(combos[x]))
                         current_layer = [remaining_list[0]]
-                        logger.info(f"[Topo-Sort] 强制打破循环，选择复杂度最低的 combo[{current_layer[0]}]")
+                        logger.debug(f"[Topo-Sort] 强制打破循环，选择复杂度最低的 combo[{current_layer[0]}]")
                     
                     layers.append([combos[i] for i in current_layer])
                     
@@ -1542,14 +1821,14 @@ class DependencyChain:
             
             # 对 new_combos 进行拓扑排序
             if len(new_combos) > 1:
-                logger.info(f"[Combo-Sort] 排序前 new_combos 数量: {len(new_combos)}")
+                logger.debug(f"[Combo-Sort] 排序前 new_combos 数量: {len(new_combos)}")
                 for i, c in enumerate(new_combos):
-                    logger.info(f"[Combo-Sort]   combo[{i}]: {c}")
+                    logger.debug(f"[Combo-Sort]   combo[{i}]: {c}")
             sorted_layers = topological_sort_combos(new_combos)
             if len(sorted_layers) > 1:
-                logger.info(f"[Combo-Sort] 排序后层数: {len(sorted_layers)}")
+                logger.debug(f"[Combo-Sort] 排序后层数: {len(sorted_layers)}")
                 for i, layer in enumerate(sorted_layers):
-                    logger.info(f"[Combo-Sort]   layer[{i}]: {layer}")
+                    logger.debug(f"[Combo-Sort]   layer[{i}]: {layer}")
             # === 依赖排序结束 ===
             
             # 在重编号前，先把旧链条里已出现的相同组合删掉，实现"前移"
@@ -1581,6 +1860,8 @@ class DependencyChain:
             #     print("a")
             augmented_list = []
             for chain in chains:
+                if not isinstance(chain, dict):
+                    continue
                 visited_params = set()
                 current_chain = copy.deepcopy(chain)
                 # 修复：用原链条中已存在的端点初始化 visited_endpoints，避免重复添加
@@ -1852,7 +2133,7 @@ class DependencyChain:
         """
         import os
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-        cache_dir = os.path.join(project_root, 'cache', self.project_name)
+        cache_dir = get_project_cache_dir(self.project_name, project_root)
         
         chain_1 = self.dependency_construction_v1()
         self.jsontools.write_json(os.path.join(cache_dir, "chain_1.json"), chain_1)
@@ -1889,6 +2170,3 @@ if __name__ == "__main__":
 
     dependencychain = DependencyChain(api_doc_type_path, "gpt-4o-mini", params_dict, project_name)
     jsontools.write_json(os.path.join(cache_dir, "dependency_chains_results.json"), dependencychain.chains_construction_results())
-
-
-

@@ -8,6 +8,15 @@ class LLMElementHelper {
         this.promptSynthesizer = new PromptSynthesizer();
     }
 
+    extractJsonPayload(reply) {
+        if (typeof reply !== 'string') {
+            throw new Error('LLM返回内容不是字符串');
+        }
+        const trimmed = reply.trim();
+        const fencedMatch = trimmed.match(/```json\s*([\s\S]*?)\s*```/i);
+        return (fencedMatch ? fencedMatch[1] : trimmed).trim();
+    }
+
     /**
      * 通过LLM分析HTML，获取可交互元素的CSS选择器
      * @param {string} htmlContent
@@ -55,27 +64,22 @@ class LLMElementHelper {
             form_html: formHtml
         });
         let testData = {};
-        let retry = 0;
-        const maxRetry = 2;
-        while (retry <= maxRetry) {
+        const maxAttempts = 3;
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 const reply = await this.llm.query(messages);
-                const match = reply.match(/```json([\s\S]*?)```/);
-                let jsonStr = match ? match[1] : reply;
+                const jsonStr = this.extractJsonPayload(reply);
                 testData = JSON.parse(jsonStr);
-                if (testData && typeof testData === 'object') {
-                    break;
-                } else {
-                    throw new Error('LLM表单数据返回格式不正确，重试...');
+                if (testData && typeof testData === 'object' && !Array.isArray(testData)) {
+                    return testData;
                 }
+                throw new Error('LLM表单数据返回格式不正确');
             } catch (e) {
-                retry++;
-                if (retry > maxRetry) {
-                    console.error('LLM表单数据生成失败，已重试多次:', e);
-                    testData = {};
-                    break;
+                if (attempt >= maxAttempts) {
+                    console.error('LLM表单数据生成失败，连续3次未返回合法JSON，直接跳过:', e);
+                    return {};
                 }
-                console.warn(`LLM表单数据返回格式异常，正在第${retry}次重试...`);
+                console.warn(`LLM表单数据返回格式异常，正在第${attempt}次重试...`);
             }
         }
         return testData;
@@ -95,27 +99,22 @@ async fixFormTestData(formHtml, lastData, errorFeedback) {
         error_feedback: errorFeedback
     });
     let testData = {};
-    let retry = 0;
-    const maxRetry = 2;
-    while (retry <= maxRetry) {
+    const maxAttempts = 3;
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
         try {
             const reply = await this.llm.query(messages);
-            const match = reply.match(/```json([\s\S]*?)```/);
-            let jsonStr = match ? match[1] : reply;
+            const jsonStr = this.extractJsonPayload(reply);
             testData = JSON.parse(jsonStr);
-            if (testData && typeof testData === 'object') {
-                break;
-            } else {
-                throw new Error('LLM表单修正数据返回格式不正确，重试...');
+            if (testData && typeof testData === 'object' && !Array.isArray(testData)) {
+                return testData;
             }
+            throw new Error('LLM表单修正数据返回格式不正确');
         } catch (e) {
-            retry++;
-            if (retry > maxRetry) {
-                console.error('LLM表单修正数据生成失败，已重试多次:', e);
-                testData = {};
-                break;
+            if (attempt >= maxAttempts) {
+                console.error('LLM表单修正数据生成失败，连续3次未返回合法JSON，直接跳过:', e);
+                return {};
             }
-            console.warn(`LLM表单修正数据返回格式异常，正在第${retry}次重试...`);
+            console.warn(`LLM表单修正数据返回格式异常，正在第${attempt}次重试...`);
         }
     }
     return testData;

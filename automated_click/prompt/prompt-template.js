@@ -69,14 +69,14 @@ HTML代码:
 - 对于密码、验证码等敏感字段，生成合理的测试值。
 - 对于文件上传控件，生成合适的文件名（如test.jpg、test.pdf等）。
 - 输出内容必须为标准JSON对象，key为唯一CSS选择器，value为填写的内容。
+- 只能输出JSON对象本身，不要输出任何解释、说明、前后缀文字、Markdown代码块或注释。
+- 如果无法判断，请直接输出空对象 {}。
 
 输出格式：
-\`\`\`json
 {
   "selector1": "value1",
   "selector2": "value2"
 }
-\`\`\`
         `,
         user: `
 请为以下表单控件生成合适的测试输入值，注意遵循控件的类型、约束和上下文：
@@ -93,14 +93,14 @@ HTML代码：
 - 结合表单控件的所有属性（type、pattern、min、max、step、placeholder、label、aria-*等）和错误提示内容，修正不合规的输入。
 - 只修正有问题的字段，其他字段保持不变。
 - 输出内容为标准JSON对象，key为唯一CSS选择器，value为填写的内容。
+- 只能输出JSON对象本身，不要输出任何解释、说明、前后缀文字、Markdown代码块或注释。
+- 如果无法判断，请直接输出空对象 {}。
 
 输出格式:
-\`\`\`json
 {
   "selector1": "value1",
   "selector2": "value2"
 }
-\`\`\`
     `,
     user: `
 表单HTML：

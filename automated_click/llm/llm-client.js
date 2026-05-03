@@ -3,13 +3,30 @@
 const { OpenAI } = require('openai');
 
 class LLMBridge {
-    constructor(apiKey) {
+    constructor(config = {}) {
+        const apiKey =
+            config.apiKey ||
+            process.env.BOLASCAN_LLM_API_KEY ||
+            process.env.OPENAI_API_KEY;
+        const baseURL =
+            config.baseURL ||
+            process.env.BOLASCAN_LLM_BASE_URL ||
+            process.env.OPENAI_BASE_URL ||
+            'https://api.openai.com/v1';
+        const model =
+            config.model ||
+            process.env.BOLASCAN_LLM_MODEL ||
+            'gpt-4o-mini';
+
         this.openai = new OpenAI({
-            apiKey: "",
-            baseURL: 'https://open.xiaojingai.com/v1',
+            apiKey,
+            baseURL,
         });
-        this.model = "gpt-4o-mini";
-        this.temperature = 0.7;
+        this.model = model;
+        const rawTemperature =
+            config.temperature ?? process.env.BOLASCAN_LLM_TEMPERATURE;
+        const parsedTemperature = Number.parseFloat(rawTemperature);
+        this.temperature = Number.isFinite(parsedTemperature) ? parsedTemperature : 0.7;
     }
 
     setModel(model) {

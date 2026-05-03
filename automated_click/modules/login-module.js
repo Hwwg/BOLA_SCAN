@@ -1,13 +1,29 @@
+const fs = require('fs');
+const path = require('path');
+
 class LoginModule {
-    constructor(page, requestCapture, mode = 'desktop') {
+    constructor(page, requestCapture, mode = 'desktop', outputPath = './results') {
         this.page = page;
         this.requestCapture = requestCapture;
         this.hasRefreshed = false; // 标记是否已经刷新过页面
         this.mode = mode || 'desktop';
+        this.outputPath = outputPath || './results';
         // 新增：登录重试计数器
         this.loginAttempts = 0;
         // 新增：验证码检测标志位，默认为 false
         this.captchaDetected = false;
+    }
+
+    async saveDebugScreenshot(filename) {
+        try {
+            const targetDir = this.outputPath || './results';
+            await fs.promises.mkdir(targetDir, { recursive: true });
+            const screenshotPath = path.join(targetDir, filename);
+            await this.page.screenshot({ path: screenshotPath, fullPage: true });
+            console.log(`[LoginModule] 已截图 ${screenshotPath}`);
+        } catch (e) {
+            console.warn('[LoginModule] 保存调试截图失败:', e.message);
+        }
     }
 
     async detectLoginForm() {
@@ -409,8 +425,7 @@ class LoginModule {
         }
         
         // 登录后截图，便于调试
-        await this.page.screenshot({ path: './results/login-debug.png', fullPage: true });
-        console.log('[LoginModule] 已截图 ./results/login-debug.png');
+        await this.saveDebugScreenshot('login-debug.png');
     }
 
     async verifyLogin() {
@@ -595,7 +610,7 @@ class LoginModule {
             }, { timeout: 5 * 60 * 1000 });
 
             console.log('[LoginModule] 检测到人工登录成功，继续扫描');
-            try { await this.page.screenshot({ path: './results/login-success.png', fullPage: true }); } catch (e) {}
+            await this.saveDebugScreenshot('login-success.png');
             // 重置登录计数器
             this.loginAttempts = 0;
             return true;

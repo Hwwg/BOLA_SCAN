@@ -20,6 +20,12 @@ When analyzing a batch of parameters (parameter names and their corresponding fu
    - A reasonable Organizational Unit should be able to contain users or sub-resources (e.g., "a project has users", "a department has projects").
    - If the parameter name refers to a device, tool, or simple resource (e.g., computer_id, file_id, order_id), even if it appears in multiple functional groups, it should NOT be judged as an Organizational Unit ID.
 
+4. Hierarchy Verification
+   - Some candidates have already been collected from endpoint path hierarchy and request/response body hierarchy.
+   - A path parameter can be a container when it is an ancestor of another object identifier, e.g. /orgs/{orgId}/projects/{projectId}.
+   - A body/response parameter can be a container candidate when it appears inside a nested object/list, e.g. data.user.id or items[].project_id.
+   - A flat query parameter does NOT become a container parameter by itself; select it only when endpoint context strongly proves container semantics.
+
 Case Study:
 Input:
 {'email': [{'Identity / Auth': ['POST /identity/api/auth/signup', 'POST /identity/api/auth/login', 'POST /identity/api/auth/forget-password']}, {'Identity / User': ['POST /identity/api/v2/user/reset-password']}], 'project_id': [{'project / template': ['POST /project/template/add, 'POST /project/template/delete'},{'project / view': ['POST /project/view/add, 'POST /project/view/delete'}, 'computer_id': [{'project / computer': ['POST /project/computer/add, '/project/computer/delete'},{'order / computer': ['POST /order / computer/add, 'POST /order / computer/delete'}]}]}]}
@@ -45,8 +51,42 @@ container_resource_judgement_user = """
 Parameters and their corresponding routes: {parameters_and_routes}
 """
 
+container_resource_recheck_system = """
+You are performing a second-pass review for Organizational Unit / container resource parameter identification.
+
+I will provide only the candidate parameters that were NOT selected in the first-pass container-resource judgment.
+Each candidate includes:
+- the parameter name
+- the functional groups where it appears
+- one sample API route
+
+Your task:
+1. Re-evaluate only these missing candidates.
+2. Select a parameter only if it is likely to be a container / Organizational Unit identifier that can logically contain users or sub-resources.
+3. Do not select ordinary leaf-resource identifiers such as order_id, file_id, video_id, postId, etc., unless the provided group distribution strongly indicates a container role.
+4. Do not infer parameters outside the given candidate list.
+
+This is only a recall pass for missed candidates.
+
+Output format:
+```json
+["param1","param2"]
+```
+
+If no candidate should be added, output:
+```json
+[]
+```
+"""
+
+container_resource_recheck_user = """
+Missing container-resource candidates for second-pass review: {missing_candidates}
+"""
+
 resource_id_judgement_system = """
 You are a Professional Web Security Engineer specializing in business logic vulnerabilities. I will provide you with all request routes under a functional group, as well as parameters that serve as both request and response parameters within that group, including their example values. Based on this information, please identify the parameters that are Resource IDs.
+
+Rule-based identifier matching has already selected common OIP candidates such as id, uuid, guid, identifier, *_id, and *Id. Your role is to supplement missed object identifier parameters based on semantics, not to remove rule-selected candidates.
 
 Definitions:
 Resource ID Parameter: A parameter used in a request to uniquely identify a resource, such as user_id, order_id, username, etc.
@@ -127,6 +167,45 @@ Finally, strictly output in JSON format:
 resource_id_judgement_user = """
 Parameters and corresponding reference data: {param_dict}
 Routes where these parameters are located, and other request parameters: {routes_data}
+"""
+
+resource_id_recheck_system = """
+You are performing a second-pass review for Resource ID identification.
+
+I will provide a functional group and the subset of candidate parameters that:
+- end with `id` (case-insensitive), and
+- were NOT selected in the first-pass Resource ID judgment.
+
+For each candidate parameter, I will also provide:
+- an example value
+- one sample API where this parameter is used as a request parameter
+- the other request parameters in that sample API
+
+Your task:
+1. Re-evaluate only these missing candidates.
+2. Select a parameter only if it is likely to represent a normal user resource identifier.
+3. Be conservative: if the parameter is more likely to be a public/business object, status/config field, or not a real resource key, do not select it.
+4. Do not infer parameters outside the provided candidate list.
+
+Important:
+- This is a补漏/recall pass. Some truly valid resource ID parameters may have been missed in the first pass.
+- A parameter ending with `id` is only a strong hint, not sufficient proof by itself.
+- Prefer parameters that identify a concrete resource instance operated, queried, updated, or deleted by the API.
+
+Output format:
+```json
+["param1","param2"]
+```
+
+If none of the missing candidates should be added, output:
+```json
+[]
+```
+"""
+
+resource_id_recheck_user = """
+Functional group: {group_name}
+Missing id-suffix candidates for second-pass review: {missing_candidates}
 """
 
 private_data_judgement_system = """
@@ -318,6 +397,194 @@ API Summary:
 {api_summary}
 
 Please analyze whether this functional group needs further subdivision and output JSON in the specified format.
+"""
+
+api_group_tree_select_system = """
+# Role
+You are an API Functional Grouping Expert. You are skilled at analyzing hierarchical API path trees and selecting precise business anchors for multi-stage API grouping.
+
+# Task
+Please process the provided API path hierarchy tree for the CURRENT stage only.
+
+You must follow the response schema exactly.
+For this task, the output schema is fixed and must contain only `functional_groups`.
+Do not output `anchors`.
+
+Do not output explanations.
+
+# Constraints
+1. Visual and formatting requirements:
+   - Output plain text only.
+   - Output must be a valid JSON object only.
+   - Do not output Markdown code fences.
+   - Do not output any explanation before or after the JSON.
+   - Do not output comments, trailing commas, or non-JSON tokens.
+   - Your first character must be `{` and your last character must be `}`.
+   - If your previous attempt was not valid JSON, you must immediately self-correct and output a new valid JSON object only.
+
+2. Grouping principles:
+   - This is a multi-stage grouping process.
+   - APIs selected in earlier stages have already been removed from the current tree.
+   - You only need to decide which business anchors should be extracted from the CURRENT remaining tree.
+   - Prefer semantically coherent business groups over overly broad groups.
+   - Avoid grouping unrelated branches together only because they share shallow path prefixes.
+
+3. Anchor principles:
+   - `level` means the hierarchy depth after removing common shared prefixes.
+   - `level` must be greater than or equal to `Current Minimum Level`.
+   - `keyword` must match exactly against a node name at the specified level, not by full-path substring matching.
+   - Every (`level`, `keyword`) pair MUST be selected from `Allowed Level Keywords`.
+   - If a (`level`, `keyword`) pair is not present in `Allowed Level Keywords`, do not output it.
+   - `keyword` should be a stable business-domain node.
+   - Do NOT use placeholders such as `{id}`, `{video_id}` as anchors.
+   - Do NOT use generic action or query suffixes as standalone functional-group anchors unless they are clearly the only meaningful business node in that branch.
+   - Especially avoid selecting keywords such as:
+     `list`, `detail`, `info`, `query`, `search`, `get`, `select`, `create`, `add`, `new`, `update`, `edit`, `delete`, `remove`, `save`, `export`, `import`.
+   - Also avoid weak keywords such as:
+     `test`, `debug`, `temp`, `misc`, `default`, `internal`.
+   - These words usually describe common operations rather than business capabilities, so they should not become independent functional groups by themselves.
+   - Prefer selecting the nearest business-domain node above such generic suffixes.
+   - A selected anchor represents:
+     the matched business node at `level`, plus APIs in the next immediate lower layer under that node.
+   - Example:
+     if `level = 1` and `keyword = "user"`, then APIs like `user/reset-passwd` belong to this stage,
+     but deeper paths like `user/videos/{video_id}` should remain for later stages.
+
+4. Quality requirements:
+   - Prefer several precise anchors rather than one oversized anchor.
+   - If a branch is clearly a standalone business domain, it should become an anchor.
+   - If a deeper branch represents a meaningful sub-domain, it may be selected in a later stage after shallower APIs are removed.
+   - You do NOT need to explain the entire current API set in a single round.
+   - It is acceptable to output only the most certain functional groups in this round; remaining APIs will be analyzed in later rounds.
+   - Do not invent keywords that do not exist in the provided tree.
+   - Do not create anchors centered on generic CRUD/list/detail suffixes that appear across many unrelated branches.
+   - If a path ends with a generic operation word, anchor on the business branch above it instead.
+   - Every selector must use exact (`level`, `keyword`) pairs from `Allowed Level Keywords`.
+   - If multiple business branches exist, prefer outputting several precise groups rather than collapsing everything into one broad group.
+
+# Execution Protocol
+1. Read the provided normalized hierarchy tree carefully.
+2. Use `Allowed Level Keywords` as the only valid source for selectable (`level`, `keyword`) pairs.
+3. Understand which branches correspond to meaningful business capabilities in the CURRENT stage.
+4. Output a JSON object that matches the required schema exactly.
+5. The top-level JSON object must contain only:
+   - `functional_groups`
+6. Each item inside `functional_groups` must contain only:
+   - `group_name`
+   - `should_continue_refine`
+   - `selectors`
+7. Do not output `anchors` or any other top-level field.
+8. For every item inside `selectors`, you MUST include all of these fields explicitly:
+   - `level`
+   - `keyword`
+   - `include_self`
+   - `include_descendants`
+   - `descendant_depth`
+9. Do not omit `include_self`, `include_descendants`, or `descendant_depth` even if you think defaults are obvious.
+10. `include_self` and `include_descendants` must be JSON booleans (`true` or `false`), not strings.
+11. `descendant_depth` must be either a non-negative integer or the string `"all"`.
+12. Do NOT output `reason`.
+13. `should_continue_refine` means whether this child group should be recursively split again in the next stage.
+14. Set `should_continue_refine = true` only when the child group still contains multiple meaningful business sub-domains.
+15. Set `should_continue_refine = false` when the child group is already a stable business group, or would likely become over-fragmented if split again.
+16. If the previous shallower grouping did not produce a usable split, and the group still contains meaningful deeper business nodes, move down to a deeper `level` instead of repeating the same shallow selector.
+
+# Output Format
+{
+  "functional_groups": [
+    {
+      "group_name": "user",
+      "should_continue_refine": true,
+      "selectors": [
+        {
+          "level": 1,
+          "keyword": "user",
+          "include_self": true,
+          "include_descendants": true,
+          "descendant_depth": 1
+        }
+      ]
+    },
+    {
+      "group_name": "auth",
+      "should_continue_refine": false,
+      "selectors": [
+        {
+          "level": 1,
+          "keyword": "auth",
+          "include_self": true,
+          "include_descendants": true,
+          "descendant_depth": 1
+        }
+      ]
+    }
+  ]
+}
+"""
+
+api_group_tree_select_user = """
+Project Name: {project_name}
+Current Stage: {stage_index}
+Removed Common Prefix Levels: {removed_prefixes}
+Current Minimum Level: {min_level}
+
+Allowed Level Keywords:
+{allowed_level_keywords}
+
+Current Remaining API Tree:
+{api_tree}
+
+Complete API Nodes:
+{complete_api_nodes}
+
+API Summary:
+{api_summary}
+
+Retry Notice:
+{retry_notice}
+"""
+
+evidence_semantic_bola_judgement_system = """
+You are a constrained semantic consistency classifier for BOLA (Broken Object Level Authorization) probing.
+
+You must NOT decide vulnerabilities by open-ended reasoning. You are given:
+1. A structured evidence object built from one probing outcome.
+2. A strategy-specific unauthorized-access semantic question.
+
+Your task has exactly two steps:
+
+Step 1: Public resource / public parameter filter.
+- Decide whether the tested parameter/resource is public by API context and response semantics.
+- Public examples include public catalog/product/list/news/blog/content resources intended for anonymous or cross-user access.
+- Do not mark a resource as public merely because the response is successful.
+- If it is public, the evidence must NOT be treated as BOLA evidence.
+
+Step 2: Evidence-question semantic consistency.
+- If the target is not public, decide whether the structured evidence directly supports the unauthorized-access semantics described by the question.
+- Error responses are not automatically negative: a business error may still reveal object-specific state for the injected identifier.
+- Non-200 status codes, business codes, and response schema mismatches are evidence features, not automatic conclusions, unless the evidence explicitly shows authentication/authorization rejection.
+- Return true only when the evidence supports the question. Use low confidence when evidence is missing, generic, or ambiguous.
+
+Output strict JSON only. Do not wrap it in prose.
+Required JSON shape:
+{
+  "is_public_resource_or_parameter": false,
+  "public_reason": "",
+  "evidence_matches_unauthorized_semantics": false,
+  "confidence": "low",
+  "matched_evidence": [],
+  "reason": ""
+}
+
+Allowed confidence values: "high", "medium", "low".
+"""
+
+evidence_semantic_bola_judgement_user = """
+Structured Evidence:
+{structured_evidence}
+
+Unauthorized-Access Semantic Question:
+{unauthorized_access_question}
 """
 
 resource_id_private_data_judgement_system = """

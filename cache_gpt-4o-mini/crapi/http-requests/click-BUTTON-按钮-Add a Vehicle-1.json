@@ -1,0 +1,124 @@
+{
+  "context": "click-BUTTON-按钮-Add a Vehicle-1",
+  "timestamp": "2026-04-29T08:13:25.283Z",
+  "count": 4,
+  "requests": [
+    {
+      "id": "38zit2am6a7",
+      "requestId": "s646pfo9jyb",
+      "type": "response",
+      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='a' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M10 0H0v10' fill='none' stroke='rgba(255,255,255,0.1)'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M0 0h100v100H0z'/%3E%3C/svg%3E",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "content-type": "image/svg+xml;charset=utf-8"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml;charset=utf-8",
+      "timestamp": 1777450273365,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 0
+    },
+    {
+      "id": "qc6x112dcy",
+      "requestId": "hg33fbqflkl",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:13 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450273378,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "6qeg0zwb8bi",
+      "requestId": "86wq4rpmwqn",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:13 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450273412,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 2,
+      "body": "[]",
+      "jsonData": [],
+      "isListQuery": true
+    },
+    {
+      "id": "1c3wuem8f1e",
+      "requestId": "nzdke11crx",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:14 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=f6c673f9-9de1-487e-8629-80e3ea58a5ed; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450274341,
+      "context": "click-BUTTON-按钮-Add a Vehicle-1",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

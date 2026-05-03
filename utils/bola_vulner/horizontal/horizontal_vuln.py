@@ -20,20 +20,65 @@ from utils.bola_vulner.horizontal.testcase_matrix import build_container_boundar
 from utils.bola_vulner.horizontal.testcase_matrix import apply_test_case_to_req as matrix_apply_test_case
 from utils.bola_vulner.horizontal.testcase_matrix import is_valid_resource_id
 from utils.dependency_cc.src.file_utils import deserialize_file_params
+from utils.cache_utils import get_project_cache_dir
+from utils.param_path import find_matching_path, nested_get
 
 # 导入新的模块化组件
 from .utils_helpers import make_json_serializable, format_duration, update_terminal_progress, ProgressTracker
 from .resource_identifier import ResourceIdentifier
 from .package_generator import PackageGenerator
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler()
-    ]
-)
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.propagate = False
+
+_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+_QUIET_CONSOLE_PREFIXES = (
+    "[DEBUG-GroupedPool]",
+    "[WARNING-GroupedPool]",
+    "[DEBUG-PathRepl]",
+    "[DEBUG-PoolMeta]",
+    "[DEBUG-PoolMeta-Resp]",
+    "[DEBUG-PoolExtract]",
+    "[DEBUG-PoolSkip]",
+    "[Alias]",
+    "[ConfigLookup]",
+)
+
+
+class _ConsoleNoiseFilter(logging.Filter):
+    def filter(self, record):
+        try:
+            message = record.getMessage()
+        except Exception:
+            return True
+        return not any(message.startswith(prefix) for prefix in _QUIET_CONSOLE_PREFIXES)
+
+
+def _setup_logger():
+    if logger.handlers:
+        return
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
+    stream_handler.setFormatter(logging.Formatter(_LOG_FORMAT))
+    stream_handler.addFilter(_ConsoleNoiseFilter())
+    logger.addHandler(stream_handler)
+
+
+def _ensure_file_logger(log_file_path: str):
+    normalized_path = os.path.abspath(log_file_path)
+    for handler in logger.handlers:
+        if isinstance(handler, logging.FileHandler) and getattr(handler, "baseFilename", None) == normalized_path:
+            return
+
+    file_handler = logging.FileHandler(normalized_path, encoding="utf-8")
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(logging.Formatter(_LOG_FORMAT))
+    logger.addHandler(file_handler)
+
+
+_setup_logger()
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -66,6 +111,11 @@ class HorizontalVuln:
         self.syn_prompt = SyntheticPrompt()
         self.project_name = project_name
         self.llm_dict = {}
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+        self.cache_dir = get_project_cache_dir(self.project_name, project_root)
+        self.horizontal_results_dir = os.path.join(self.cache_dir, "horizontal_results")
+        os.makedirs(self.horizontal_results_dir, exist_ok=True)
+        _ensure_file_logger(os.path.join(self.horizontal_results_dir, "horizontal_vuln.log"))
         
         # 构建参数映射索引（基于 parameters_dict_all.json）
         self.route_group_map = {}  # { "POST /api/videos": "group_name" }
@@ -92,6 +142,72 @@ class HorizontalVuln:
             self.jsontool,
             self.llm_dict
         )
+
+    def generate_container_resource_divide_results(self):
+        data_resource_id_result = self.data_resource()
+        try:
+            oip_debug = getattr(self.resource_identifier, "_last_oip_result", None)
+            if oip_debug:
+                self.jsontool.write_json(
+                    os.path.join(self.horizontal_results_dir, "oip_candidates_result.json"),
+                    oip_debug,
+                )
+        except Exception as exc:
+            logger.info("写入 OIP 候选调试结果失败: %s", exc)
+        self.jsontool.write_json(
+            os.path.join(self.horizontal_results_dir, "data_resource_id_result.json"),
+            data_resource_id_result,
+        )
+
+        container_reoust_id_result = self.data_container_resource()
+        try:
+            hierarchy_debug = getattr(self.resource_identifier, "_last_occurrence_result", None)
+            if hierarchy_debug:
+                self.jsontool.write_json(
+                    os.path.join(self.horizontal_results_dir, "identifier_hierarchy_result.json"),
+                    hierarchy_debug,
+                )
+        except Exception as exc:
+            logger.info("写入 identifier 层级调试结果失败: %s", exc)
+        try:
+            if isinstance(container_reoust_id_result, dict):
+                self.container_param_set = set(container_reoust_id_result.keys())
+            elif isinstance(container_reoust_id_result, list):
+                _ps = set()
+                for item in container_reoust_id_result:
+                    if isinstance(item, dict):
+                        for _, params in item.items():
+                            if isinstance(params, list):
+                                for p in params:
+                                    _ps.add(p)
+                    elif isinstance(item, str):
+                        _ps.add(item)
+                self.container_param_set = _ps
+            else:
+                self.container_param_set = set()
+        except Exception:
+            self.container_param_set = set()
+
+        self.jsontool.write_json(
+            os.path.join(self.horizontal_results_dir, "container_reoust_id_result.json"),
+            container_reoust_id_result,
+        )
+        logger.info(f"container_reoust_id_result:{container_reoust_id_result}")
+
+        container_resource_divide_results = self.resource_package_generation(
+            data_resource_id_result,
+            container_reoust_id_result,
+        )
+        logger.info(f"container_resource_divide_results:{container_resource_divide_results}")
+        self.jsontool.write_json(
+            os.path.join(self.horizontal_results_dir, "container_resource_divide_results.json"),
+            container_resource_divide_results,
+        )
+        try:
+            self.container_params_by_group = self.build_container_params_by_group(container_resource_divide_results)
+        except Exception:
+            self.container_params_by_group = {"ou_id": {}, "resource_id": {}}
+        return container_resource_divide_results
         
 
     def build_test_cases(self, param_name: str, locations: List[str], aliases: List[str], last_step_type: str, category: str, include_extra_types: bool=True) -> List[MatrixTestCase]:
@@ -983,23 +1099,56 @@ class HorizontalVuln:
 
         def _parse_base(url_param):
             if not url_param:
-                return ("http", "localhost")
+                return ("http", "localhost", "")
             if url_param.startswith("http://") or url_param.startswith("https://"):
                 sp = urlsplit(url_param)
                 scheme = sp.scheme or "http"
                 netloc = sp.netloc or (sp.path.strip("/") if sp.path else "")
-                return (scheme, netloc)
+                base_path = (sp.path or "").strip()
+                if base_path in ("/", ""):
+                    base_path = ""
+                else:
+                    base_path = "/" + base_path.strip("/")
+                return (scheme, netloc, base_path)
             else:
-                return ("http", url_param.strip("/"))
+                raw = (url_param or "").strip()
+                if "/" in raw:
+                    host, path = raw.split("/", 1)
+                    base_path = "/" + path.strip("/") if path.strip("/") else ""
+                    return ("http", host.strip(), base_path)
+                return ("http", raw.strip("/"), "")
 
-        def _replace_domain(original_url, base_scheme, base_netloc, route=None):
-            if (not original_url) and route:
-                return f"{base_scheme}://{base_netloc}{route}"
-            if original_url and original_url.startswith("/"):
-                return f"{base_scheme}://{base_netloc}{original_url}"
+        def _replace_domain(original_url, base_scheme, base_netloc, base_path="", route=None):
+            def _join_base_path(path_value):
+                p = (path_value or "").strip()
+                bp = (base_path or "").strip()
+                if not p:
+                    return bp or ""
+                if not p.startswith("/"):
+                    p = f"/{p}"
+                if not bp:
+                    return p
+                if not bp.startswith("/"):
+                    bp = f"/{bp}"
+                bp = bp.rstrip("/")
+                if p == bp or p.startswith(f"{bp}/"):
+                    return p
+                return f"{bp}{p}"
+
             sp = urlsplit(original_url or "")
-            path = sp.path or (route or "")
-            return urlunsplit((base_scheme, base_netloc, path, sp.query, sp.fragment))
+            query = sp.query
+            fragment = sp.fragment
+            path = sp.path or ""
+
+            if (not original_url) and route:
+                path = route
+            elif original_url and original_url.startswith("/") and not path:
+                path = original_url
+            elif (not path) and route:
+                path = route
+
+            path = _join_base_path(path)
+            return urlunsplit((base_scheme, base_netloc, path, query, fragment))
 
         def _merge_headers(headers, auth_info):
             headers = headers.copy() if isinstance(headers, dict) else {}
@@ -1216,6 +1365,68 @@ class HorizontalVuln:
                 return False
             first_key = next(iter(pool), None)
             return isinstance(pool.get(first_key), dict)
+
+        def _expand_param_aliases(aliases):
+            """
+            扩展参数名的常见命名形式，统一支持：
+            - camelCase: vehicleId
+            - snake_case: vehicle_id
+            - lowercase 连写: vehicleid
+            """
+            import re
+
+            expanded = []
+            seen = set()
+
+            def _add(value):
+                if not isinstance(value, str):
+                    return
+                value = value.strip()
+                if not value or value in seen:
+                    return
+                seen.add(value)
+                expanded.append(value)
+
+            def _snake_to_camel(parts):
+                if not parts:
+                    return ""
+                head = parts[0].lower()
+                tail = "".join(part[:1].upper() + part[1:] for part in parts[1:] if part)
+                return head + tail
+
+            for alias in aliases or []:
+                if not isinstance(alias, str):
+                    continue
+                normalized = alias.replace("-", "_").strip()
+                if not normalized:
+                    continue
+
+                _add(alias)
+                _add(normalized)
+
+                # camelCase / PascalCase -> snake_case
+                snake = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", normalized).lower()
+                _add(snake)
+                _add(snake.replace("_", ""))
+
+                snake_parts = [part for part in snake.split("_") if part]
+                if snake_parts:
+                    _add(_snake_to_camel(snake_parts))
+                    _add("".join(snake_parts))
+
+                # snake_case -> camelCase / lowercase compact
+                if "_" in normalized:
+                    raw_parts = [part for part in normalized.split("_") if part]
+                    if raw_parts:
+                        _add(_snake_to_camel(raw_parts))
+                        _add("".join(raw_parts).lower())
+
+            return expanded
+
+        def _param_names_match(left, right):
+            if not left or not right:
+                return False
+            return bool(set(_expand_param_aliases([left])) & set(_expand_param_aliases([right])))
         
         def _get_value_from_grouped_pool(pool_values, aliases, target_group=None):
             """
@@ -1225,6 +1436,8 @@ class HorizontalVuln:
             :param target_group: 目标组名称
             :return: 参数值或None
             """
+            aliases = _expand_param_aliases(aliases)
+
             if not _is_grouped_pool(pool_values):
                 # 旧结构，直接查找
                 for a in aliases:
@@ -1290,6 +1503,47 @@ class HorizontalVuln:
             :return: 参数值或None
             """
             try:
+                def _iter_config_lookup_aliases(candidate):
+                    """
+                    仅用于配置映射查找的安全展开：
+                    - 保留原始别名及命名变体
+                    - 对 `[].id` / `comments[].id` 这类结构化字段，额外尝试其末段 `id`
+                    这样可以让 response 里的资源主键回填到 keep_pra，
+                    但不把更宽的字段路径规则扩散到全局别名系统里。
+                    """
+                    import re
+
+                    aliases = []
+                    seen = set()
+
+                    def _add_many(values):
+                        for value in values:
+                            if not isinstance(value, str):
+                                continue
+                            value = value.strip()
+                            if not value or value in seen:
+                                continue
+                            seen.add(value)
+                            aliases.append(value)
+
+                    _add_many(_expand_param_aliases([candidate]))
+
+                    if isinstance(candidate, str):
+                        structured = candidate.replace("[]", "").strip(".")
+                        if structured and structured != candidate:
+                            _add_many(_expand_param_aliases([structured]))
+
+                        tail = structured.split(".")[-1] if structured else ""
+                        if tail and tail != structured:
+                            _add_many(_expand_param_aliases([tail]))
+
+                        # 补一层常见数组/路径压平后的 `foo.bar_baz -> foo_bar_baz`
+                        flattened = re.sub(r"[.\[\]]+", "_", candidate).strip("_")
+                        if flattened and flattened not in (candidate, structured, tail):
+                            _add_many(_expand_param_aliases([flattened]))
+
+                    return aliases
+
                 # 1. 如果提供了 api_route，优先从 route_group_map 查找组
                 if api_route and api_route in self.route_group_map:
                     target_group = self.route_group_map[api_route]
@@ -1317,11 +1571,11 @@ class HorizontalVuln:
                     
                     # 确定要查找的候选别名列表
                     candidates = []
-                    if target_param == keep_para:
+                    if _param_names_match(target_param, keep_para):
                         # 查找 video_id，需要找 id
                         candidates.extend(replace_paras)
                         logger.info(f"[ConfigLookup] 目标参数 {target_param} 是 keep_pra，查找候选: {candidates}")
-                    elif target_param in replace_paras:
+                    elif any(_param_names_match(target_param, replace_para) for replace_para in replace_paras):
                         # 查找 id，需要找 video_id
                         if keep_para:
                             candidates.append(keep_para)
@@ -1329,6 +1583,40 @@ class HorizontalVuln:
                     else:
                         # 当前配置不匹配，尝试下一个
                         continue
+
+                    def _candidate_priority(candidate):
+                        """
+                        Prefer concrete identifier aliases over generic/nested id fields.
+                        For example, vehicleId/uuid should win over [].id or
+                        vehicleLocation.id when filling vehicleId.
+                        """
+                        if not isinstance(candidate, str):
+                            return (1000, "")
+                        raw = candidate.strip()
+                        normalized = raw.replace("[]", "").strip(".")
+                        tail = normalized.split(".")[-1] if normalized else raw
+                        expanded_candidate = set(_expand_param_aliases([raw, normalized, tail]))
+                        expanded_target = set(_expand_param_aliases([target_param, keep_para]))
+
+                        score = 0
+                        if expanded_candidate & expanded_target:
+                            score -= 1000
+
+                        low_raw = raw.lower()
+                        low_tail = tail.lower()
+                        if low_tail in {"uuid", "guid"} or low_raw.endswith("uuid") or low_raw.endswith("guid"):
+                            score -= 300
+                        if low_tail in {"id", "identifier"}:
+                            score += 100
+                        if "." in raw or "[]" in raw:
+                            score += 50
+                        if raw in {"id", "ID"}:
+                            score += 150
+
+                        return (score, raw)
+
+                    candidates = sorted(candidates, key=_candidate_priority)
+                    logger.info(f"[ConfigLookup] 排序后的候选: {candidates}")
                     
                     # 4. 在同一组的池中查找这些候选参数
                     # 检查是否是分组池
@@ -1336,17 +1624,19 @@ class HorizontalVuln:
                         group_pool = pool_values.get(target_group, {})
                         if isinstance(group_pool, dict):
                             for candidate in candidates:
-                                value = group_pool.get(candidate)
-                                if value not in (None, "", 0):
-                                    logger.info(f"[ConfigLookup] 在组 {target_group} 中找到 {candidate}={value}")
-                                    return value
+                                for candidate_alias in _iter_config_lookup_aliases(candidate):
+                                    value = group_pool.get(candidate_alias)
+                                    if value not in (None, "", 0):
+                                        logger.info(f"[ConfigLookup] 在组 {target_group} 中找到 {candidate_alias}={value}")
+                                        return value
                     else:
                         # 扁平池，直接查找
                         for candidate in candidates:
-                            value = pool_values.get(candidate)
-                            if value not in (None, "", 0):
-                                logger.info(f"[ConfigLookup] 在扁平池中找到 {candidate}={value}")
-                                return value
+                            for candidate_alias in _iter_config_lookup_aliases(candidate):
+                                value = pool_values.get(candidate_alias)
+                                if value not in (None, "", 0):
+                                    logger.info(f"[ConfigLookup] 在扁平池中找到 {candidate_alias}={value}")
+                                    return value
                 
                 logger.info(f"[ConfigLookup] 目标参数 {target_param} 在所有配置中都未找到匹配")
                 return None
@@ -1619,6 +1909,8 @@ class HorizontalVuln:
                     logger.info(f"[DEBUG-PREP] videos 组的内容: {source_pool['identity/api/v2/user/videos']}")
             
             prepared = {}
+            primary_alias = param_aliases[0] if isinstance(param_aliases, list) and param_aliases else None
+            primary_naming_variants = set(_expand_param_aliases([primary_alias])) if primary_alias else set()
             
             # 如果是分组池，直接使用分组查找逻辑
             if _is_grouped_pool(source_pool):
@@ -1627,12 +1919,13 @@ class HorizontalVuln:
                 # 首先尝试使用配置映射查找主要的别名
                 for alias in param_aliases:
                     if alias not in prepared or prepared.get(alias) in (None, ""):
-                        # 先尝试配置映射
-                        config_val = _get_value_based_on_config(source_pool, alias, target_group)
-                        if config_val is not None and config_val != "" and config_val != 0:
-                            prepared[alias] = config_val
-                            logger.info(f"[DEBUG-PREP] ✓ 配置映射找到: {alias}={config_val}")
-                            continue
+                        # 配置映射只允许用于“主参数的命名变体”，避免把同组其他语义字段错误映射成同一值
+                        if alias in primary_naming_variants:
+                            config_val = _get_value_based_on_config(source_pool, alias, target_group)
+                            if config_val is not None and config_val != "" and config_val != 0:
+                                prepared[alias] = config_val
+                                logger.info(f"[DEBUG-PREP] ✓ 配置映射找到: {alias}={config_val}")
+                                continue
                         
                         # 如果配置映射没找到，使用分组池查找
                         val = _get_value_from_grouped_pool(source_pool, [alias], target_group=target_group)
@@ -1751,6 +2044,182 @@ class HorizontalVuln:
             except Exception:
                 return None
             return None
+
+        def _flatten_simple_values(obj, prefix="", limit=80):
+            items = {}
+            if len(items) >= limit:
+                return items
+            if isinstance(obj, dict):
+                for k, v in obj.items():
+                    if len(items) >= limit:
+                        break
+                    key = f"{prefix}.{k}" if prefix else str(k)
+                    if isinstance(v, (dict, list)):
+                        items.update(_flatten_simple_values(v, key, limit - len(items)))
+                    elif v not in (None, "") and isinstance(v, (str, int, float, bool)):
+                        items[key] = v
+            elif isinstance(obj, list):
+                for idx, v in enumerate(obj[:5]):
+                    if len(items) >= limit:
+                        break
+                    key = f"{prefix}[{idx}]" if prefix else f"[{idx}]"
+                    if isinstance(v, (dict, list)):
+                        items.update(_flatten_simple_values(v, key, limit - len(items)))
+                    elif v not in (None, "") and isinstance(v, (str, int, float, bool)):
+                        items[key] = v
+            return items
+
+        def _lookup_request_param_defs(step_obj):
+            endpoint = f"{str(step_obj.get('method', '')).upper()} {step_obj.get('route', '')}"
+            for _, endpoints in (self.true_params or {}).items():
+                if isinstance(endpoints, dict) and endpoint in endpoints:
+                    params = endpoints[endpoint].get("request_parameters", {})
+                    return params if isinstance(params, dict) else {}
+            return {}
+
+        def _is_validation_like_failure(status_code, resp_json):
+            if isinstance(status_code, int) and status_code in (400, 409, 422):
+                return True
+            if not isinstance(resp_json, dict):
+                return False
+            if resp_json.get("success") is False:
+                return True
+            message = str(resp_json.get("message") or resp_json.get("error") or "").lower()
+            return any(word in message for word in ("invalid", "required", "format", "date", "time", "must", "missing"))
+
+        def _set_request_value(req, location, path, value):
+            if location not in {"json", "params", "data"}:
+                return False
+            container = req.get(location)
+            if not isinstance(container, dict) or not path:
+                return False
+            if path in container:
+                container[path] = value
+                return True
+            parts = [p for p in str(path).split(".") if p]
+            cur = container
+            for part in parts[:-1]:
+                if not isinstance(cur, dict) or part not in cur:
+                    return False
+                cur = cur.get(part)
+            if isinstance(cur, dict) and parts and parts[-1] in cur:
+                cur[parts[-1]] = value
+                return True
+            return False
+
+        def _is_identifier_repair_path(path):
+            tail = str(path or "").replace("[]", "").split(".")[-1].lower()
+            compact = "".join(ch for ch in tail if ch.isalnum())
+            return compact in {"id", "uuid", "guid", "identifier"} or compact.endswith("id")
+
+        def _maybe_repair_request_params_with_llm(req, step_obj, resp_json, status_code, pool_values, pools):
+            if _llm_disabled or not _is_validation_like_failure(status_code, resp_json):
+                return None
+            request_defs = _lookup_request_param_defs(step_obj)
+            current_values = {
+                "json": req.get("json") if isinstance(req.get("json"), dict) else {},
+                "params": req.get("params") if isinstance(req.get("params"), dict) else {},
+                "data": req.get("data") if isinstance(req.get("data"), dict) else {},
+            }
+            candidate_values = {
+                "current_request": _flatten_simple_values(current_values),
+                "pool": _flatten_simple_values(pool_values),
+            }
+            if isinstance(pools, dict):
+                for name, pool in pools.items():
+                    if isinstance(pool, dict):
+                        candidate_values[f"pool_{name}"] = _flatten_simple_values(pool, limit=30)
+            messages = [
+                {
+                    "role": "system",
+                    "content": (
+                        "You repair one failed HTTP request by returning only parameter-level patches. "
+                        "Do not return a full request body, headers, URL, method, or code. "
+                        "Only update existing json/params/data fields when the server error clearly indicates a bad value. "
+                        "Prefer values from candidate_values; if the error is a date/time format issue, an ISO-8601 value is allowed. "
+                        "Return no patch when unsure."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {
+                            "endpoint": {
+                                "method": step_obj.get("method"),
+                                "route": step_obj.get("route"),
+                                "type": step_obj.get("type"),
+                            },
+                            "openapi_request_parameters": request_defs,
+                            "failed_response": {
+                                "status_code": status_code,
+                                "body": resp_json,
+                            },
+                            "current_request_values": current_values,
+                            "candidate_values": candidate_values,
+                            "output_contract": {
+                                "repairs": [
+                                    {
+                                        "location": "json|params|data",
+                                        "path": "existing parameter path, e.g. start or owner.id",
+                                        "value": "replacement scalar value",
+                                        "reason": "short reason",
+                                    }
+                                ]
+                            },
+                        },
+                        ensure_ascii=False,
+                        default=str,
+                    ),
+                },
+            ]
+            schema = {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "repairs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": False,
+                            "properties": {
+                                "location": {"type": "string", "enum": ["json", "params", "data"]},
+                                "path": {"type": "string"},
+                                "value": {"type": ["string", "number", "integer", "boolean", "null"]},
+                                "reason": {"type": "string"},
+                            },
+                            "required": ["location", "path", "value", "reason"],
+                        },
+                    }
+                },
+                "required": ["repairs"],
+            }
+            try:
+                parsed = self.gpt_reply.getreply_json_schema(messages, "request_parameter_repair", schema, temperature=0)
+            except Exception as exc:
+                logger.warning("[RequestRepair] LLM 参数修正失败: %s", exc)
+                return None
+            repairs = parsed.get("repairs") if isinstance(parsed, dict) else None
+            if not isinstance(repairs, list) or not repairs:
+                return None
+            repaired = copy.deepcopy(req)
+            applied = []
+            for item in repairs[:5]:
+                if not isinstance(item, dict):
+                    continue
+                location = item.get("location")
+                path = item.get("path")
+                if _is_identifier_repair_path(path):
+                    continue
+                if _set_request_value(repaired, location, path, item.get("value")):
+                    applied.append({
+                        "location": location,
+                        "path": path,
+                        "value": item.get("value"),
+                        "reason": item.get("reason", ""),
+                    })
+            if not applied:
+                return None
+            return repaired, applied
 
         # 新增：统一提取步骤对象，保证结构完整
         def _extract_step_obj(api_step):
@@ -1992,23 +2461,23 @@ class HorizontalVuln:
                     req_url_placeholders = re.findall(r"\{([A-Za-z0-9_]+)\}", req_url)
                     if not req_url_placeholders:
                         # req_url 已被 apply_test_case_to_req 正确替换，保留它
-                        req["url"] = _replace_domain(req_url, base_scheme, base_netloc, route=None)
+                        req["url"] = _replace_domain(req_url, base_scheme, base_netloc, base_path=base_path, route=None)
                         logger.info(f"[DEBUG-URLFix] 保留 apply_test_case_to_req 替换后的URL: {req['url']}")
                     else:
                         # req_url 仍有占位符，回退到原逻辑
                         if route_placeholders and missing_keys:
-                            req["url"] = _replace_domain(req_url, base_scheme, base_netloc, route=None)
+                            req["url"] = _replace_domain(req_url, base_scheme, base_netloc, base_path=base_path, route=None)
                         else:
-                            req["url"] = _replace_domain(None, base_scheme, base_netloc, route=route)
+                            req["url"] = _replace_domain(None, base_scheme, base_netloc, base_path=base_path, route=route)
                 elif route_placeholders and missing_keys and isinstance(req_url, str) and req_url:
                     # 保留原始 URL（含具体值），避免被替换回占位符
-                    req["url"] = _replace_domain(req_url, base_scheme, base_netloc, route=None)
+                    req["url"] = _replace_domain(req_url, base_scheme, base_netloc, base_path=base_path, route=None)
                 else:
                     # 无占位符或共享池可满足占位符，使用 route 以便统一域名
-                    req["url"] = _replace_domain(None, base_scheme, base_netloc, route=route)
+                    req["url"] = _replace_domain(None, base_scheme, base_netloc, base_path=base_path, route=route)
             else:
                 # 无 route 时，回退到原始 URL
-                req["url"] = _replace_domain(req_url, base_scheme, base_netloc, route=None)
+                req["url"] = _replace_domain(req_url, base_scheme, base_netloc, base_path=base_path, route=None)
             # 始终用step_obj的请求方式覆盖（确保method与API定义一致）
             if step_obj.get("method"):
                 req["method"] = step_obj.get("method")
@@ -2066,15 +2535,47 @@ class HorizontalVuln:
             _fix_files(req)
 
             try:
-                timeout = req.pop('timeout', REQUEST_TIMEOUT)
+                request_kwargs = copy.deepcopy(req)
+                timeout = request_kwargs.pop('timeout', REQUEST_TIMEOUT)
                 # 兼容 JSON 反序列化后的超时配置（list -> tuple）
                 if isinstance(timeout, list) and len(timeout) == 2:
                     timeout = (timeout[0], timeout[1])
-                response = session.request(**req, timeout=timeout)
+                response = session.request(**request_kwargs, timeout=timeout)
                 try:
                     resp_json = response.json()
                 except Exception:
                     resp_json = {"text": response.text}
+                repair_meta = None
+                if _is_validation_like_failure(response.status_code, resp_json):
+                    repaired = _maybe_repair_request_params_with_llm(
+                        req,
+                        step_obj,
+                        resp_json,
+                        response.status_code,
+                        pool_values,
+                        pools,
+                    )
+                    if repaired:
+                        retry_req, applied_repairs = repaired
+                        _fix_files(retry_req)
+                        retry_kwargs = copy.deepcopy(retry_req)
+                        retry_timeout = retry_kwargs.pop('timeout', timeout)
+                        if isinstance(retry_timeout, list) and len(retry_timeout) == 2:
+                            retry_timeout = (retry_timeout[0], retry_timeout[1])
+                        retry_response = session.request(**retry_kwargs, timeout=retry_timeout)
+                        try:
+                            retry_json = retry_response.json()
+                        except Exception:
+                            retry_json = {"text": retry_response.text}
+                        repair_meta = {
+                            "attempted": True,
+                            "applied_repairs": applied_repairs,
+                            "original_status_code": response.status_code,
+                            "original_response": resp_json,
+                        }
+                        req = retry_req
+                        response = retry_response
+                        resp_json = retry_json
                 api_key = f"{step_obj.get('method')}:{step_obj.get('route')}"
                 def _path_params_for_req():
                     try:
@@ -2109,6 +2610,8 @@ class HorizontalVuln:
                         "request_data": req.get("json") or req.get("params") or req.get("data") or _path_params_for_req()
                     }
                 }
+                if repair_meta:
+                    result["execution_status"]["validation_repair"] = repair_meta
                 if isinstance(resp_json, (dict, list)):
                     _update_pool_with_response(pool_values, pool_priority, resp_json, step_obj)
                 return result
@@ -2186,8 +2689,9 @@ class HorizontalVuln:
                             break
                 if isinstance(b, dict):
                     for a in aliases:
-                        if a in b:
-                            vals["body"] = b.get(a)
+                        match_path = a if a in b else find_matching_path(b, [a])
+                        if match_path:
+                            vals["body"] = nested_get(b, match_path) if ("." in match_path or "[]" in match_path) else b.get(match_path)
                             break
                 if isinstance(h, dict):
                     for a in aliases:
@@ -2234,8 +2738,10 @@ class HorizontalVuln:
                         by_alias[a] = {"position": "query", "value": q.get(a)}
             if isinstance(b, dict):
                 for a in aliases:
-                    if a in b and a not in by_alias:
-                        by_alias[a] = {"position": "body", "value": b.get(a)}
+                    match_path = a if a in b else find_matching_path(b, [a])
+                    if match_path and a not in by_alias:
+                        value = nested_get(b, match_path) if ("." in match_path or "[]" in match_path) else b.get(match_path)
+                        by_alias[a] = {"position": "body", "value": value}
             if isinstance(h, dict):
                 for a in aliases:
                     if a in h and a not in by_alias:
@@ -2363,6 +2869,7 @@ class HorizontalVuln:
         def _find_param_value_in_nested(nested, aliases):
             if not isinstance(nested, dict):
                 return None
+            aliases = _expand_param_aliases(aliases)
             def _flat(obj):
                 flat = {}
                 def walk(o):
@@ -2526,14 +3033,14 @@ class HorizontalVuln:
                             # p 是替换项，则返回 [keep_pra, p, 其它替换项]
                             if param_name in repl_list and keep_pra:
                                 aliases = [keep_pra, param_name] + [x for x in repl_list if x != param_name]
-                                return aliases
+                                return _expand_param_aliases(aliases)
                             # p 是 keep_pra，则返回 [keep_pra] + 替换项
                             if param_name == keep_pra and repl_list:
                                 aliases = [param_name] + list(repl_list)
-                                return aliases
+                                return _expand_param_aliases(aliases)
             except Exception:
                 pass
-            return aliases
+            return _expand_param_aliases(aliases)
 
         def _build_evidence_query(last_step_obj, param_name, group_name, target_param_value, data_auth, last_req_data):
             """
@@ -2885,7 +3392,7 @@ class HorizontalVuln:
                 pass
             return None
 
-        base_scheme, base_netloc = _parse_base(url)
+        base_scheme, base_netloc, base_path = _parse_base(url)
         results = {}
         data_auth = authority_account.get("data_account", {}).get("auth", "")
         test_auth = authority_account.get("test_account", {}).get("auth", "")
@@ -2953,8 +3460,7 @@ class HorizontalVuln:
             return total
 
         import os
-        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-        progress_path = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results', 'execution_progress.json')
+        progress_path = os.path.join(self.horizontal_results_dir, 'execution_progress.json')
         total_chains = _count_total_chains(resource_dict, ou_dict)
         progress = {"total": total_chains, "completed": 0, "by_group": {}}
         progress_lock = __import__("threading").Lock()
@@ -3795,7 +4301,7 @@ class HorizontalVuln:
                                     body = params.get(body_key, {})
                                     if isinstance(body, dict):
                                         for alias in aliases:
-                                            if alias in body:
+                                            if alias in body or find_matching_path(body, [alias]):
                                                 locs.add("body" if body_key in ("json", "data") else "query")
                                                 logger.info(f"[DEBUG-DetectLoc] 在{body_key}中找到别名: {alias}")
                                                 break
@@ -3971,7 +4477,7 @@ class HorizontalVuln:
                                     body = params.get(body_key, {})
                                     if isinstance(body, dict):
                                         for alias in aliases:
-                                            if alias in body:
+                                            if alias in body or find_matching_path(body, [alias]):
                                                 locs.add("body" if body_key in ("json", "data") else "query")
                                                 break
                                 route = step_obj.get("route", "") or ""
@@ -4194,8 +4700,7 @@ class HorizontalVuln:
 
         # === 判定阶段进度条初始化 ===
         import time
-        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-        progress_path = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results', 'judgement_progress.json')
+        progress_path = os.path.join(self.horizontal_results_dir, 'judgement_progress.json')
         progress_lock = threading.Lock()
         start_time = time.time()
 
@@ -4514,188 +5019,360 @@ class HorizontalVuln:
             
             return description
 
+        def _extract_first_non_empty_value(values):
+            if not isinstance(values, dict):
+                return None
+            for pos in ["path", "query", "body", "header"]:
+                value = values.get(pos)
+                if value not in (None, "", [], {}):
+                    return value
+            for value in values.values():
+                if value not in (None, "", [], {}):
+                    return value
+            return None
+
+        def _extract_source_value(test_meta, source_codes):
+            if not isinstance(test_meta, dict):
+                return None
+            source_set = {str(item).upper() for item in source_codes}
+            alias_sources = test_meta.get("param_alias_sources", {})
+            alias_values = test_meta.get("param_alias_values", {})
+            if isinstance(alias_sources, dict) and isinstance(alias_values, dict):
+                for alias, source in alias_sources.items():
+                    if str(source).upper() not in source_set:
+                        continue
+                    value_info = alias_values.get(alias, {})
+                    if isinstance(value_info, dict):
+                        value = value_info.get("value")
+                        if value not in (None, "", [], {}):
+                            return value
+            param_sources = test_meta.get("param_sources", {})
+            param_values = test_meta.get("param_values", {})
+            if isinstance(param_sources, dict) and isinstance(param_values, dict):
+                for pos, source in param_sources.items():
+                    if str(source).upper() in source_set:
+                        value = param_values.get(pos)
+                        if value not in (None, "", [], {}):
+                            return value
+            return None
+
+        def _body_business_code(params):
+            if not isinstance(params, dict):
+                return None
+            for key in ("code", "status", "statusCode", "errno", "errorCode"):
+                value = params.get(key)
+                if value is None:
+                    continue
+                try:
+                    return int(value)
+                except Exception:
+                    return value
+            return None
+
+        def _has_non_empty_payload(value):
+            if value in (None, "", [], {}):
+                return False
+            if isinstance(value, dict):
+                return any(_has_non_empty_payload(v) for v in value.values())
+            if isinstance(value, list):
+                return any(_has_non_empty_payload(v) for v in value)
+            return True
+
+        def _parse_llm_json(raw_text):
+            text = self.jsontool.list_formatting(raw_text)
+            if not text:
+                text = str(raw_text or "").strip()
+            return json.loads(text)
+
+        def _build_structured_bola_evidence(
+            current_param_name,
+            data_params,
+            test_params,
+            data_step,
+            test_step,
+            data_request_params,
+            test_request_params,
+            type_tag,
+            evidence_data,
+            test_meta,
+            api_key,
+        ):
+            test_meta = test_meta if isinstance(test_meta, dict) else {}
+            data_exec = (data_step or {}).get("execution_status", {}) if isinstance(data_step, dict) else {}
+            test_exec = (test_step or {}).get("execution_status", {}) if isinstance(test_step, dict) else {}
+            case_type = test_meta.get("case_type", "")
+            category = test_meta.get("category") or type_tag or "resource_id"
+            param_values = test_meta.get("param_values", {})
+            param_sources = test_meta.get("param_sources", {})
+            alias_values = test_meta.get("param_alias_values", {})
+            alias_sources = test_meta.get("param_alias_sources", {})
+
+            victim_value = _extract_source_value(test_meta, ("A", "B"))
+            attacker_value = _extract_source_value(test_meta, ("C",))
+            container_a_value = _extract_source_value(test_meta, ("C",))
+            container_b_value = _extract_source_value(test_meta, ("D", "E"))
+            injected_value = victim_value
+            if case_type == "container_boundary":
+                injected_value = container_a_value
+            elif injected_value is None:
+                injected_value = _extract_first_non_empty_value(param_values if isinstance(param_values, dict) else {})
+
+            data_param_names = set(data_params.keys()) if isinstance(data_params, dict) else set()
+            test_param_names = set(test_params.keys()) if isinstance(test_params, dict) else set()
+            return make_json_serializable({
+                "user_api": {
+                    "method": (test_step or {}).get("method") or (data_step or {}).get("method") or "",
+                    "route": (test_step or {}).get("route") or (data_step or {}).get("route") or "",
+                    "api_key": api_key,
+                    "operation_type": (test_meta.get("last_step_type") or (data_step or {}).get("type") or "").strip().lower(),
+                },
+                "tested_identifier_parameter": current_param_name,
+                "identifier_category": category,
+                "probing_strategy": {
+                    "case_type": case_type,
+                    "strategy": test_meta.get("strategy", ""),
+                    "position_mode": test_meta.get("position_mode", ""),
+                    "target_position": test_meta.get("target_position"),
+                    "value_source": test_meta.get("value_source"),
+                    "comparison_source": test_meta.get("comparison_source"),
+                    "non_target_source": test_meta.get("non_target_source"),
+                },
+                "identifier_values": {
+                    "injected_victim_or_container_value": injected_value,
+                    "victim_reference_value": victim_value,
+                    "attacker_own_value": attacker_value,
+                    "container_a_value": container_a_value,
+                    "container_b_or_comparison_value": container_b_value,
+                    "param_values_by_location": param_values,
+                    "param_sources_by_location": param_sources,
+                    "alias_values": alias_values,
+                    "alias_sources": alias_sources,
+                },
+                "attacker_observation": {
+                    "request_params": test_request_params,
+                    "response_params": test_params,
+                    "execution_status": test_exec,
+                    "business_code": _body_business_code(test_params),
+                },
+                "victim_or_control_observation": {
+                    "request_params": data_request_params,
+                    "response_params": data_params,
+                    "execution_status": data_exec,
+                    "business_code": _body_business_code(data_params),
+                },
+                "follow_up_evidence": evidence_data,
+                "evidence_features": {
+                    "attacker_status_code": test_exec.get("status_code"),
+                    "victim_status_code": data_exec.get("status_code"),
+                    "attacker_status": test_exec.get("status"),
+                    "victim_status": data_exec.get("status"),
+                    "response_parameter_names_match": data_param_names == test_param_names,
+                    "victim_response_param_names": sorted(data_param_names),
+                    "attacker_response_param_names": sorted(test_param_names),
+                    "has_follow_up_evidence": _has_non_empty_payload(evidence_data),
+                    "has_attacker_response_payload": _has_non_empty_payload(test_params),
+                    "has_victim_response_payload": _has_non_empty_payload(data_params),
+                },
+            })
+
+        def _build_unauthorized_access_question(evidence):
+            api = evidence.get("user_api", {}) if isinstance(evidence, dict) else {}
+            strategy = evidence.get("probing_strategy", {}) if isinstance(evidence, dict) else {}
+            values = evidence.get("identifier_values", {}) if isinstance(evidence, dict) else {}
+            category = str(evidence.get("identifier_category", "resource_id")).strip().lower()
+            case_type = str(strategy.get("case_type", "")).strip().lower()
+            operation_type = str(api.get("operation_type", "")).strip().lower()
+            param_name = evidence.get("tested_identifier_parameter", "identifier")
+            route = api.get("api_key") or api.get("route") or "the tested API"
+            injected_value = values.get("injected_victim_or_container_value")
+            attacker_value = values.get("attacker_own_value")
+            container_a_value = values.get("container_a_value")
+            container_b_value = values.get("container_b_or_comparison_value")
+            target_position = strategy.get("target_position")
+
+            if case_type == "container_boundary":
+                base = (
+                    f"Does the evidence show that, under the same authenticated user, the server accepted an "
+                    f"inconsistent container-resource relationship on `{route}` involving `{param_name}` "
+                    f"(container/source value `{container_a_value}` versus comparison resource/container value "
+                    f"`{container_b_value}`), and allowed access to or operation on data outside the intended "
+                    f"container scope?"
+                )
+            elif case_type == "multi_param":
+                base = (
+                    f"Does the evidence show that the server honored the victim/container identifier value "
+                    f"`{injected_value}` at target parameter location `{target_position}` for `{param_name}`, "
+                    f"rather than the attacker-owned or non-target value `{attacker_value}`?"
+                )
+            elif category == "ou_id":
+                base = (
+                    f"Does the evidence show that the attacker used protected container/organization identifier "
+                    f"`{injected_value}` through `{param_name}` on `{route}` to access or affect resources outside "
+                    f"the attacker-owned scope?"
+                )
+            else:
+                base = (
+                    f"Does the evidence show that the attacker, using attacker credentials, accessed or operated "
+                    f"on the victim-owned object identified by injected identifier value `{injected_value}` "
+                    f"through `{param_name}` on `{route}`?"
+                )
+
+            if operation_type in ("update", "delete"):
+                if case_type == "container_boundary":
+                    return (
+                        base + " For this update/delete-style operation, include follow-up evidence: "
+                        "does it show that data in the non-target or inconsistent container scope was modified, "
+                        "removed, or otherwise affected by the operation?"
+                    )
+                return (
+                    base + " For this update/delete-style operation, include follow-up evidence: "
+                    "does it show that victim-owned data was modified, removed, or otherwise affected by the attacker operation?"
+                )
+            if operation_type in ("query", "list query"):
+                if case_type == "container_boundary":
+                    return (
+                        base + " For this query/list-query operation, focus on whether the response reveals "
+                        "object data or object-specific state from the non-target or inconsistent container scope."
+                    )
+                return (
+                    base + " For this query/list-query operation, focus on whether the attacker response reveals "
+                    "victim-owned object data or object-specific state for the injected identifier."
+                )
+            return base
+
+        def _map_semantic_decision_to_conclusion(decision):
+            if not isinstance(decision, dict):
+                if _llm_fail_policy == 'aggressive':
+                    return "Potential BOLA", "LLM semantic judgment failed, applying aggressive fallback"
+                return "BOLA Not Found (middle)", "LLM semantic judgment failed, applying lenient fallback"
+
+            confidence = str(decision.get("confidence", "")).strip().lower()
+            reason = str(decision.get("reason") or decision.get("public_reason") or "")
+            if decision.get("is_public_resource_or_parameter") is True:
+                return "BOLA Not Found (public_resource)", decision.get("public_reason") or reason or "public resource/parameter"
+            if confidence == "low":
+                if _llm_fail_policy == 'aggressive':
+                    return "Potential BOLA", reason or "low-confidence semantic evidence"
+                return "BOLA Not Found (high)", reason or "low-confidence semantic evidence"
+            if decision.get("evidence_matches_unauthorized_semantics") is True:
+                return "BOLA Found", reason
+            return "BOLA Not Found (middle)", reason or "evidence does not match unauthorized-access semantics"
+
         def _compare_response_params(current_param_name,data_params, test_params, data_step, test_step, data_request_params, test_request_params, type_tag=None, evidence_data=None, test_meta=None):
-            """比较响应参数"""
-            # === 强 gating：不可执行/非200 直接短路（不进入 LLM） ===
+            """基于结构化证据和策略语义问题进行 BOLA 判定。"""
             data_exec = (data_step or {}).get("execution_status", {}) if isinstance(data_step, dict) else {}
             test_exec = (test_step or {}).get("execution_status", {}) if isinstance(test_step, dict) else {}
             data_status = (data_exec or {}).get("status")
             test_status = (test_exec or {}).get("status")
             data_sc = (data_exec or {}).get("status_code")
             test_sc = (test_exec or {}).get("status_code")
-            # 获取请求路由和方法
-            data_route = data_step.get("route", "")
-            data_method = data_step.get("method", "")
-            data_route_type = data_step.get("type", "")
-            # request_parameters
+            data_route = (data_step or {}).get("route", "")
+            data_method = (data_step or {}).get("method", "")
             api_key = f"{data_method}:{data_route}"
             if data_status == "unexecutable":
                 return {api_key: {"conclusion": "Skipped / Not Executable", "reason": (data_exec or {}).get("reason", "data_account not executable")}}
             if test_status == "unexecutable":
                 return {api_key: {"conclusion": "Skipped / Not Executable", "reason": (test_exec or {}).get("reason", "test_account not executable")}}
-            if isinstance(test_sc, int) and test_sc != 200:
-                return {api_key: {"conclusion": "BOLA Not Found", "reason": f"attacker_status_code={test_sc}"}}
-            if isinstance(data_sc, int) and data_sc >= 400:
-                return {api_key: {"conclusion": "BOLA Not Found", "reason": f"victim_status_code={data_sc}"}}
-            if not data_params or not test_params:
-                return None
-            # 比较参数名是否一致
-            data_param_names = set(data_params.keys())
-            test_param_names = set(test_params.keys())
-            # 检查参数名是否一致
-            if data_param_names != test_param_names:
-                return {
-                    api_key: {
-                        "conclusion": "BOLA Not Found",
-                        "reason": "Response Parameter Mismatch"
+            if test_status == "error" and not _has_non_empty_payload(test_params):
+                return {api_key: {"conclusion": "Skipped / Not Executable", "reason": (test_exec or {}).get("reason", "test_account execution error")}}
+            if data_status == "error" and not _has_non_empty_payload(data_params):
+                return {api_key: {"conclusion": "Skipped / Not Executable", "reason": (data_exec or {}).get("reason", "data_account execution error")}}
+            if isinstance(test_sc, int) and test_sc in (401, 403):
+                return {api_key: {"conclusion": "BOLA Not Found", "reason": f"attacker_authz_rejected_status_code={test_sc}"}}
+            if isinstance(data_sc, int) and data_sc in (401, 403):
+                return {api_key: {"conclusion": "BOLA Not Found", "reason": f"victim_authz_rejected_status_code={data_sc}"}}
+
+            if not _has_non_empty_payload(test_params) and not _has_non_empty_payload(evidence_data):
+                return {api_key: {"conclusion": "BOLA Not Found", "reason": "empty_attacker_response_without_follow_up_evidence"}}
+
+            structured_evidence = _build_structured_bola_evidence(
+                current_param_name,
+                data_params,
+                test_params,
+                data_step,
+                test_step,
+                data_request_params,
+                test_request_params,
+                type_tag,
+                evidence_data,
+                test_meta,
+                api_key,
+            )
+            unauthorized_access_question = _build_unauthorized_access_question(structured_evidence)
+
+            semantic_decision = None
+            bola_results = None
+            bola_reason = ""
+            if not _llm_disabled:
+                for _attempt in range(1, _llm_max_retries + 1):
+                    try:
+                        local_llm_dict = {
+                            "structured_evidence": json.dumps(structured_evidence, ensure_ascii=False, sort_keys=True),
+                            "unauthorized_access_question": unauthorized_access_question,
+                        }
+                        tmp_result_params = self.gpt_reply.getreply(
+                            self.syn_prompt.synthesis_prompt("evidence_semantic_bola_judgement", local_llm_dict)
+                        )
+                        semantic_decision = _parse_llm_json(tmp_result_params)
+                        bola_results, bola_reason = _map_semantic_decision_to_conclusion(semantic_decision)
+                        break
+                    except Exception as e:
+                        logger.info(f"Evidence-Semantic LLM 判定异常（第{_attempt}/{_llm_max_retries}次）: {str(e)}")
+            if bola_results is None:
+                semantic_decision = None
+                bola_results, bola_reason = _map_semantic_decision_to_conclusion(None)
+
+            out = {
+                api_key: {
+                    "conclusion": bola_results,
+                    "reason": bola_reason,
+                    "evidence_semantic": {
+                        "structured_evidence": structured_evidence,
+                        "unauthorized_access_question": unauthorized_access_question,
+                        "llm_decision": semantic_decision,
                     }
                 }
-            # 检查test_account的值是否为空
-            has_non_empty_values = False
-            for _, param_value in test_params.items():
-                if param_value is not None and param_value != "" and param_value != [] and param_value != {}:
-                    has_non_empty_values = True
-                    break
-    
-            # 生成自然语言描述
-            test_description = _generate_test_description(test_meta, api_key)
-            
-            # 判断是否为容器边界测试
-            is_container_boundary = (test_meta or {}).get("case_type") == "container_boundary"
-            comparison_source = (test_meta or {}).get("comparison_source", "A")
-    
-            comparison_dict = {
-                "test_description": test_description,
-                "current_param_name":current_param_name,
-                "routes_type": data_route_type,
-                "route_name": api_key,
-                "test_results": str({
-                    "request_params": str(test_request_params),
-                    "response_params": str(test_params)
-                }),
-                "data_results": str({
-                    "request_params": str(data_request_params),
-                    "response_params": str(data_params)
-                }),
-                "evidence_data": str(evidence_data),
-                "test_meta": test_meta or {},
-                "is_container_boundary": is_container_boundary,  # 标记是否为容器边界测试
-                "comparison_source": comparison_source  # 对照组Pool来源
             }
-            if has_non_empty_values:
-                # 使用 self.llm_dict 的线程独立副本，避免共享状态导致的串行化或数据污染
-                import copy as _copy
-                try:
-                    local_llm_dict = _copy.deepcopy(self.llm_dict)
-                except Exception:
-                    local_llm_dict = dict(self.llm_dict) if isinstance(self.llm_dict, dict) else {}
-                local_llm_dict = comparison_dict
-                bola_results = None
-                bola_reason = ""
-                if not _llm_disabled:
-                    _last_err = None
-                    for _attempt in range(1, _llm_max_retries + 1):
-                        try:
-                            # 根据测试类型选择合适的LLM prompt
-                            case_type = (test_meta or {}).get("case_type", "")
-                            if case_type == "container_boundary":
-                                # 容器边界测试使用ou_id的判定逻辑（同一用户跨容器）
-                                tmp_result_params = self.gpt_reply.getreply(
-                                    self.syn_prompt.synthesis_prompt("ou_id_private_data_judgement", local_llm_dict)
-                                )
-                            elif str(type_tag).strip().lower() == "ou_id":
-                                tmp_result_params = self.gpt_reply.getreply(
-                                    self.syn_prompt.synthesis_prompt("ou_id_private_data_judgement", local_llm_dict)
-                                )
-                            else:
-                                tmp_result_params = self.gpt_reply.getreply(
-                                    self.syn_prompt.synthesis_prompt("resource_id_private_data_judgement", local_llm_dict)
-                                )
-                            final_reuslts = eval(self.jsontool.list_formatting(tmp_result_params))
-                            res = str(final_reuslts.get("results", "")).upper()
-                            if "YES" in res:
-                                bola_results = "BOLA Found"
-                                bola_reason = final_reuslts.get("reason", "")
-                                break
-                            elif "NO" in res:
-                                bola_results = "BOLA Not Found (middle)"
-                                bola_reason = final_reuslts.get("reason", "")
-                                break
-                            elif "UNSURE" in res:
-                                bola_results = "BOLA Not Found (high)"
-                                bola_reason = final_reuslts.get("reason", "")
-                                break
-                        except Exception as e:
-                            _last_err = e
-                            logger.info(f"LLM 判定异常（第{_attempt}/{_llm_max_retries}次）: {str(e)}")
-                    if bola_results is None:
-                        if _llm_fail_policy == 'aggressive':
-                            bola_results = "Potential BOLA"
-                            bola_reason = "LLM failed, applying aggressive fallback"
-                        else:
-                            bola_results = "BOLA Not Found (middle)"
-                            bola_reason = "LLM failed, applying lenient fallback"
-                else:
-                    if _llm_fail_policy == 'aggressive':
-                        bola_results = "Potential BOLA"
-                        bola_reason = "LLM disabled, aggressive fallback"
-                    else:
-                        bola_results = "BOLA Not Found (middle)"
-                        bola_reason = "LLM disabled, lenient fallback"
-                # 当判定为“存在越权”时，追加记录 data/test 的接口信息与请求/响应的具体值
-                out = {
-                    api_key: {
-                        "conclusion": bola_results,
-                        "reason": bola_reason
+            try:
+                if isinstance(test_meta, dict):
+                    out[api_key]["test_type"] = {
+                        "category": test_meta.get("category"),
+                        "case_type": test_meta.get("case_type"),
+                        "position_mode": test_meta.get("position_mode"),
+                        "value_source": test_meta.get("value_source"),
+                        "strategy": test_meta.get("strategy"),
+                        "group_name": test_meta.get("group_name"),
+                        "param_name": test_meta.get("param_name"),
+                        "target_position": test_meta.get("target_position"),
+                        "param_sources": test_meta.get("param_sources"),
+                        "param_values": test_meta.get("param_values"),
+                        "param_alias_sources": test_meta.get("param_alias_sources"),
+                        "param_alias_values": test_meta.get("param_alias_values")
+                    }
+            except Exception:
+                pass
+            if bola_results == "BOLA Found":
+                out[api_key]["api_info"] = {
+                    "data": {
+                        "method": (data_step or {}).get("method", ""),
+                        "route": (data_step or {}).get("route", "")
+                    },
+                    "test": {
+                        "method": (test_step or {}).get("method", ""),
+                        "route": (test_step or {}).get("route", "")
                     }
                 }
-                try:
-                    if isinstance(test_meta, dict):
-                        out[api_key]["test_type"] = {
-                            "category": test_meta.get("category"),
-                            "case_type": test_meta.get("case_type"),
-                            "position_mode": test_meta.get("position_mode"),
-                            "value_source": test_meta.get("value_source"),
-                            "strategy": test_meta.get("strategy"),
-                            "group_name": test_meta.get("group_name"),
-                            "param_name": test_meta.get("param_name"),
-                            "target_position": test_meta.get("target_position"),  # one-hot测试的目标位置
-                            "param_sources": test_meta.get("param_sources"),
-                            "param_values": test_meta.get("param_values"),
-                            "param_alias_sources": test_meta.get("param_alias_sources"),
-                            "param_alias_values": test_meta.get("param_alias_values")
-                        }
-                except Exception:
-                    pass
-                if bola_results == "BOLA Found":
-                    out[api_key]["api_info"] = {
-                        "data": {
-                            "method": data_step.get("method", ""),
-                            "route": data_step.get("route", "")
-                        },
-                        "test": {
-                            "method": test_step.get("method", ""),
-                            "route": test_step.get("route", "")
-                        }
-                    }
-                    out[api_key]["details"] = {
-                        "data": {
-                            "request_params": data_request_params,
-                            "response_params": data_params
-                        },
-                        "test": {
-                            "request_params": test_request_params,
-                            "response_params": test_params
-                        }
-                    }
-                return out
-            else:
-                return {
-                    api_key: {
-                        "conclusion": "Potential BOLA",
-                        "reason": "Response parameters match but test_account values are empty"
+                out[api_key]["details"] = {
+                    "data": {
+                        "request_params": data_request_params,
+                        "response_params": data_params
+                    },
+                    "test": {
+                        "request_params": test_request_params,
+                        "response_params": test_params
                     }
                 }
+            return out
 
         def _aliases_for_group(group_name: str, param_name: str) -> List[str]:
             aliases = [param_name]
@@ -5088,46 +5765,8 @@ class HorizontalVuln:
         5. 执行测试（execution_packages）
         6. 判断漏洞（bola_vul_judgement）
         """
-        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-        horizontal_results_dir = os.path.join(project_root, 'cache', self.project_name, 'horizontal_results')
-        
-        data_resource_id_result = self.data_resource()
-
-        self.jsontool.write_json(os.path.join(horizontal_results_dir, "data_resource_id_result.json"), data_resource_id_result)
-        container_reoust_id_result = self.data_container_resource()
-        # print(container_reoust_id_result)
-        # 提取并缓存容器参数名集合，供后续 bola_vul_judgement 使用
-        try:
-            if isinstance(container_reoust_id_result, dict):
-                self.container_param_set = set(container_reoust_id_result.keys())
-            elif isinstance(container_reoust_id_result, list):
-                _ps = set()
-                for item in container_reoust_id_result:
-                    if isinstance(item, dict):
-                        for _, params in item.items():
-                            if isinstance(params, list):
-                                for p in params:
-                                    _ps.add(p)
-                    elif isinstance(item, str):
-                        _ps.add(item)
-                self.container_param_set = _ps
-            else:
-                self.container_param_set = set()
-        except Exception:
-            self.container_param_set = set()
-        self.jsontool.write_json(os.path.join(horizontal_results_dir, "container_reoust_id_result.json"), container_reoust_id_result)
-        logger.info(f"container_reoust_id_result:{container_reoust_id_result}")
-        # data_resource_id_result = self.jsontool.read_json(os.path.join(horizontal_results_dir, "data_resource_id_result.json"))
-        # container_reoust_id_result = self.jsontool.read_json(os.path.join(horizontal_results_dir, "container_reoust_id_result.json"))
-        
-        container_resource_divide_results = self.resource_package_generation(data_resource_id_result,container_reoust_id_result)
-        logger.info(f"container_resource_divide_results:{container_resource_divide_results}")
-        self.jsontool.write_json(os.path.join(horizontal_results_dir, "container_resource_divide_results.json"), container_resource_divide_results)
-        # 缓存容器参数映射：按 route(group前缀)→param 集合精确定义（供执行/判定使用）
-        try:
-            self.container_params_by_group = self.build_container_params_by_group(container_resource_divide_results)
-        except Exception:
-            self.container_params_by_group = {"ou_id": {}, "resource_id": {}}
+        horizontal_results_dir = self.horizontal_results_dir
+        container_resource_divide_results = self.generate_container_resource_divide_results()
         # container_resource_divide_results = self.jsontool.read_json(os.path.join(horizontal_results_dir, "container_resource_divide_results.json"))
         dependency_execution_reoutes_packages = self.dependency_chain_package_generation(container_resource_divide_results)
         # 序列化后再写入 JSON

@@ -1,6 +1,6 @@
 import json
 import os
-from re import T
+import re
 import sys
 from typing import Any, Dict, Union
 
@@ -22,7 +22,47 @@ except ModuleNotFoundError:
     from scripts.jsontools import JsonTools
 
 class ApiDoc:
+    PARAM_SEGMENT_RE = re.compile(r"^\{[^{}]+\}$")
+    VERSION_SEGMENT_RE = re.compile(r"^v\d+(?:\.\d+)*$", re.IGNORECASE)
+    NOISE_SEGMENTS = {
+        "api",
+        "app-api",
+        "manage-api",
+        "openapi",
+        "rest",
+        "rest-api",
+    }
+    GENERIC_SEGMENT_TOKENS = {
+        "add", "admin", "all", "auth", "by", "change", "check", "comment", "comments",
+        "confirm", "convert", "create", "dashboard", "debug", "default", "delete", "detail",
+        "download", "edit", "email", "export", "file", "files", "forgot", "get", "id",
+        "import", "info", "internal", "list", "login", "logout", "manage", "me", "misc",
+        "new", "password", "ping", "profile", "query", "register", "remove", "report",
+        "reset", "save", "search", "select", "send", "signin", "signup", "status",
+        "temp", "test", "token", "update", "upload", "verify", "view",
+    }
+    TREE_SELECT_SCHEMA = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "anchors": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "level": {"type": "integer"},
+                        "keyword": {"type": "string"},
+                    },
+                    "required": ["level", "keyword"],
+                },
+            }
+        },
+        "required": ["anchors"],
+    }
+
     def __init__(self, api_doc_path, model,excludes=None):
+        self.api_doc_path = api_doc_path
         self.jsontools = JsonTools()
         self.api_doc = self.jsontools.read_json(api_doc_path)
         # 允许通过配置排除掉部分路径（前缀匹配），例如 ['/apis/defaults']
@@ -34,9 +74,9 @@ class ApiDoc:
     
     def api_function_tag(
         self,
-        grouping_strategy: str = 'resource_crud',
+        grouping_strategy: str = 'tree_select',
         min_group_size: int = 2,
-        max_anchor_depth: int = 3,
+        max_anchor_depth: int | None = None,
     ):
         """
         从postman collection中提取API信息并转换为指定格式
@@ -304,6 +344,10 @@ class ApiDoc:
         
         # 处理顶级items
         all_apis = extract_apis_from_items(self.api_doc['item'])
+        if isinstance(grouping_strategy, str) and grouping_strategy.lower() in {"none", "no_group", "no-group", "flat", "all"}:
+            return [{"all_apis": all_apis}]
+        grouped_apis = self._group_apis_by_tree_select(all_apis)
+        return [{group_name: apis} for group_name, apis in grouped_apis.items()]
 
         # 数据驱动的公共前缀检测（不使用任何静态字符串名单）
         # 1) 统计所有接口路径的首段分布，若某个首段占比超过阈值，则视为公共前缀
@@ -477,10 +521,22 @@ class ApiDoc:
             else:
                 grouping_strategy = plan
 
-        # 自适应：在 1~max_anchor_depth 里选择“尽可能多分组但避免单接口组”的粒度
+        # 自适应：未指定 max_anchor_depth 时按当前 API 路径的最大深度计算，不使用固定默认值。
         if isinstance(grouping_strategy, str) and grouping_strategy.lower() == 'adaptive':
             keys = list(all_apis.keys())
-            max_d = max(1, int(max_anchor_depth or 3))
+            if max_anchor_depth is None:
+                max_d = max(
+                    1,
+                    max(
+                        (
+                            len([seg for seg in (api_key.split(" ", 1)[1] if " " in api_key else api_key).split("/") if seg])
+                            for api_key in keys
+                        ),
+                        default=1,
+                    ),
+                )
+            else:
+                max_d = max(1, int(max_anchor_depth))
             min_sz = max(1, int(min_group_size or 2))
             # 策略：先用更细粒度（max_anchor_depth）尽可能多分组；再把小组（size < min_group_size）按父前缀逐级合并
             grouping_strategy = f"resource_crud@{max_d}"
@@ -558,6 +614,336 @@ class ApiDoc:
             result.append({group_name: apis})
         
         return result
+
+    def _parse_api_path(self, api_key: str) -> list[str]:
+        parts = api_key.split(" ", 1)
+        if len(parts) != 2:
+            return []
+        path = parts[1].strip()
+        raw_segments = [segment for segment in path.split("/") if segment]
+        return [segment for segment in raw_segments if not self._is_noise_segment(segment)]
+
+    def _is_noise_segment(self, segment: str) -> bool:
+        normalized = segment.strip().lower()
+        if not normalized:
+            return True
+        if normalized in self.NOISE_SEGMENTS:
+            return True
+        return bool(self.VERSION_SEGMENT_RE.match(normalized))
+
+    def _longest_common_prefix(self, all_segments: list[list[str]]) -> list[str]:
+        if not all_segments:
+            return []
+        prefix = list(all_segments[0])
+        for segments in all_segments[1:]:
+            common_len = 0
+            for left, right in zip(prefix, segments):
+                if left != right:
+                    break
+                common_len += 1
+            prefix = prefix[:common_len]
+            if not prefix:
+                break
+        return prefix
+
+    def _normalize_segments(self, full_segments: list[str], common_prefix: list[str]) -> list[str]:
+        if common_prefix and full_segments[: len(common_prefix)] == common_prefix:
+            return full_segments[len(common_prefix) :]
+        return list(full_segments)
+
+    def _build_tree(self, normalized_paths: list[list[str]]) -> dict[str, Any]:
+        tree: dict[str, Any] = {}
+        for path_segments in normalized_paths:
+            node = tree
+            for segment in path_segments:
+                node = node.setdefault(segment, {})
+        return tree
+
+    def _segment_tokens(self, segment: str) -> list[str]:
+        return [token for token in re.split(r"[_\-]+", segment.lower()) if token]
+
+    def _is_placeholder_segment(self, segment: str) -> bool:
+        return bool(self.PARAM_SEGMENT_RE.match(segment.strip()))
+
+    def _is_generic_segment(self, segment: str) -> bool:
+        if self._is_placeholder_segment(segment):
+            return True
+        tokens = self._segment_tokens(segment)
+        if not tokens:
+            return True
+        return all(token in self.GENERIC_SEGMENT_TOKENS for token in tokens)
+
+    def _extract_json_payload(self, reply: Any) -> dict[str, Any]:
+        if isinstance(reply, dict):
+            return reply
+        raw_text = str(reply).strip()
+        fenced_payload = self.jsontools.list_formatting(raw_text)
+        text = fenced_payload.strip() if fenced_payload else raw_text
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            start = text.find("{")
+            end = text.rfind("}")
+            if start == -1 or end == -1 or end <= start:
+                raise
+            return json.loads(text[start : end + 1])
+
+    def _validate_anchors(self, anchors: Any) -> list[dict[str, Any]]:
+        return self._validate_anchors_with_candidates(anchors, None)
+
+    def _validate_anchors_with_candidates(
+        self,
+        anchors: Any,
+        allowed_level_keywords: dict[int, set[str]] | None,
+    ) -> list[dict[str, Any]]:
+        if not isinstance(anchors, list):
+            raise ValueError("anchors 不是数组")
+        validated: list[dict[str, Any]] = []
+        for anchor in anchors:
+            if not isinstance(anchor, dict):
+                continue
+            try:
+                level = int(anchor.get("level"))
+            except (TypeError, ValueError):
+                continue
+            keyword = str(anchor.get("keyword", "")).strip()
+            if level <= 0 or not keyword:
+                continue
+            if self.PARAM_SEGMENT_RE.match(keyword):
+                continue
+            lowered = keyword.lower()
+            if lowered in {
+                "list", "detail", "info", "query", "search", "get", "create",
+                "add", "new", "update", "edit", "delete", "remove", "save",
+                "export", "import", "reset", "test",
+            }:
+                continue
+            if allowed_level_keywords is not None:
+                valid_keywords = allowed_level_keywords.get(level, set())
+                if keyword not in valid_keywords:
+                    continue
+            validated.append({"level": level, "keyword": keyword})
+        return validated
+
+    def _collect_level_keywords(self, normalized_full_map: dict[str, list[str]]) -> dict[int, list[str]]:
+        level_keywords: dict[int, set[str]] = {}
+        for segments in normalized_full_map.values():
+            for idx, segment in enumerate(segments, start=1):
+                if not segment or self.PARAM_SEGMENT_RE.match(segment):
+                    continue
+                level_keywords.setdefault(idx, set()).add(segment)
+        return {level: sorted(keywords) for level, keywords in level_keywords.items()}
+
+    def _select_tree_anchors(
+        self,
+        normalized_full_map: dict[str, list[str]],
+        unassigned_keys: list[str],
+        common_prefix: list[str],
+        stage_index: int,
+    ) -> list[dict[str, Any]]:
+        remaining_map = {
+            api_key: normalized_full_map.get(api_key, [])
+            for api_key in unassigned_keys
+            if normalized_full_map.get(api_key)
+        }
+        if not remaining_map:
+            return []
+
+        tree = self._build_tree(list(remaining_map.values()))
+        complete_nodes = sorted(
+            {
+                "/".join(segments) if segments else "(root)"
+                for segments in remaining_map.values()
+            }
+        )
+        api_summary = [
+            {
+                "endpoint": api_key,
+                "normalized_path": "/".join(remaining_map.get(api_key, [])),
+            }
+            for api_key in unassigned_keys
+        ]
+        allowed_level_keywords = self._collect_level_keywords(remaining_map)
+        base_prompt_data = {
+            "project_name": os.path.basename(os.path.dirname(self.api_doc_path)) if getattr(self, "api_doc_path", "") else "project",
+            "stage_index": stage_index,
+            "removed_prefixes": json.dumps(common_prefix, ensure_ascii=False),
+            "allowed_level_keywords": json.dumps(allowed_level_keywords, ensure_ascii=False, indent=2),
+            "api_tree": json.dumps(tree, ensure_ascii=False, indent=2),
+            "complete_api_nodes": json.dumps(complete_nodes, ensure_ascii=False, indent=2),
+            "api_summary": json.dumps(api_summary, ensure_ascii=False, indent=2),
+        }
+
+        last_error = None
+        for attempt in range(1, 4):
+            prompt_data = dict(base_prompt_data)
+            if attempt > 1 and last_error:
+                prompt_data["api_summary"] = (
+                    base_prompt_data["api_summary"]
+                    + "\n\nIMPORTANT RETRY NOTICE:\n"
+                    + f"Previous output was invalid. Error: {last_error}\n"
+                    + "You must output valid JSON only and choose anchors from the provided tree."
+                )
+            try:
+                result = self.gpt_reply.getreply_json_schema(
+                    self.syn_prompt.synthesis_prompt("api_group_tree_select", prompt_data),
+                    schema_name="api_group_tree_select",
+                    schema=self.TREE_SELECT_SCHEMA,
+                )
+                return self._validate_anchors_with_candidates(
+                    result.get("anchors", []),
+                    {level: set(keywords) for level, keywords in allowed_level_keywords.items()},
+                )
+            except Exception as exc:
+                last_error = exc
+        return []
+
+    def _match_by_level_and_keyword(
+        self,
+        normalized_segments: list[str],
+        level: int,
+        keyword: str,
+    ) -> bool:
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return False
+        if level <= 0 or not keyword:
+            return False
+        if len(normalized_segments) < level:
+            return False
+        if normalized_segments[level - 1] != keyword:
+            return False
+        if len(normalized_segments) == level:
+            return True
+        child_segment = normalized_segments[level]
+        if self._is_placeholder_segment(child_segment):
+            return True
+        # 当前层级分组只吸收“该节点本身 + 下一层为动作/通用节点”的接口；
+        # 如果下一层已经是稳定业务节点，则留给后续阶段继续细分。
+        if len(normalized_segments) > level + 1:
+            return False
+        return self._is_generic_segment(child_segment)
+
+    def _reclaim_from_existing_groups(
+        self,
+        grouped_apis: dict[str, dict],
+        normalized_full_map: dict[str, list[str]],
+        level: int,
+        keyword: str,
+    ) -> dict[str, Any]:
+        reclaimed: dict[str, Any] = {}
+        for group_name in list(grouped_apis.keys()):
+            if group_name == "other":
+                continue
+            group_apis = grouped_apis.get(group_name, {})
+            to_remove = []
+            for api_key, api_data in group_apis.items():
+                normalized_segments = normalized_full_map.get(api_key, [])
+                if self._match_by_level_and_keyword(normalized_segments, level, keyword):
+                    reclaimed[api_key] = api_data
+                    to_remove.append(api_key)
+            for api_key in to_remove:
+                group_apis.pop(api_key, None)
+            if not group_apis:
+                grouped_apis.pop(group_name, None)
+        return reclaimed
+
+    def _fallback_to_nearest_existing_group(
+        self,
+        normalized_segments: list[str],
+        existing_groups: set[str],
+    ) -> str:
+        for segment in reversed(normalized_segments):
+            if self.PARAM_SEGMENT_RE.match(segment):
+                continue
+            candidate = self._sanitize_group_name(segment)
+            if candidate in existing_groups:
+                return candidate
+        return "other"
+
+    def _sanitize_group_name(self, group_name: str) -> str:
+        sanitized = re.sub(r"[^a-zA-Z0-9/_-]+", "_", group_name.strip()).strip("_")
+        return sanitized or "unnamed"
+
+    def group_existing_apis(self, all_apis: dict) -> dict[str, dict]:
+        """
+        对已抽取的 API 字典执行纯功能组分类，不做任何类型判定。
+        """
+        return self._group_apis_by_tree_select(all_apis)
+
+    def _group_apis_by_tree_select(self, all_apis: dict) -> dict[str, dict]:
+        full_path_map: dict[str, list[str]] = {}
+        all_full_segments: list[list[str]] = []
+
+        for api_key in all_apis:
+            full_segments = self._parse_api_path(api_key)
+            if not full_segments:
+                continue
+            all_full_segments.append(full_segments)
+            full_path_map[api_key] = full_segments
+
+        common_prefix = self._longest_common_prefix(all_full_segments)
+        normalized_full_map = {
+            api_key: self._normalize_segments(segments, common_prefix)
+            for api_key, segments in full_path_map.items()
+        }
+        grouped_apis: dict[str, dict] = {}
+        unassigned_keys = [api_key for api_key in all_apis if api_key in normalized_full_map]
+        max_stage_count = max((len(segments) for segments in normalized_full_map.values()), default=0)
+
+        for stage_index in range(1, max_stage_count + 1):
+            if not unassigned_keys:
+                break
+            anchors = self._select_tree_anchors(
+                normalized_full_map,
+                unassigned_keys,
+                common_prefix,
+                stage_index,
+            )
+            if not anchors:
+                break
+
+            stage_assigned: set[str] = set()
+            for anchor in anchors:
+                level = anchor["level"]
+                keyword = anchor["keyword"]
+                group_name = self._sanitize_group_name(keyword)
+                matched = {
+                    api_key
+                    for api_key in unassigned_keys
+                    if self._match_by_level_and_keyword(normalized_full_map.get(api_key, []), level, keyword)
+                }
+                if not matched:
+                    continue
+
+                reclaimed = self._reclaim_from_existing_groups(
+                    grouped_apis,
+                    normalized_full_map,
+                    level,
+                    keyword,
+                )
+                target_group = grouped_apis.setdefault(group_name, {})
+                for api_key in matched:
+                    target_group[api_key] = all_apis[api_key]
+                target_group.update(reclaimed)
+                stage_assigned.update(matched)
+
+            if not stage_assigned:
+                break
+            unassigned_keys = [api_key for api_key in unassigned_keys if api_key not in stage_assigned]
+
+        existing_groups = set(grouped_apis.keys())
+        for api_key in unassigned_keys:
+            normalized_segments = normalized_full_map.get(api_key, [])
+            fallback_group = self._fallback_to_nearest_existing_group(normalized_segments, existing_groups)
+            grouped_apis.setdefault(fallback_group, {})[api_key] = all_apis[api_key]
+            existing_groups.add(fallback_group)
+
+        if not grouped_apis:
+            grouped_apis["default"] = all_apis
+
+        return grouped_apis
 
     def recursive_refine_groups(self, grouped_apis, max_depth=2, current_depth=0):
         """

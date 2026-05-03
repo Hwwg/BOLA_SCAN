@@ -1,0 +1,378 @@
+{
+  "context": "click-LI-菜单项-Community-3",
+  "timestamp": "2026-04-29T08:20:59.665Z",
+  "count": 10,
+  "requests": [
+    {
+      "id": "5ankb35ay8",
+      "requestId": "tdpgjvtlrqq",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:06 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450806670,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "yl2qmb2x229",
+      "requestId": "77jk34bprxr",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:06 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450806678,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "s5mza6qr32",
+      "requestId": "496u8838dr9",
+      "type": "response",
+      "url": "http://example.test/images/lamborghini-aventador.jpg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "etag": "\"68d18f7b-a1c2\"",
+        "connection": "keep-alive",
+        "accept-ranges": "bytes",
+        "content-length": "41410",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "content-type": "image/jpeg",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/jpeg",
+      "timestamp": 1777450806713,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 0
+    },
+    {
+      "id": "4yhvxrdz9bi",
+      "requestId": "htua6k19rbg",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:06 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450806727,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 393,
+      "body": "[{\"id\":6,\"uuid\":\"33ced8a8-246b-4cc4-8bce-5a5173397ae3\",\"pincode\":\"0588\",\"vin\":\"896480MP7DZHB9D69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":2,\"model\":\"Aventador\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/lamborghini-aventador.jpg\",\"vehiclecompany\":{\"id\":2,\"name\":\"Lamborghini\"}},\"vehicleLocation\":{\"id\":4,\"latitude\":\"38.206348\",\"longitude\":\"-84.270172\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "33ced8a8-246b-4cc4-8bce-5a5173397ae3",
+          "pincode": "0588",
+          "vin": "896480MP7DZHB9D69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 2,
+            "model": "Aventador",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/lamborghini-aventador.jpg",
+            "vehiclecompany": {
+              "id": 2,
+              "name": "Lamborghini"
+            }
+          },
+          "vehicleLocation": {
+            "id": 4,
+            "latitude": "38.206348",
+            "longitude": "-84.270172"
+          },
+          "owner": null
+        }
+      ],
+      "isListQuery": true
+    },
+    {
+      "id": "5rmq93d5dq9",
+      "requestId": "9cfocx94eft",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=38.206348,-84.270172&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s38.206348,-84.270172",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=3",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1777450806729,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 0
+    },
+    {
+      "id": "mizqdtq4n5",
+      "requestId": "9cfocx94eft",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=38.206348,-84.270172&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s38.206348,-84.270172",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=3",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1777450806945,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 0
+    },
+    {
+      "id": "9boquc7f9yl",
+      "requestId": "tdpgjvtlrqq",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:06 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450806947,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "fw4xlmapwt8",
+      "requestId": "77jk34bprxr",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:06 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450806948,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "fahm8i5ap4p",
+      "requestId": "htua6k19rbg",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:07 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450806982,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 393,
+      "body": "[{\"id\":6,\"uuid\":\"33ced8a8-246b-4cc4-8bce-5a5173397ae3\",\"pincode\":\"0588\",\"vin\":\"896480MP7DZHB9D69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":2,\"model\":\"Aventador\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/lamborghini-aventador.jpg\",\"vehiclecompany\":{\"id\":2,\"name\":\"Lamborghini\"}},\"vehicleLocation\":{\"id\":4,\"latitude\":\"38.206348\",\"longitude\":\"-84.270172\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "33ced8a8-246b-4cc4-8bce-5a5173397ae3",
+          "pincode": "0588",
+          "vin": "896480MP7DZHB9D69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 2,
+            "model": "Aventador",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/lamborghini-aventador.jpg",
+            "vehiclecompany": {
+              "id": 2,
+              "name": "Lamborghini"
+            }
+          },
+          "vehicleLocation": {
+            "id": 4,
+            "latitude": "38.206348",
+            "longitude": "-84.270172"
+          },
+          "owner": null
+        }
+      ],
+      "isListQuery": true
+    },
+    {
+      "id": "rp82n2fa7w",
+      "requestId": "bmbm54bd8ph",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:20:07 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=efe8239e-4630-4553-9668-2d70af096e31; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450807202,
+      "context": "click-LI-菜单项-Community-3",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

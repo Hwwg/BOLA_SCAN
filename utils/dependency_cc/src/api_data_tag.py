@@ -1,4 +1,3 @@
-from re import T
 from venv import logger
 from urllib3.util import response
 from scripts.api_doc import ApiDoc
@@ -10,6 +9,8 @@ from gptreply.gpt_con import GPTReply
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import sys,os
+import json
+import re
 
 # from utils.dependency_cc.src.case_generation_v2 import js
 
@@ -20,8 +21,32 @@ Extract API doc data, tag each endpoint with CRUD type, and output.
 Tagged results: self.api_doc
 """
 class ApiDataTagging:
-    def __init__(self,api_doc_path,model, grouping_strategy: str = 'auto') -> None:
-        self.api_doc_tool = ApiDoc(api_doc_path,model)
+    VALID_API_TYPES = {"add", "delete", "update", "query", "list query"}
+    API_TYPE_JUDGE_SCHEMA = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "results": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "endpoint": {"type": "string"},
+                        "type": {
+                            "type": "string",
+                            "enum": ["add", "delete", "update", "query", "list query"],
+                        },
+                    },
+                    "required": ["endpoint", "type"],
+                },
+            }
+        },
+        "required": ["results"],
+    }
+
+    def __init__(self,api_doc_path,model, grouping_strategy: str = 'tree_select', excludes=None) -> None:
+        self.api_doc_tool = ApiDoc(api_doc_path,model, excludes=excludes or [])
         # 
         self.tag_results = {}
         # Use a smarter grouping strategy to aggregate CRUD for the same resource
@@ -32,6 +57,178 @@ class ApiDataTagging:
         self.syn_prompt = SyntheticPrompt()
         self.initial_test_info_dict = {
 
+        }
+        try:
+            self.min_coverage = float(os.getenv("BOLASCAN_API_TYPE_MIN_COVERAGE", "1.0"))
+        except Exception:
+            self.min_coverage = 1.0
+        self.min_coverage = max(0.0, min(1.0, self.min_coverage))
+
+    def _split_endpoint(self, endpoint):
+        parts = str(endpoint or "").strip().split(None, 1)
+        if len(parts) == 2:
+            return parts[0].upper(), parts[1]
+        return "", str(endpoint or "")
+
+    def _endpoint_tokens(self, endpoint):
+        _, path = self._split_endpoint(endpoint)
+        text = re.sub(r"\{[^}]+\}", " ", path)
+        return {t for t in re.split(r"[^A-Za-z0-9]+", text.lower()) if t}
+
+    def _has_pagination_or_list_request(self, api_info):
+        list_params = {
+            "page", "pagesize", "page_size", "pagenumber", "pagenum",
+            "limit", "offset", "size", "per_page", "perpage", "start", "count",
+        }
+        req = api_info.get("request_parameters", {}) if isinstance(api_info, dict) else {}
+        if not isinstance(req, dict):
+            return False
+        for name in req.keys():
+            normalized = str(name).replace("-", "_").lower()
+            if normalized in list_params:
+                return True
+        return False
+
+    def _has_array_response(self, api_info):
+        resp = api_info.get("response_parameters", {}) if isinstance(api_info, dict) else {}
+        if isinstance(resp, list):
+            return True
+        if not isinstance(resp, dict):
+            return False
+        t = str(resp.get("type", "")).lower()
+        if t == "array":
+            return True
+        for name, spec in resp.items():
+            lname = str(name).lower()
+            # Only top-level collection fields indicate a list query. Nested arrays
+            # such as comments[].id in a detail response should not upgrade it.
+            if "." in lname:
+                continue
+            if "[]" in lname or lname in {"items", "data", "list", "records", "rows"}:
+                if lname.endswith("[]") or isinstance(spec, list):
+                    return True
+                if isinstance(spec, dict) and (spec.get("type") == "array" or "items" in spec):
+                    return True
+        return False
+
+    def _has_path_identifier(self, endpoint):
+        _, path = self._split_endpoint(endpoint)
+        return bool(re.search(r"\{[^}]+\}", path))
+
+    def _upgrade_query_type(self, endpoint, api_info, base_type):
+        if base_type != "query":
+            return base_type
+        tokens = self._endpoint_tokens(endpoint)
+        if tokens & {"list", "search", "page", "pages", "index"}:
+            return "list query"
+        if self._has_pagination_or_list_request(api_info) or self._has_array_response(api_info):
+            if self._has_path_identifier(endpoint) and not self._has_pagination_or_list_request(api_info):
+                return "query"
+            return "list query"
+        return "query"
+
+    def _classify_api_type_by_rule(self, endpoint, api_info):
+        method, _ = self._split_endpoint(endpoint)
+        tokens = self._endpoint_tokens(endpoint)
+        if tokens & {"create", "add", "save", "new", "insert", "register", "signup"}:
+            return "add"
+        if tokens & {"delete", "remove", "del"}:
+            return "delete"
+        if tokens & {"update", "edit", "modify", "patch"}:
+            return "update"
+        if method == "DELETE":
+            return "delete"
+        if method in {"PUT", "PATCH"}:
+            return "update"
+        if method == "GET":
+            return self._upgrade_query_type(endpoint, api_info, "query")
+        if tokens & {"get", "detail", "details", "query", "find", "search", "list", "page", "pages", "index"}:
+            return self._upgrade_query_type(endpoint, api_info, "query")
+        return None
+
+    def _extract_json_payload(self, reply):
+        if isinstance(reply, dict):
+            return reply
+        if isinstance(reply, list):
+            return reply
+        raw_text = str(reply).strip()
+        fenced_payload = self.jsontool.list_formatting(raw_text)
+        text = fenced_payload.strip() if fenced_payload else raw_text
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            object_start = text.find("{")
+            object_end = text.rfind("}")
+            array_start = text.find("[")
+            array_end = text.rfind("]")
+
+            candidates = []
+            if object_start != -1 and object_end != -1 and object_end > object_start:
+                candidates.append(text[object_start : object_end + 1])
+            if array_start != -1 and array_end != -1 and array_end > array_start:
+                candidates.append(text[array_start : array_end + 1])
+
+            for candidate in candidates:
+                try:
+                    return json.loads(candidate)
+                except json.JSONDecodeError:
+                    continue
+            raise
+
+    def _normalize_api_type_results(self, payload):
+        if not isinstance(payload, dict) or "results" not in payload:
+            raise ValueError("LLM 返回结果不符合标准 schema：缺少顶层 results 数组")
+
+        results = payload.get("results")
+        if not isinstance(results, list):
+            raise ValueError("LLM 返回结果不符合标准 schema：results 不是数组")
+
+        normalized = {}
+        for item in results:
+            if not isinstance(item, dict):
+                raise ValueError("LLM 返回结果不符合标准 schema：results 中存在非对象元素")
+            endpoint = str(item.get("endpoint", "")).strip()
+            api_type = str(item.get("type", "")).strip()
+            if not endpoint:
+                raise ValueError("LLM 返回结果不符合标准 schema：存在空 endpoint")
+            if api_type not in self.VALID_API_TYPES:
+                raise ValueError(f"LLM 返回结果包含非法 type: endpoint={endpoint} type={api_type}")
+            if endpoint in normalized:
+                raise ValueError(f"LLM 返回结果包含重复 endpoint: {endpoint}")
+            normalized[endpoint] = api_type
+        return normalized
+
+    def _validate_api_type_coverage(self, group_name, analysis_result, expected_endpoints):
+        if not isinstance(analysis_result, dict):
+            raise ValueError(f"功能组 {group_name} 的分析结果不是对象")
+
+        expected_set = {
+            str(endpoint).strip()
+            for endpoint in expected_endpoints
+            if isinstance(endpoint, str) and endpoint.strip()
+        }
+        result_set = set(analysis_result.keys())
+
+        unexpected = sorted(result_set - expected_set)
+        if unexpected:
+            preview = unexpected[:10]
+            raise ValueError(f"功能组 {group_name} 返回了未请求的 endpoint: {preview}")
+
+        missing = sorted(expected_set - result_set)
+        expected_count = len(expected_set)
+        actual_count = len(result_set)
+        coverage = (actual_count / expected_count) if expected_count else 1.0
+        if expected_count and coverage < self.min_coverage:
+            preview = missing[:20]
+            raise ValueError(
+                f"功能组 {group_name} 覆盖率不足: {actual_count}/{expected_count}={coverage:.1%}; "
+                f"missing={preview}"
+            )
+        return {
+            "expected_count": expected_count,
+            "actual_count": actual_count,
+            "missing": missing,
+            "coverage": coverage,
         }
     
 
@@ -106,22 +303,84 @@ class ApiDataTagging:
             print(f"Analyzing group: {group_name}")
         
         # Create per-thread local data to avoid shared state
+        rule_result = {}
+        unresolved_apis = {}
+        for endpoint, api_info in apis.items():
+            if not isinstance(endpoint, str) or not endpoint.strip():
+                continue
+            api_type = self._classify_api_type_by_rule(endpoint, api_info if isinstance(api_info, dict) else {})
+            if api_type:
+                rule_result[endpoint] = api_type
+            else:
+                unresolved_apis[endpoint] = api_info
+
+        if not unresolved_apis:
+            return {
+                "group_name": group_name,
+                "analysis_result": rule_result,
+                "coverage": 1.0,
+                "expected_count": len(rule_result),
+                "actual_count": len(rule_result),
+            }
+
+        expected_endpoints = [
+            endpoint
+            for endpoint in unresolved_apis.keys()
+            if isinstance(endpoint, str) and endpoint.strip()
+        ]
         local_test_info_dict = {
-            "api_data": {group_name: apis}
+            "api_data": {group_name: unresolved_apis},
+            "expected_endpoints": json.dumps(expected_endpoints, ensure_ascii=False, indent=2),
+            "retry_notice": "None",
         }
         
         # Call GPT to analyze the current group, with retries
         max_retries = 3
+        last_error = None
         for attempt in range(max_retries):
             try:
-                tmp_result = self.gpt_reply.getreply(
-                    self.syn_prompt.synthesis_prompt("api_function_type_judge", local_test_info_dict)
+                if attempt > 0:
+                    local_test_info_dict["retry_notice"] = (
+                        "Previous output was invalid or incomplete.\n"
+                        + f"Validation error: {last_error}\n"
+                        + "Regenerate the full JSON object from scratch.\n"
+                        + "You must return a standard JSON object with top-level `results`.\n"
+                        + "Every endpoint in Expected Endpoints must appear exactly once.\n"
+                        + "Do not omit endpoints. Do not invent extra endpoints."
+                    )
+                formatted_result = self.gpt_reply.getreply_json_schema(
+                    self.syn_prompt.synthesis_prompt("api_function_type_judge", local_test_info_dict),
+                    schema_name="api_function_type_judge",
+                    schema=self.API_TYPE_JUDGE_SCHEMA,
                 )
-                formatted_result = eval(self.jsontool.list_formatting(tmp_result))
+                formatted_result = self._normalize_api_type_results(formatted_result)
+                for endpoint, api_type in list(formatted_result.items()):
+                    api_info = unresolved_apis.get(endpoint, {})
+                    formatted_result[endpoint] = self._upgrade_query_type(
+                        endpoint,
+                        api_info if isinstance(api_info, dict) else {},
+                        api_type,
+                    )
+                coverage_info = self._validate_api_type_coverage(
+                    group_name,
+                    formatted_result,
+                    expected_endpoints,
+                )
+                merged_result = dict(rule_result)
+                merged_result.update(formatted_result)
+                all_expected = list(apis.keys())
+                merged_coverage_info = self._validate_api_type_coverage(
+                    group_name,
+                    merged_result,
+                    all_expected,
+                )
                 
                 result = {
                     "group_name": group_name,
-                    "analysis_result": formatted_result
+                    "analysis_result": merged_result,
+                    "coverage": merged_coverage_info["coverage"],
+                    "expected_count": merged_coverage_info["expected_count"],
+                    "actual_count": merged_coverage_info["actual_count"],
                 }
                 
                 with self.lock:
@@ -130,6 +389,7 @@ class ApiDataTagging:
                 return result
                 
             except Exception as e:
+                last_error = str(e)
                 with self.lock:
                     print(f"Error analyzing group {group_name} (attempt {attempt + 1}/{max_retries}): {str(e)}")
                 if attempt == max_retries - 1:
@@ -249,9 +509,10 @@ class ApiDataTagging:
                             if param_name.lower() in pagination_params:
                                 has_pagination = True
                                 break
+                    has_list_endpoint = bool(self._endpoint_tokens(api_path) & {"list", "search", "page", "pages", "index"})
                     
                     # 如果既没有数组响应也没有分页参数，纠正为 "query"
-                    if not has_array_response and not has_pagination:
+                    if not has_array_response and not has_pagination and not has_list_endpoint:
                         api_info['type'] = 'query'
                         corrected_count += 1
                         print(f"  Corrected {api_path}: 'list query' -> 'query' (no array response, no pagination)")
@@ -262,6 +523,42 @@ class ApiDataTagging:
             print("Type validation completed: no corrections needed")
         
         return api_doc
+
+    def complete_api_tagging_by_static_rules(self):
+        """
+        Tag every endpoint with deterministic method/path rules only.
+        This is used for ablation experiments where API type classification
+        should not call the LLM.
+        """
+        tagged_count = 0
+        total_apis = 0
+        for group_item in self.api_doc:
+            if not isinstance(group_item, dict):
+                continue
+            for _, apis in group_item.items():
+                if not isinstance(apis, dict):
+                    continue
+                for endpoint, api_info in apis.items():
+                    total_apis += 1
+                    if not isinstance(api_info, dict):
+                        apis[endpoint] = api_info = {}
+                    api_type = self._classify_api_type_by_rule(endpoint, api_info)
+                    if not api_type:
+                        method, _ = self._split_endpoint(endpoint)
+                        if method == "POST":
+                            api_type = "add"
+                        elif method == "DELETE":
+                            api_type = "delete"
+                        elif method in {"PUT", "PATCH"}:
+                            api_type = "update"
+                        else:
+                            api_type = "query"
+                    api_info["type"] = self._upgrade_query_type(endpoint, api_info, api_type)
+                    tagged_count += 1
+
+        tagged_api_doc = self.validate_and_correct_list_query_type(self.api_doc)
+        print(f"Static API type tagging completed: total APIs {total_apis}, tagged {tagged_count}")
+        return tagged_api_doc
 
     def complete_api_tagging_process(self, max_workers=3):
         """
@@ -294,6 +591,10 @@ class ApiDataTagging:
             print("Failed groups:")
             for failed in failed_groups:
                 print(f"  - {failed['group_name']}: {failed.get('error', 'Unknown error')}")
+            raise RuntimeError(
+                "API type analysis failed for some groups: "
+                + ", ".join(failed["group_name"] for failed in failed_groups)
+            )
         
         
         print("Step 2: Merge type tags into API doc...")
@@ -313,7 +614,13 @@ class ApiDataTagging:
                     if isinstance(api_info, dict) and 'type' in api_info:
                         tagged_apis += 1
         
-        print(f"Tagging stats: total APIs {total_apis}, tagged {tagged_apis}, rate {tagged_apis/total_apis*100:.1f}%")
+        coverage = (tagged_apis / total_apis) if total_apis else 1.0
+        print(f"Tagging stats: total APIs {total_apis}, tagged {tagged_apis}, rate {coverage*100:.1f}%")
+        if total_apis and coverage < self.min_coverage:
+            raise RuntimeError(
+                f"API tagging coverage below threshold: tagged={tagged_apis} total={total_apis} "
+                f"coverage={coverage:.1%} threshold={self.min_coverage:.1%}"
+            )
         
         
         print("API tagging flow completed!")
@@ -650,7 +957,11 @@ if __name__ == "__main__":
     grouping_strategy = "resource_crud"
     api_data_tag = ApiDataTagging(api_doc_path, model, grouping_strategy)
     
-    api_doc_with_types = api_data_tag.complete_api_tagging_process(max_workers=5)
+    try:
+        max_workers = int(os.getenv("BOLASCAN_LLM_MAX_WORKERS", "5"))
+    except Exception:
+        max_workers = 5
+    api_doc_with_types = api_data_tag.complete_api_tagging_process(max_workers=max(1, max_workers))
     # api_doc_with_types = jsontools.read_json(os.path.join(cache_dir, "api_doc_with_type.json"))
     api_match_results = api_data_tag.api_tag_results_review(api_doc_with_types)
     

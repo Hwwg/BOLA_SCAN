@@ -6,6 +6,7 @@ import copy
 import json
 import logging
 import hashlib
+import re
 
 # 配置日志
 logger = logging.getLogger(__name__)
@@ -20,6 +21,12 @@ if project_root not in sys.path:
 from scripts.jsontools import JsonTools
 from prompt.synthesis_prompt import SyntheticPrompt
 from gptreply.gpt_con import GPTReply
+from utils.param_path import (
+    any_param_matches,
+    base_param_name as shared_base_param_name,
+    compact_name as shared_compact_name,
+    param_matches,
+)
 
 """
 self.api_fully_doc:指的已经是打上标的doc了
@@ -132,6 +139,102 @@ class ParaNormalize:
         """
         # 存储每次输出的数据
         stored_outputs = []
+        generic_identifier_denylist = {
+            "message", "status", "token", "code", "key", "serial", "number", "amount",
+            "title", "content", "description", "result", "data"
+        }
+
+        def base_param_name(field):
+            if not isinstance(field, str):
+                field = str(field)
+            return field.strip().split(".")[-1].replace("[]", "")
+
+        def to_snake_case(name):
+            name = base_param_name(name)
+            if not name:
+                return ""
+            s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
+            s2 = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1)
+            return s2.replace("-", "_").lower()
+
+        def expand_param_variants(name):
+            base = base_param_name(name)
+            snake = to_snake_case(base)
+            compact = snake.replace("_", "")
+            parts = [p for p in snake.split("_") if p]
+            camel = parts[0] + "".join(p.capitalize() for p in parts[1:]) if parts else snake
+            return {v for v in {base, snake, compact, camel} if v}
+
+        def same_param_family(left, right):
+            return bool(expand_param_variants(left) & expand_param_variants(right))
+
+        def should_keep_generic_replace(candidate):
+            snake = to_snake_case(candidate)
+            if not snake:
+                return False
+            if snake in generic_identifier_denylist:
+                return False
+            return True
+
+        def sanitize_mapping_result(results_check):
+            """
+            清洗 LLM 输出：
+            1. replace_para 只保留与 keep_pra 同名风格变体，或可信的通用 ID。
+            2. 移除 message/status/token/code/number 等高歧义字段。
+            """
+            if not isinstance(results_check, list):
+                return results_check
+
+            sanitized = []
+            trusted_generic_ids = {"id", "identifier", "uuid", "guid"}
+
+            for item in results_check:
+                if not isinstance(item, dict):
+                    sanitized.append(item)
+                    continue
+
+                params_info = item.get("parameters_name", {}) or {}
+                keep_param = params_info.get("keep_pra")
+                replace_list = params_info.get("replace_para", [])
+
+                if not keep_param:
+                    sanitized.append(item)
+                    continue
+
+                if not isinstance(replace_list, list):
+                    replace_list = [replace_list] if replace_list else []
+
+                filtered_replace = []
+                seen = set()
+                for candidate in replace_list:
+                    if not isinstance(candidate, str):
+                        continue
+
+                    candidate_base = base_param_name(candidate)
+                    candidate_snake = to_snake_case(candidate_base)
+
+                    if same_param_family(keep_param, candidate):
+                        keep_candidate = True
+                    elif candidate_snake in trusted_generic_ids:
+                        keep_candidate = True
+                    else:
+                        keep_candidate = False
+
+                    if not keep_candidate:
+                        continue
+
+                    if candidate not in seen:
+                        filtered_replace.append(candidate)
+                        seen.add(candidate)
+
+                sanitized_item = copy.deepcopy(item)
+                sanitized_item["parameters_name"] = {
+                    "keep_pra": keep_param,
+                    "replace_para": filtered_replace
+                }
+                sanitized.append(sanitized_item)
+
+            return sanitized
 
         def check_api_in_doc(result,params_data):
             """
@@ -592,6 +695,7 @@ class ParaNormalize:
                                 self.syn_prompt.synthesis_prompt("parameter_normalization", local_test_info_dict)
                             )
                             result = eval(self.jsontools.list_formatting(tmp_result))
+                            result = sanitize_mapping_result(result)
                             
                             # 新增：检测并纠正反向映射
                             is_reversed, corrected_result, reversed_items = detect_reverse_mapping(result)
@@ -814,6 +918,71 @@ class ParaNormalize:
 
 
     # ========= 新增：请求-响应参数模糊匹配工具 =========
+    def _base_param_name(self, field: str) -> str:
+        """提取字段的基础参数名，去掉嵌套路径和数组标记。"""
+        if not isinstance(field, str):
+            field = str(field)
+        return field.strip().split(".")[-1].replace("[]", "")
+
+    def _to_snake_case(self, name: str) -> str:
+        """将 camelCase / PascalCase / kebab-case 统一转换为 snake_case。"""
+        if not isinstance(name, str):
+            name = str(name)
+        name = self._base_param_name(name)
+        if not name:
+            return ""
+        s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
+        s2 = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1)
+        return s2.replace("-", "_").lower()
+
+    def _compact_name(self, name: str) -> str:
+        """去掉分隔符后的紧凑形式。"""
+        return self._to_snake_case(name).replace("_", "")
+
+    def _extract_resource_anchor(self, name: str) -> str:
+        """
+        从参数名里提取资源锚点。
+        例如:
+        - order_id -> order
+        - orderId -> order
+        - postId -> post
+        - items[].id -> items
+        """
+        snake = self._to_snake_case(name)
+        if not snake:
+            return ""
+        generic_suffixes = (
+            "_id", "_ids", "_uuid", "_guid", "_code", "_name",
+            "_key", "_slug", "_token"
+        )
+        for suffix in generic_suffixes:
+            if snake.endswith(suffix) and len(snake) > len(suffix):
+                return snake[:-len(suffix)]
+        if snake in {"id", "uuid", "guid", "identifier", "code", "name"}:
+            return ""
+        return snake
+
+    def _normalize_anchor_token(self, token: str) -> str:
+        """对资源锚点做轻量单复数归一化。"""
+        if not token:
+            return ""
+        token = token.lower()
+        if token.endswith("ies") and len(token) > 3:
+            return token[:-3] + "y"
+        if token.endswith("ses") and len(token) > 3:
+            return token[:-2]
+        if token.endswith("s") and not token.endswith("ss") and len(token) > 3:
+            return token[:-1]
+        return token
+
+    def _anchors_match(self, left: str, right: str) -> bool:
+        """判断两个资源锚点是否表达同一资源。"""
+        left_norm = self._normalize_anchor_token(left)
+        right_norm = self._normalize_anchor_token(right)
+        if not left_norm or not right_norm:
+            return False
+        return left_norm == right_norm
+
     def _normalize_response_field(self, field: str) -> str:
         """标准化响应参数字段：小写+按'.'分割并清洗每个片段的'[]'，不依赖固定前缀。"""
         if not isinstance(field, str):
@@ -827,12 +996,30 @@ class ParaNormalize:
         return ".".join(cleaned)
 
     def _response_matches_request(self, req_field: str, resp_field: str) -> bool:
-        """基于'.'分割的包含式匹配：请求字段的最后一个token出现在响应字段token集合中即认为命中。"""
+        """
+        语义交集匹配：
+        1. 命名风格变体匹配: order_id <-> orderId <-> orderid
+        2. 传统 token 匹配: id 命中 items[].id
+        3. 资源锚点匹配: postId 命中 posts[].id
+        """
+        try:
+            if param_matches(req_field, resp_field):
+                return True
+        except Exception:
+            pass
         if not isinstance(req_field, str):
             req_field = str(req_field)
         if not isinstance(resp_field, str):
             resp_field = str(resp_field)
-        # 获取请求字段的最后token
+
+        req_base = self._base_param_name(req_field)
+        resp_base = self._base_param_name(resp_field)
+
+        # 1) 优先做命名风格统一后的等价判断
+        if self._compact_name(req_base) and self._compact_name(req_base) == self._compact_name(resp_base):
+            return True
+
+        # 2) 传统最后 token 命中
         req_tokens = [p for p in req_field.strip().lower().split(".") if p]
         if not req_tokens:
             return False
@@ -844,11 +1031,28 @@ class ParaNormalize:
             return False
         # 获取响应字段的token集合
         resp_norm = self._normalize_response_field(resp_field)
-        resp_tokens = set([p for p in resp_norm.split(".") if p])
-        return last in resp_tokens
+        resp_tokens = [p for p in resp_norm.split(".") if p]
+        resp_token_set = set(resp_tokens)
+        if last in resp_token_set:
+            return True
+
+        # 3) 资源锚点匹配：xxxId / xxx_id 命中 items[].id / data.xxx.id
+        req_anchor = self._extract_resource_anchor(req_base)
+        if req_anchor:
+            resp_last = resp_tokens[-1] if resp_tokens else ""
+            if resp_last in {"id", "uuid", "guid", "identifier", "code", "name"}:
+                for token in resp_tokens[:-1]:
+                    if self._anchors_match(req_anchor, token):
+                        return True
+
+        return False
 
     def _request_in_response(self, req_field: str, response_fields) -> bool:
         """判断请求参数在响应参数集合中是否命中（使用模糊匹配）。"""
+        try:
+            return any_param_matches(req_field, response_fields)
+        except Exception:
+            pass
         for resp in response_fields:
             if self._response_matches_request(req_field, resp):
                 return True
@@ -1136,17 +1340,21 @@ class ParaNormalize:
         
         return result
 
-    def parameters_results_packages(self):
+    def parameters_results_packages(self, use_llm_mapping=True):
         """
         使用这个方法，就可以输出这个阶段所需要获取的所有数据
         """
         # todo: 需要确定这种path类型的数据提取是否适用于所有文档
         parameters_extraction_results = self.parameters_extraction(include_path_params=True)
 
-        # normalized_params是进行替换后的参数，normalized_params_process_data是后续用于参考的参数
-        # normalized_params = self.jsontools.read_json("/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/mall/parameters_dict_all.json")["normalized_params"]
-        # normalized_params_process_data = self.jsontools.read_json("/Users/tlif3./zju_research/bolascan_v3/bolascan_v4/cache/mall/parameters_dict_all.json")["normalized_params_process_data"]
-        normalized_params, normalized_params_process_data = self.parameters_normalization(parameters_extraction_results)
+        # normalized_params 是进行替换后的参数，normalized_params_process_data 是后续用于参考的参数。
+        # 消融实验可关闭 LLM 参数映射，直接使用原始请求/响应参数进入后续集合计算。
+        if use_llm_mapping:
+            normalized_params, normalized_params_process_data = self.parameters_normalization(parameters_extraction_results)
+        else:
+            normalized_params = copy.deepcopy(parameters_extraction_results)
+            self._add_type_info_to_normalized_params(normalized_params)
+            normalized_params_process_data = []
 
         # 这里的v1指的是功能组内的纯集合运算、这里的v2指的是加上add类型的
         set_calculate_results_v1 = self.set_generation_by_group(normalized_params)
@@ -1197,5 +1405,3 @@ if __name__ == "__main__":
 
 
         
-
-

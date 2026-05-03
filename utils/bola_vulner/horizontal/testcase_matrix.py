@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 import re
+from utils.param_path import find_matching_path, nested_delete, nested_set
 
 
 def is_valid_resource_id(value):
@@ -207,10 +208,8 @@ def _detect_param_locations(step_obj: Dict[str, Any], aliases: List[str]) -> Lis
     if not body:
         body = params.get("data", {})
     if isinstance(body, dict):
-        for alias in aliases:
-            if alias in body:
-                locations.append("body")
-                break
+        if find_matching_path(body, aliases):
+            locations.append("body")
     
     # 检查 header
     headers = params.get("headers", {})
@@ -332,6 +331,58 @@ def apply_test_case_to_req(step_obj: Dict[str, Any], test_case: Optional[TestCas
             logger.info(f"[DEBUG-TC-URL] _repl_path 输出: {result}")
         return result
 
+    def _repl_concrete_path_by_route(url_s: str, route_s: str, aliases: List[str], val: Any) -> str:
+        """
+        Replace an already-materialized path parameter by aligning the request URL
+        with the route template. This covers routes such as
+        /vehicle/{vehicleId}/location where the concrete URL is /vehicle/1/location.
+        """
+        if not (isinstance(url_s, str) and isinstance(route_s, str) and url_s and route_s):
+            return url_s
+        if val in (None, "") or not is_valid_resource_id(val):
+            return url_s
+
+        try:
+            from urllib.parse import urlsplit, urlunsplit
+
+            split_url = urlsplit(url_s)
+            url_path = split_url.path or url_s
+            route_path = urlsplit(route_s).path if "://" in route_s else route_s
+
+            url_parts = [p for p in url_path.split("/") if p != ""]
+            route_parts = [p for p in route_path.split("/") if p != ""]
+            if not url_parts or not route_parts or len(url_parts) < len(route_parts):
+                return url_s
+
+            offset = len(url_parts) - len(route_parts)
+            changed = False
+            new_parts = list(url_parts)
+
+            for idx, route_part in enumerate(route_parts):
+                if not (route_part.startswith("{") and route_part.endswith("}")):
+                    url_idx = offset + idx
+                    if url_idx < 0 or url_idx >= len(url_parts) or url_parts[url_idx] != route_part:
+                        return url_s
+                    continue
+
+                name = route_part[1:-1]
+                if name in aliases:
+                    url_idx = offset + idx
+                    if 0 <= url_idx < len(new_parts):
+                        new_parts[url_idx] = str(val)
+                        changed = True
+
+            if not changed:
+                return url_s
+
+            new_path = "/" + "/".join(new_parts)
+            if split_url.scheme or split_url.netloc:
+                return urlunsplit((split_url.scheme, split_url.netloc, new_path, split_url.query, split_url.fragment))
+            return new_path
+        except Exception as exc:
+            logger.debug(f"[DEBUG-Path-Apply] concrete path route alignment failed: {exc}")
+            return url_s
+
     def _apply_value_to_position(pos: str, val: Any, is_target: bool):
         """应用值到指定位置"""
         nonlocal params
@@ -355,11 +406,19 @@ def apply_test_case_to_req(step_obj: Dict[str, Any], test_case: Optional[TestCas
             if not b:
                 b = params.get("data", {}) if isinstance(params.get("data"), dict) else {}
             for a in aliases:
-                if a in b:
+                match_path = a if a in b else find_matching_path(b, [a])
+                if match_path:
                     if remove_flag and is_target:
-                        _remove(b, a)
+                        if "." in match_path or "[]" in match_path:
+                            nested_delete(b, match_path)
+                        else:
+                            _remove(b, match_path)
                     else:
-                        _set(b, a, (conflict_val if conflict_flag and is_target else val))
+                        target_val = conflict_val if conflict_flag and is_target else val
+                        if "." in match_path or "[]" in match_path:
+                            nested_set(b, match_path, target_val)
+                        else:
+                            _set(b, match_path, target_val)
                         applied = True
                         break
             if "json" in params:
@@ -385,6 +444,19 @@ def apply_test_case_to_req(step_obj: Dict[str, Any], test_case: Optional[TestCas
                         logger.info(f"[DEBUG-Path-Apply] _repl_path结果: {new_url} (是否改变={new_url != url_s})")
                     
                     # 如果 _repl_path 无法替换（URL 中没有占位符），尝试替换路径中的数字默认值
+                    if new_url == url_s and val not in (None, "") and is_valid_resource_id(val):
+                        route_s = step_obj.get("route", "")
+                        route_aligned_url = _repl_concrete_path_by_route(
+                            url_s,
+                            route_s,
+                            aliases,
+                            (conflict_val if conflict_flag and is_target else val),
+                        )
+                        if route_aligned_url != url_s:
+                            new_url = route_aligned_url
+                            if test_case.param_name == "video_id":
+                                logger.info(f"[DEBUG-Path-Apply] ✓ 按route占位符位置替换具体路径段: {new_url}")
+
                     if new_url == url_s and val not in (None, "") and is_valid_resource_id(val):
                         # URL 可能包含默认值（如 /videos/0），尝试智能替换最后一个路径段
                         parts = url_s.rsplit('/', 1)

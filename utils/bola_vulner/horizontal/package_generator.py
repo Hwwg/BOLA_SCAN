@@ -8,6 +8,7 @@ import copy
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, List, Set, Optional
 from .utils_helpers import flatten_list, parse_method_route_key, is_step_object
+from utils.param_path import find_matching_path, param_matches
 
 logger = logging.getLogger(__name__)
 
@@ -206,19 +207,19 @@ class PackageGenerator:
             # 检查json请求体参数中是否包含资源id（仅匹配相同键名）
             json_data = parameters.get("json", {})
             if isinstance(json_data, dict):
-                if resource_id in json_data:
+                if resource_id in json_data or find_matching_path(json_data, [resource_id]):
                     return True
                     
             # 检查form表单参数中是否包含资源id（仅匹配相同键名）
             form_data = parameters.get("data", {})
             if isinstance(form_data, dict):
-                if resource_id in form_data:
+                if resource_id in form_data or find_matching_path(form_data, [resource_id]):
                     return True
             
             # 检查 params 查询参数字段中是否包含资源id（仅匹配键名）
             params_data = parameters.get("params", {})
             if isinstance(params_data, dict):
-                if resource_id in params_data:
+                if resource_id in params_data or any(param_matches(resource_id, key) for key in params_data.keys()):
                     return True
                         
             return False
@@ -404,5 +405,4 @@ class PackageGenerator:
                             result[kind][gname][rid]["group"].extend(cg.get("group", []))
 
         return result
-
 

@@ -1,0 +1,35 @@
+{
+  "context": "click-BUTTON-按钮-Verify Vehicle Detai-4",
+  "timestamp": "2026-04-29T08:13:25.285Z",
+  "count": 1,
+  "requests": [
+    {
+      "id": "lgjhl58hmx",
+      "requestId": "nzdke11crx",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:12:29 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=d0404649-687e-4fac-9fad-18a75bbd5b31; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450349540,
+      "context": "click-BUTTON-按钮-Verify Vehicle Detai-4",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

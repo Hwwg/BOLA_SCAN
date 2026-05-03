@@ -1,13 +1,25 @@
 api_function_type_judge_system = """
-As a Professional Web Application Developer, you need to determine the primary function of each API endpoint based on the functional group parameter documentation I provide. First, determine if the endpoint can be translated into a SQL statement; if so, combine the SQL operation type, endpoint function, parameter design, and request method to classify it into one of the following types: "add", "delete", "update", "query", or "list query".
+As a Professional Web Application Developer, you need to determine the primary function of each unresolved API endpoint based on the functional group parameter documentation I provide. Rule-based classification has already been applied before this prompt; only classify the endpoints that remain unresolved. Combine endpoint function, parameter design, and request method to classify each endpoint into exactly one of the following types: "add", "delete", "update", "query", or "list query".
+
+You must return a STANDARD JSON OBJECT with this exact structure:
+{
+  "results": [
+    {"endpoint": "METHOD /path", "type": "add|delete|update|query|list query"}
+  ]
+}
+
+Do not return a plain endpoint-to-type dictionary.
+Do not omit the top-level `results` field.
+Every endpoint in `Expected Endpoints` must appear exactly once in `results`.
+Do not invent endpoints that are not in `Expected Endpoints`.
 
 - "add": Corresponds to data creation (usually POST, returns a new resource ID).
 - "delete": Represents deleting a resource (DELETE or POST request, parameters include ID).
 - "update": Represents updating data (PUT, PATCH, or POST request, passing fields to be modified).
 - "query": Represents a single item query (GET request, exact match condition returns a single record).
-- "list query": Used for batch querying a collection of resources (typically GET /resource or POST /resource/query, supports pagination, sorting, and filtering, returns a data list and pagination info).
+- "list query": A subtype of query for batch querying a collection of resources (typically GET /resource or POST /resource/query, supports pagination, sorting, and filtering, returns a data list and pagination info).
 
-**Strict Rule**: Only classify as "list query" if the response parameters contain an array structure (e.g., items[], data[], list[]) OR the request parameters contain pagination/list parameters (e.g., page, pageSize, limit, offset, size, per_page). Otherwise, classify as "query".
+**Strict Rule**: First decide whether an endpoint is a query. Only after it is a query may you upgrade it to "list query" if the response parameters contain an array structure (e.g., items[], data[], list[]) OR the request parameters contain pagination/list parameters (e.g., page, pageSize, limit, offset, size, per_page) OR the endpoint clearly has list/search/page semantics. Do not output a mixed type such as "query/list query".
 
 "List query" Example:
 "GET /user/list": {
@@ -39,12 +51,22 @@ Input:
 
 Output (Please ensure to output standard JSON format):
 ```json
-{"POST /user/test/add":"add"}
+{
+  "results": [
+    {"endpoint": "POST /user/test/add", "type": "add"}
+  ]
+}
 ```
 """
 
 api_function_type_judge_user = """
 Here is the functional group API data you need to judge: {api_data}
+
+Expected Endpoints:
+{expected_endpoints}
+
+Retry Notice:
+{retry_notice}
 """
 
 parameter_normalization_system = """
@@ -62,20 +84,20 @@ Please pay special attention to the potential naming relationship between the fu
 (3) Replacement Priority (Strictly Follow)
     ⚠️ Core Principle: Keep Specific, Replace Generic
     - Specific parameter names (e.g., `order_id`, `product_id`, `book_id`) -> `keep_pra` (Keep)
-    - Generic parameter names (e.g., `id`, `identifier`, `uuid`, `guid`, `code`, `key`, `serial`, `number`) -> `replace_para` (Replace)
+    - Only trusted generic identifier names (e.g., `id`, `identifier`, `uuid`, `guid`) may enter `replace_para`
+    - Non-identifier generic fields such as `message`, `status`, `token`, `code`, `key`, `serial`, `number`, `amount` MUST NOT enter `replace_para` unless the route semantics clearly prove they are the primary resource identifier
     
-    🆕 Multiple Identifiers Handling:
-    - When an API returns MULTIPLE generic identifiers for the same resource (e.g., both `id` and `uuid`), 
-      include ALL of them in `replace_para`, even if they may cause redundancy.
-    - Example: If resource APIs return both numeric `id` and UUID `uuid`, both should map to the specific ID name.
-    - Rationale: This ensures comprehensive dependency chain coverage. The execution layer will handle 
-      value selection intelligently through priority-based fallback mechanism.
+    Naming Variant Handling:
+    - Treat `vehicle_id`, `vehicleId`, and `vehicleid` as the SAME parameter written in different styles.
+    - These naming variants are safe to normalize together.
+    - Do NOT treat semantically different fields in the same group as aliases.
     
     - Judgment Criteria:
       a) Parameters with resource type prefixes are more specific (`order_id` > `id`)
       b) Parameters consistent with route semantics are more specific (In `/orders` route, `order_id` > `id`)
       c) Parameters related to the functional group name are more specific (In `cart` group, `cart_id` > `id`)
-      d) 🆕 All generic identifiers without resource context should be mapped (`id`, `uuid`, `code` all -> `xxx_id`)
+      d) Only high-confidence generic identifiers should be mapped (`id`, `uuid`, `identifier` -> `xxx_id` when resource semantics are clear)
+      e) If unsure, prefer omitting the mapping instead of guessing
     - ❌ Wrong Example: `{"keep_pra": "id", "replace_para": ["order_id"]}` # This causes parameter pool pollution!
     - ✅ Correct Example: `{"keep_pra": "order_id", "replace_para": ["id", "uuid"]}`
     - `keep_pra` (the retained parameter name) is usually the specific parameter name (e.g., `video_id`, `order_id`), not the generic parameter name (e.g., `id`, `uuid`) returned by an add-type route.
@@ -85,13 +107,14 @@ Please pay special attention to the potential naming relationship between the fu
 (3.1) Pre-output Self-check:
     ✓ Checklist (Must satisfy):
       - `keep_pra` contains underscores or prefixes (e.g., `order_id`, `video_id`)
-      - `replace_para` contains ALL generic identifier fields present in responses (e.g., `id`, `uuid`, `code`, `identifier`)
-      - 🆕 If response contains both `id` and `uuid`, BOTH must appear in `replace_para`
-      - 🆕 Prioritize comprehensive coverage over avoiding redundancy
+      - `replace_para` only contains high-confidence aliases or trusted generic identifiers for the SAME resource
+      - If response contains both `id` and `uuid`, include both only when they clearly identify the same resource
+      - Prefer precision over broad coverage
     ✗ Forbidden (Must NOT occur):
       - `keep_pra` should not be merely "id", "uuid", or "identifier"
       - `replace_para` should not contain names more specific than `keep_pra`
-      - 🆕 Should NOT omit any generic identifier field that appears in API responses
+      - `replace_para` must not contain `message`, `status`, `token`, `amount`, `number`, or similar payload/status fields unless they are proven resource identifiers
+      - Do not include unrelated fields from the same functional group just to improve coverage
 
 (4) Consistency Judgment Goal
     - Only replace parameters that appear in different routes but clearly identify the SAME resource.
@@ -201,12 +224,11 @@ Output:
 ```
 
 Analysis: 
-- The asset functional group returns multiple generic identifiers: `id` (numeric) and `uuid` (UUID format)
-- Path parameter uses `assetId` (camelCase variant)
-- ✅ ALL identifiers (`id`, `uuid`, `assetId`) are included in `replace_para` to ensure comprehensive coverage
-- This may create some redundant dependency chains, but that's acceptable - missing dependencies is worse
-- The execution layer will handle value selection through priority-based fallback (specific names > generic names)
-- Priority order: `asset_id` > `assetId` > `id` > `uuid`
+- The asset functional group returns multiple identifier-like fields: `id` and `uuid`
+- Path parameter uses `assetId` (camelCase variant of the same resource identifier)
+- `assetId` is a naming variant of `asset_id`, so it is safe to normalize together
+- Include `id` and `uuid` only because route and resource semantics clearly point to the same asset resource
+- Precision is more important than broad coverage
 
 Correct Case (4) - Multiple Identifier Types (id + code + key):
 Input:
@@ -238,7 +260,7 @@ Output:
             "POST /api/v2/ticket/validate"
         ],
         "parameters_name": {
-            "replace_para": ["id", "code", "key", "ticketId"],
+            "replace_para": ["id", "ticketId"],
             "keep_pra": "ticket_id"
         }
     }
@@ -246,10 +268,10 @@ Output:
 ```
 
 Analysis:
-- Three different generic identifier types: `id`, `code`, `key`
-- ALL are included to ensure complete dependency chain coverage
-- Different APIs may use different identifier formats (numeric id vs. alphanumeric code)
-- Execution layer will try them in priority order: `ticket_id` > `ticketId` > `id` > `code` > `key`
+- `ticketId` is a safe camelCase naming variant of `ticket_id`
+- `id` may be included because it is a common generic identifier
+- `code` and `key` should only be included when the route semantics clearly prove they are the primary ticket identifier
+- If that proof is missing, omit `code` and `key` instead of guessing
 
 Finally, output strictly in standard JSON format:
 ```json

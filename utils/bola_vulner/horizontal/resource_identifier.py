@@ -4,9 +4,20 @@
 """
 import logging
 import os
+import random
+from dataclasses import asdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, Set, List, Optional
 from .utils_helpers import flatten_list
+from utils.param_path import (
+    ParameterOccurrence,
+    any_param_matches,
+    identifier_names_in_path,
+    is_identifier_name,
+    occurrence_for,
+    path_container_params,
+    parse_path_identifier_order,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +53,315 @@ class ResourceIdentifier:
         self.syn_prompt = syn_prompt
         self.jsontool = jsontool
         self.llm_dict = llm_dict
+        self._last_oip_result: Dict[str, Any] | None = None
+        self._last_occurrence_result: Dict[str, Any] | None = None
+
+    def _iter_groups(self):
+        if isinstance(self.true_params, dict):
+            return list(self.true_params.items())
+        if isinstance(self.true_params, list):
+            groups_iter = []
+            for group_item in self.true_params:
+                if isinstance(group_item, dict):
+                    groups_iter.extend(group_item.items())
+            return groups_iter
+        return []
+
+    def build_oip_candidates(self, include_llm: bool = True) -> Dict[str, Any]:
+        """Build the OIP set as rule-based identifiers union LLM semantic additions."""
+        by_group: Dict[str, set[str]] = {}
+        rule_by_group: Dict[str, set[str]] = {}
+        llm_by_group: Dict[str, set[str]] = {}
+        candidate_meta_by_group: Dict[str, Dict[str, Any]] = {}
+
+        for group_name, apis in self._iter_groups():
+            if isinstance(apis, dict):
+                iterable_items = list(apis.items())
+            elif isinstance(apis, list):
+                iterable_items = []
+                for api_dict in apis:
+                    if isinstance(api_dict, dict):
+                        iterable_items.extend(api_dict.items())
+            else:
+                iterable_items = []
+
+            request_params_all: set[str] = set()
+            response_params_all: set[str] = set()
+            for endpoint, params in iterable_items:
+                request_params_all.update(self._extract_request_param_names(params))
+                response_params_all.update(self._extract_response_param_names(params))
+                for path_param, _ in parse_path_identifier_order(endpoint):
+                    request_params_all.add(path_param)
+
+            rule_oips = {p for p in request_params_all if is_identifier_name(p)}
+            for param in request_params_all | response_params_all:
+                rule_oips.update(identifier_names_in_path(param))
+            for req_param in request_params_all:
+                if any_param_matches(req_param, response_params_all) and is_identifier_name(req_param):
+                    rule_oips.add(req_param)
+
+            semantic_candidates = sorted(
+                p for p in (request_params_all & response_params_all)
+                if p not in rule_oips
+            )
+            candidate_meta = {
+                p: {
+                    "example_value": None,
+                    "sample_api": self._find_sample_api_for_param(apis, p),
+                }
+                for p in semantic_candidates
+            }
+            candidate_meta_by_group[group_name] = candidate_meta
+
+            llm_selected: set[str] = set()
+            if include_llm and semantic_candidates and not _llm_disabled:
+                local_llm_dict = self.llm_dict.copy()
+                local_llm_dict["param_dict"] = str({p: {"example_value": None} for p in semantic_candidates})
+                local_llm_dict["routes_data"] = str(apis)
+                try:
+                    tmp_result_params = self.gpt_reply.getreply(
+                        self.syn_prompt.synthesis_prompt("resource_id_judgement", local_llm_dict)
+                    )
+                    logger.info("功能组 %s 的 OIP 语义补充结果: %s", group_name, tmp_result_params)
+                    llm_selected = set(self._parse_llm_param_list(eval(self.jsontool.list_formatting(tmp_result_params))))
+                    # LLM can supplement semantic identifiers, but do not allow
+                    # obvious payload/status/config fields into the OIP set.
+                    deny = {
+                        "amount", "count", "quantity", "number", "password", "name", "title",
+                        "content", "message", "status", "state", "token", "code", "key",
+                        "coupon_code", "conversion_params", "problem_details", "pincode",
+                    }
+                    llm_selected = {p for p in llm_selected if p not in deny}
+                except Exception as exc:
+                    logger.info("功能组 %s 的 OIP 语义补充失败: %s", group_name, exc)
+
+            merged = set(rule_oips) | llm_selected
+            by_group[group_name] = merged
+            rule_by_group[group_name] = set(rule_oips)
+            llm_by_group[group_name] = llm_selected
+
+        result = {
+            "by_group": {g: sorted(v) for g, v in by_group.items() if v},
+            "rule_by_group": {g: sorted(v) for g, v in rule_by_group.items() if v},
+            "llm_by_group": {g: sorted(v) for g, v in llm_by_group.items() if v},
+            "all": sorted({p for values in by_group.values() for p in values}),
+        }
+        self._last_oip_result = result
+        return result
+
+    def _extract_request_param_names(self, params: Any) -> Set[str]:
+        """统一提取请求参数名，兼容新旧结构。"""
+        request_params_obj = params.get('request_parameters', params.get('request_para', {})) if isinstance(params, dict) else {}
+        if isinstance(request_params_obj, dict):
+            return {key for key in request_params_obj.keys() if isinstance(key, str)}
+        if isinstance(request_params_obj, list):
+            return {item for item in flatten_list(request_params_obj) if isinstance(item, str)}
+        return set()
+
+    def _extract_response_param_names(self, params: Any) -> Set[str]:
+        response_params_obj = params.get('response_parameters', params.get('response_para', {})) if isinstance(params, dict) else {}
+        if isinstance(response_params_obj, dict):
+            return {key for key in response_params_obj.keys() if isinstance(key, str)}
+        if isinstance(response_params_obj, list):
+            return {item for item in flatten_list(response_params_obj) if isinstance(item, str)}
+        return set()
+
+    def _collect_identifier_occurrences(self) -> Dict[str, List[ParameterOccurrence]]:
+        occurrences: Dict[str, List[ParameterOccurrence]] = {}
+
+        if isinstance(self.true_params, dict):
+            groups_iter = list(self.true_params.items())
+        elif isinstance(self.true_params, list):
+            groups_iter = []
+            for group_item in self.true_params:
+                if isinstance(group_item, dict):
+                    groups_iter.extend(group_item.items())
+        else:
+            groups_iter = []
+
+        for group_name, apis in groups_iter:
+            if isinstance(apis, dict):
+                iterable_items = list(apis.items())
+            elif isinstance(apis, list):
+                iterable_items = []
+                for api_dict in apis:
+                    if isinstance(api_dict, dict):
+                        iterable_items.extend(api_dict.items())
+            else:
+                iterable_items = []
+
+            for endpoint, api_data in iterable_items:
+                if not isinstance(api_data, dict):
+                    continue
+                api_type = api_data.get("type", "")
+
+                for path_param in path_container_params(endpoint) | {p for p, _ in parse_path_identifier_order(endpoint)}:
+                    for identifier_name in identifier_names_in_path(path_param):
+                        occurrences.setdefault(identifier_name, []).append(
+                            occurrence_for(path_param, "path", endpoint, api_type, identifier_name)
+                        )
+
+                req_obj = api_data.get("request_parameters", api_data.get("request_para", {}))
+                if isinstance(req_obj, dict):
+                    for pname, pinfo in req_obj.items():
+                        loc = pinfo.get("in", "body") if isinstance(pinfo, dict) else "body"
+                        for identifier_name in identifier_names_in_path(pname):
+                            occurrences.setdefault(identifier_name, []).append(
+                                occurrence_for(pname, loc, endpoint, api_type, identifier_name)
+                            )
+
+                resp_obj = api_data.get("response_parameters", api_data.get("response_para", {}))
+                if isinstance(resp_obj, dict):
+                    for pname in resp_obj.keys():
+                        for identifier_name in identifier_names_in_path(pname):
+                            occurrences.setdefault(identifier_name, []).append(
+                                occurrence_for(pname, "response", endpoint, api_type, identifier_name)
+                            )
+                elif isinstance(resp_obj, list):
+                    for pname in flatten_list(resp_obj):
+                        if not isinstance(pname, str):
+                            continue
+                        for identifier_name in identifier_names_in_path(pname):
+                            occurrences.setdefault(identifier_name, []).append(
+                                occurrence_for(pname, "response", endpoint, api_type, identifier_name)
+                            )
+        return occurrences
+
+    def _coip_candidates_by_hierarchy(self, oip_set: Optional[Set[str]] = None) -> Set[str]:
+        occurrences = self._collect_identifier_occurrences()
+        coip = set()
+        for param, occs in occurrences.items():
+            if oip_set is not None and param not in oip_set:
+                continue
+            for occ in occs:
+                if occ.location in {"body", "response"} and occ.structural_level > 1:
+                    coip.add(param)
+                elif occ.location == "path" and param in path_container_params(occ.endpoint):
+                    coip.add(param)
+        return coip
+
+    def build_identifier_hierarchy_report(self, oip_set: Optional[Set[str]] = None) -> Dict[str, Any]:
+        occurrences = self._collect_identifier_occurrences()
+        report = {}
+        for param, occs in sorted(occurrences.items()):
+            if oip_set is not None and param not in oip_set:
+                continue
+            report[param] = [asdict(occ) for occ in occs]
+        self._last_occurrence_result = report
+        return report
+
+    def _find_sample_api_for_param(self, apis: Any, param_name: str) -> Dict[str, Any]:
+        """为参数找一个示例 API，供二次补判使用。"""
+        candidates: List[Dict[str, Any]] = []
+        iterable_items = []
+        if isinstance(apis, dict):
+            iterable_items = list(apis.items())
+        elif isinstance(apis, list):
+            for api_dict in apis:
+                if isinstance(api_dict, dict):
+                    iterable_items.extend(api_dict.items())
+
+        for endpoint, params in iterable_items:
+            request_params = sorted(self._extract_request_param_names(params))
+            if param_name in request_params:
+                candidates.append(
+                    {
+                        "endpoint": endpoint,
+                        "request_params": request_params,
+                        "type": params.get("type", "") if isinstance(params, dict) else "",
+                    }
+                )
+        return random.choice(candidates) if candidates else {}
+
+    def _parse_llm_param_list(self, payload: Any) -> List[str]:
+        """尽量把 LLM 输出收敛为字符串列表。"""
+        if isinstance(payload, list):
+            return [item for item in payload if isinstance(item, str)]
+        if isinstance(payload, dict):
+            for value in payload.values():
+                if isinstance(value, list):
+                    return [item for item in value if isinstance(item, str)]
+        return []
+
+    def _recheck_missing_resource_id_params(
+        self,
+        result: Dict[str, Any],
+        candidate_meta_by_group: Dict[str, Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        """对首轮未命中的 id 后缀参数做一次补判。"""
+        if _llm_disabled:
+            return result
+
+        for group_name, candidate_meta in candidate_meta_by_group.items():
+            selected = set(self._parse_llm_param_list(result.get(group_name, [])))
+            missing = [param for param in candidate_meta.keys() if param.lower().endswith("id") and param not in selected]
+            if not missing:
+                continue
+
+            local_llm_dict = dict(self.llm_dict)
+            local_llm_dict["group_name"] = group_name
+            local_llm_dict["missing_candidates"] = str(
+                [
+                    {
+                        "param_name": param,
+                        "example_value": candidate_meta[param].get("example_value"),
+                        "sample_api": candidate_meta[param].get("sample_api", {}),
+                    }
+                    for param in missing
+                ]
+            )
+            try:
+                retry_reply = self.gpt_reply.getreply(
+                    self.syn_prompt.synthesis_prompt("resource_id_recheck", local_llm_dict)
+                )
+                retry_selected = self._parse_llm_param_list(eval(self.jsontool.list_formatting(retry_reply)))
+            except Exception as exc:
+                logger.info("功能组 %s 的资源参数补判失败: %s", group_name, exc)
+                retry_selected = []
+
+            if retry_selected:
+                merged = sorted(selected | set(retry_selected))
+                result[group_name] = merged
+                logger.info("功能组 %s 的资源参数补判追加结果: %s", group_name, retry_selected)
+        return result
+
+    def _recheck_missing_container_params(
+        self,
+        selected_params: Any,
+        candidate_meta: Dict[str, Any],
+    ) -> List[str]:
+        """对首轮未命中的容器候选参数做一次补判。"""
+        selected = set(self._parse_llm_param_list(selected_params))
+        missing = [param for param in candidate_meta.keys() if param not in selected]
+        if _llm_disabled or not missing:
+            return sorted(selected)
+
+        local_llm_dict = dict(self.llm_dict)
+        local_llm_dict["missing_candidates"] = str(
+            [
+                {
+                    "param_name": param,
+                    "sample_api": candidate_meta[param].get("sample_api", {}),
+                    "groups": candidate_meta[param].get("groups", []),
+                }
+                for param in missing
+            ]
+        )
+        try:
+            retry_reply = self.gpt_reply.getreply(
+                self.syn_prompt.synthesis_prompt("container_resource_recheck", local_llm_dict)
+            )
+            retry_selected = self._parse_llm_param_list(eval(self.jsontool.list_formatting(retry_reply)))
+        except Exception as exc:
+            logger.info("容器参数补判失败: %s", exc)
+            retry_selected = []
+
+        allowed = set(candidate_meta.keys())
+        retry_selected = [p for p in retry_selected if p in allowed]
+        merged = sorted(selected | set(retry_selected))
+        if retry_selected:
+            logger.info("容器参数补判追加结果: %s", retry_selected)
+        return merged
     
     def data_resource(self) -> Dict[str, Any]:
         """
@@ -53,6 +373,9 @@ class ResourceIdentifier:
         Returns:
             按功能组划分的资源参数识别结果
         """
+        oip_result = self.build_oip_candidates(include_llm=True)
+        return oip_result.get("by_group", {})
+
         def _process_group(group_name, apis, parameters_data):
             """处理单个功能组的资源参数计算"""
             # A集合：该功能组所有API的请求参数
@@ -99,16 +422,29 @@ class ResourceIdentifier:
             
             # 对该功能组进行集合运算：A∩B-(A-B)
             # A∩B：请求参数和响应参数的交集
-            result_params = all_request_params & all_response_params
-            print(f"功能组 {group_name} 的参数: {result_params}")
+            intersection_params = all_request_params & all_response_params
+            rule_identifier_params = {
+                param for param in all_request_params
+                if isinstance(param, str) and is_identifier_name(param)
+            }
+            for req_param in all_request_params:
+                if isinstance(req_param, str) and any_param_matches(req_param, all_response_params):
+                    rule_identifier_params.add(req_param)
+            intersection_params.update(rule_identifier_params)
+            print(f"功能组 {group_name} 的参数: {intersection_params}")
 
             # 为每个功能组创建临时字典，从execution_results.json中匹配参数值
             temp_dict = {}
-            if result_params:
-                for param_name in result_params:
+            candidate_meta = {}
+            if intersection_params:
+                for param_name in intersection_params:
                     # 从parameters_data中查找匹配的参数值
                     param_value = _find_parameter_value(parameters_data, group_name, param_name)
                     temp_dict[param_name] = {"example_value": param_value}
+                    candidate_meta[param_name] = {
+                        "example_value": param_value,
+                        "sample_api": self._find_sample_api_for_param(apis, param_name),
+                    }
 
             # 使用大模型来判断，哪些是用户资源id
             # 创建线程本地的llm_dict副本
@@ -135,8 +471,18 @@ class ResourceIdentifier:
                     logger.warning(f"功能组 {group_name} LLM 判定失败，应用兜底: {result_params}")
             else:
                 result_params = {"resource_id": [], "ou_id": []}
+
+            if rule_identifier_params:
+                if isinstance(result_params, list):
+                    result_params = sorted(set(result_params) | set(rule_identifier_params))
+                elif isinstance(result_params, dict):
+                    current = set(self._parse_llm_param_list(result_params))
+                    current.update(rule_identifier_params)
+                    result_params = sorted(current)
+                else:
+                    result_params = sorted(rule_identifier_params)
             
-            return group_name, result_params
+            return group_name, result_params, candidate_meta
         
         def _find_parameter_value(parameters_data, group_name, param_name):
             """从execution_results.json中查找指定功能组和参数名对应的参数值"""
@@ -198,6 +544,7 @@ class ResourceIdentifier:
                 return data
 
         result = {}
+        candidate_meta_by_group = {}
         group_para_data = self.true_params
         parameters_data = self.case_generation_results_packages
     
@@ -224,91 +571,61 @@ class ResourceIdentifier:
             for future in as_completed(future_to_group):
                 group_name = future_to_group[future]
                 try:
-                    group_name, result_params = future.result()
+                    group_name, result_params, candidate_meta = future.result()
                     if result_params:
                         result[group_name] = result_params
+                    candidate_meta_by_group[group_name] = candidate_meta
                     logger.info(f"功能组 {group_name} 处理完成")
                 except Exception as e:
                     logger.error(f"功能组 {group_name} 处理失败: {str(e)}")
-        
-        return result
+
+        return self._recheck_missing_resource_id_params(result, candidate_meta_by_group)
 
     def data_container_resource(self) -> Dict[str, Any]:
         """
-        找出同时出现在多个功能组中的请求参数
-        返回格式: {"参数名": [{"group_name": ["路由一", "路由二"]}]}
+        从 OIP 集合中识别 COIP。
+
+        Workflow:
+        1. rule OIP + LLM semantic additions -> OIP set.
+        2. collect OIP hierarchy positions from endpoint path/request/response.
+        3. hierarchy level > 1 or path ancestor relation -> COIP.
+        4. LLM only rechecks remaining OIPs; it cannot introduce non-OIP params.
         
         Returns:
             容器资源参数识别结果
         """
-        group_para_data = self.normalized_params
-        param_info = {}  # 存储每个参数的详细信息
-        
-        # 遍历每个功能组
-        for group_name, apis in group_para_data.items():
-            # 收集该功能组下所有API的请求参数和对应的路由
-            for api_dict in apis:
-                for endpoint, params in api_dict.items():
-                    request_params = params.get('request_para', [])
-                    
-                    # 展开嵌套 list，提取其中的项（仅统计字符串项）
-                    if isinstance(request_params, list):
-                        request_params_iter = flatten_list(request_params)
-                    else:
-                        request_params_iter = request_params
-                    
-                    # 为每个请求参数记录其出现的功能组和路由
-                    for param in request_params_iter:
-                        # request_params 应该是字符串列表，不应该包含嵌套列表
-                        # 如果 param 不是字符串类型，记录警告并跳过
-                        if not isinstance(param, str):
-                            logger.warning(f"发现非字符串类型的参数: {param} (类型: {type(param)}) 在 {endpoint}")
-                            continue
-                            
-                        if param not in param_info:
-                            param_info[param] = {}
-                        
-                        if group_name not in param_info[param]:
-                            param_info[param][group_name] = []
-                        
-                        # 添加路由到该参数在该功能组的路由列表中
-                        if endpoint not in param_info[param][group_name]:
-                            param_info[param][group_name].append(endpoint)
-        
-        # 筛选出现在多个功能组中的参数，并按要求格式化输出
-        container_resources = {}
-        for param, group_routes in param_info.items():
-            if len(group_routes) > 1:  # 出现在多个功能组中
-                container_resources[param] = []
-                for group_name, routes in group_routes.items():
-                    container_resources[param].append({group_name: routes})
-        
-        # 使用线程局部副本，避免共享 self.llm_dict 被并发写入
-        try:
-            local_llm_dict = dict(self.llm_dict)
-        except Exception:
-            local_llm_dict = {}
-        local_llm_dict["parameters_and_routes"] = str(container_resources)
-        
-        if not _llm_disabled:
-            _last_err = None
-            container_resources_results = {}
-            for _attempt in range(1, _llm_max_retries + 1):
-                try:
-                    tmp_container_id = self.gpt_reply.getreply(
-                        self.syn_prompt.synthesis_prompt("container_resource_judgement", local_llm_dict)
-                    )
-                    container_resources_results = eval(self.jsontool.list_formatting(tmp_container_id))
-                    break
-                except Exception as e:
-                    _last_err = e
-                    logger.info(f"容器资源 LLM 异常（第{_attempt}/{_llm_max_retries}次）: {str(e)}")
-            else:
-                logger.warning("容器资源 LLM 判定失败，应用兜底: 空结果")
-                container_resources_results = {}
-        else:
-            container_resources_results = {}
+        oip_result = self._last_oip_result or self.build_oip_candidates(include_llm=True)
+        oip_set = set(oip_result.get("all", []))
+        hierarchy_report = self.build_identifier_hierarchy_report(oip_set=oip_set)
+        hierarchy_coip = self._coip_candidates_by_hierarchy(oip_set=oip_set)
 
-        return container_resources_results
+        candidate_meta = {}
+        for param in sorted(oip_set - hierarchy_coip):
+            occs = hierarchy_report.get(param, [])
+            if not occs:
+                continue
+            sample = occs[0]
+            candidate_meta[param] = {
+                "groups": sorted({self._group_for_endpoint(o.get("endpoint", "")) for o in occs}),
+                "sample_api": {
+                    "endpoint": sample.get("endpoint", ""),
+                    "location": sample.get("location", ""),
+                    "canonical_path": sample.get("canonical_path", ""),
+                    "structural_level": sample.get("structural_level", 1),
+                    "resource_level": sample.get("resource_level", 1),
+                },
+            }
 
+        selected = set(hierarchy_coip)
+        selected = set(self._recheck_missing_container_params(sorted(selected), candidate_meta))
+        return sorted(selected & oip_set)
 
+    def _group_for_endpoint(self, endpoint: str) -> str:
+        for group_name, apis in self._iter_groups():
+            if isinstance(apis, dict) and endpoint in apis:
+                return group_name
+            if isinstance(apis, list):
+                for api_dict in apis:
+                    if isinstance(api_dict, dict) and endpoint in api_dict:
+                        return group_name
+        return ""

@@ -28,6 +28,9 @@ class RequestCapture {
                 this._autoSaveToTempFile();
             }
         }, this.autoSaveInterval);
+        if (typeof this.autoSaveTimer.unref === 'function') {
+            this.autoSaveTimer.unref();
+        }
     }
 
     async startCapture(context, outputPath) {

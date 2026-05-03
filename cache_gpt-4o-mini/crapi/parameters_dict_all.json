@@ -1,0 +1,2474 @@
+{
+    "parameters_extraction_results": {
+        "other/vehicle": [
+            {
+                "GET /identity/api/v2/vehicle/vehicles": {
+                    "request_para": [],
+                    "response_para": [
+                        "[].model.fuel_type",
+                        "[].model.id",
+                        "[].model.model",
+                        "[].model.vehicle_img",
+                        "[].model.vehiclecompany.id",
+                        "[].model.vehiclecompany.name",
+                        "[].owner.email",
+                        "[].owner.number",
+                        "[].pincode",
+                        "[].status",
+                        "[].uuid",
+                        "[].vehicleLocation.id",
+                        "[].vehicleLocation.latitude",
+                        "[].vehicleLocation.longitude",
+                        "[].vin",
+                        "[].year",
+                        "message",
+                        "status",
+                        "vehicle_id"
+                    ],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            },
+            {
+                "POST /identity/api/v2/vehicle/add_vehicle": {
+                    "request_para": [
+                        "pincode",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "pincode": "body",
+                        "vin": "body"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/vehicle/{vehicleId}/location": {
+                    "request_para": [
+                        "vehicle_id"
+                    ],
+                    "response_para": [
+                        "carId",
+                        "fullName",
+                        "message",
+                        "status",
+                        "vehicleLocation.latitude",
+                        "vehicleLocation.longitude",
+                        "vehicle_id"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "vehicle_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/vehicle/resend_email": {
+                    "request_para": [],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {}
+                }
+            }
+        ],
+        "other/auth": [
+            {
+                "POST /identity/api/auth/signup": {
+                    "request_para": [
+                        "email",
+                        "name",
+                        "number",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "name": "body",
+                        "number": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/login": {
+                    "request_para": [
+                        "email",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "role",
+                        "token",
+                        "type"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/forget-password": {
+                    "request_para": [
+                        "email"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v2/check-otp": {
+                    "request_para": [
+                        "email",
+                        "otp",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "otp": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v3/check-otp": {
+                    "request_para": [
+                        "email",
+                        "otp",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "otp": "body",
+                        "password": "body"
+                    }
+                }
+            }
+        ],
+        "other/community": [
+            {
+                "GET /community/api/v2/community/posts/{postId}": {
+                    "request_para": [
+                        "post_id"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[]",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "post_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/community/posts": {
+                    "request_para": [
+                        "content",
+                        "title"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[]",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "content": "body",
+                        "title": "body"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/community/posts/{postId}/comment": {
+                    "request_para": [
+                        "content",
+                        "post_id"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[].CreatedAt",
+                        "comments[].author.created_at",
+                        "comments[].author.email",
+                        "comments[].author.nickname",
+                        "comments[].author.profile_pic_url",
+                        "comments[].author.vehicleid",
+                        "comments[].content",
+                        "comments[].id",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "content": "body",
+                        "post_id": "path"
+                    }
+                }
+            },
+            {
+                "GET /community/api/v2/community/posts/recent": {
+                    "request_para": [
+                        "limit",
+                        "offset"
+                    ],
+                    "response_para": [
+                        "[].CreatedAt",
+                        "[].author.created_at",
+                        "[].author.email",
+                        "[].author.nickname",
+                        "[].author.profile_pic_url",
+                        "[].author.vehicleid",
+                        "[].authorid",
+                        "[].comments[]",
+                        "[].content",
+                        "[].id",
+                        "[].title"
+                    ],
+                    "type": "list query",
+                    "param_locations": {
+                        "limit": "params",
+                        "offset": "params"
+                    }
+                }
+            }
+        ],
+        "other/shop/orders": [
+            {
+                "POST /workshop/api/shop/orders": {
+                    "request_para": [
+                        "product_id",
+                        "quantity"
+                    ],
+                    "response_para": [
+                        "credit",
+                        "message",
+                        "order_id"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "product_id": "body",
+                        "quantity": "body"
+                    }
+                }
+            },
+            {
+                "PUT /workshop/api/shop/orders/{order_id}": {
+                    "request_para": [
+                        "order_id",
+                        "product_id",
+                        "quantity"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order_id",
+                        "orders.created_on",
+                        "orders.product.id",
+                        "orders.product.image_url",
+                        "orders.product.name",
+                        "orders.product.price",
+                        "orders.quantity",
+                        "orders.status",
+                        "orders.user.email",
+                        "orders.user.number"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "order_id": "path",
+                        "product_id": "body",
+                        "quantity": "body"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/shop/orders/{order_id}": {
+                    "request_para": [
+                        "order_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order_id",
+                        "orders.created_on",
+                        "orders.product.id",
+                        "orders.product.image_url",
+                        "orders.product.name",
+                        "orders.product.price",
+                        "orders.quantity",
+                        "orders.status",
+                        "orders.user.email",
+                        "orders.user.number"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "order_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /workshop/api/shop/orders/return_order": {
+                    "request_para": [
+                        "order_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order.created_on",
+                        "order.product.id",
+                        "order.product.image_url",
+                        "order.product.name",
+                        "order.product.price",
+                        "order.quantity",
+                        "order.status",
+                        "order.user.email",
+                        "order.user.number",
+                        "order_id",
+                        "qr_code_url"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "order_id": "params"
+                    }
+                }
+            }
+        ],
+        "other/shop": [
+            {
+                "POST /workshop/api/shop/apply_coupon": {
+                    "request_para": [
+                        "amount",
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "credit",
+                        "message"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "amount": "body",
+                        "coupon_code": "body"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/shop/return_qr_code": {
+                    "request_para": [],
+                    "response_para": [],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            }
+        ],
+        "other/mechanic": [
+            {
+                "GET /workshop/api/mechanic/receive_report": {
+                    "request_para": [
+                        "mechanic_code",
+                        "problem_details",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "key_0",
+                        "mechanic_code",
+                        "report_link",
+                        "sent"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "mechanic_code": "params",
+                        "problem_details": "params",
+                        "vin": "params"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/mechanic/mechanic_report": {
+                    "request_para": [
+                        "report_id"
+                    ],
+                    "response_para": [
+                        "created_on",
+                        "mechanic.id",
+                        "mechanic.mechanic_code",
+                        "mechanic.user.email",
+                        "mechanic.user.number",
+                        "mechanic_code",
+                        "problem_details",
+                        "status",
+                        "vehicle.id",
+                        "vehicle.owner.email",
+                        "vehicle.owner.number",
+                        "vehicle.vin"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "report_id": "params"
+                    }
+                }
+            },
+            {
+                "POST /workshop/api/mechanic/signup": {
+                    "request_para": [
+                        "email",
+                        "mechanic_code",
+                        "name",
+                        "number",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "mechanic_code": "body",
+                        "name": "body",
+                        "number": "body",
+                        "password": "body"
+                    }
+                }
+            }
+        ],
+        "other/coupon": [
+            {
+                "POST /community/api/v2/coupon/new-coupon": {
+                    "request_para": [
+                        "amount",
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "amount",
+                        "coupon_code",
+                        "createdAt"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "coupon_code": "body",
+                        "amount": "body"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/coupon/validate-coupon": {
+                    "request_para": [
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "amount",
+                        "coupon_code",
+                        "createdAt"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "coupon_code": "body"
+                    }
+                }
+            }
+        ],
+        "other/merchant": [
+            {
+                "POST /workshop/api/merchant/contact_mechanic": {
+                    "request_para": [
+                        "mechanic_api",
+                        "mechanic_code",
+                        "number_of_repeats",
+                        "problem_details",
+                        "repeat_request_if_failed",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "message",
+                        "response_from_mechanic_api.id",
+                        "response_from_mechanic_api.report_link",
+                        "response_from_mechanic_api.sent",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "mechanic_api": "body",
+                        "mechanic_code": "body",
+                        "number_of_repeats": "body",
+                        "problem_details": "body",
+                        "repeat_request_if_failed": "body",
+                        "vin": "body"
+                    }
+                }
+            }
+        ],
+        "other/user/videos": [
+            {
+                "POST /identity/api/v2/user/videos": {
+                    "request_para": [
+                        "file"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "file": "formdata"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            },
+            {
+                "PUT /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "conversion_params",
+                        "videoName",
+                        "video_id",
+                        "video_url"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "video_id": "path",
+                        "videoName": "body",
+                        "video_url": "body",
+                        "conversion_params": "body"
+                    }
+                }
+            },
+            {
+                "DELETE /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "delete",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/videos/convert_video": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [],
+                    "type": "query",
+                    "param_locations": {
+                        "video_id": "params"
+                    }
+                }
+            }
+        ],
+        "other/user": [
+            {
+                "POST /identity/api/v2/user/reset-password": {
+                    "request_para": [
+                        "email",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/user/change-email": {
+                    "request_para": [
+                        "new_email",
+                        "old_email"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "new_email": "body",
+                        "old_email": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/user/verify-email-token": {
+                    "request_para": [
+                        "new_email",
+                        "old_email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "old_email": "body",
+                        "new_email": "body",
+                        "token": "body"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/dashboard": {
+                    "request_para": [],
+                    "response_para": [
+                        "available_credit",
+                        "email",
+                        "id",
+                        "message",
+                        "name",
+                        "number",
+                        "picture_url",
+                        "role",
+                        "status",
+                        "video_id",
+                        "video_name",
+                        "video_url"
+                    ],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            },
+            {
+                "POST /identity/api/v2/user/pictures": {
+                    "request_para": [
+                        "file"
+                    ],
+                    "response_para": [
+                        "available_credit",
+                        "id",
+                        "message",
+                        "name",
+                        "picture",
+                        "status",
+                        "user"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "file": "formdata"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v4.0/user/login-with-token": {
+                    "request_para": [
+                        "email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "email": "body",
+                        "token": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v2.7/user/login-with-token": {
+                    "request_para": [
+                        "email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "role",
+                        "token",
+                        "type"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "email": "body",
+                        "token": "body"
+                    }
+                }
+            }
+        ],
+        "other/admin": [
+            {
+                "DELETE /identity/api/v2/admin/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "delete",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            }
+        ]
+    },
+    "normalized_params": {
+        "other/vehicle": [
+            {
+                "GET /identity/api/v2/vehicle/vehicles": {
+                    "request_para": [],
+                    "response_para": [
+                        "[].model.fuel_type",
+                        "[].model.id",
+                        "[].model.model",
+                        "[].model.vehicle_img",
+                        "[].model.vehiclecompany.id",
+                        "[].model.vehiclecompany.name",
+                        "[].owner.email",
+                        "[].owner.number",
+                        "[].pincode",
+                        "[].status",
+                        "[].uuid",
+                        "[].vehicleLocation.id",
+                        "[].vehicleLocation.latitude",
+                        "[].vehicleLocation.longitude",
+                        "[].vin",
+                        "[].year",
+                        "message",
+                        "status",
+                        "vehicle_id"
+                    ],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            },
+            {
+                "POST /identity/api/v2/vehicle/add_vehicle": {
+                    "request_para": [
+                        "pincode",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "pincode": "body",
+                        "vin": "body"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/vehicle/{vehicleId}/location": {
+                    "request_para": [
+                        "vehicle_id"
+                    ],
+                    "response_para": [
+                        "carId",
+                        "fullName",
+                        "message",
+                        "status",
+                        "vehicleLocation.latitude",
+                        "vehicleLocation.longitude",
+                        "vehicle_id"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "vehicle_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/vehicle/resend_email": {
+                    "request_para": [],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {}
+                }
+            }
+        ],
+        "other/auth": [
+            {
+                "POST /identity/api/auth/signup": {
+                    "request_para": [
+                        "email",
+                        "name",
+                        "number",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "name": "body",
+                        "number": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/login": {
+                    "request_para": [
+                        "email",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "role",
+                        "token",
+                        "type"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/forget-password": {
+                    "request_para": [
+                        "email"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v2/check-otp": {
+                    "request_para": [
+                        "email",
+                        "otp",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "otp": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v3/check-otp": {
+                    "request_para": [
+                        "email",
+                        "otp",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "otp": "body",
+                        "password": "body"
+                    }
+                }
+            }
+        ],
+        "other/community": [
+            {
+                "GET /community/api/v2/community/posts/{postId}": {
+                    "request_para": [
+                        "post_id"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[]",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "post_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/community/posts": {
+                    "request_para": [
+                        "content",
+                        "title"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[]",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "content": "body",
+                        "title": "body"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/community/posts/{postId}/comment": {
+                    "request_para": [
+                        "content",
+                        "post_id"
+                    ],
+                    "response_para": [
+                        "CreatedAt",
+                        "author.created_at",
+                        "author.email",
+                        "author.nickname",
+                        "author.profile_pic_url",
+                        "author.vehicleid",
+                        "authorid",
+                        "comments[].CreatedAt",
+                        "comments[].author.created_at",
+                        "comments[].author.email",
+                        "comments[].author.nickname",
+                        "comments[].author.profile_pic_url",
+                        "comments[].author.vehicleid",
+                        "comments[].content",
+                        "comments[].id",
+                        "content",
+                        "post_id",
+                        "title"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "content": "body",
+                        "post_id": "path"
+                    }
+                }
+            },
+            {
+                "GET /community/api/v2/community/posts/recent": {
+                    "request_para": [
+                        "limit",
+                        "offset"
+                    ],
+                    "response_para": [
+                        "[].CreatedAt",
+                        "[].author.created_at",
+                        "[].author.email",
+                        "[].author.nickname",
+                        "[].author.profile_pic_url",
+                        "[].author.vehicleid",
+                        "[].authorid",
+                        "[].comments[]",
+                        "[].content",
+                        "[].id",
+                        "[].title"
+                    ],
+                    "type": "list query",
+                    "param_locations": {
+                        "limit": "params",
+                        "offset": "params"
+                    }
+                }
+            }
+        ],
+        "other/shop/orders": [
+            {
+                "POST /workshop/api/shop/orders": {
+                    "request_para": [
+                        "product_id",
+                        "quantity"
+                    ],
+                    "response_para": [
+                        "credit",
+                        "message",
+                        "order_id"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "product_id": "body",
+                        "quantity": "body"
+                    }
+                }
+            },
+            {
+                "PUT /workshop/api/shop/orders/{order_id}": {
+                    "request_para": [
+                        "order_id",
+                        "product_id",
+                        "quantity"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order_id",
+                        "orders.created_on",
+                        "orders.product.id",
+                        "orders.product.image_url",
+                        "orders.product.name",
+                        "orders.product.price",
+                        "orders.quantity",
+                        "orders.status",
+                        "orders.user.email",
+                        "orders.user.number"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "order_id": "path",
+                        "product_id": "body",
+                        "quantity": "body"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/shop/orders/{order_id}": {
+                    "request_para": [
+                        "order_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order_id",
+                        "orders.created_on",
+                        "orders.product.id",
+                        "orders.product.image_url",
+                        "orders.product.name",
+                        "orders.product.price",
+                        "orders.quantity",
+                        "orders.status",
+                        "orders.user.email",
+                        "orders.user.number"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "order_id": "path"
+                    }
+                }
+            },
+            {
+                "POST /workshop/api/shop/orders/return_order": {
+                    "request_para": [
+                        "order_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "order.created_on",
+                        "order.product.id",
+                        "order.product.image_url",
+                        "order.product.name",
+                        "order.product.price",
+                        "order.quantity",
+                        "order.status",
+                        "order.user.email",
+                        "order.user.number",
+                        "order_id",
+                        "qr_code_url"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "order_id": "params"
+                    }
+                }
+            }
+        ],
+        "other/shop": [
+            {
+                "POST /workshop/api/shop/apply_coupon": {
+                    "request_para": [
+                        "amount",
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "credit",
+                        "message"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "amount": "body",
+                        "coupon_code": "body"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/shop/return_qr_code": {
+                    "request_para": [],
+                    "response_para": [],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            }
+        ],
+        "other/mechanic": [
+            {
+                "GET /workshop/api/mechanic/receive_report": {
+                    "request_para": [
+                        "mechanic_code",
+                        "problem_details",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "key_0",
+                        "mechanic_code",
+                        "report_link",
+                        "sent"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "mechanic_code": "params",
+                        "problem_details": "params",
+                        "vin": "params"
+                    }
+                }
+            },
+            {
+                "GET /workshop/api/mechanic/mechanic_report": {
+                    "request_para": [
+                        "report_id"
+                    ],
+                    "response_para": [
+                        "created_on",
+                        "mechanic.id",
+                        "mechanic.mechanic_code",
+                        "mechanic.user.email",
+                        "mechanic.user.number",
+                        "mechanic_code",
+                        "problem_details",
+                        "status",
+                        "vehicle.id",
+                        "vehicle.owner.email",
+                        "vehicle.owner.number",
+                        "vehicle.vin"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "report_id": "params"
+                    }
+                }
+            },
+            {
+                "POST /workshop/api/mechanic/signup": {
+                    "request_para": [
+                        "email",
+                        "mechanic_code",
+                        "name",
+                        "number",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "email": "body",
+                        "mechanic_code": "body",
+                        "name": "body",
+                        "number": "body",
+                        "password": "body"
+                    }
+                }
+            }
+        ],
+        "other/coupon": [
+            {
+                "POST /community/api/v2/coupon/new-coupon": {
+                    "request_para": [
+                        "amount",
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "amount",
+                        "coupon_code",
+                        "createdAt"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "coupon_code": "body",
+                        "amount": "body"
+                    }
+                }
+            },
+            {
+                "POST /community/api/v2/coupon/validate-coupon": {
+                    "request_para": [
+                        "coupon_code"
+                    ],
+                    "response_para": [
+                        "amount",
+                        "coupon_code",
+                        "createdAt"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "coupon_code": "body"
+                    }
+                }
+            }
+        ],
+        "other/merchant": [
+            {
+                "POST /workshop/api/merchant/contact_mechanic": {
+                    "request_para": [
+                        "mechanic_api",
+                        "mechanic_code",
+                        "number_of_repeats",
+                        "problem_details",
+                        "repeat_request_if_failed",
+                        "vin"
+                    ],
+                    "response_para": [
+                        "message",
+                        "response_from_mechanic_api.id",
+                        "response_from_mechanic_api.report_link",
+                        "response_from_mechanic_api.sent",
+                        "status"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "mechanic_api": "body",
+                        "mechanic_code": "body",
+                        "number_of_repeats": "body",
+                        "problem_details": "body",
+                        "repeat_request_if_failed": "body",
+                        "vin": "body"
+                    }
+                }
+            }
+        ],
+        "other/user/videos": [
+            {
+                "POST /identity/api/v2/user/videos": {
+                    "request_para": [
+                        "file"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "file": "formdata"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            },
+            {
+                "PUT /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "conversion_params",
+                        "videoName",
+                        "video_id",
+                        "video_url"
+                    ],
+                    "response_para": [
+                        "conversion_params",
+                        "message",
+                        "status",
+                        "user.email",
+                        "user.number",
+                        "video",
+                        "video_id",
+                        "video_name"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "video_id": "path",
+                        "videoName": "body",
+                        "video_url": "body",
+                        "conversion_params": "body"
+                    }
+                }
+            },
+            {
+                "DELETE /identity/api/v2/user/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "delete",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/videos/convert_video": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [],
+                    "type": "query",
+                    "param_locations": {
+                        "video_id": "params"
+                    }
+                }
+            }
+        ],
+        "other/user": [
+            {
+                "POST /identity/api/v2/user/reset-password": {
+                    "request_para": [
+                        "email",
+                        "password"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "email": "body",
+                        "password": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/user/change-email": {
+                    "request_para": [
+                        "new_email",
+                        "old_email"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "new_email": "body",
+                        "old_email": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/v2/user/verify-email-token": {
+                    "request_para": [
+                        "new_email",
+                        "old_email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "update",
+                    "param_locations": {
+                        "old_email": "body",
+                        "new_email": "body",
+                        "token": "body"
+                    }
+                }
+            },
+            {
+                "GET /identity/api/v2/user/dashboard": {
+                    "request_para": [],
+                    "response_para": [
+                        "available_credit",
+                        "email",
+                        "id",
+                        "message",
+                        "name",
+                        "number",
+                        "picture_url",
+                        "role",
+                        "status",
+                        "video_id",
+                        "video_name",
+                        "video_url"
+                    ],
+                    "type": "query",
+                    "param_locations": {}
+                }
+            },
+            {
+                "POST /identity/api/v2/user/pictures": {
+                    "request_para": [
+                        "file"
+                    ],
+                    "response_para": [
+                        "available_credit",
+                        "id",
+                        "message",
+                        "name",
+                        "picture",
+                        "status",
+                        "user"
+                    ],
+                    "type": "add",
+                    "param_locations": {
+                        "file": "formdata"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v4.0/user/login-with-token": {
+                    "request_para": [
+                        "email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "email": "body",
+                        "token": "body"
+                    }
+                }
+            },
+            {
+                "POST /identity/api/auth/v2.7/user/login-with-token": {
+                    "request_para": [
+                        "email",
+                        "token"
+                    ],
+                    "response_para": [
+                        "message",
+                        "role",
+                        "token",
+                        "type"
+                    ],
+                    "type": "query",
+                    "param_locations": {
+                        "email": "body",
+                        "token": "body"
+                    }
+                }
+            }
+        ],
+        "other/admin": [
+            {
+                "DELETE /identity/api/v2/admin/videos/{video_id}": {
+                    "request_para": [
+                        "video_id"
+                    ],
+                    "response_para": [
+                        "message",
+                        "status"
+                    ],
+                    "type": "delete",
+                    "param_locations": {
+                        "video_id": "path"
+                    }
+                }
+            }
+        ]
+    },
+    "normalized_params_process_data": [
+        {
+            "group": "other/shop",
+            "data": []
+        },
+        {
+            "group": "other/auth",
+            "data": []
+        },
+        {
+            "group": "other/shop/orders",
+            "data": [
+                {
+                    "route_name": [
+                        "POST /workshop/api/shop/orders",
+                        "PUT /workshop/api/shop/orders/{order_id}",
+                        "GET /workshop/api/shop/orders/{order_id}",
+                        "POST /workshop/api/shop/orders/return_order"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "order_id",
+                        "replace_para": [
+                            "id",
+                            "orders.id",
+                            "order.id",
+                            "orders.product.id",
+                            "order.product.id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/community",
+            "data": [
+                {
+                    "route_name": [
+                        "GET /community/api/v2/community/posts/{postId}",
+                        "POST /community/api/v2/community/posts",
+                        "POST /community/api/v2/community/posts/{postId}/comment",
+                        "GET /community/api/v2/community/posts/recent"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "post_id",
+                        "replace_para": [
+                            "id",
+                            "postId",
+                            "comments[].id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/vehicle",
+            "data": [
+                {
+                    "route_name": [
+                        "GET /identity/api/v2/vehicle/vehicles",
+                        "GET /identity/api/v2/vehicle/{vehicleId}/location",
+                        "POST /identity/api/v2/vehicle/add_vehicle",
+                        "POST /identity/api/v2/vehicle/resend_email"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "vehicle_id",
+                        "replace_para": [
+                            "[].id",
+                            "vehicleId",
+                            "uuid",
+                            "vehicleLocation.id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/merchant",
+            "data": []
+        },
+        {
+            "group": "other/coupon",
+            "data": [
+                {
+                    "route_name": [
+                        "POST /community/api/v2/coupon/new-coupon",
+                        "POST /community/api/v2/coupon/validate-coupon"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "coupon_code",
+                        "replace_para": [
+                            "coupon_code"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/user",
+            "data": []
+        },
+        {
+            "group": "other/mechanic",
+            "data": [
+                {
+                    "route_name": [
+                        "GET /workshop/api/mechanic/receive_report",
+                        "GET /workshop/api/mechanic/mechanic_report",
+                        "POST /workshop/api/mechanic/signup"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "mechanic_code",
+                        "replace_para": [
+                            "id",
+                            "mechanic.id",
+                            "vehicle.id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/user/videos",
+            "data": [
+                {
+                    "route_name": [
+                        "POST /identity/api/v2/user/videos",
+                        "GET /identity/api/v2/user/videos/{video_id}",
+                        "PUT /identity/api/v2/user/videos/{video_id}",
+                        "DELETE /identity/api/v2/user/videos/{video_id}",
+                        "GET /identity/api/v2/user/videos/convert_video"
+                    ],
+                    "parameters_name": {
+                        "keep_pra": "video_id",
+                        "replace_para": [
+                            "id",
+                            "video_id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "group": "other/admin",
+            "data": []
+        }
+    ],
+    "set_calculate_results_v1": {
+        "other/vehicle": {
+            "A": [
+                "pincode",
+                "vehicle_id",
+                "vin"
+            ],
+            "B": [
+                "[].model.fuel_type",
+                "[].model.id",
+                "[].model.model",
+                "[].model.vehicle_img",
+                "[].model.vehiclecompany.id",
+                "[].model.vehiclecompany.name",
+                "[].owner.email",
+                "[].owner.number",
+                "[].pincode",
+                "[].status",
+                "[].uuid",
+                "[].vehicleLocation.id",
+                "[].vehicleLocation.latitude",
+                "[].vehicleLocation.longitude",
+                "[].vin",
+                "[].year",
+                "carId",
+                "fullName",
+                "message",
+                "status",
+                "vehicleLocation.latitude",
+                "vehicleLocation.longitude",
+                "vehicle_id"
+            ],
+            "A-B": [],
+            "A-(A-B)": [
+                "pincode",
+                "vehicle_id",
+                "vin"
+            ]
+        },
+        "other/auth": {
+            "A": [
+                "email",
+                "name",
+                "number",
+                "otp",
+                "password"
+            ],
+            "B": [
+                "message",
+                "role",
+                "status",
+                "token",
+                "type"
+            ],
+            "A-B": [
+                "email",
+                "name",
+                "number",
+                "otp",
+                "password"
+            ],
+            "A-(A-B)": []
+        },
+        "other/community": {
+            "A": [
+                "content",
+                "limit",
+                "offset",
+                "post_id",
+                "title"
+            ],
+            "B": [
+                "CreatedAt",
+                "[].CreatedAt",
+                "[].author.created_at",
+                "[].author.email",
+                "[].author.nickname",
+                "[].author.profile_pic_url",
+                "[].author.vehicleid",
+                "[].authorid",
+                "[].comments[]",
+                "[].content",
+                "[].id",
+                "[].title",
+                "author.created_at",
+                "author.email",
+                "author.nickname",
+                "author.profile_pic_url",
+                "author.vehicleid",
+                "authorid",
+                "comments[]",
+                "comments[].CreatedAt",
+                "comments[].author.created_at",
+                "comments[].author.email",
+                "comments[].author.nickname",
+                "comments[].author.profile_pic_url",
+                "comments[].author.vehicleid",
+                "comments[].content",
+                "comments[].id",
+                "content",
+                "post_id",
+                "title"
+            ],
+            "A-B": [
+                "limit",
+                "offset"
+            ],
+            "A-(A-B)": [
+                "content",
+                "post_id",
+                "title"
+            ]
+        },
+        "other/shop/orders": {
+            "A": [
+                "order_id",
+                "product_id",
+                "quantity"
+            ],
+            "B": [
+                "credit",
+                "message",
+                "order.created_on",
+                "order.product.id",
+                "order.product.image_url",
+                "order.product.name",
+                "order.product.price",
+                "order.quantity",
+                "order.status",
+                "order.user.email",
+                "order.user.number",
+                "order_id",
+                "orders.created_on",
+                "orders.product.id",
+                "orders.product.image_url",
+                "orders.product.name",
+                "orders.product.price",
+                "orders.quantity",
+                "orders.status",
+                "orders.user.email",
+                "orders.user.number",
+                "qr_code_url"
+            ],
+            "A-B": [],
+            "A-(A-B)": [
+                "order_id",
+                "product_id",
+                "quantity"
+            ]
+        },
+        "other/shop": {
+            "A": [
+                "amount",
+                "coupon_code"
+            ],
+            "B": [
+                "credit",
+                "message"
+            ],
+            "A-B": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-(A-B)": []
+        },
+        "other/mechanic": {
+            "A": [
+                "email",
+                "mechanic_code",
+                "name",
+                "number",
+                "password",
+                "problem_details",
+                "report_id",
+                "vin"
+            ],
+            "B": [
+                "created_on",
+                "key_0",
+                "mechanic.id",
+                "mechanic.mechanic_code",
+                "mechanic.user.email",
+                "mechanic.user.number",
+                "mechanic_code",
+                "message",
+                "problem_details",
+                "report_link",
+                "sent",
+                "status",
+                "vehicle.id",
+                "vehicle.owner.email",
+                "vehicle.owner.number",
+                "vehicle.vin"
+            ],
+            "A-B": [
+                "name",
+                "password",
+                "report_id"
+            ],
+            "A-(A-B)": [
+                "email",
+                "mechanic_code",
+                "number",
+                "problem_details",
+                "vin"
+            ]
+        },
+        "other/coupon": {
+            "A": [
+                "amount",
+                "coupon_code"
+            ],
+            "B": [
+                "amount",
+                "coupon_code",
+                "createdAt"
+            ],
+            "A-B": [],
+            "A-(A-B)": [
+                "amount",
+                "coupon_code"
+            ]
+        },
+        "other/merchant": {
+            "A": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ],
+            "B": [
+                "message",
+                "response_from_mechanic_api.id",
+                "response_from_mechanic_api.report_link",
+                "response_from_mechanic_api.sent",
+                "status"
+            ],
+            "A-B": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ],
+            "A-(A-B)": []
+        },
+        "other/user/videos": {
+            "A": [
+                "conversion_params",
+                "file",
+                "videoName",
+                "video_id",
+                "video_url"
+            ],
+            "B": [
+                "conversion_params",
+                "message",
+                "status",
+                "user.email",
+                "user.number",
+                "video",
+                "video_id",
+                "video_name"
+            ],
+            "A-B": [
+                "file",
+                "video_url"
+            ],
+            "A-(A-B)": [
+                "conversion_params",
+                "videoName",
+                "video_id"
+            ]
+        },
+        "other/user": {
+            "A": [
+                "email",
+                "file",
+                "new_email",
+                "old_email",
+                "password",
+                "token"
+            ],
+            "B": [
+                "available_credit",
+                "email",
+                "id",
+                "message",
+                "name",
+                "number",
+                "picture",
+                "picture_url",
+                "role",
+                "status",
+                "token",
+                "type",
+                "user",
+                "video_id",
+                "video_name",
+                "video_url"
+            ],
+            "A-B": [
+                "file",
+                "new_email",
+                "old_email",
+                "password"
+            ],
+            "A-(A-B)": [
+                "email",
+                "token"
+            ]
+        },
+        "other/admin": {
+            "A": [
+                "video_id"
+            ],
+            "B": [
+                "message",
+                "status"
+            ],
+            "A-B": [
+                "video_id"
+            ],
+            "A-(A-B)": []
+        }
+    },
+    "set_calculate_results_v2": {
+        "other/vehicle": {
+            "A-B": [],
+            "A-(A-B)": [
+                "pincode",
+                "vehicle_id",
+                "vin"
+            ],
+            "A-B-add": []
+        },
+        "other/auth": {
+            "A-B": [
+                "email",
+                "name",
+                "number",
+                "otp",
+                "password"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "email",
+                "name",
+                "number",
+                "password"
+            ]
+        },
+        "other/community": {
+            "A-B": [
+                "limit",
+                "offset"
+            ],
+            "A-(A-B)": [
+                "content",
+                "post_id",
+                "title"
+            ],
+            "A-B-add": []
+        },
+        "other/shop/orders": {
+            "A-B": [],
+            "A-(A-B)": [
+                "order_id",
+                "product_id",
+                "quantity"
+            ],
+            "A-B-add": []
+        },
+        "other/shop": {
+            "A-B": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        },
+        "other/mechanic": {
+            "A-B": [
+                "name",
+                "password",
+                "report_id"
+            ],
+            "A-(A-B)": [
+                "email",
+                "mechanic_code",
+                "number",
+                "problem_details",
+                "vin"
+            ],
+            "A-B-add": [
+                "name",
+                "password"
+            ]
+        },
+        "other/coupon": {
+            "A-B": [],
+            "A-(A-B)": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-B-add": []
+        },
+        "other/merchant": {
+            "A-B": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ]
+        },
+        "other/user/videos": {
+            "A-B": [
+                "file",
+                "video_url"
+            ],
+            "A-(A-B)": [
+                "conversion_params",
+                "videoName",
+                "video_id"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/user": {
+            "A-B": [
+                "file",
+                "new_email",
+                "old_email",
+                "password"
+            ],
+            "A-(A-B)": [
+                "email",
+                "token"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/admin": {
+            "A-B": [
+                "video_id"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        }
+    },
+    "set_calculate_results_all": {
+        "other/vehicle": {
+            "A-B": [],
+            "A-(A-B)": [
+                "pincode",
+                "vehicle_id",
+                "vin"
+            ],
+            "A-B-add": []
+        },
+        "other/auth": {
+            "A-B": [
+                "email",
+                "name",
+                "number",
+                "otp",
+                "password"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "email",
+                "name",
+                "number",
+                "password"
+            ]
+        },
+        "other/community": {
+            "A-B": [
+                "limit",
+                "offset"
+            ],
+            "A-(A-B)": [
+                "content",
+                "post_id",
+                "title"
+            ],
+            "A-B-add": []
+        },
+        "other/shop/orders": {
+            "A-B": [],
+            "A-(A-B)": [
+                "order_id",
+                "product_id",
+                "quantity"
+            ],
+            "A-B-add": []
+        },
+        "other/shop": {
+            "A-B": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        },
+        "other/mechanic": {
+            "A-B": [
+                "name",
+                "password",
+                "report_id"
+            ],
+            "A-(A-B)": [
+                "email",
+                "mechanic_code",
+                "number",
+                "problem_details",
+                "vin"
+            ],
+            "A-B-add": [
+                "name",
+                "password"
+            ]
+        },
+        "other/coupon": {
+            "A-B": [],
+            "A-(A-B)": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-B-add": []
+        },
+        "other/merchant": {
+            "A-B": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ]
+        },
+        "other/user/videos": {
+            "A-B": [
+                "file",
+                "video_url"
+            ],
+            "A-(A-B)": [
+                "conversion_params",
+                "videoName",
+                "video_id"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/user": {
+            "A-B": [
+                "file",
+                "new_email",
+                "old_email",
+                "password"
+            ],
+            "A-(A-B)": [
+                "email",
+                "token"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/admin": {
+            "A-B": [
+                "video_id"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        }
+    },
+    "set_calculate_results_v3": {
+        "other/vehicle": {
+            "A-B": [],
+            "A-(A-B)": [
+                "pincode",
+                "vehicle_id",
+                "vin"
+            ],
+            "A-B-add": []
+        },
+        "other/auth": {
+            "A-B": [
+                "email",
+                "name",
+                "number",
+                "otp",
+                "password"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "email",
+                "name",
+                "password",
+                "number"
+            ]
+        },
+        "other/community": {
+            "A-B": [
+                "limit",
+                "offset"
+            ],
+            "A-(A-B)": [
+                "content",
+                "post_id",
+                "title"
+            ],
+            "A-B-add": []
+        },
+        "other/shop/orders": {
+            "A-B": [],
+            "A-(A-B)": [
+                "order_id",
+                "product_id",
+                "quantity"
+            ],
+            "A-B-add": []
+        },
+        "other/shop": {
+            "A-B": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        },
+        "other/mechanic": {
+            "A-B": [
+                "name",
+                "password",
+                "report_id"
+            ],
+            "A-(A-B)": [
+                "email",
+                "mechanic_code",
+                "number",
+                "problem_details",
+                "vin"
+            ],
+            "A-B-add": [
+                "name",
+                "password"
+            ]
+        },
+        "other/coupon": {
+            "A-B": [],
+            "A-(A-B)": [
+                "amount",
+                "coupon_code"
+            ],
+            "A-B-add": []
+        },
+        "other/merchant": {
+            "A-B": [
+                "mechanic_api",
+                "mechanic_code",
+                "number_of_repeats",
+                "problem_details",
+                "repeat_request_if_failed",
+                "vin"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": [
+                "mechanic_api",
+                "problem_details",
+                "mechanic_code",
+                "number_of_repeats",
+                "vin",
+                "repeat_request_if_failed"
+            ]
+        },
+        "other/user/videos": {
+            "A-B": [
+                "file",
+                "video_url"
+            ],
+            "A-(A-B)": [
+                "conversion_params",
+                "videoName",
+                "video_id"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/user": {
+            "A-B": [
+                "file",
+                "new_email",
+                "old_email",
+                "password"
+            ],
+            "A-(A-B)": [
+                "email",
+                "token"
+            ],
+            "A-B-add": [
+                "file"
+            ]
+        },
+        "other/admin": {
+            "A-B": [
+                "video_id"
+            ],
+            "A-(A-B)": [],
+            "A-B-add": []
+        }
+    }
+}

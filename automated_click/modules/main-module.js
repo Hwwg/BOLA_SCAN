@@ -1,3 +1,4 @@
+const path = require('path');
 const { cssPath } = require('css-path');
 
 class MainModule {
@@ -9,6 +10,11 @@ class MainModule {
         // this.elementDetector = ...
         // this.resultManager = ...
         this.requestCapture = null; // 请求捕获器
+        this._seenNavigationTargets = new Set();
+        this._automationInputActive = false;
+        this._maxClicksPerPage = Number(this.options?.maxClicksPerPage) > 0
+            ? Number(this.options.maxClicksPerPage)
+            : 12;
     }
 
     /**
@@ -96,7 +102,7 @@ class MainModule {
         
         if (this.options.credentials && this.options.credentials.username && this.options.credentials.password) {
             const LoginModule = require('./login-module');
-            this.loginModule = new LoginModule(this.pageWrapper.page, this.requestCapture, this.options?.mode || 'desktop'); // 传入请求捕获器并保存为实例变量                // 启动登录请求捕获
+            this.loginModule = new LoginModule(this.pageWrapper.page, this.requestCapture, this.options?.mode || 'desktop', this.options?.outputPath || './results'); // 传入请求捕获器并保存为实例变量                // 启动登录请求捕获
                 if (this.requestCapture) {
                     console.log(`[MainModule] 启动登录请求捕获`);
                     await this.requestCapture.startCapture('login-detection', this.options.outputPath);
@@ -162,8 +168,10 @@ class MainModule {
                         console.log('[MainModule] ⚠️ 警告: 返回首页后仍检测到登录表单，可能登录失败');
                     } else {
                         console.log('[MainModule] ✓ 确认登录成功！首页不再显示登录表单');
-                        // 截图成功页面
-                        await this.pageWrapper.page.screenshot({ path: './results/login-success.png', fullPage: true });
+                        // 截图成功页面到当前输出目录，避免固定 ./results 导致目录不存在
+                        const loginSuccessPath = path.join(this.options.outputPath || './results', 'login-success.png');
+                        await this.pageWrapper.page.screenshot({ path: loginSuccessPath, fullPage: true });
+                        console.log(`[MainModule] 已保存登录成功截图: ${loginSuccessPath}`);
                         
                         // 获取当前URL作为真正的扫描起点
                         actualStartUrl = await this.pageWrapper.page.url();
@@ -297,6 +305,9 @@ class MainModule {
                 selector: item && item.selector,
                 tag: item && item.tag,
                 text: item && item.text,
+                href: item && item.href,
+                role: item && item.role,
+                hasOnclick: item && item.hasOnclick,
                 isVisible: item && item.isVisible,
                 type: this._determineElementType(item)  // 添加一个辅助方法来确定元素类型
             }));
@@ -310,7 +321,7 @@ class MainModule {
                 link: elements.filter(e => e.type === 'link'),
                 form: elements.filter(e => e.type === 'form'),
                 container: elements.filter(e => e.type === 'container'),
-                other: elements.filter(e => e.type === 'other')
+                other: []
             };
             
             console.log(`[MainModule] 元素分类统计: 按钮(${categories.button.length}), 链接(${categories.link.length}), 表单(${categories.form.length}), 容器(${categories.container.length}), 其他(${categories.other.length})`);
@@ -366,7 +377,7 @@ class MainModule {
             }
             
             // 保存请求数据
-            this.requestCapture.saveResults(outputPath);
+            await this.requestCapture.saveResults(outputPath);
             console.log(`[MainModule] 请求数据已保存到以下文件:`);
             console.log(`[MainModule]  - 主文件: ${outputPath}/http-requests.json`);
             console.log(`[MainModule]  - 分析文件: ${outputPath}/http-analysis.json`);
@@ -382,6 +393,12 @@ class MainModule {
             await this.requestCapture.saveResults(this.options.outputPath);
             // 清理定时器
             this.requestCapture.cleanup();
+        }
+
+        if (this._userActivityTimer) {
+            clearInterval(this._userActivityTimer);
+            this._userActivityTimer = null;
+            console.log(`[MainModule] 已清理用户活动监控定时器`);
         }
         
         console.log(`[MainModule] 关闭浏览器...`);
@@ -451,15 +468,21 @@ class MainModule {
         const totalElements = categories.button.length + categories.link.length + (categories.other ? categories.other.length : 0);
         console.log(`[MainModule] 准备测试 ${totalElements} 个可点击元素 (按钮 + 链接 + 其他可交互元素)`);
         let processedCount = 0;
+        let clickedCount = 0;
+        const seenElementKeys = new Set();
         
         // 合并所有可点击元素：按钮、链接和其他可交互元素
         const allClickableElements = [
             ...categories.button,
             ...categories.link,
             ...(categories.other || [])
-        ];
+        ].filter(element => !this._shouldSkipClickableElement(element));
         
         for (const element of allClickableElements) {
+            if (clickedCount >= this._maxClicksPerPage) {
+                console.log(`[MainModule] 已达到单页点击上限 ${this._maxClicksPerPage}，停止继续点击当前页面`);
+                break;
+            }
             processedCount++;
             console.log(`[MainModule] 检查元素类型:`, JSON.stringify({
                 类型: typeof element,
@@ -476,6 +499,19 @@ class MainModule {
                 continue;
             }
             const beforeUrl = await this.pageWrapper.page.url();
+            const elementKey = this._getElementDedupKey(element, beforeUrl);
+            if (elementKey && seenElementKeys.has(elementKey)) {
+                console.log(`[MainModule] 跳过重复元素 (${processedCount}/${totalElements}): ${elementKey}`);
+                continue;
+            }
+            if (elementKey) {
+                seenElementKeys.add(elementKey);
+            }
+            const stableTarget = this._getStableTargetForElement(element, beforeUrl);
+            if (stableTarget && this._seenNavigationTargets.has(stableTarget)) {
+                console.log(`[MainModule] 跳过重复目标元素 (${processedCount}/${totalElements}): ${stableTarget}`);
+                continue;
+            }
             
             // 安全获取元素文本和类型
             let elementText = '未知文本';
@@ -573,7 +609,8 @@ class MainModule {
             
             // 使用SPA智能点击，返回包括路由变化信息
             console.log(`[MainModule] 开始点击元素...`);
-            let clickResult = await spaNavigator.smartClick(element);
+            let clickResult = await this._withAutomationInput(() => spaNavigator.smartClick(element));
+            clickedCount++;
             let afterUrl = clickResult && clickResult.newUrl ? clickResult.newUrl : await this.pageWrapper.page.url();
             
             // 点击后停止请求捕获
@@ -793,6 +830,10 @@ class MainModule {
             
             // 检查是否发生传统跳转
             if (afterUrl && afterUrl !== beforeUrl) {
+                const normalizedTarget = this._normalizeTargetUrl(afterUrl);
+                if (normalizedTarget) {
+                    this._seenNavigationTargets.add(normalizedTarget);
+                }
                 const afterHost = (new URL(afterUrl)).host;
                 const hostChanged = afterHost !== currentHost;
                 const elementDescription = getElementTypeDescription(element);
@@ -812,6 +853,10 @@ class MainModule {
             if (clickResult && clickResult.routeChanged) {
                 const virtualUrl = await spaNavigator.getVirtualUrl();
                 if (virtualUrl && virtualUrl !== beforeUrl) {
+                    const normalizedTarget = this._normalizeTargetUrl(virtualUrl);
+                    if (normalizedTarget) {
+                        this._seenNavigationTargets.add(normalizedTarget);
+                    }
                     const elementDescription = getElementTypeDescription(element);
                     jumpUrls.push({
                         from: beforeUrl,
@@ -844,7 +889,7 @@ class MainModule {
                 try {
                     console.log(`[MainModule] 返回原始页面: ${beforeUrl}`);
                     await this._awaitUserIdle('返回原始页面');
-                    await this.pageWrapper.goto(beforeUrl);
+                    await this._withAutomationInput(() => this.pageWrapper.goto(beforeUrl));
                     await new Promise(r => setTimeout(r, 500)); // 等待页面加载
                     
                     // 返回原始页面后同样注入 token 到存储（若配置了存储键）
@@ -882,8 +927,18 @@ class MainModule {
         for (const formElement of categories.form) {
             formCount++;
             console.log(`[MainModule] 处理表单 ${formCount}/${categories.form.length}`);
+            console.log('[MainModule] 当前表单元素信息:', JSON.stringify({
+                tag: formElement && formElement.tag,
+                type: formElement && formElement.type,
+                text: formElement && formElement.text,
+                selectorPreview: ((formElement && formElement.selector) || '').slice(0, 200)
+            }, null, 2));
             const formHtml = await this.pageWrapper.getFormHtml(formElement);
             console.log(`[MainModule] 获取表单HTML成功，长度: ${formHtml.length} 字符`);
+            if (!formHtml || !formHtml.trim()) {
+                console.log('[MainModule] 表单HTML为空，跳过该表单，避免向LLM发送空内容');
+                continue;
+            }
             console.log(`[MainModule] 使用LLM生成表单测试数据...`);
             
             // 尝试使用预生成的表单数据（如果有）
@@ -1105,6 +1160,11 @@ class MainModule {
                                     selector: selector,
                                     tag: element.tagName,
                                     text: (element.textContent || '').trim().substring(0, 50),
+                                    href: element.href || element.getAttribute('href') || '',
+                                    role: element.getAttribute('role') || '',
+                                    hasOnclick: element.hasAttribute('onclick') || element.hasAttribute('ng-click') ||
+                                        element.hasAttribute('@click') || element.hasAttribute('v-on:click') ||
+                                        element.hasAttribute('data-toggle') || element.hasAttribute('aria-controls'),
                                     isVisible: isVisible,
                                     isInteractive: isInteractive
                                 });
@@ -1155,22 +1215,31 @@ class MainModule {
         const tag = (element.tag || '').toLowerCase();
         const selector = (element.selector || '').toLowerCase();
         const text = (element.text || '').trim();
+        const role = (element.role || '').toLowerCase();
+        const href = (element.href || '').trim();
+        const hasOnclick = Boolean(element.hasOnclick);
         
         // 资源/元信息标签直接归为其他（不作为交互元素处理）
         if (this._isResourceOrMeta(element)) {
             return 'other';
         }
+        if (['tr', 'td', 'tbody', 'thead', 'tfoot', 'table'].includes(tag)) {
+            return 'other';
+        }
         
         // 按钮类型元素
         if (tag === 'button' || 
+            role === 'button' ||
+            role === 'tab' ||
+            role === 'menuitem' ||
             /button|btn|submit|reset|toggle/i.test(selector) || 
             /^\s*[\u4e00-\u9fa5]*[提交|确定|保存|确认|取消|登录][\u4e00-\u9fa5]*\s*$/i.test(text) ||
-            /[role="button"]/i.test(selector)) {
+            hasOnclick) {
             return 'button';
         }
         
-        // 链接类型元素（仅限语义链接 <a> 或 ARIA role="link"）
-        if (tag === 'a' || /\brole\s*=\s*["']link["']/i.test(selector)) {
+        // 链接类型元素（仅限语义链接 <a> 或显式跳转目标）
+        if (tag === 'a' || role === 'link' || href) {
             return 'link';
         }
         
@@ -1181,8 +1250,10 @@ class MainModule {
         }
         
         // 文章、卡片、面板等容器元素
-        if (/card|post|article|panel|tile|item/i.test(selector) ||
-            /ant-card|ant-list-item|ant-collapse-item/i.test(selector)) {
+        if ((tag === 'div' || tag === 'section' || tag === 'article') &&
+            (/card|post|article|panel|tile/i.test(selector) ||
+            /ant-card|ant-list-item|ant-collapse-item/i.test(selector)) &&
+            hasOnclick) {
             return 'container';
         }
         
@@ -1214,23 +1285,43 @@ class MainModule {
         const tag = (element.tag || '').toUpperCase();
         const selector = (element.selector || '').toLowerCase();
         const text = (element.text || '').trim();
+        const href = (element.href || '').trim();
+        const role = (element.role || '').toLowerCase();
+        const hasOnclick = Boolean(element.hasOnclick);
         
         // 直接排除资源/元信息标签
         if (["LINK","SCRIPT","META","BASE","STYLE","HEAD","TITLE"].includes(tag)) {
             return false;
         }
+        if (["TR", "TD", "TBODY", "THEAD", "TFOOT", "TABLE"].includes(tag)) {
+            return false;
+        }
+        if (href || tag === 'A') {
+            return true;
+        }
+        if (['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'SUMMARY'].includes(tag)) {
+            return true;
+        }
+        if (['button', 'link', 'tab', 'menuitem'].includes(role)) {
+            return true;
+        }
+        if (hasOnclick) {
+            return true;
+        }
         
         // 检查类名中的提示词
         const interactiveClassPatterns = [
-            'btn', 'button', 'nav', 'menu', 'click', 'select',
-            'dropdown', 'tab', 'item', 'option', 'trigger', 'toggle', 'control',
-            'ant-', 'mui', 'el-', 'mat-', 'interactive', 'action', 'active',
+            'btn', 'button', 'click', 'select',
+            'dropdown', 'tab', 'trigger', 'toggle', 'control',
+            'interactive', 'action',
             'expand', 'collapse', 'submit', 'cancel', 'confirm', 'delete',
             'edit', 'save', 'add', 'remove', 'open', 'close', 'show', 'hide',
-            'switch', 'checkbox', 'radio', 'slider', 'card'
+            'switch', 'checkbox', 'radio', 'slider'
         ];
         
-        if (interactiveClassPatterns.some(pattern => selector.includes(pattern))) {
+        if (['DIV', 'SPAN', 'LI', 'LABEL'].includes(tag) &&
+            interactiveClassPatterns.some(pattern => selector.includes(pattern)) &&
+            text.length > 0 && text.length <= 40) {
             return true;
         }
         
@@ -1245,18 +1336,13 @@ class MainModule {
             return true;
         }
         
-        // li元素通常是菜单项
-        if (tag === 'LI' && /menu|nav|list|item/i.test(selector)) {
+        // li元素仅在显式菜单/标签语义下视为交互
+        if (tag === 'LI' && (/menu|tab/i.test(selector) || ['tab', 'menuitem'].includes(role))) {
             return true;
         }
         
         // 特定的组件命名模式
-        if (/ant-menu-item|el-menu-item|mui-item|li\.ant-menu-overflow-item/i.test(selector)) {
-            return true;
-        }
-        
-        // 特定的属性模式
-        if (/href|ng-click|@click|v-on:click|onclick|data-action|data-target|data-toggle/i.test(selector)) {
+        if (/ant-menu-item|el-menu-item|li\.ant-menu-overflow-item/i.test(selector)) {
             return true;
         }
         
@@ -1295,14 +1381,101 @@ class MainModule {
             console.log(`[MainModule] URL检测 - 当前: ${currentUrl}, 原始: ${originalLoginUrl}`);
             console.log(`[MainModule] 域名匹配: ${isSameHost}, 路径匹配: ${isSamePath}, 根路径: ${isRootPath}, 包含登录关键词: ${hasLoginKeyword}`);
             
-            // 触发条件：
-            // 1) 同域名且路径相同（直接返回登录页）
-            // 2) 同域名且包含登录关键词（如 /user/login 等）
-            // 3) 同域名且当前为站点根路径，但没有token（可能未登录或被登出）
-            return (isSameHost && isSamePath) || (isSameHost && hasLoginKeyword) || (isSameHost && isRootPath);
+            // 仅在明确回到登录相关路径时才触发，避免把站点首页误判成登录页
+            return (isSameHost && isSamePath) || (isSameHost && hasLoginKeyword);
         } catch (error) {
             console.log(`[MainModule] URL检测出错: ${error.message}`);
             return false;
+        }
+    }
+
+    _shouldClickOtherElement(element) {
+        if (!element) return false;
+        const tag = (element.tag || '').toUpperCase();
+        const role = (element.role || '').toLowerCase();
+        const hasOnclick = Boolean(element.hasOnclick);
+        const text = (element.text || '').trim();
+        if (["TR", "TD", "TBODY", "THEAD", "TFOOT", "TABLE"].includes(tag)) {
+            return false;
+        }
+        if (text.length === 0 || text.length > 40) {
+            return false;
+        }
+        return hasOnclick || ['button', 'link', 'tab', 'menuitem'].includes(role);
+    }
+
+    _shouldSkipClickableElement(element) {
+        if (!element) return true;
+        const selector = (element.selector || '').toLowerCase();
+        const text = (element.text || '').trim();
+        const href = (element.href || '').trim();
+
+        if (!text && !href) {
+            return true;
+        }
+        if (/^\d+$/.test(text)) {
+            return true;
+        }
+        if (text.length > 60) {
+            return true;
+        }
+        if (/\b(active|current|selected|disabled)\b/.test(selector)) {
+            return true;
+        }
+        if (/logout|signout|退出登录|注销/.test(text.toLowerCase())) {
+            return true;
+        }
+        if (selector.includes('navbar-brand')) {
+            return true;
+        }
+        return false;
+    }
+
+    _getElementDedupKey(element, baseUrl) {
+        if (!element) return null;
+        const href = this._getStableTargetForElement(element, baseUrl);
+        if (href) {
+            return `href:${href}`;
+        }
+        const text = (element.text || '').trim().replace(/\s+/g, ' ');
+        const tag = (element.tag || '').toUpperCase();
+        if (!text) {
+            return null;
+        }
+        return `${tag}:${text}`;
+    }
+
+    _normalizeTargetUrl(rawUrl) {
+        if (!rawUrl) return null;
+        try {
+            const url = new URL(rawUrl);
+            return `${url.origin}${url.pathname}`;
+        } catch (error) {
+            return rawUrl;
+        }
+    }
+
+    _getStableTargetForElement(element, baseUrl) {
+        if (!element) return null;
+        const href = (element.href || '').trim();
+        if (!href || href === '#' || href.toLowerCase().startsWith('javascript:')) {
+            return null;
+        }
+        try {
+            return this._normalizeTargetUrl(new URL(href, baseUrl).toString());
+        } catch (error) {
+            return this._normalizeTargetUrl(href);
+        }
+    }
+
+    async _withAutomationInput(action) {
+        this._automationInputActive = true;
+        try {
+            return await action();
+        } finally {
+            setTimeout(() => {
+                this._automationInputActive = false;
+            }, 250);
         }
     }
     
@@ -1394,15 +1567,31 @@ class MainModule {
                 active: false
             };
             await page.exposeFunction('__notifyUserActivity', () => {
+                if (this._automationInputActive) {
+                    return;
+                }
                 this._userActivity.lastTs = Date.now();
                 this._userActivity.active = true;
             });
             await page.evaluateOnNewDocument(() => {
-                const notify = () => {
+                const notify = (event) => {
+                    // 只把真实用户输入当作“人工接管”，避免页面脚本或自动化自身事件误触发暂停
+                    if (event && event.isTrusted === false) return;
                     try { typeof window.__notifyUserActivity === 'function' && window.__notifyUserActivity(); } catch (e) {}
                 };
-                const events = ['mousemove','mousedown','mouseup','click','keydown','keyup','wheel','touchstart','touchend','scroll','input','change','focus','blur'];
-                events.forEach(ev => window.addEventListener(ev, notify, { passive: true, capture: false }));
+                const events = [
+                    'mousedown',
+                    'mouseup',
+                    'click',
+                    'keydown',
+                    'keyup',
+                    'wheel',
+                    'touchstart',
+                    'touchend',
+                    'pointerdown',
+                    'pointerup'
+                ];
+                events.forEach(ev => window.addEventListener(ev, notify, { passive: true, capture: true }));
             });
             if (!this._userActivityTimer) {
                 this._userActivityTimer = setInterval(() => {
@@ -1483,7 +1672,7 @@ class MainModule {
         // 登录逻辑
         if (this.options.credentials && this.options.credentials.username && this.options.credentials.password) {
             const LoginModule = require('./login-module');
-            this.loginModule = new LoginModule(this.pageWrapper.page, this.requestCapture, this.options?.mode || 'desktop');
+            this.loginModule = new LoginModule(this.pageWrapper.page, this.requestCapture, this.options?.mode || 'desktop', this.options?.outputPath || './results');
             
             if (this.requestCapture) {
                 await this.requestCapture.startCapture('login-detection', this.options.outputPath);

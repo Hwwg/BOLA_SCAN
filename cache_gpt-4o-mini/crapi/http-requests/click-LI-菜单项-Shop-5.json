@@ -1,0 +1,460 @@
+{
+  "context": "click-LI-菜单项-Shop-5",
+  "timestamp": "2026-04-29T08:13:25.284Z",
+  "count": 14,
+  "requests": [
+    {
+      "id": "juh69e117i",
+      "type": "request",
+      "url": "http://example.test/workshop/api/shop/products?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/shop",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1777450282570,
+      "context": "click-LI-菜单项-Shop-5",
+      "signature": "GET|/workshop/api/shop/products|limit=30&offset=0"
+    },
+    {
+      "id": "kk2uhqiin3a",
+      "requestId": "xgl6cdfgqph",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:22 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450282710,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "hp0e0i3bnqk",
+      "requestId": "hg33fbqflkl",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:22 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450282792,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "2v92x8irz9f",
+      "requestId": "86wq4rpmwqn",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:22 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450282900,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 2,
+      "body": "[]",
+      "jsonData": [],
+      "isListQuery": true
+    },
+    {
+      "id": "6in21boyq1v",
+      "requestId": "xgl6cdfgqph",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450282992,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "eq0hlm4257m",
+      "requestId": "juh69e117i",
+      "type": "response",
+      "url": "http://example.test/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450283000,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "f0u26s94okl",
+      "requestId": "hg33fbqflkl",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450283009,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "wt7plj4kwhd",
+      "requestId": "86wq4rpmwqn",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450283096,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 2,
+      "body": "[]",
+      "jsonData": [],
+      "isListQuery": true
+    },
+    {
+      "id": "kd9w9hz2vao",
+      "requestId": "juh69e117i",
+      "type": "response",
+      "url": "http://example.test/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450283290,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "8yexc59clhf",
+      "type": "request",
+      "url": "http://example.test/images/wheel.svg",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "referer": "http://example.test/shop"
+      },
+      "timestamp": 1777450283511,
+      "context": "click-LI-菜单项-Shop-5",
+      "signature": "GET|/images/wheel.svg|"
+    },
+    {
+      "id": "cb8xi3mxz8i",
+      "type": "request",
+      "url": "http://example.test/images/seat.svg",
+      "method": "GET",
+      "resourceType": "image",
+      "headers": {
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "referer": "http://example.test/shop"
+      },
+      "timestamp": 1777450283511,
+      "context": "click-LI-菜单项-Shop-5",
+      "signature": "GET|/images/seat.svg|"
+    },
+    {
+      "id": "iy19c3ukjt",
+      "requestId": "juh69e117i",
+      "type": "response",
+      "url": "http://example.test/workshop/api/shop/products?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "allow": "GET, POST, HEAD, OPTIONS",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "referrer-policy": "same-origin",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "vary": "origin, Cookie",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450283511,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 221,
+      "body": "{\"products\":[{\"id\":2,\"name\":\"Wheel\",\"price\":\"10.00\",\"image_url\":\"images/wheel.svg\"},{\"id\":1,\"name\":\"Seat\",\"price\":\"10.00\",\"image_url\":\"images/seat.svg\"}],\"credit\":100.0,\"next_offset\":null,\"previous_offset\":null,\"count\":2}",
+      "jsonData": {
+        "products": [
+          {
+            "id": 2,
+            "name": "Wheel",
+            "price": "10.00",
+            "image_url": "images/wheel.svg"
+          },
+          {
+            "id": 1,
+            "name": "Seat",
+            "price": "10.00",
+            "image_url": "images/seat.svg"
+          }
+        ],
+        "credit": 100,
+        "next_offset": null,
+        "previous_offset": null,
+        "count": 2
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "cirjlozvb58",
+      "requestId": "8yexc59clhf",
+      "type": "response",
+      "url": "http://example.test/images/wheel.svg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "accept-ranges": "bytes",
+        "connection": "keep-alive",
+        "content-length": "13708",
+        "content-type": "image/svg+xml",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "etag": "\"68d18f7b-358c\"",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml",
+      "timestamp": 1777450283522,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 0
+    },
+    {
+      "id": "f40py862qdq",
+      "requestId": "cb8xi3mxz8i",
+      "type": "response",
+      "url": "http://example.test/images/seat.svg",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "accept-ranges": "bytes",
+        "connection": "keep-alive",
+        "content-length": "7844",
+        "content-type": "image/svg+xml",
+        "date": "Wed, 29 Apr 2026 08:11:23 GMT",
+        "etag": "\"68d18f7b-1ea4\"",
+        "last-modified": "Mon, 22 Sep 2025 18:03:39 GMT",
+        "server": "openresty/1.27.1.2"
+      },
+      "method": "GET",
+      "contentType": "image/svg+xml",
+      "timestamp": 1777450283524,
+      "context": "click-LI-菜单项-Shop-5",
+      "size": 0
+    }
+  ]
+}

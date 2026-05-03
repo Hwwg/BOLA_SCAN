@@ -1,0 +1,13 @@
+{
+    "total": 259,
+    "completed": 259,
+    "by_group": {
+        "other/mechanic": 51,
+        "other/admin": 1,
+        "other/shop/orders": 46,
+        "other/user": 78,
+        "other/community": 37,
+        "other/vehicle": 1,
+        "other/user/videos": 45
+    }
+}

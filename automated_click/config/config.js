@@ -1,5 +1,11 @@
 // 全局配置文件
 module.exports = {
+    // 扫描运行控制
+    scanControl: {
+        // autoclick 默认总执行时长：3 分钟
+        defaultMaxDurationMs: 3 * 60 * 1000
+    },
+
     // URL跳转白名单配置
     urlWhitelist: {
         // 是否启用白名单功能
@@ -8,7 +14,7 @@ module.exports = {
         // 允许跳转的域名列表
         // 支持完整域名匹配和通配符匹配
         allowedDomains: [
-            "10.192.37.15:8060"
+            process.env.BOLASCAN_ALLOWED_DOMAIN || "example.test"
             // 示例：允许跳转到这些域名
             // 'login.example.com',
             // 'auth.example.com', 

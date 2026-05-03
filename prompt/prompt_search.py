@@ -19,8 +19,12 @@ class PromptSearch:
             return [private_data_judgement_system,private_data_judgement_user]
         elif task_type == "container_resource_judgement":
             return [container_resource_judgement_system,container_resource_judgement_user]
+        elif task_type == "container_resource_recheck":
+            return [container_resource_recheck_system,container_resource_recheck_user]
         elif task_type == "resource_id_judgement":
             return [resource_id_judgement_system,resource_id_judgement_user]
+        elif task_type == "resource_id_recheck":
+            return [resource_id_recheck_system,resource_id_recheck_user]
         elif task_type == "private_data_judgement":
             return [private_data_judgement_system,private_data_judgement_user]
         elif task_type == "parameters_fills":
@@ -41,5 +45,9 @@ class PromptSearch:
             return [resource_id_private_data_judgement_system,resource_id_private_data_judgement_user]
         elif task_type == "ou_id_private_data_judgement":
             return [ou_id_private_data_judgement_system,ou_id_private_data_judgement_user]
+        elif task_type == "evidence_semantic_bola_judgement":
+            return [evidence_semantic_bola_judgement_system, evidence_semantic_bola_judgement_user]
         elif task_type == "api_group_refine_judge":
             return [api_group_refine_judge_system, api_group_refine_judge_user]
+        elif task_type == "api_group_tree_select":
+            return [api_group_tree_select_system, api_group_tree_select_user]
