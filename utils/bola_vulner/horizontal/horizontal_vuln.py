@@ -5078,6 +5078,92 @@ class HorizontalVuln:
                 return any(_has_non_empty_payload(v) for v in value)
             return True
 
+        def _normalize_scalar(value):
+            if value is None:
+                return None
+            if isinstance(value, bool):
+                return "true" if value else "false"
+            if isinstance(value, (int, float)):
+                return str(value)
+            if isinstance(value, str):
+                v = value.strip()
+                return v if v else None
+            return None
+
+        def _contains_normalized_value(obj, normalized_value):
+            if normalized_value is None:
+                return False
+            if isinstance(obj, dict):
+                for v in obj.values():
+                    if _contains_normalized_value(v, normalized_value):
+                        return True
+                return False
+            if isinstance(obj, list):
+                for v in obj:
+                    if _contains_normalized_value(v, normalized_value):
+                        return True
+                return False
+            return _normalize_scalar(obj) == normalized_value
+
+        def _build_honored_value_cues(test_meta, attacker_response_params):
+            if not isinstance(test_meta, dict):
+                return []
+            param_values = test_meta.get("param_values", {})
+            param_sources = test_meta.get("param_sources", {})
+            alias_values = test_meta.get("param_alias_values", {})
+            alias_sources = test_meta.get("param_alias_sources", {})
+
+            candidates = []
+            if isinstance(param_values, dict):
+                for location, value in param_values.items():
+                    if value in (None, "", [], {}):
+                        continue
+                    source = None
+                    if isinstance(param_sources, dict):
+                        source = param_sources.get(location)
+                    candidates.append({
+                        "value": value,
+                        "source": source,
+                        "origin": f"location:{location}",
+                    })
+            if isinstance(alias_values, dict):
+                for alias, info in alias_values.items():
+                    if not isinstance(info, dict):
+                        continue
+                    value = info.get("value")
+                    if value in (None, "", [], {}):
+                        continue
+                    source = None
+                    if isinstance(alias_sources, dict):
+                        source = alias_sources.get(alias)
+                    position = info.get("position")
+                    origin = f"alias:{alias}" if position in (None, "", [], {}) else f"alias:{alias}@{position}"
+                    candidates.append({
+                        "value": value,
+                        "source": source,
+                        "origin": origin,
+                    })
+
+            seen = set()
+            cues = []
+            for cand in candidates:
+                normalized = _normalize_scalar(cand.get("value"))
+                if normalized is None:
+                    continue
+                source = cand.get("source")
+                key = (normalized, str(source or ""), cand.get("origin"))
+                if key in seen:
+                    continue
+                seen.add(key)
+                if _contains_normalized_value(attacker_response_params, normalized):
+                    cues.append({
+                        "normalized_value": normalized,
+                        "value": cand.get("value"),
+                        "source": source,
+                        "origin": cand.get("origin"),
+                    })
+            return cues
+
         def _parse_llm_json(raw_text):
             text = self.jsontool.list_formatting(raw_text)
             if not text:
@@ -5107,6 +5193,17 @@ class HorizontalVuln:
             alias_values = test_meta.get("param_alias_values", {})
             alias_sources = test_meta.get("param_alias_sources", {})
 
+            tested_alias_value = None
+            tested_alias_position = None
+            tested_alias_source = None
+            if isinstance(alias_values, dict):
+                entry = alias_values.get(current_param_name, {})
+                if isinstance(entry, dict):
+                    tested_alias_value = entry.get("value")
+                    tested_alias_position = entry.get("position")
+            if isinstance(alias_sources, dict):
+                tested_alias_source = alias_sources.get(current_param_name)
+
             victim_value = _extract_source_value(test_meta, ("A", "B"))
             attacker_value = _extract_source_value(test_meta, ("C",))
             container_a_value = _extract_source_value(test_meta, ("C",))
@@ -5114,9 +5211,26 @@ class HorizontalVuln:
             injected_value = victim_value
             if case_type == "container_boundary":
                 injected_value = container_a_value
+            elif case_type == "multi_param":
+                source = str(tested_alias_source or "").upper()
+                if source in ("A", "B"):
+                    injected_value = tested_alias_value
+                    victim_value = tested_alias_value
+                elif source in ("D", "E"):
+                    injected_value = tested_alias_value
+                elif source == "C":
+                    attacker_value = tested_alias_value
+                    injected_value = None
+                elif injected_value is None:
+                    injected_value = _extract_first_non_empty_value(param_values if isinstance(param_values, dict) else {})
             elif injected_value is None:
                 injected_value = _extract_first_non_empty_value(param_values if isinstance(param_values, dict) else {})
 
+            target_position = test_meta.get("target_position")
+            if case_type == "multi_param" and tested_alias_position not in (None, "", [], {}):
+                target_position = tested_alias_position
+
+            honored_value_cues = _build_honored_value_cues(test_meta, test_params)
             data_param_names = set(data_params.keys()) if isinstance(data_params, dict) else set()
             test_param_names = set(test_params.keys()) if isinstance(test_params, dict) else set()
             return make_json_serializable({
@@ -5132,7 +5246,7 @@ class HorizontalVuln:
                     "case_type": case_type,
                     "strategy": test_meta.get("strategy", ""),
                     "position_mode": test_meta.get("position_mode", ""),
-                    "target_position": test_meta.get("target_position"),
+                    "target_position": target_position,
                     "value_source": test_meta.get("value_source"),
                     "comparison_source": test_meta.get("comparison_source"),
                     "non_target_source": test_meta.get("non_target_source"),
@@ -5143,6 +5257,9 @@ class HorizontalVuln:
                     "attacker_own_value": attacker_value,
                     "container_a_value": container_a_value,
                     "container_b_or_comparison_value": container_b_value,
+                    "tested_parameter_value": tested_alias_value,
+                    "tested_parameter_source": tested_alias_source,
+                    "tested_parameter_position": tested_alias_position,
                     "param_values_by_location": param_values,
                     "param_sources_by_location": param_sources,
                     "alias_values": alias_values,
@@ -5161,6 +5278,7 @@ class HorizontalVuln:
                     "business_code": _body_business_code(data_params),
                 },
                 "follow_up_evidence": evidence_data,
+                "honored_value_cues": honored_value_cues,
                 "evidence_features": {
                     "attacker_status_code": test_exec.get("status_code"),
                     "victim_status_code": data_exec.get("status_code"),
@@ -5189,6 +5307,8 @@ class HorizontalVuln:
             container_a_value = values.get("container_a_value")
             container_b_value = values.get("container_b_or_comparison_value")
             target_position = strategy.get("target_position")
+            tested_source = values.get("tested_parameter_source")
+            tested_position = values.get("tested_parameter_position")
 
             if case_type == "container_boundary":
                 base = (
@@ -5199,11 +5319,18 @@ class HorizontalVuln:
                     f"container scope?"
                 )
             elif case_type == "multi_param":
-                base = (
-                    f"Does the evidence show that the server honored the victim/container identifier value "
-                    f"`{injected_value}` at target parameter location `{target_position}` for `{param_name}`, "
-                    f"rather than the attacker-owned or non-target value `{attacker_value}`?"
-                )
+                if injected_value in (None, "", [], {}):
+                    base = (
+                        f"In this multi-param probing record, the tested parameter `{param_name}` does not carry a "
+                        f"victim/container value (observed source `{tested_source}` at `{tested_position}`). "
+                        f"Does the evidence nevertheless show unauthorized access semantics for `{route}`?"
+                    )
+                else:
+                    base = (
+                        f"Does the evidence show that the server honored the victim/container identifier value "
+                        f"`{injected_value}` at tested parameter location `{target_position}` for `{param_name}`, "
+                        f"rather than the attacker-owned or non-target value `{attacker_value}`?"
+                    )
             elif category == "ou_id":
                 base = (
                     f"Does the evidence show that the attacker used protected container/organization identifier "
@@ -5306,9 +5433,36 @@ class HorizontalVuln:
             if not _llm_disabled:
                 for _attempt in range(1, _llm_max_retries + 1):
                     try:
+                        cue_lines = []
+                        for cue in (structured_evidence.get("honored_value_cues") or []):
+                            if not isinstance(cue, dict):
+                                continue
+                            source = str(cue.get("source") or "").upper()
+                            value = cue.get("normalized_value")
+                            origin = cue.get("origin")
+                            if source in ("A", "B"):
+                                source_desc = "source A/B (victim or target value)"
+                            elif source == "C":
+                                source_desc = "source C (attacker-owned / non-target value)"
+                            elif source in ("D", "E"):
+                                source_desc = "source D/E (comparison value)"
+                            else:
+                                source_desc = f"source {source or 'unknown'}"
+                            cue_lines.append(
+                                f"- The attacker response contains value `{value}` which matches attacker request input from {source_desc} at `{origin}`."
+                            )
+                        honored_value_cue_text = ""
+                        if cue_lines:
+                            honored_value_cue_text = (
+                                "Additional honored-value cue:\n"
+                                + "\n".join(cue_lines)
+                                + "\n"
+                                + "Do not treat request success alone as evidence of BOLA."
+                            )
                         local_llm_dict = {
                             "structured_evidence": json.dumps(structured_evidence, ensure_ascii=False, sort_keys=True),
                             "unauthorized_access_question": unauthorized_access_question,
+                            "honored_value_cue_text": honored_value_cue_text,
                         }
                         tmp_result_params = self.gpt_reply.getreply(
                             self.syn_prompt.synthesis_prompt("evidence_semantic_bola_judgement", local_llm_dict)

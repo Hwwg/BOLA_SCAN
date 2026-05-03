@@ -564,6 +564,10 @@ Step 2: Evidence-question semantic consistency.
 - Error responses are not automatically negative: a business error may still reveal object-specific state for the injected identifier.
 - Non-200 status codes, business codes, and response schema mismatches are evidence features, not automatic conclusions, unless the evidence explicitly shows authentication/authorization rejection.
 - Return true only when the evidence supports the question. Use low confidence when evidence is missing, generic, or ambiguous.
+- For "multi_param" evidence, use `identifier_values.*_source` and `honored_value_cues` to distinguish victim/target values ("A"/"B") from attacker/non-target values ("C").
+- For update/delete operations, do not treat request success or the presence of a victim value in any request field as sufficient. Return true only when:
+  1) the attacker response clearly reflects the injected victim/container identifier value, or
+  2) follow-up evidence shows the victim-owned resource was modified/removed as a result of the attacker operation.
 
 Output strict JSON only. Do not wrap it in prose.
 Required JSON shape:
@@ -582,6 +586,8 @@ Allowed confidence values: "high", "medium", "low".
 evidence_semantic_bola_judgement_user = """
 Structured Evidence:
 {structured_evidence}
+
+{honored_value_cue_text}
 
 Unauthorized-Access Semantic Question:
 {unauthorized_access_question}
