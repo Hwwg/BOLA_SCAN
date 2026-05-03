@@ -2,15 +2,6 @@
 
 **BOLASCAN** is an automated testing tool for detecting BOLA (Broken Object Level Authorization) vulnerabilities in web applications. It leverages LLM-based API dependency analysis and multi-account testing matrices to identify horizontal privilege escalation issues.
 
-## Features
-
-- **Automated API Analysis**: Automatically analyzes OpenAPI specifications and tags API operations
-- **LLM-Powered Dependency Chain Construction**: Uses Large Language Models to infer API dependencies and data flows
-- **Parameter Normalization**: Intelligently extracts and normalizes API parameters across different endpoints
-- **Test Case Generation**: Combines dependency chains with browser interaction data to generate realistic test cases
-- **Horizontal BOLA Detection**: Employs multi-account testing matrices to detect cross-user access control vulnerabilities
-- **Web Automation**: Built-in Puppeteer-based module for automated web interaction and HTTP traffic capture
-
 ## System Requirements
 
 - **Python**: Version 3.8 or higher
