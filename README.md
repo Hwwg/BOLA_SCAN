@@ -187,6 +187,73 @@ Generated summaries, mismatch reports, and plots are written to
 python evaluation/eval_all_experiments.py --models gpt-4o-mini
 ```
 
+## Sanitized Vulnerability Audit
+
+The following anonymized table summarizes the BOLA findings used in the CCS 2026
+artifact. Project identifiers and external vulnerability identifiers are
+sanitized for anonymous review. The probe category is reported as
+`requester-only` when the check targets requester-to-identifier authorization,
+and `SIDP-side` when the check targets same-input dependent parameter context.
+
+| ID | Project | Probe category | Multi-ID | Hits | Resource domain | Operation class | Impact type | External ID |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | P1 | requester-only | N | (4/5) | Transaction management | State update | Unauthorized state manipulation | CVE-2025-12*** |
+| 2 | P2 | SIDP-side | Y | (2/5) | E-commerce workflow | Action execution | Unauthorized business operation | CVE-2025-12*** |
+| 3 | P3 | requester-only | Y | (5/5) | E-commerce resource | Attribute update | Unauthorized object modification | CVE-2025-13*** |
+| 4 | P3 | requester-only | N | (3/5) | E-commerce resource | Object query | Unauthorized object disclosure | CVE-2025-13*** |
+| 5 | P3 | requester-only | Y | (4/5) | E-commerce resource | State transition | Unauthorized object cancellation | CVE-2025-13*** |
+| 6 | P3 | requester-only | Y | (2/5) | E-commerce resource | State transition | Unauthorized object cancellation | CVE-2025-13*** |
+| 7 | P3 | requester-only | Y | (5/5) | Transaction management | State update | Unauthorized state manipulation | CVE-2025-13*** |
+| 8 | P4 | requester-only | Y | (1/5) | E-commerce resource | Attribute update | Unauthorized object modification | Pending |
+| 9 | P4 | requester-only | N | (3/5) | E-commerce resource | Object query | Unauthorized object disclosure | Confirmed |
+| 10 | P4 | requester-only | Y | (4/5) | E-commerce resource | State transition | Unauthorized object cancellation | Confirmed |
+| 11 | P4 | requester-only | Y | (2/5) | E-commerce resource | State transition | Unauthorized object cancellation | Confirmed |
+| 12 | P4 | requester-only | Y | (5/5) | Transaction management | State update | Unauthorized state manipulation | Confirmed |
+| 13 | P4 | requester-only | Y | (3/5) | User activity data | Object deletion | Unauthorized object deletion | CVE-2025-13*** |
+| 14 | P3 | requester-only | Y | (4/5) | User activity data | Object deletion | Unauthorized object deletion | CVE-2025-14*** |
+| 15 | P5 | requester-only | N | (2/5) | User-associated resource | Object query | Unauthorized object disclosure | CVE-2025-14*** |
+| 16 | P5 | SIDP-side | Y | (5/5) | User-associated resource | Object update | Unauthorized object modification | Confirmed |
+| 17 | P5 | requester-only | Y | (3/5) | User-associated resource | Object deletion | Unauthorized object deletion | Confirmed |
+| 18 | P5 | requester-only | N | (4/5) | Account identifier data | Object query | Unauthorized identifier disclosure | CVE-2025-14*** |
+| 19 | P5 | requester-only | Y | (1/5) | User-associated resource | Object deletion | Unauthorized object deletion | Confirmed |
+| 20 | P5 | requester-only | Y | (5/5) | E-commerce resource | Object deletion | Unauthorized object deletion | CVE-2025-14*** |
+| 21 | P5 | requester-only | N | (3/5) | Transaction management | Action execution | Unauthorized business operation | CVE-2025-15*** |
+| 22 | P5 | requester-only | N | (2/5) | Account identifier data | Object query | Unauthorized identifier-based access | CVE-2025-14*** |
+| 23 | P5 | requester-only | Y | (4/5) | Account financial data | State update | Unauthorized balance modification | CVE-2025-15*** |
+| 24 | P5 | requester-only | N | (1/5) | Account identifier data | Object query | Unauthorized identifier-based access | CVE-2025-15*** |
+| 25 | P5 | requester-only | N | (3/5) | Account identifier data | Object query | Unauthorized identifier-based access | Confirmed |
+| 26 | P5 | requester-only | Y | (5/5) | E-commerce resource | Object deletion | Unauthorized object deletion | Confirmed |
+| 27 | P5 | requester-only | Y | (4/5) | Transaction management | Action execution | Unauthorized business operation | CVE-2025-15*** |
+| 28 | P3 | requester-only | Y | (2/5) | User-associated resource | Object update | Unauthorized ownership modification | Confirmed |
+| 29 | P4 | requester-only | Y | (5/5) | User-associated resource | Object update | Unauthorized ownership modification | CVE-2025-15*** |
+| 30 | P6 | SIDP-side | N | (3/5) | Organization management | Object listing | Cross-scope information disclosure | CVE-2025-15*** |
+| 31 | P6 | SIDP-side | Y | (4/5) | Organization management | Object query | Cross-scope consistency violation | CVE-2025-15*** |
+| 32 | P6 | SIDP-side | Y | (2/5) | Organization management | Object query | Cross-scope consistency violation | CVE-2025-15*** |
+| 33 | P6 | SIDP-side | Y | (5/5) | Authorization policy data | Object query | Unauthorized policy-data access | CVE-2025-15*** |
+| 34 | P6 | SIDP-side | Y | (1/5) | Authorization policy data | Object query | Unauthorized policy-data access | CVE-2025-15*** |
+| 35 | P6 | SIDP-side | N | (4/5) | Organization management | Object listing | Cross-scope information disclosure | CVE-2025-15*** |
+| 36 | P6 | SIDP-side | N | (2/5) | Organization management | Object query | Cross-scope information disclosure | CVE-2025-15*** |
+| 37 | P6 | SIDP-side | N | (3/5) | Organization management | Object listing | Cross-scope information disclosure | CVE-2025-15*** |
+| 38 | P6 | SIDP-side | Y | (5/5) | Organization management | Membership update | Unauthorized relationship modification | Under disclosure |
+| 39 | P6 | SIDP-side | Y | (4/5) | Organization management | Membership update | Unauthorized relationship modification | Under disclosure |
+| 40 | P6 | SIDP-side | N | (1/5) | Tenant-scoped resource | Object listing | Cross-tenant information disclosure | Under disclosure |
+| 41 | P6 | SIDP-side | N | (2/5) | Organization management | Structure query | Cross-scope structure disclosure | Under disclosure |
+| 42 | P6 | SIDP-side | N | (3/5) | Organization management | Object listing | Cross-scope information disclosure | Under disclosure |
+| 43 | P7 | requester-only | N | (4/5) | Administrative resource | Object query | Unauthorized object disclosure | Under disclosure |
+| 44 | P7 | requester-only | Y | (5/5) | Administrative resource | Object update | Unauthorized object modification | Under disclosure |
+| 45 | P7 | requester-only | Y | (2/5) | Administrative resource | Object deletion | Unauthorized object deletion | Under disclosure |
+| 46 | P7 | requester-only | N | (3/5) | Audit data | Object query | Unauthorized audit-data access | Under disclosure |
+| 47 | P7 | requester-only | N | (1/5) | Audit data | Object listing | Unauthorized audit-data listing | Under disclosure |
+| 48 | P7 | requester-only | Y | (5/5) | Audit data | Object deletion | Unauthorized audit-data deletion | Under disclosure |
+| 49 | P7 | requester-only | Y | (4/5) | Audit data | Batch deletion | Unauthorized batch deletion | Under disclosure |
+| 50 | P8 | requester-only | Y | (2/5) | User profile data | Object query | Unauthorized profile-data access | CVE-2025-12*** |
+| 51 | P9 | requester-only | Y | (5/5) | Healthcare record data | Subresource update | Unauthorized record modification | Under disclosure |
+| 52 | P9 | requester-only | Y | (3/5) | Healthcare record data | Subresource update | Unauthorized record modification | Under disclosure |
+| 53 | P9 | requester-only | Y | (4/5) | Healthcare record data | Subresource deletion | Unauthorized record deletion | Under disclosure |
+| 54 | P9 | requester-only | Y | (2/5) | Healthcare record data | Subresource update | Unauthorized record modification | Under disclosure |
+| 55 | P9 | requester-only | Y | (5/5) | Healthcare record data | Subresource update | Unauthorized record modification | Under disclosure |
+| 56 | P9 | requester-only | Y | (1/5) | Healthcare record data | Subresource update | Unauthorized record modification | Under disclosure |
+
 ## Project Structure
 
 ```
