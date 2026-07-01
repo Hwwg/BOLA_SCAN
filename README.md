@@ -189,9 +189,9 @@ python evaluation/eval_all_experiments.py --models gpt-4o-mini
 
 ## Sanitized Vulnerability Audit
 
-The following anonymized table summarizes the BOLA findings used in the CCS 2026
-artifact. Project identifiers and external vulnerability identifiers are
-sanitized for anonymous review. The probe category is reported as
+The following anonymized table summarizes the BOLA findings. Project identifiers
+and external vulnerability identifiers are sanitized for anonymous review. The
+probe category is reported as
 `requester-only` when the check targets requester-to-identifier authorization,
 and `SIDP-side` when the check targets same-input dependent parameter context.
 
