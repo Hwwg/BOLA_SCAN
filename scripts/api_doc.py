@@ -346,8 +346,9 @@ class ApiDoc:
         all_apis = extract_apis_from_items(self.api_doc['item'])
         if isinstance(grouping_strategy, str) and grouping_strategy.lower() in {"none", "no_group", "no-group", "flat", "all"}:
             return [{"all_apis": all_apis}]
-        grouped_apis = self._group_apis_by_tree_select(all_apis)
-        return [{group_name: apis} for group_name, apis in grouped_apis.items()]
+        if isinstance(grouping_strategy, str) and grouping_strategy.lower() == "tree_select":
+            grouped_apis = self._group_apis_by_tree_select(all_apis)
+            return [{group_name: apis} for group_name, apis in grouped_apis.items()]
 
         # 数据驱动的公共前缀检测（不使用任何静态字符串名单）
         # 1) 统计所有接口路径的首段分布，若某个首段占比超过阈值，则视为公共前缀

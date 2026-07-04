@@ -176,7 +176,8 @@ class DependencyChain:
         """判断两个字段名是否只是命名风格不同。"""
         left_variants = self._expand_param_variants(left)
         right_variants = self._expand_param_variants(right)
-        return bool(left_variants & right_variants)
+        # _expand_param_variants 现返回 tuple（可缓存/可哈希），此处用集合求交集
+        return bool(set(left_variants) & set(right_variants))
 
     def _get_param_aliases(self, group_name, param_name):
         """获取参数的安全别名：只保留命名风格变体，不跨语义扩散。"""
@@ -1488,7 +1489,7 @@ class DependencyChain:
                 adds.append(ep)
             add_endpoints_in_group_cache[cache_key] = adds
             return adds
-        
+
         def chain_has_combo(chain: dict, combo: dict):
             if not isinstance(chain, dict):
                 return False
@@ -1972,24 +1973,19 @@ class DependencyChain:
         
         seen_endpoints = set()
         deduped_chain = {}
-        
-        def collect_endpoints(value):
-            """递归收集值中的所有端点"""
-            endpoints = []
-            if isinstance(value, str):
-                endpoints.append(value)
-            elif isinstance(value, list):
-                for item in value:
-                    endpoints.extend(collect_endpoints(item))
-            elif isinstance(value, dict):
-                for subval in value.values():
-                    endpoints.extend(collect_endpoints(subval))
-            return endpoints
-        
+
         def remove_seen_endpoints(value, seen):
-            """从值中移除已见过的端点"""
+            """从值中移除已见过的端点。
+
+            保留的端点会即时加入 seen，因此不仅去除跨步骤重复，也去除“同一步骤内”
+            的重复端点（例如同一步里多个并联组合都以同一个建资源接口开头）。每个端点
+            只在其最早出现的位置保留一次，链内端点集合与链条数量均不变，因此不影响召回。
+            """
             if isinstance(value, str):
-                return None if value in seen else value
+                if value in seen:
+                    return None
+                seen.add(value)
+                return value
             elif isinstance(value, list):
                 filtered = []
                 for item in value:
@@ -2008,22 +2004,18 @@ class DependencyChain:
                         filtered_dict[k] = result
                 return filtered_dict if filtered_dict else None
             return value
-        
+
         # 按步骤顺序处理
         sorted_keys = sorted(chain.keys(), key=lambda x: int(x) if x.isdigit() else 999)
-        
+
         for step_key in sorted_keys:
             step_value = chain[step_key]
-            
-            # 移除已见过的端点
+
+            # 移除已见过的端点（seen_endpoints 在递归中即时更新，同一步骤内的重复也会被去除）
             cleaned_value = remove_seen_endpoints(step_value, seen_endpoints)
-            
+
             # 如果清理后还有内容，保留该步骤
             if cleaned_value is not None:
-                # 收集当前步骤的端点
-                current_endpoints = collect_endpoints(step_value)
-                seen_endpoints.update(current_endpoints)
-                
                 deduped_chain[step_key] = cleaned_value
         
         # 重新编号（如果有步骤被删除）

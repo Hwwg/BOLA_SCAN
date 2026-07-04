@@ -551,7 +551,7 @@ def run_bola(project: Dict[str, Any], cache_dir: str, mode: str = "full") -> Non
     from utils.dependency_cc.main import run_dependency_generation
 
     requests_path = os.path.join(cache_dir, "http-requests.json")
-    if mode not in {"api-doc-with-type-only", "parameter-mapping-only", "dependency-chain-only"} and read_requests_count(requests_path) == 0:
+    if mode not in {"api-doc-with-type-only", "parameter-mapping-only", "dependency-chain-only", "ablation-rule-cads"} and read_requests_count(requests_path) == 0:
         raise RuntimeError("缺少有效的 http-requests.json，无法执行 BOLA 阶段")
 
     api_doc_path = prepare_openapi(project, cache_dir)
@@ -815,6 +815,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ablation-no-group", action="store_true", help="消融：不做功能组分组，全部 API 作为同一组继续执行到 CADS")
     parser.add_argument("--ablation-no-param-mapping", action="store_true", help="消融：保留功能组分组，但关闭 LLM 参数映射，直接使用原始参数")
     parser.add_argument("--ablation-static-api-type", action="store_true", help="消融：API 类型只用静态规则打标，不调用 LLM 判定类型")
+    parser.add_argument("--ablation-rule-cads", action="store_true", help="消融：CADS 前置构造全规则化，跳过 LLM 分组细化、静态规则打 API 类型、关闭 LLM 参数映射")
     parser.add_argument("--static-identifier-only", action="store_true", help="消融：只用静态规则识别 identifier parameters，并写入 horizontal_results")
     parser.add_argument("--with-container-divide", action="store_true", help="在依赖生成实验中额外生成 container_resource_divide_results.json")
     parser.add_argument("--container-divide-only", action="store_true", help="只补生成 container_resource_divide_results.json，要求前置产物已存在")
@@ -848,6 +849,7 @@ def main() -> int:
         args.ablation_no_group,
         args.ablation_no_param_mapping,
         args.ablation_static_api_type,
+        args.ablation_rule_cads,
         args.static_identifier_only,
     ]
     if sum(1 for flag in ablation_flags if flag) > 1:
@@ -916,6 +918,8 @@ def main() -> int:
         os.environ["BOLASCAN_ABLATION"] = "no-param-mapping"
     elif args.ablation_static_api_type:
         os.environ["BOLASCAN_ABLATION"] = "static-api-type"
+    elif args.ablation_rule_cads:
+        os.environ["BOLASCAN_ABLATION"] = "rule-cads"
     elif args.static_identifier_only:
         os.environ["BOLASCAN_ABLATION"] = "static-identifier"
     else:
@@ -964,6 +968,8 @@ def main() -> int:
             mode = "ablation-no-param-mapping"
         elif args.ablation_static_api_type:
             mode = "ablation-static-api-type"
+        elif args.ablation_rule_cads:
+            mode = "ablation-rule-cads"
         else:
             mode = "depen-gen" if args.depen_gen else "full"
         run_bola(project, cache_dir, mode=mode)
