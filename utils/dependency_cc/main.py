@@ -35,6 +35,11 @@ class DependencyGeneration:
         "ablation-no-param-mapping",
         "ablation-static-api-type",
     }
+    DEPENDENCY_ONLY_MODES = {
+        "depen-gen",
+        "dependency-chain-only",
+        "ablation-rule-cads",
+    }
 
     def __init__(
         self,
@@ -124,7 +129,12 @@ class DependencyGeneration:
             # 1) 先完成初始功能组分类，暂不做接口类型判定
             self.logger.info("Step 1: API功能组分类开始，api_doc_path=%s，model=%s", self.api_doc_path, self.model)
             _t1 = time.perf_counter()
-            grouping_strategy = "none" if self.mode == "ablation-no-group" else "tree_select"
+            if self.mode == "ablation-no-group":
+                grouping_strategy = "none"
+            elif self.mode == "ablation-rule-cads":
+                grouping_strategy = "resource_crud"
+            else:
+                grouping_strategy = "tree_select"
             api_data_tag = ApiDataTagging(
                 self.api_doc_path,
                 self.model,
@@ -139,8 +149,8 @@ class DependencyGeneration:
             self.logger.info("Step 1: 耗时 %.3fs", _d1)
 
             # 1.5) 在类型判定前，先把功能组细分到最终形态；no-group 消融保持单组输入。
-            if self.mode == "ablation-no-group":
-                self.logger.info("Step 1.5: ablation-no-group 模式跳过递归细分")
+            if self.mode in {"ablation-no-group", "ablation-rule-cads"}:
+                self.logger.info("Step 1.5: %s 模式跳过递归细分", self.mode)
                 self.execution_times["step1_5_refine_groups_secs"] = 0.0
             else:
                 self.logger.info("Step 1.5: 递归细分功能组开始")
@@ -164,7 +174,7 @@ class DependencyGeneration:
             self.logger.info("Step 1.8: 接口类型判定开始")
             _t18 = time.perf_counter()
             api_data_tag.api_doc = api_doc_grouped
-            if self.mode == "ablation-static-api-type":
+            if self.mode in {"ablation-static-api-type", "ablation-rule-cads"}:
                 api_doc_with_types = api_data_tag.complete_api_tagging_by_static_rules()
             else:
                 try:
@@ -196,7 +206,7 @@ class DependencyGeneration:
             except Exception as e:
                 self.logger.warning("Step 2: 参数提取出现异常，将继续执行参数打包：%s", e)
             params_dict_all = para_tool.parameters_results_packages(
-                use_llm_mapping=self.mode != "ablation-no-param-mapping"
+                use_llm_mapping=self.mode not in {"ablation-no-param-mapping", "ablation-rule-cads"}
             )
             self.jsontool.write_json(params_dict_path, params_dict_all)
             self.logger.info("Step 2: 参数提取/归一化完成，结果写入：%s", params_dict_path)
@@ -232,9 +242,11 @@ class DependencyGeneration:
             self.logger.info("Step 3: 耗时 %.3fs", _d3)
 
         # depen-gen 模式：只执行到依赖生成（Step 1~3），不进入 Step 4/5
-        if self.mode in {"depen-gen", "dependency-chain-only"}:
+        if self.mode in self.DEPENDENCY_ONLY_MODES:
             if self.mode == "dependency-chain-only":
                 self.logger.info("Mode=dependency-chain-only：dependency_chains_results.json 生成完成后停止")
+            elif self.mode == "ablation-rule-cads":
+                self.logger.info("Mode=ablation-rule-cads：规则化 CADS 构造完成后停止，不进入 Step 4/5")
             else:
                 self.logger.info("Mode=depen-gen：依赖生成完成后停止，不进入 Step 4 用例生成与 Step 5 水平BOLA分析")
             self._finalize_and_maybe_write_usage()

@@ -90,6 +90,18 @@ except Exception:
 _llm_disabled = str(os.getenv('BOLASCAN_DISABLE_LLM', 'false')).lower() in ('1', 'true', 'yes', 'on')
 _llm_fail_policy = str(os.getenv('BOLASCAN_LLM_FAIL_POLICY', 'lenient')).lower()  # 可选：'lenient' 或 'aggressive'
 
+# 最终 BOLA 判定的三路自一致投票配置（替代单次 LLM 语义判定，降低单次调用随机性带来的不稳定）
+try:
+    _judge_votes = int(os.getenv('BOLASCAN_JUDGE_VOTES', '3'))
+except Exception:
+    _judge_votes = 3
+if _judge_votes < 1:
+    _judge_votes = 1
+try:
+    _judge_vote_temperature = float(os.getenv('BOLASCAN_JUDGE_VOTE_TEMPERATURE', '0.5'))
+except Exception:
+    _judge_vote_temperature = 0.5
+
 class HorizontalVuln:
     def __init__(self,model_name,param_dict,case_generation_results_packages,project_name,api_doc_data) -> None:
         # 统一规范 api_doc_data：原始文件可能为 list[dict]（每个元素是一个功能组的字典），此处归一化为 dict 以便后续 .get 等操作
@@ -5385,6 +5397,65 @@ class HorizontalVuln:
                 return "BOLA Found", reason
             return "BOLA Not Found (middle)", reason or "evidence does not match unauthorized-access semantics"
 
+        def _conclusion_bucket(conclusion):
+            """将细分结论收敛到三路投票桶：found / potential / not_found。其他（如 skipped）返回 None，不参与投票。"""
+            c = str(conclusion or "").strip().lower()
+            if c == "bola found":
+                return "found"
+            if c == "potential bola":
+                return "potential"
+            if c.startswith("bola not found"):
+                return "not_found"
+            return None
+
+        def _aggregate_votes(votes):
+            """对多路独立 LLM 采样做多数投票；无绝对多数（平票）时判为 Potential BOLA。
+
+            返回 (final_conclusion, final_reason, representative_decision)。
+            """
+            valid = [v for v in votes if isinstance(v, dict) and v.get("bucket")]
+            if not valid:
+                concl, reason = _map_semantic_decision_to_conclusion(None)
+                return concl, reason, None
+
+            counts = {}
+            for v in valid:
+                counts[v["bucket"]] = counts.get(v["bucket"], 0) + 1
+            # 稳定排序：票数降序、桶名升序，保证同票时聚合结果可复现
+            ordered = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+            top_bucket, top_n = ordered[0]
+            has_majority = len(ordered) == 1 or ordered[1][1] < top_n
+            vote_summary = ", ".join(f"{b}:{n}" for b, n in ordered)
+
+            if not has_majority:
+                # 平票且无绝对多数 → 标记为 Potential BOLA 交由人工复核
+                rep = next((v for v in valid if v["bucket"] == "potential"), valid[0])
+                reason = rep.get("reason") or "voters split without a clear majority"
+                return "Potential BOLA", f"{reason} (vote split: {vote_summary})", rep.get("decision")
+
+            if top_bucket == "found":
+                rep = next((v for v in valid if v["bucket"] == "found"), valid[0])
+                return "BOLA Found", (rep.get("reason") or f"majority voted BOLA Found ({vote_summary})"), rep.get("decision")
+            if top_bucket == "potential":
+                rep = next((v for v in valid if v["bucket"] == "potential"), valid[0])
+                return "Potential BOLA", (rep.get("reason") or f"majority voted Potential ({vote_summary})"), rep.get("decision")
+
+            # not_found：保留最具体的“未发现”结论（public_resource > high > middle > plain）
+            nf = [v for v in valid if v["bucket"] == "not_found"]
+            pref = ["public_resource", "high", "middle"]
+            def _nf_rank(v):
+                c = str(v.get("conclusion", "")).lower()
+                for i, tag in enumerate(pref):
+                    if tag in c:
+                        return i
+                return len(pref)
+            rep = sorted(nf, key=_nf_rank)[0] if nf else valid[0]
+            return (
+                rep.get("conclusion") or "BOLA Not Found (middle)",
+                rep.get("reason") or f"majority voted BOLA Not Found ({vote_summary})",
+                rep.get("decision"),
+            )
+
         def _compare_response_params(current_param_name,data_params, test_params, data_step, test_step, data_request_params, test_request_params, type_tag=None, evidence_data=None, test_meta=None):
             """基于结构化证据和策略语义问题进行 BOLA 判定。"""
             data_exec = (data_step or {}).get("execution_status", {}) if isinstance(data_step, dict) else {}
@@ -5427,52 +5498,69 @@ class HorizontalVuln:
             )
             unauthorized_access_question = _build_unauthorized_access_question(structured_evidence)
 
+            # === 三路自一致投票（self-consistency voting）替代单次最终 LLM 判定 ===
+            # 用多次独立的 LLM 采样 + 多数投票得到最终结论，显著降低单次调用随机性造成的不稳定；
+            # 平票（无绝对多数）判为 Potential BOLA，交由人工复核。
+            vote_decisions = []
             semantic_decision = None
             bola_results = None
             bola_reason = ""
             if not _llm_disabled:
-                for _attempt in range(1, _llm_max_retries + 1):
-                    try:
-                        cue_lines = []
-                        for cue in (structured_evidence.get("honored_value_cues") or []):
-                            if not isinstance(cue, dict):
-                                continue
-                            source = str(cue.get("source") or "").upper()
-                            value = cue.get("normalized_value")
-                            origin = cue.get("origin")
-                            if source in ("A", "B"):
-                                source_desc = "source A/B (victim or target value)"
-                            elif source == "C":
-                                source_desc = "source C (attacker-owned / non-target value)"
-                            elif source in ("D", "E"):
-                                source_desc = "source D/E (comparison value)"
-                            else:
-                                source_desc = f"source {source or 'unknown'}"
-                            cue_lines.append(
-                                f"- The attacker response contains value `{value}` which matches attacker request input from {source_desc} at `{origin}`."
+                cue_lines = []
+                for cue in (structured_evidence.get("honored_value_cues") or []):
+                    if not isinstance(cue, dict):
+                        continue
+                    source = str(cue.get("source") or "").upper()
+                    value = cue.get("normalized_value")
+                    origin = cue.get("origin")
+                    if source in ("A", "B"):
+                        source_desc = "source A/B (victim or target value)"
+                    elif source == "C":
+                        source_desc = "source C (attacker-owned / non-target value)"
+                    elif source in ("D", "E"):
+                        source_desc = "source D/E (comparison value)"
+                    else:
+                        source_desc = f"source {source or 'unknown'}"
+                    cue_lines.append(
+                        f"- The attacker response contains value `{value}` which matches attacker request input from {source_desc} at `{origin}`."
+                    )
+                honored_value_cue_text = ""
+                if cue_lines:
+                    honored_value_cue_text = (
+                        "Additional honored-value cue:\n"
+                        + "\n".join(cue_lines)
+                        + "\n"
+                        + "Do not treat request success alone as evidence of BOLA."
+                    )
+                local_llm_dict = {
+                    "structured_evidence": json.dumps(structured_evidence, ensure_ascii=False, sort_keys=True),
+                    "unauthorized_access_question": unauthorized_access_question,
+                    "honored_value_cue_text": honored_value_cue_text,
+                }
+                # 独立采样若干次（每次采样内部仍有有限重试兜底），温度 > 0 以获得可投票的多样性
+                for _vote_idx in range(1, _judge_votes + 1):
+                    one_decision = None
+                    for _attempt in range(1, _llm_max_retries + 1):
+                        try:
+                            tmp_result_params = self.gpt_reply.getreply(
+                                self.syn_prompt.synthesis_prompt("evidence_semantic_bola_judgement", local_llm_dict),
+                                temperature=_judge_vote_temperature,
                             )
-                        honored_value_cue_text = ""
-                        if cue_lines:
-                            honored_value_cue_text = (
-                                "Additional honored-value cue:\n"
-                                + "\n".join(cue_lines)
-                                + "\n"
-                                + "Do not treat request success alone as evidence of BOLA."
-                            )
-                        local_llm_dict = {
-                            "structured_evidence": json.dumps(structured_evidence, ensure_ascii=False, sort_keys=True),
-                            "unauthorized_access_question": unauthorized_access_question,
-                            "honored_value_cue_text": honored_value_cue_text,
-                        }
-                        tmp_result_params = self.gpt_reply.getreply(
-                            self.syn_prompt.synthesis_prompt("evidence_semantic_bola_judgement", local_llm_dict)
-                        )
-                        semantic_decision = _parse_llm_json(tmp_result_params)
-                        bola_results, bola_reason = _map_semantic_decision_to_conclusion(semantic_decision)
-                        break
-                    except Exception as e:
-                        logger.info(f"Evidence-Semantic LLM 判定异常（第{_attempt}/{_llm_max_retries}次）: {str(e)}")
+                            one_decision = _parse_llm_json(tmp_result_params)
+                            break
+                        except Exception as e:
+                            logger.info(f"Evidence-Semantic 投票采样 {_vote_idx} 异常（第{_attempt}/{_llm_max_retries}次）: {str(e)}")
+                    vote_conclusion, vote_reason = _map_semantic_decision_to_conclusion(one_decision)
+                    vote_decisions.append({
+                        "vote_index": _vote_idx,
+                        "decision": one_decision,
+                        "conclusion": vote_conclusion,
+                        "reason": vote_reason,
+                        "bucket": _conclusion_bucket(vote_conclusion),
+                    })
+                bola_results, bola_reason, semantic_decision = _aggregate_votes(vote_decisions)
             if bola_results is None:
+                # LLM 关闭或没有任何有效投票 → 走兜底
                 semantic_decision = None
                 bola_results, bola_reason = _map_semantic_decision_to_conclusion(None)
 
@@ -5484,6 +5572,21 @@ class HorizontalVuln:
                         "structured_evidence": structured_evidence,
                         "unauthorized_access_question": unauthorized_access_question,
                         "llm_decision": semantic_decision,
+                        "votes": [
+                            {
+                                "vote_index": v.get("vote_index"),
+                                "conclusion": v.get("conclusion"),
+                                "bucket": v.get("bucket"),
+                                "reason": v.get("reason"),
+                                "decision": v.get("decision"),
+                            }
+                            for v in vote_decisions
+                        ],
+                        "vote_strategy": {
+                            "votes": _judge_votes,
+                            "temperature": _judge_vote_temperature,
+                            "tie_break": "potential",
+                        },
                     }
                 }
             }
@@ -5772,6 +5875,7 @@ class HorizontalVuln:
                 "Potential BOLA": 2,
                 "BOLA Not Found (middle)": 1,
                 "BOLA Not Found (high)": 0,
+                "BOLA Not Found (public_resource)": 0,
                 "BOLA Not Found": 0,
                 "Skipped / Not Executable": -1
             }

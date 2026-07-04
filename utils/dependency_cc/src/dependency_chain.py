@@ -53,6 +53,13 @@ class DependencyChain:
         self._param_alias_cache = {}
         self._route_index_source_id = None
         self._route_index = None
+        self._base_param_name_cache = {}
+        self._snake_case_cache = {}
+        self._expand_param_variants_cache = {}
+        self._field_lookup_keys_cache = {}
+        self._lookup_keys_for_param_cache = {}
+        self._normalize_response_field_cache = {}
+        self._response_request_match_cache = {}
         # logger.info("DependencyChain初始化完成")
 
     def _iter_route_entries(self, routes):
@@ -68,6 +75,10 @@ class DependencyChain:
     # ========= 嵌套参数匹配工具（与 para_normalize 保持一致）=========
     def _normalize_response_field(self, field: str) -> str:
         """标准化响应/参数字段：小写+按'.'分割并清洗每个片段的'[]'。"""
+        cache_key = str(field)
+        cached = self._normalize_response_field_cache.get(cache_key)
+        if cached is not None:
+            return cached
         if not isinstance(field, str):
             field = str(field)
         parts = [p for p in field.strip().lower().split(".") if p]
@@ -76,12 +87,19 @@ class DependencyChain:
             if p.endswith("[]"):
                 p = p[:-2]
             cleaned.append(p)
-        return ".".join(cleaned)
+        result = ".".join(cleaned)
+        self._normalize_response_field_cache[cache_key] = result
+        return result
 
     def _response_matches_request(self, req_field: str, resp_field: str) -> bool:
         """基于'.'分割的包含式匹配：请求字段的最后一个token出现在候选字段token集合中即认为命中。"""
+        cache_key = (str(req_field), str(resp_field))
+        cached = self._response_request_match_cache.get(cache_key)
+        if cached is not None:
+            return cached
         try:
             if param_matches(req_field, resp_field):
+                self._response_request_match_cache[cache_key] = True
                 return True
         except Exception:
             pass
@@ -97,31 +115,51 @@ class DependencyChain:
             last = last[:-2]
         # 避免过短token导致误判
         if len(last) < 2:
+            self._response_request_match_cache[cache_key] = False
             return False
         resp_norm = self._normalize_response_field(resp_field)
         resp_tokens = set([p for p in resp_norm.split(".") if p])
-        return last in resp_tokens
+        result = last in resp_tokens
+        self._response_request_match_cache[cache_key] = result
+        return result
 
     def _base_param_name(self, field: str) -> str:
         """提取字段的基础参数名，去掉嵌套路径和数组标记。"""
+        cache_key = str(field)
+        cached = self._base_param_name_cache.get(cache_key)
+        if cached is not None:
+            return cached
         if not isinstance(field, str):
             field = str(field)
         base = field.strip().split(".")[-1]
-        return base.replace("[]", "")
+        result = base.replace("[]", "")
+        self._base_param_name_cache[cache_key] = result
+        return result
 
     def _to_snake_case(self, name: str) -> str:
         """将 camelCase / PascalCase 转换为 snake_case。"""
+        cache_key = str(name)
+        cached = self._snake_case_cache.get(cache_key)
+        if cached is not None:
+            return cached
         if not isinstance(name, str):
             name = str(name)
         name = self._base_param_name(name)
         if not name:
+            self._snake_case_cache[cache_key] = ""
             return ""
         s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
         s2 = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1)
-        return s2.replace("-", "_").lower()
+        result = s2.replace("-", "_").lower()
+        self._snake_case_cache[cache_key] = result
+        return result
 
     def _expand_param_variants(self, name: str):
         """展开同一参数的常见命名变体。"""
+        cache_key = str(name)
+        cached = self._expand_param_variants_cache.get(cache_key)
+        if cached is not None:
+            return cached
         if not isinstance(name, str):
             name = str(name)
         base = self._base_param_name(name)
@@ -130,7 +168,9 @@ class DependencyChain:
         parts = [p for p in snake.split("_") if p]
         camel = parts[0] + "".join(p.capitalize() for p in parts[1:]) if parts else snake
         variants = {base, snake, compact, camel}
-        return {v for v in variants if v}
+        result = tuple(sorted(v for v in variants if v))
+        self._expand_param_variants_cache[cache_key] = result
+        return result
 
     def _param_names_equivalent(self, left: str, right: str) -> bool:
         """判断两个字段名是否只是命名风格不同。"""
@@ -199,10 +239,15 @@ class DependencyChain:
         return flat
 
     def _field_lookup_keys(self, field):
+        cache_key = str(field)
+        cached = self._field_lookup_keys_cache.get(cache_key)
+        if cached is not None:
+            return cached
         keys = set()
         text = str(field or "").strip()
         if not text:
-            return keys
+            self._field_lookup_keys_cache[cache_key] = frozenset()
+            return frozenset()
         keys.update(self._expand_param_variants(text))
         parts = [p.replace("[]", "").strip("{}") for p in text.split(".") if p]
         for part in parts:
@@ -213,14 +258,22 @@ class DependencyChain:
             if last in {"id", "uuid", "guid", "identifier", "code", "name"} and prev:
                 for suffix in ("id", "uuid", "guid", "identifier", "code", "name"):
                     keys.update(self._expand_param_variants(f"{prev}_{suffix}"))
-        return {k for k in keys if k}
+        result = frozenset(k for k in keys if k)
+        self._field_lookup_keys_cache[cache_key] = result
+        return result
 
     def _lookup_keys_for_param(self, group_name, param_name):
+        cache_key = (group_name or "", str(param_name))
+        cached = self._lookup_keys_for_param_cache.get(cache_key)
+        if cached is not None:
+            return cached
         keys = set(self._expand_param_variants(param_name))
         if group_name:
             for alias in self._get_param_aliases(group_name, param_name):
                 keys.update(self._expand_param_variants(alias))
-        return {k for k in keys if k}
+        result = frozenset(k for k in keys if k)
+        self._lookup_keys_for_param_cache[cache_key] = result
+        return result
 
     def _ensure_route_index(self, routes_packages_normalized=None):
         routes = routes_packages_normalized or self.params_dict.get("normalized_params", {})
@@ -380,13 +433,8 @@ class DependencyChain:
         
         req_entries = []
         resp_entries = []
-        for current_group_name in (routes_packages_normalized or {}).keys():
-            req_entries.extend(
-                self._lookup_param_entries("request", parameters_item, current_group_name, routes_packages_normalized)
-            )
-            resp_entries.extend(
-                self._lookup_param_entries("response", parameters_item, current_group_name, routes_packages_normalized)
-            )
+        req_entries = self._lookup_param_entries("request", parameters_item, None, routes_packages_normalized)
+        resp_entries = self._lookup_param_entries("response", parameters_item, None, routes_packages_normalized)
         if req_entries or resp_entries:
             result["request_location_path"] = [
                 {entry["endpoint"]: entry.get("type", "unknown")}
@@ -1392,6 +1440,8 @@ class DependencyChain:
         response_params_cache = {}
         combo_endpoint_cache = {}
         combo_complexity_cache = {}
+        response_endpoints_for_param_cache = {}
+        add_endpoints_in_group_cache = {}
         
         def collect_request_params_for_endpoint(endpoint: str):
             if endpoint in request_params_cache:
@@ -1406,13 +1456,16 @@ class DependencyChain:
             return params
         
         def find_response_endpoints_for_param(param: str):
-            entries = []
-            for group_name in normalized_params.keys():
-                entries.extend(self._lookup_param_entries("response", param, group_name, normalized_params))
-            return [
+            cache_key = str(param)
+            if cache_key in response_endpoints_for_param_cache:
+                return response_endpoints_for_param_cache[cache_key]
+            entries = self._lookup_param_entries("response", param, None, normalized_params)
+            result = [
                 (entry.get("group"), entry.get("endpoint"), entry.get("type", "unknown"))
                 for entry in entries
             ]
+            response_endpoints_for_param_cache[cache_key] = result
+            return result
         
         def find_add_endpoints_in_group(group: str, exclude_param: str = None):
             """
@@ -1420,6 +1473,9 @@ class DependencyChain:
             如果指定了 exclude_param，则过滤掉请求参数中包含该参数的接口
             （因为这些接口本身需要该参数，不能作为该参数的起点）。
             """
+            cache_key = (group or "", str(exclude_param or ""))
+            if cache_key in add_endpoints_in_group_cache:
+                return add_endpoints_in_group_cache[cache_key]
             adds = []
             for ep in route_index["group_add"].get(group, []):
                 rd = find_route_data(group, ep)
@@ -1430,6 +1486,7 @@ class DependencyChain:
                     if self._param_in_list(exclude_param, req_params, group):
                         continue
                 adds.append(ep)
+            add_endpoints_in_group_cache[cache_key] = adds
             return adds
         
         def chain_has_combo(chain: dict, combo: dict):

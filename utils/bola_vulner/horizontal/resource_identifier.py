@@ -118,22 +118,26 @@ class ResourceIdentifier:
                 local_llm_dict = self.llm_dict.copy()
                 local_llm_dict["param_dict"] = str({p: {"example_value": None} for p in semantic_candidates})
                 local_llm_dict["routes_data"] = str(apis)
-                try:
-                    tmp_result_params = self.gpt_reply.getreply(
-                        self.syn_prompt.synthesis_prompt("resource_id_judgement", local_llm_dict)
-                    )
-                    logger.info("功能组 %s 的 OIP 语义补充结果: %s", group_name, tmp_result_params)
-                    llm_selected = set(self._parse_llm_param_list(eval(self.jsontool.list_formatting(tmp_result_params))))
-                    # LLM can supplement semantic identifiers, but do not allow
-                    # obvious payload/status/config fields into the OIP set.
-                    deny = {
-                        "amount", "count", "quantity", "number", "password", "name", "title",
-                        "content", "message", "status", "state", "token", "code", "key",
-                        "coupon_code", "conversion_params", "problem_details", "pincode",
-                    }
-                    llm_selected = {p for p in llm_selected if p not in deny}
-                except Exception as exc:
-                    logger.info("功能组 %s 的 OIP 语义补充失败: %s", group_name, exc)
+                # 有限重试 + 兜底：LLM 只是对规则识别结果的语义补充，任意一次采样失败都不应中断整体流程，
+                # 全部失败时回退为“仅规则结果”（llm_selected 保持为空）。
+                for _attempt in range(1, _llm_max_retries + 1):
+                    try:
+                        tmp_result_params = self.gpt_reply.getreply(
+                            self.syn_prompt.synthesis_prompt("resource_id_judgement", local_llm_dict)
+                        )
+                        logger.info("功能组 %s 的 OIP 语义补充结果: %s", group_name, tmp_result_params)
+                        llm_selected = set(self._parse_llm_param_list(eval(self.jsontool.list_formatting(tmp_result_params))))
+                        # LLM can supplement semantic identifiers, but do not allow
+                        # obvious payload/status/config fields into the OIP set.
+                        deny = {
+                            "amount", "count", "quantity", "number", "password", "name", "title",
+                            "content", "message", "status", "state", "token", "code", "key",
+                            "coupon_code", "conversion_params", "problem_details", "pincode",
+                        }
+                        llm_selected = {p for p in llm_selected if p not in deny}
+                        break
+                    except Exception as exc:
+                        logger.info("功能组 %s 的 OIP 语义补充失败（第%s/%s次）: %s", group_name, _attempt, _llm_max_retries, exc)
 
             merged = set(rule_oips) | llm_selected
             by_group[group_name] = merged
