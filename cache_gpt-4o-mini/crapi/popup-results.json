@@ -1,0 +1,52 @@
+{
+  "http://example.test/": [
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > main.ant-layout-content.layout-content.css-1m63z2v > div.ant-layout.page-container.css-1m63z2v:nth-child(1) > main.ant-layout-content.css-1m63z2v > div.ant-row.css-1m63z2v > div.ant-col.alert-msg-box.css-1m63z2v > div.ant-alert.ant-alert-warning.ant-alert-with-description.ant-alert-no-icon.css-1m63z2v > div.ant-alert-content > div.ant-alert-description:nth-child(2) > button.alert-msg.btn",
+        "tag": "BUTTON",
+        "text": "Click here",
+        "href": "",
+        "role": "",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "type": "popup",
+      "popupInfo": {
+        "type": "div",
+        "className": "ant-modal css-1m63z2v ant-modal-confirm ant-modal-confirm-success ant-zoom-appear ant-zoom-appear-active ant-zoom",
+        "id": "",
+        "text": "Success\nYour newly purchased Vehicle Details have been sent to you email address. If you have used example.com email, check your email using the MailHog web portal.\nOK",
+        "htmlContent": "<div tabindex=\"0\" style=\"outline: none;\"><div class=\"ant-modal-content\"><div class=\"ant-modal-body\"><div class=\"ant-modal-confirm-body-wrapper\"><div class=\"ant-modal-confirm-body ant-modal-confirm-body-has-title\"><span role=\"img\" aria-label=\"check-circle\" class=\"anticon anticon-check-circle\"><svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"check-circle\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z\"></path></svg></span><div class=\"ant-modal-confirm-paragraph\"><span class=\"ant-modal-confirm-title\">Success</span><div class=\"ant-modal-confirm-content\">Your newly purchased Vehicle Details have been sent to you email address. If you have used example.com email, check your email using the MailHog web portal. </div></div></div><div class=\"ant-modal-confirm-btns\"><button type=\"button\" class=\"ant-btn css-1m63z2v ant-btn-primary ant-btn-color-primary ant-btn-variant-solid\"><span>OK</span></button></div></div></div></div></div><div tabindex=\"0\" style=\"width: 0px; height: 0px; overflow: hidden; outline: none;\"></div>",
+        "hasCloseButton": false,
+        "hasConfirmButton": false,
+        "hasCancelButton": false,
+        "messageType": "success"
+      }
+    },
+    {
+      "element": {
+        "selector": "body > div > div.ant-spin-nested-loading.css-1m63z2v > div.ant-spin-container > div.ant-layout.css-1m63z2v > header.ant-layout-header.css-1m63z2v > div.ant-space.css-1m63z2v.ant-space-horizontal.ant-space-align-center.ant-space-gap-row-small.ant-space-gap-col-small.top-nav-left:nth-child(1) > div.ant-space-item:nth-child(2) > ul.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark.css-1m63z2v > li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child:nth-child(1)",
+        "tag": "LI",
+        "text": "Dashboard",
+        "href": "",
+        "role": "menuitem",
+        "hasOnclick": false,
+        "isVisible": true,
+        "type": "button"
+      },
+      "type": "popup",
+      "popupInfo": {
+        "type": "div",
+        "className": "ant-modal css-1m63z2v ant-modal-confirm ant-modal-confirm-success ant-zoom-appear ant-zoom-appear-active ant-zoom",
+        "id": "",
+        "text": "Success\nYour newly purchased Vehicle Details have been sent to you email address. If you have used example.com email, check your email using the MailHog web portal.\nOK",
+        "htmlContent": "<div tabindex=\"0\" style=\"outline: none;\"><div class=\"ant-modal-content\"><div class=\"ant-modal-body\"><div class=\"ant-modal-confirm-body-wrapper\"><div class=\"ant-modal-confirm-body ant-modal-confirm-body-has-title\"><span role=\"img\" aria-label=\"check-circle\" class=\"anticon anticon-check-circle\"><svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"check-circle\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z\"></path></svg></span><div class=\"ant-modal-confirm-paragraph\"><span class=\"ant-modal-confirm-title\">Success</span><div class=\"ant-modal-confirm-content\">Your newly purchased Vehicle Details have been sent to you email address. If you have used example.com email, check your email using the MailHog web portal. </div></div></div><div class=\"ant-modal-confirm-btns\"><button type=\"button\" class=\"ant-btn css-1m63z2v ant-btn-primary ant-btn-color-primary ant-btn-variant-solid\"><span>OK</span></button></div></div></div></div></div><div tabindex=\"0\" style=\"width: 0px; height: 0px; overflow: hidden; outline: none;\"></div>",
+        "hasCloseButton": false,
+        "hasConfirmButton": false,
+        "hasCancelButton": false,
+        "messageType": "success"
+      }
+    }
+  ]
+}

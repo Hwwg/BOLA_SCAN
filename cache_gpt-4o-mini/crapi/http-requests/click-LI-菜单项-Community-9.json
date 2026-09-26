@@ -1,0 +1,840 @@
+{
+  "context": "click-LI-菜单项-Community-9",
+  "timestamp": "2026-04-29T08:20:59.663Z",
+  "count": 18,
+  "requests": [
+    {
+      "id": "4u8xlu3dmze",
+      "type": "request",
+      "url": "http://example.test/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/forum",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1777450703811,
+      "context": "click-LI-菜单项-Community-9",
+      "signature": "GET|/community/api/v2/community/posts/recent|limit=30&offset=0"
+    },
+    {
+      "id": "lruix2lnhj",
+      "requestId": "4u8xlu3dmze",
+      "type": "response",
+      "url": "http://example.test/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:23 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450703873,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 1006,
+      "body": "{\"posts\":[{\"id\":\"eayRby74fTcdwJDvqtRvs\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.474Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-04-29T07:16:51.474Z\"},{\"id\":\"ANhRmnQ2YxgiyrejB3wV7i\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.473Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-04-29T07:16:51.473Z\"},{\"id\":\"tDBtF78EYLfSb6fcawCnXX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.461Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-04-29T07:16:51.461Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "eayRby74fTcdwJDvqtRvs",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.474Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-04-29T07:16:51.474Z"
+          },
+          {
+            "id": "ANhRmnQ2YxgiyrejB3wV7i",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.473Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-04-29T07:16:51.473Z"
+          },
+          {
+            "id": "tDBtF78EYLfSb6fcawCnXX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.461Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-04-29T07:16:51.461Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "vtf6ke9kgss",
+      "requestId": "9cfocx94eft",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=38.206348,-84.270172&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s38.206348,-84.270172",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=3",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1777450703939,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 0
+    },
+    {
+      "id": "qfsrfaydnrp",
+      "requestId": "tdpgjvtlrqq",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:23 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450703950,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "ut4rydjua4b",
+      "requestId": "77jk34bprxr",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:23 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450703950,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "oc9b0cmkvtc",
+      "requestId": "htua6k19rbg",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450703989,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 393,
+      "body": "[{\"id\":6,\"uuid\":\"33ced8a8-246b-4cc4-8bce-5a5173397ae3\",\"pincode\":\"0588\",\"vin\":\"896480MP7DZHB9D69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":2,\"model\":\"Aventador\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/lamborghini-aventador.jpg\",\"vehiclecompany\":{\"id\":2,\"name\":\"Lamborghini\"}},\"vehicleLocation\":{\"id\":4,\"latitude\":\"38.206348\",\"longitude\":\"-84.270172\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "33ced8a8-246b-4cc4-8bce-5a5173397ae3",
+          "pincode": "0588",
+          "vin": "896480MP7DZHB9D69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 2,
+            "model": "Aventador",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/lamborghini-aventador.jpg",
+            "vehiclecompany": {
+              "id": 2,
+              "name": "Lamborghini"
+            }
+          },
+          "vehicleLocation": {
+            "id": 4,
+            "latitude": "38.206348",
+            "longitude": "-84.270172"
+          },
+          "owner": null
+        }
+      ],
+      "isListQuery": true
+    },
+    {
+      "id": "0bma2okbte39",
+      "requestId": "4u8xlu3dmze",
+      "type": "response",
+      "url": "http://example.test/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704162,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 1006,
+      "body": "{\"posts\":[{\"id\":\"eayRby74fTcdwJDvqtRvs\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.474Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-04-29T07:16:51.474Z\"},{\"id\":\"ANhRmnQ2YxgiyrejB3wV7i\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.473Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-04-29T07:16:51.473Z\"},{\"id\":\"tDBtF78EYLfSb6fcawCnXX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.461Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-04-29T07:16:51.461Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "eayRby74fTcdwJDvqtRvs",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.474Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-04-29T07:16:51.474Z"
+          },
+          {
+            "id": "ANhRmnQ2YxgiyrejB3wV7i",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.473Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-04-29T07:16:51.473Z"
+          },
+          {
+            "id": "tDBtF78EYLfSb6fcawCnXX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.461Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-04-29T07:16:51.461Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "rx6jl2p76hf",
+      "requestId": "9cfocx94eft",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=38.206348,-84.270172&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s38.206348,-84.270172",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=3",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1777450704235,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 0
+    },
+    {
+      "id": "i91shcz9z8n",
+      "requestId": "tdpgjvtlrqq",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450704239,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "o71nm6z4h7",
+      "requestId": "77jk34bprxr",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704239,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "er36k73u61n",
+      "requestId": "htua6k19rbg",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704279,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 393,
+      "body": "[{\"id\":6,\"uuid\":\"33ced8a8-246b-4cc4-8bce-5a5173397ae3\",\"pincode\":\"0588\",\"vin\":\"896480MP7DZHB9D69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":2,\"model\":\"Aventador\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/lamborghini-aventador.jpg\",\"vehiclecompany\":{\"id\":2,\"name\":\"Lamborghini\"}},\"vehicleLocation\":{\"id\":4,\"latitude\":\"38.206348\",\"longitude\":\"-84.270172\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "33ced8a8-246b-4cc4-8bce-5a5173397ae3",
+          "pincode": "0588",
+          "vin": "896480MP7DZHB9D69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 2,
+            "model": "Aventador",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/lamborghini-aventador.jpg",
+            "vehiclecompany": {
+              "id": 2,
+              "name": "Lamborghini"
+            }
+          },
+          "vehicleLocation": {
+            "id": 4,
+            "latitude": "38.206348",
+            "longitude": "-84.270172"
+          },
+          "owner": null
+        }
+      ],
+      "isListQuery": true
+    },
+    {
+      "id": "14yk8dfppjt",
+      "requestId": "4u8xlu3dmze",
+      "type": "response",
+      "url": "http://example.test/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704331,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 1006,
+      "body": "{\"posts\":[{\"id\":\"eayRby74fTcdwJDvqtRvs\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.474Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-04-29T07:16:51.474Z\"},{\"id\":\"ANhRmnQ2YxgiyrejB3wV7i\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.473Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-04-29T07:16:51.473Z\"},{\"id\":\"tDBtF78EYLfSb6fcawCnXX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.461Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-04-29T07:16:51.461Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "eayRby74fTcdwJDvqtRvs",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.474Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-04-29T07:16:51.474Z"
+          },
+          {
+            "id": "ANhRmnQ2YxgiyrejB3wV7i",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.473Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-04-29T07:16:51.473Z"
+          },
+          {
+            "id": "tDBtF78EYLfSb6fcawCnXX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.461Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-04-29T07:16:51.461Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      },
+      "isListQuery": true
+    },
+    {
+      "id": "yrotqygr8dm",
+      "requestId": "bmbm54bd8ph",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=da7137d0-5393-4ffe-80bd-1b21cfe1282f; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704331,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "wkr52eob8b",
+      "requestId": "9cfocx94eft",
+      "type": "response",
+      "url": "https://maps.google.com/maps?q=38.206348,-84.270172&output=embed",
+      "status": 301,
+      "statusText": "",
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "content-length": "0",
+        "content-type": "text/html",
+        "date": "Wed, 29 Apr 2026 08:18:06 GMT",
+        "location": "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s38.206348,-84.270172",
+        "server": "scaffolding on HTTPServer2",
+        "server-timing": "gfet4t7; dur=3",
+        "vary": "Origin\nX-Origin\nReferer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "text/html",
+      "timestamp": 1777450704446,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 0
+    },
+    {
+      "id": "6z797pntn8v",
+      "requestId": "tdpgjvtlrqq",
+      "type": "response",
+      "url": "http://example.test/identity/api/auth/verify",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "POST",
+      "contentType": "application/json",
+      "timestamp": 1777450704503,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 57,
+      "body": "{\"message\":\"The token is a valid JWT token\",\"status\":200}",
+      "jsonData": {
+        "message": "The token is a valid JWT token",
+        "status": 200
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "ugmre1d020q",
+      "requestId": "77jk34bprxr",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/user/dashboard",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704503,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 184,
+      "body": "{\"id\":8,\"name\":\"huangtestaaaa\",\"email\":\"1@qq.com\",\"number\":\"11111111111\",\"picture_url\":null,\"video_url\":null,\"video_name\":null,\"available_credit\":100.0,\"video_id\":0,\"role\":\"ROLE_USER\"}",
+      "jsonData": {
+        "id": 8,
+        "name": "huangtestaaaa",
+        "email": "1@qq.com",
+        "number": "11111111111",
+        "picture_url": null,
+        "video_url": null,
+        "video_name": null,
+        "available_credit": 100,
+        "video_id": 0,
+        "role": "ROLE_USER"
+      },
+      "isListQuery": false
+    },
+    {
+      "id": "tim7aurw8ej",
+      "requestId": "htua6k19rbg",
+      "type": "response",
+      "url": "http://example.test/identity/api/v2/vehicle/vehicles",
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "openresty/1.27.1.2",
+        "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+        "transfer-encoding": "chunked",
+        "vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "0"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704534,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 393,
+      "body": "[{\"id\":6,\"uuid\":\"33ced8a8-246b-4cc4-8bce-5a5173397ae3\",\"pincode\":\"0588\",\"vin\":\"896480MP7DZHB9D69\",\"year\":2026,\"status\":\"INACTIVE\",\"previousOwners\":[],\"model\":{\"id\":2,\"model\":\"Aventador\",\"fuel_type\":\"PETROL\",\"vehicle_img\":\"images/lamborghini-aventador.jpg\",\"vehiclecompany\":{\"id\":2,\"name\":\"Lamborghini\"}},\"vehicleLocation\":{\"id\":4,\"latitude\":\"38.206348\",\"longitude\":\"-84.270172\"},\"owner\":null}]",
+      "jsonData": [
+        {
+          "id": 6,
+          "uuid": "33ced8a8-246b-4cc4-8bce-5a5173397ae3",
+          "pincode": "0588",
+          "vin": "896480MP7DZHB9D69",
+          "year": 2026,
+          "status": "INACTIVE",
+          "previousOwners": [],
+          "model": {
+            "id": 2,
+            "model": "Aventador",
+            "fuel_type": "PETROL",
+            "vehicle_img": "images/lamborghini-aventador.jpg",
+            "vehiclecompany": {
+              "id": 2,
+              "name": "Lamborghini"
+            }
+          },
+          "vehicleLocation": {
+            "id": 4,
+            "latitude": "38.206348",
+            "longitude": "-84.270172"
+          },
+          "owner": null
+        }
+      ],
+      "isListQuery": true
+    },
+    {
+      "id": "tmkd018c3p",
+      "requestId": "4u8xlu3dmze",
+      "type": "response",
+      "url": "http://example.test/community/api/v2/community/posts/recent?limit=30&offset=0",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "access-control-allow-headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+        "access-control-allow-methods": "POST, GET, OPTIONS, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:24 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450704629,
+      "context": "click-LI-菜单项-Community-9",
+      "size": 1006,
+      "body": "{\"posts\":[{\"id\":\"eayRby74fTcdwJDvqtRvs\",\"title\":\"Title 3\",\"content\":\"Hello world 3\",\"author\":{\"nickname\":\"Robot\",\"email\":\"robot001@example.com\",\"vehicleid\":\"4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.474Z\"},\"comments\":[],\"authorid\":3,\"CreatedAt\":\"2026-04-29T07:16:51.474Z\"},{\"id\":\"ANhRmnQ2YxgiyrejB3wV7i\",\"title\":\"Title 2\",\"content\":\"Hello world 2\",\"author\":{\"nickname\":\"Pogba\",\"email\":\"pogba006@example.com\",\"vehicleid\":\"cd515c12-0fc1-48ae-8b61-9230b70a845b\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.473Z\"},\"comments\":[],\"authorid\":2,\"CreatedAt\":\"2026-04-29T07:16:51.473Z\"},{\"id\":\"tDBtF78EYLfSb6fcawCnXX\",\"title\":\"Title 1\",\"content\":\"Hello world 1\",\"author\":{\"nickname\":\"Adam\",\"email\":\"adam007@example.com\",\"vehicleid\":\"f89b5f21-7829-45cb-a650-299a61090378\",\"profile_pic_url\":\"\",\"created_at\":\"2026-04-29T07:16:51.461Z\"},\"comments\":[],\"authorid\":1,\"CreatedAt\":\"2026-04-29T07:16:51.461Z\"}],\"next_offset\":null,\"previous_offset\":null,\"total\":3}\n",
+      "jsonData": {
+        "posts": [
+          {
+            "id": "eayRby74fTcdwJDvqtRvs",
+            "title": "Title 3",
+            "content": "Hello world 3",
+            "author": {
+              "nickname": "Robot",
+              "email": "robot001@example.com",
+              "vehicleid": "4bae9968-ec7f-4de3-a3a0-ba1b2ab5e5e5",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.474Z"
+            },
+            "comments": [],
+            "authorid": 3,
+            "CreatedAt": "2026-04-29T07:16:51.474Z"
+          },
+          {
+            "id": "ANhRmnQ2YxgiyrejB3wV7i",
+            "title": "Title 2",
+            "content": "Hello world 2",
+            "author": {
+              "nickname": "Pogba",
+              "email": "pogba006@example.com",
+              "vehicleid": "cd515c12-0fc1-48ae-8b61-9230b70a845b",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.473Z"
+            },
+            "comments": [],
+            "authorid": 2,
+            "CreatedAt": "2026-04-29T07:16:51.473Z"
+          },
+          {
+            "id": "tDBtF78EYLfSb6fcawCnXX",
+            "title": "Title 1",
+            "content": "Hello world 1",
+            "author": {
+              "nickname": "Adam",
+              "email": "adam007@example.com",
+              "vehicleid": "f89b5f21-7829-45cb-a650-299a61090378",
+              "profile_pic_url": "",
+              "created_at": "2026-04-29T07:16:51.461Z"
+            },
+            "comments": [],
+            "authorid": 1,
+            "CreatedAt": "2026-04-29T07:16:51.461Z"
+          }
+        ],
+        "next_offset": null,
+        "previous_offset": null,
+        "total": 3
+      },
+      "isListQuery": true
+    }
+  ]
+}

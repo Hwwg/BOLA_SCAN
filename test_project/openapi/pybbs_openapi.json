@@ -1,0 +1,4515 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "pybbs API (derived from AsciiDoc)",
+    "version": "1.0.0",
+    "description": "Generated from docs/src/main/asciidoc/api-doc.asciidoc. Schema inferred approximately."
+  },
+  "servers": [
+    {
+      "url": "http://example.test"
+    }
+  ],
+  "paths": {
+    "/common/captcha": {
+      "post": {
+        "summary": "图片验证码",
+        "description": "GIF图片",
+        "responses": {
+          "200": {
+            "description": "GIF图片",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "无": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/": {
+      "get": {
+        "summary": "首页 - 首页列表",
+        "description": "Result(IPage<Map>)",
+        "responses": {
+          "200": {
+            "description": "Result(IPage<Map>)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "collectCount": {
+                                "type": "integer"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "good": {
+                                "type": "boolean"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "commentCount": {
+                                "type": "integer"
+                              },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "icon": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "topicCount": {
+                                      "type": "integer"
+                                    },
+                                    "inTime": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "topicCount",
+                                    "inTime"
+                                  ]
+                                }
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "view": {
+                                "type": "integer"
+                              },
+                              "modifyTime": {
+                                "type": "integer"
+                              },
+                              "top": {
+                                "type": "boolean"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "collectCount",
+                              "avatar",
+                              "title",
+                              "userId",
+                              "good",
+                              "content",
+                              "commentCount",
+                              "tags",
+                              "inTime",
+                              "view",
+                              "modifyTime",
+                              "top",
+                              "id",
+                              "username"
+                            ]
+                          }
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "current": {
+                          "type": "integer"
+                        },
+                        "searchCount": {
+                          "type": "boolean"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "records",
+                        "total",
+                        "size",
+                        "current",
+                        "searchCount",
+                        "pages"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "records": [
+                          {
+                            "collectCount": 0,
+                            "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                            "title": "我是一个话题标题",
+                            "userId": 1,
+                            "good": false,
+                            "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                            "commentCount": 0,
+                            "tags": [
+                              {
+                                "id": 1,
+                                "name": "一个标签",
+                                "description": null,
+                                "icon": null,
+                                "topicCount": 1,
+                                "inTime": 1548992281000
+                              }
+                            ],
+                            "inTime": 1548992281000,
+                            "view": 2,
+                            "modifyTime": 1548992296000,
+                            "top": false,
+                            "id": 1,
+                            "username": "tomoya"
+                          }
+                        ],
+                        "total": 1,
+                        "size": 20,
+                        "current": 1,
+                        "searchCount": true,
+                        "pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "tab",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "分类，分别是 精华：`good` 无人评论：`noanswer` 热门：`hot` 最新：`newest`"
+          }
+        ]
+      }
+    },
+    "/api/index": {
+      "get": {
+        "summary": "首页 - 首页列表",
+        "description": "Result(IPage<Map>)",
+        "responses": {
+          "200": {
+            "description": "Result(IPage<Map>)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "collectCount": {
+                                "type": "integer"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "good": {
+                                "type": "boolean"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "commentCount": {
+                                "type": "integer"
+                              },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "icon": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "topicCount": {
+                                      "type": "integer"
+                                    },
+                                    "inTime": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "topicCount",
+                                    "inTime"
+                                  ]
+                                }
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "view": {
+                                "type": "integer"
+                              },
+                              "modifyTime": {
+                                "type": "integer"
+                              },
+                              "top": {
+                                "type": "boolean"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "collectCount",
+                              "avatar",
+                              "title",
+                              "userId",
+                              "good",
+                              "content",
+                              "commentCount",
+                              "tags",
+                              "inTime",
+                              "view",
+                              "modifyTime",
+                              "top",
+                              "id",
+                              "username"
+                            ]
+                          }
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "current": {
+                          "type": "integer"
+                        },
+                        "searchCount": {
+                          "type": "boolean"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "records",
+                        "total",
+                        "size",
+                        "current",
+                        "searchCount",
+                        "pages"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "records": [
+                          {
+                            "collectCount": 0,
+                            "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                            "title": "我是一个话题标题",
+                            "userId": 1,
+                            "good": false,
+                            "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                            "commentCount": 0,
+                            "tags": [
+                              {
+                                "id": 1,
+                                "name": "一个标签",
+                                "description": null,
+                                "icon": null,
+                                "topicCount": 1,
+                                "inTime": 1548992281000
+                              }
+                            ],
+                            "inTime": 1548992281000,
+                            "view": 2,
+                            "modifyTime": 1548992296000,
+                            "top": false,
+                            "id": 1,
+                            "username": "tomoya"
+                          }
+                        ],
+                        "total": 1,
+                        "size": 20,
+                        "current": 1,
+                        "searchCount": true,
+                        "pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "tab",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "分类，分别是 精华：`good` 无人评论：`noanswer` 热门：`hot` 最新：`newest`"
+          }
+        ]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "首页 - 登录",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "website": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "bio": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        },
+                        "token": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "user",
+                        "token"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "user": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": null,
+                          "website": null,
+                          "bio": null,
+                          "score": 10,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        },
+                        "token": "REDACTED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "captcha": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "post": {
+        "summary": "首页 - 注册",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "website": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "bio": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        },
+                        "token": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "user",
+                        "token"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "user": {
+                          "id": 2,
+                          "username": "test",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                          "email": null,
+                          "website": null,
+                          "bio": null,
+                          "score": 0,
+                          "inTime": 1548992486000,
+                          "emailNotification": false
+                        },
+                        "token": "REDACTED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "captcha": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/send_code": {
+      "get": {
+        "summary": "首页 - 发送手机验证码",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mobile",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "手机号"
+          },
+          {
+            "name": "captcha",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "图片验证码"
+          }
+        ]
+      }
+    },
+    "/api/mobile_login": {
+      "post": {
+        "summary": "首页 - 手机号+验证码登录/注册",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "mobile": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "bio": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "mobile",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        },
+                        "token": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "user",
+                        "token"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "user": {
+                          "id": 2,
+                          "username": "test",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                          "email": null,
+                          "mobile": "13111111111",
+                          "website": null,
+                          "bio": null,
+                          "score": 0,
+                          "inTime": 1548992486000,
+                          "emailNotification": false
+                        },
+                        "token": "REDACTED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "captcha": {
+                    "type": "string"
+                  },
+                  "mobile": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tags": {
+      "post": {
+        "summary": "首页 - 标签",
+        "description": "Result(List<Tag>)",
+        "responses": {
+          "200": {
+            "description": "Result(List<Tag>)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "icon": {
+                                "type": "string"
+                              },
+                              "topicCount": {
+                                "type": "integer"
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "description",
+                              "icon",
+                              "topicCount",
+                              "inTime"
+                            ]
+                          }
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "current": {
+                          "type": "integer"
+                        },
+                        "searchCount": {
+                          "type": "boolean"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "records",
+                        "total",
+                        "size",
+                        "current",
+                        "searchCount",
+                        "pages"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "records": [
+                          {
+                            "id": 1,
+                            "name": "一个标签",
+                            "description": "标签描述，解释一下标签让人能更明白它的意思",
+                            "icon": "http://spring.io/img/homepage/icon-spring-boot.svg",
+                            "topicCount": 1,
+                            "inTime": 1548992281000
+                          }
+                        ],
+                        "total": 1,
+                        "size": 20,
+                        "current": 1,
+                        "searchCount": true,
+                        "pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pageNo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tag/{name}": {
+      "post": {
+        "summary": "首页 - 标签查话题列表",
+        "description": "Result(IPage<Map>)",
+        "responses": {
+          "200": {
+            "description": "Result(IPage<Map>)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "tag": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "icon": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "topicCount": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "name",
+                            "topicCount",
+                            "inTime"
+                          ]
+                        },
+                        "page": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "collectCount": {
+                                    "type": "integer"
+                                  },
+                                  "avatar": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "good": {
+                                    "type": "boolean"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  },
+                                  "commentCount": {
+                                    "type": "integer"
+                                  },
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "view": {
+                                    "type": "integer"
+                                  },
+                                  "modifyTime": {
+                                    "type": "integer"
+                                  },
+                                  "top": {
+                                    "type": "boolean"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "collectCount",
+                                  "avatar",
+                                  "title",
+                                  "userId",
+                                  "good",
+                                  "content",
+                                  "commentCount",
+                                  "inTime",
+                                  "view",
+                                  "modifyTime",
+                                  "top",
+                                  "upIds",
+                                  "id",
+                                  "username"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "tag",
+                        "page"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "tag": {
+                          "id": 17,
+                          "name": "朋也社区",
+                          "description": null,
+                          "icon": null,
+                          "topicCount": 3,
+                          "inTime": 1551036349000
+                        },
+                        "page": {
+                          "records": [
+                            {
+                              "collectCount": 1,
+                              "avatar": "https://avatars3.githubusercontent.com/u/6915570?s=460&v=4",
+                              "title": "网站的接口全换成restful风格的了，欢迎大家来测bug",
+                              "userId": 1,
+                              "good": false,
+                              "content": "",
+                              "commentCount": 1,
+                              "inTime": 1551036349000,
+                              "view": 236,
+                              "modifyTime": 1555529685000,
+                              "top": false,
+                              "upIds": "23,99",
+                              "id": 15,
+                              "username": "atjiu"
+                            }
+                          ],
+                          "total": 3,
+                          "size": 20,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name 标签名": {
+                    "type": "string"
+                  },
+                  "pageNo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/upload": {
+      "post": {
+        "summary": "首页 - 上传文件（图片，视频）",
+        "description": "Result(String) // 上传成功后，会返回图片的访问地址",
+        "responses": {
+          "200": {
+            "description": "Result(String) // 上传成功后，会返回图片的访问地址",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "errors": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "urls": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "errors",
+                        "urls"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "errors": [],
+                        "urls": [
+                          "http://example.test/static/upload/avatar/tomoya/avatar.png"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/topic/{id}": {
+      "get": {
+        "summary": "话题 - 话题详情",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "comments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "topicId": {
+                                "type": "integer"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "commentId": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "upIds": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "layer": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "topicId",
+                              "userId",
+                              "content",
+                              "inTime",
+                              "upIds",
+                              "username",
+                              "avatar",
+                              "layer"
+                            ]
+                          }
+                        },
+                        "topic": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "content": {
+                              "type": "string"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "modifyTime": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            },
+                            "commentCount": {
+                              "type": "integer"
+                            },
+                            "collectCount": {
+                              "type": "integer"
+                            },
+                            "view": {
+                              "type": "integer"
+                            },
+                            "top": {
+                              "type": "boolean"
+                            },
+                            "good": {
+                              "type": "boolean"
+                            },
+                            "upIds": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "content",
+                            "inTime",
+                            "modifyTime",
+                            "userId",
+                            "commentCount",
+                            "collectCount",
+                            "view",
+                            "top",
+                            "good"
+                          ]
+                        },
+                        "topicUser": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "website": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "bio": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        },
+                        "collect": {
+                          "type": "object",
+                          "properties": {
+                            "topicId": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "topicId",
+                            "userId",
+                            "inTime"
+                          ]
+                        },
+                        "collects": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "topicId": {
+                                "type": "integer"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "topicId",
+                              "userId",
+                              "inTime"
+                            ]
+                          }
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "icon": {
+                                "type": "string"
+                              },
+                              "topicCount": {
+                                "type": "integer"
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "description",
+                              "icon",
+                              "topicCount",
+                              "inTime"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "comments",
+                        "topic",
+                        "topicUser",
+                        "collect",
+                        "collects",
+                        "tags"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "comments": [
+                          {
+                            "id": 1,
+                            "topicId": 1,
+                            "userId": 1,
+                            "content": "modify_comment_content",
+                            "inTime": 1548992961000,
+                            "commentId": null,
+                            "upIds": "2",
+                            "username": "tomoya",
+                            "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                            "layer": 0
+                          },
+                          {
+                            "id": 5,
+                            "topicId": 1,
+                            "userId": 2,
+                            "content": "@tomoya 我是第三条评论",
+                            "inTime": 1548993369000,
+                            "commentId": 1,
+                            "upIds": null,
+                            "username": "test",
+                            "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                            "layer": 1
+                          },
+                          {
+                            "id": 4,
+                            "topicId": 1,
+                            "userId": 2,
+                            "content": "我是第二条评论",
+                            "inTime": 1548993303000,
+                            "commentId": null,
+                            "upIds": null,
+                            "username": "test",
+                            "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                            "layer": 0
+                          }
+                        ],
+                        "topic": {
+                          "id": 1,
+                          "title": "我是一个话题标题",
+                          "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                          "inTime": 1548992281000,
+                          "modifyTime": 1548992296000,
+                          "userId": 1,
+                          "commentCount": 4,
+                          "collectCount": 1,
+                          "view": 13,
+                          "top": false,
+                          "good": false,
+                          "upIds": null
+                        },
+                        "topicUser": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": null,
+                          "website": null,
+                          "bio": null,
+                          "score": 20,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        },
+                        "collect": {
+                          "topicId": 1,
+                          "userId": 2,
+                          "inTime": 1548999420000
+                        },
+                        "collects": [
+                          {
+                            "topicId": 1,
+                            "userId": 2,
+                            "inTime": 1548999420000
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "一个标签",
+                            "description": "标签描述，解释一下标签让人能更明白它的意思",
+                            "icon": "http://spring.io/img/homepage/icon-spring-boot.svg",
+                            "topicCount": 1,
+                            "inTime": 1548992281000
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "**可不传**，传token返回值里会多一个这个话题是否被自己收藏，如果不填就没有这个对象"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "话题id"
+          }
+        ]
+      }
+    },
+    "/api/topic": {
+      "post": {
+        "summary": "话题 - 发布话题",
+        "description": "Result(Topic)",
+        "responses": {
+          "200": {
+            "description": "Result(Topic)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "inTime": {
+                          "type": "integer"
+                        },
+                        "modifyTime": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "commentCount": {
+                          "type": "integer"
+                        },
+                        "collectCount": {
+                          "type": "integer"
+                        },
+                        "view": {
+                          "type": "integer"
+                        },
+                        "top": {
+                          "type": "boolean"
+                        },
+                        "good": {
+                          "type": "boolean"
+                        },
+                        "upIds": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "content",
+                        "inTime",
+                        "userId",
+                        "commentCount",
+                        "collectCount",
+                        "view",
+                        "top",
+                        "good"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "id": 11,
+                        "title": "222",
+                        "content": "",
+                        "inTime": 1551063711700,
+                        "modifyTime": null,
+                        "userId": 1,
+                        "commentCount": 0,
+                        "collectCount": 0,
+                        "view": 0,
+                        "top": false,
+                        "good": false,
+                        "upIds": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "话题 - 编辑话题",
+        "description": "Result(Topic)",
+        "responses": {
+          "200": {
+            "description": "Result(Topic)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "inTime": {
+                          "type": "integer"
+                        },
+                        "modifyTime": {
+                          "type": "integer"
+                        },
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "commentCount": {
+                          "type": "integer"
+                        },
+                        "collectCount": {
+                          "type": "integer"
+                        },
+                        "view": {
+                          "type": "integer"
+                        },
+                        "top": {
+                          "type": "boolean"
+                        },
+                        "good": {
+                          "type": "boolean"
+                        },
+                        "upIds": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "inTime",
+                        "modifyTime",
+                        "userId",
+                        "commentCount",
+                        "collectCount",
+                        "view",
+                        "top",
+                        "good"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "id": 11,
+                        "title": "333",
+                        "content": null,
+                        "inTime": 1551063712000,
+                        "modifyTime": 1551064039058,
+                        "userId": 1,
+                        "commentCount": 0,
+                        "collectCount": 0,
+                        "view": 0,
+                        "top": false,
+                        "good": false,
+                        "upIds": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "话题 - 删除话题",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/topic/{id}/vote": {
+      "get": {
+        "summary": "话题 - 点赞话题",
+        "description": "Result(int) 返回点赞后当前话题的总赞数",
+        "responses": {
+          "200": {
+            "description": "Result(int) 返回点赞后当前话题的总赞数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "话题ID"
+          }
+        ]
+      }
+    },
+    "/api/comment": {
+      "post": {
+        "summary": "评论 - 发布评论",
+        "description": "Result(Comment)",
+        "responses": {
+          "200": {
+            "description": "Result(Comment)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "topicId": {
+                          "type": "integer"
+                        },
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "inTime": {
+                          "type": "integer"
+                        },
+                        "commentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "upIds": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "topicId",
+                        "userId",
+                        "content",
+                        "inTime"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "id": 1,
+                        "topicId": 1,
+                        "userId": 1,
+                        "content": "我是一个评论",
+                        "inTime": 1548992997521,
+                        "commentId": null,
+                        "upIds": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topicId": {
+                    "type": "string"
+                  },
+                  "commentId": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comment/{id}": {
+      "put": {
+        "summary": "评论 - 更新评论",
+        "description": "Result(Comment)",
+        "responses": {
+          "200": {
+            "description": "Result(Comment)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "topicId": {
+                          "type": "integer"
+                        },
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "inTime": {
+                          "type": "integer"
+                        },
+                        "commentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "upIds": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "topicId",
+                        "userId",
+                        "content",
+                        "inTime"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "id": 1,
+                        "topicId": 1,
+                        "userId": 1,
+                        "content": "我是更新后的评论",
+                        "inTime": 1548993059477,
+                        "commentId": null,
+                        "upIds": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "评论 - 删除评论",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comment/{id}/vote": {
+      "get": {
+        "summary": "评论 - 点赞评论",
+        "description": "Result(int) 返回点赞后当前评论的总赞数",
+        "responses": {
+          "200": {
+            "description": "Result(int) 返回点赞后当前评论的总赞数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "评论的id"
+          }
+        ]
+      }
+    },
+    "/api/collect/{topicId}": {
+      "post": {
+        "summary": "收藏 - 收藏话题",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topicId": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "收藏 - 取消收藏",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topicId": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notification/notRead": {
+      "get": {
+        "summary": "通知 - 未读消息个数",
+        "description": "Result(int) // 返回未读消息条数",
+        "responses": {
+          "200": {
+            "description": "Result(int) // 返回未读消息条数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/api/notification/markRead": {
+      "get": {
+        "summary": "通知 - 标记消息已读",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/api/notification/list": {
+      "get": {
+        "summary": "通知 - 消息列表",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "read": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "topicId": {
+                                "type": "integer"
+                              },
+                              "read": {
+                                "type": "boolean"
+                              },
+                              "action": {
+                                "type": "string"
+                              },
+                              "targetUserId": {
+                                "type": "integer"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "inTime",
+                              "topicId",
+                              "read",
+                              "action",
+                              "targetUserId",
+                              "id",
+                              "avatar",
+                              "title",
+                              "userId",
+                              "content",
+                              "username"
+                            ]
+                          }
+                        },
+                        "notRead": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "topicId": {
+                                "type": "integer"
+                              },
+                              "read": {
+                                "type": "boolean"
+                              },
+                              "action": {
+                                "type": "string"
+                              },
+                              "targetUserId": {
+                                "type": "integer"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "inTime",
+                              "topicId",
+                              "read",
+                              "action",
+                              "targetUserId",
+                              "id",
+                              "avatar",
+                              "title",
+                              "userId",
+                              "content",
+                              "username"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "read",
+                        "notRead"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "read": [
+                          {
+                            "inTime": 1548993303000,
+                            "topicId": 1,
+                            "read": true,
+                            "action": "COMMENT",
+                            "targetUserId": 1,
+                            "id": 1,
+                            "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                            "title": "我是一个话题标题",
+                            "userId": 2,
+                            "content": "我是第二条评论",
+                            "username": "test"
+                          }
+                        ],
+                        "notRead": [
+                          {
+                            "inTime": 1548993369000,
+                            "topicId": 1,
+                            "read": false,
+                            "action": "REPLY",
+                            "targetUserId": 1,
+                            "id": 2,
+                            "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                            "title": "我是一个话题标题",
+                            "userId": 2,
+                            "content": "@tomoya 我是第三条评论",
+                            "username": "test"
+                          },
+                          {
+                            "inTime": 1548993369000,
+                            "topicId": 1,
+                            "read": false,
+                            "action": "COMMENT",
+                            "targetUserId": 1,
+                            "id": 3,
+                            "avatar": "http://example.test/static/upload/avatar/test/avatar.png",
+                            "title": "我是一个话题标题",
+                            "userId": 2,
+                            "content": "@tomoya 我是第三条评论",
+                            "username": "test"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/api/user/{username}": {
+      "get": {
+        "summary": "用户 - 用户信息",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "oAuthUsers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "oauthId": {
+                                "type": "integer"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "login": {
+                                "type": "string"
+                              },
+                              "inTime": {
+                                "type": "integer"
+                              },
+                              "bio": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "userId": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "oauthId",
+                              "type",
+                              "login",
+                              "inTime",
+                              "bio",
+                              "email",
+                              "userId"
+                            ]
+                          }
+                        },
+                        "comments": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "topicId": {
+                                    "type": "integer"
+                                  },
+                                  "commentUsername": {
+                                    "type": "string"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "topicUsername": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "inTime",
+                                  "topicId",
+                                  "commentUsername",
+                                  "upIds",
+                                  "id",
+                                  "topicUsername",
+                                  "title",
+                                  "userId",
+                                  "content"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        },
+                        "topics": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "collectCount": {
+                                    "type": "integer"
+                                  },
+                                  "avatar": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "good": {
+                                    "type": "boolean"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  },
+                                  "commentCount": {
+                                    "type": "integer"
+                                  },
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "view": {
+                                    "type": "integer"
+                                  },
+                                  "modifyTime": {
+                                    "type": "integer"
+                                  },
+                                  "top": {
+                                    "type": "boolean"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "collectCount",
+                                  "avatar",
+                                  "title",
+                                  "userId",
+                                  "good",
+                                  "content",
+                                  "commentCount",
+                                  "inTime",
+                                  "view",
+                                  "modifyTime",
+                                  "top",
+                                  "upIds",
+                                  "id",
+                                  "username"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        },
+                        "collectCount": {
+                          "type": "integer"
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string"
+                            },
+                            "bio": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "email",
+                            "website",
+                            "bio",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "oAuthUsers",
+                        "comments",
+                        "topics",
+                        "collectCount",
+                        "user"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "oAuthUsers": [
+                          {
+                            "id": 1,
+                            "oauthId": 6915570,
+                            "type": "GITHUB",
+                            "login": "atjiu",
+                            "inTime": 1548734221000,
+                            "bio": "hello world",
+                            "email": "py2qiuse@gmail.com",
+                            "userId": 1
+                          }
+                        ],
+                        "comments": {
+                          "records": [
+                            {
+                              "inTime": 1548992961000,
+                              "topicId": 1,
+                              "commentUsername": "tomoya",
+                              "upIds": "2",
+                              "id": 1,
+                              "topicUsername": "tomoya",
+                              "title": "我是一个话题标题",
+                              "userId": 1,
+                              "content": "modify_comment_content"
+                            }
+                          ],
+                          "total": 1,
+                          "size": 10,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        },
+                        "topics": {
+                          "records": [
+                            {
+                              "collectCount": 2,
+                              "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                              "title": "我是一个话题标题",
+                              "userId": 1,
+                              "good": false,
+                              "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                              "commentCount": 4,
+                              "inTime": 1548992281000,
+                              "view": 20,
+                              "modifyTime": 1548992296000,
+                              "top": false,
+                              "upIds": "2",
+                              "id": 1,
+                              "username": "tomoya"
+                            }
+                          ],
+                          "total": 1,
+                          "size": 10,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        },
+                        "collectCount": 1,
+                        "user": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": "py2qiuse@gmail.com",
+                          "website": "https://17dev.club/",
+                          "bio": "hello world",
+                          "score": 20,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户名"
+          },
+          {
+            "name": "用户信息",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "话题列表（7条）",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "评论列表（7条）",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "收藏条数",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/api/user/{username}/topics": {
+      "get": {
+        "summary": "用户 - 用户话题列表",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "topics": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "collectCount": {
+                                    "type": "integer"
+                                  },
+                                  "avatar": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "good": {
+                                    "type": "boolean"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  },
+                                  "commentCount": {
+                                    "type": "integer"
+                                  },
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "view": {
+                                    "type": "integer"
+                                  },
+                                  "modifyTime": {
+                                    "type": "integer"
+                                  },
+                                  "top": {
+                                    "type": "boolean"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "collectCount",
+                                  "avatar",
+                                  "title",
+                                  "userId",
+                                  "good",
+                                  "content",
+                                  "commentCount",
+                                  "inTime",
+                                  "view",
+                                  "modifyTime",
+                                  "top",
+                                  "upIds",
+                                  "id",
+                                  "username"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string"
+                            },
+                            "bio": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "email",
+                            "website",
+                            "bio",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "topics",
+                        "user"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "topics": {
+                          "records": [
+                            {
+                              "collectCount": 2,
+                              "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                              "title": "我是一个话题标题",
+                              "userId": 1,
+                              "good": false,
+                              "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                              "commentCount": 4,
+                              "inTime": 1548992281000,
+                              "view": 20,
+                              "modifyTime": 1548992296000,
+                              "top": false,
+                              "upIds": "2",
+                              "id": 1,
+                              "username": "tomoya"
+                            }
+                          ],
+                          "total": 1,
+                          "size": 20,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        },
+                        "user": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": "py2qiuse@gmail.com",
+                          "website": "https://17dev.club/",
+                          "bio": "hello world",
+                          "score": 20,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户名"
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页数"
+          }
+        ]
+      }
+    },
+    "/api/user/{username}/comments": {
+      "get": {
+        "summary": "用户 - 用户评论列表",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "comments": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "topicId": {
+                                    "type": "integer"
+                                  },
+                                  "commentUsername": {
+                                    "type": "string"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "topicUsername": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "inTime",
+                                  "topicId",
+                                  "commentUsername",
+                                  "upIds",
+                                  "id",
+                                  "topicUsername",
+                                  "title",
+                                  "userId",
+                                  "content"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string"
+                            },
+                            "bio": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "email",
+                            "website",
+                            "bio",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "comments",
+                        "user"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "comments": {
+                          "records": [
+                            {
+                              "inTime": 1548992961000,
+                              "topicId": 1,
+                              "commentUsername": "tomoya",
+                              "upIds": "2",
+                              "id": 1,
+                              "topicUsername": "tomoya",
+                              "title": "我是一个话题标题",
+                              "userId": 1,
+                              "content": "modify_comment_content"
+                            }
+                          ],
+                          "total": 1,
+                          "size": 20,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        },
+                        "user": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": "py2qiuse@gmail.com",
+                          "website": "https://17dev.club/",
+                          "bio": "hello world",
+                          "score": 20,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户名"
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页数"
+          }
+        ]
+      }
+    },
+    "/api/user/{username}/collects": {
+      "get": {
+        "summary": "用户 - 用户收藏列表",
+        "description": "Result(Map)",
+        "responses": {
+          "200": {
+            "description": "Result(Map)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "telegramName": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string"
+                            },
+                            "bio": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "integer"
+                            },
+                            "inTime": {
+                              "type": "integer"
+                            },
+                            "emailNotification": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "username",
+                            "avatar",
+                            "email",
+                            "website",
+                            "bio",
+                            "score",
+                            "inTime",
+                            "emailNotification"
+                          ]
+                        },
+                        "collects": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "collectCount": {
+                                    "type": "integer"
+                                  },
+                                  "avatar": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "good": {
+                                    "type": "boolean"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  },
+                                  "commentCount": {
+                                    "type": "integer"
+                                  },
+                                  "tags": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "icon": {
+                                          "type": "string"
+                                        },
+                                        "topicCount": {
+                                          "type": "integer"
+                                        },
+                                        "inTime": {
+                                          "type": "integer"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name",
+                                        "description",
+                                        "icon",
+                                        "topicCount",
+                                        "inTime"
+                                      ]
+                                    }
+                                  },
+                                  "inTime": {
+                                    "type": "integer"
+                                  },
+                                  "view": {
+                                    "type": "integer"
+                                  },
+                                  "modifyTime": {
+                                    "type": "integer"
+                                  },
+                                  "top": {
+                                    "type": "boolean"
+                                  },
+                                  "upIds": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "collectCount",
+                                  "avatar",
+                                  "title",
+                                  "userId",
+                                  "good",
+                                  "content",
+                                  "commentCount",
+                                  "tags",
+                                  "inTime",
+                                  "view",
+                                  "modifyTime",
+                                  "top",
+                                  "upIds",
+                                  "id",
+                                  "username"
+                                ]
+                              }
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "current": {
+                              "type": "integer"
+                            },
+                            "searchCount": {
+                              "type": "boolean"
+                            },
+                            "pages": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "records",
+                            "total",
+                            "size",
+                            "current",
+                            "searchCount",
+                            "pages"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "user",
+                        "collects"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": {
+                        "user": {
+                          "id": 1,
+                          "username": "tomoya",
+                          "telegramName": null,
+                          "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                          "email": "py2qiuse@gmail.com",
+                          "website": "https://17dev.club/",
+                          "bio": "hello world",
+                          "score": 20,
+                          "inTime": 1548992041000,
+                          "emailNotification": false
+                        },
+                        "collects": {
+                          "records": [
+                            {
+                              "collectCount": 2,
+                              "avatar": "http://example.test/static/upload/avatar/tomoya/avatar.png",
+                              "title": "我是一个话题标题",
+                              "userId": 1,
+                              "good": false,
+                              "content": "我是话题内容\n\n我还支持Markdown语法哦\n\n![](https://avatars3.githubusercontent.com/u/6915570?s=460&v=4)\n\n- 无序列表1\n- 无序列表2\n- 无序列表3\n\n1. 有序列表1\n2. 有序列表2\n3. 有序列表3\n\n| Column A | Column B | Column C |\n| -------- | -------- | -------- |\n| A1       | B1       | C1       |\n| A2       | B2       | C2       |\n| A3       | B3       | C3       |\n\n[开发俱乐部](https://17dev.club/)",
+                              "commentCount": 4,
+                              "tags": [
+                                {
+                                  "id": 1,
+                                  "name": "一个标签",
+                                  "description": "标签描述，解释一下标签让人能更明白它的意思",
+                                  "icon": "http://spring.io/img/homepage/icon-spring-boot.svg",
+                                  "topicCount": 1,
+                                  "inTime": 1548992281000
+                                }
+                              ],
+                              "inTime": 1548992281000,
+                              "view": 20,
+                              "modifyTime": 1548992296000,
+                              "top": false,
+                              "upIds": "2",
+                              "id": 1,
+                              "username": "tomoya"
+                            }
+                          ],
+                          "total": 1,
+                          "size": 20,
+                          "current": 1,
+                          "searchCount": true,
+                          "pages": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户名"
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页数"
+          }
+        ]
+      }
+    },
+    "/api/settings": {
+      "put": {
+        "summary": "设置 - 更新个人信息",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "website": {
+                    "type": "string"
+                  },
+                  "bio": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "telegramName": {
+                    "type": "string"
+                  },
+                  "emailNotification": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/settings/sendActiveEmail": {
+      "get": {
+        "summary": "设置 - 发送激活邮件",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/api/sendEmailCode": {
+      "get": {
+        "summary": "设置 - 发送邮箱验证码",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "邮箱地址"
+          }
+        ]
+      }
+    },
+    "/api/settings/updateEmail": {
+      "put": {
+        "summary": "设置 - 更新用户邮箱",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/settings/updatePassword": {
+      "put": {
+        "summary": "设置 - 修改密码",
+        "description": "Result()",
+        "responses": {
+          "200": {
+            "description": "Result()",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "oldPassword": {
+                    "type": "string"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/settings/refreshToken": {
+      "get": {
+        "summary": "设置 - 刷新token",
+        "description": "Result(String) // 返回新token",
+        "responses": {
+          "200": {
+            "description": "Result(String) // 返回新token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "description",
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "code": 200,
+                      "description": "SUCCESS",
+                      "detail": "208bb4c1-daf1-4a32-b198-7f4db8f6d565"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "TokenQuery": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "token"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "context": "click-BUTTON-按钮-Login-1",
+  "timestamp": "2026-04-29T08:13:42.019Z",
+  "count": 2,
+  "requests": [
+    {
+      "id": "wq1cdtgm72h",
+      "type": "request",
+      "url": "http://example.test/chatbot/genai/state",
+      "method": "GET",
+      "resourceType": "xhr",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/login",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "accept": "application/json",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+      },
+      "timestamp": 1777450410381,
+      "context": "click-BUTTON-按钮-Login-1",
+      "signature": "GET|/chatbot/genai/state|"
+    },
+    {
+      "id": "f6b6xk4cah8",
+      "requestId": "wq1cdtgm72h",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:13:30 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=b2cb1e88-0f6d-4894-aa7e-0000549f5bfd; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450410402,
+      "context": "click-BUTTON-按钮-Login-1",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

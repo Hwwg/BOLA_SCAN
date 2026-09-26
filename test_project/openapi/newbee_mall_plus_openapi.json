@@ -1,0 +1,1818 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBee Mall Plus API",
+    "description": "新蜂商城升级版 REST API 文档",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Goods",
+      "description": "商品相关接口"
+    },
+    {
+      "name": "Index",
+      "description": "首页数据接口"
+    }
+  ],
+  "paths": {
+    "/api/v1/shop-cart": {
+      "get": {
+        "tags": [
+          "api-shopping-cart-controller"
+        ],
+        "operationId": "cartList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "api-shopping-cart-controller"
+        ],
+        "operationId": "updateCartItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBeeMallShoppingCartItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "api-shopping-cart-controller"
+        ],
+        "operationId": "saveCartItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBeeMallShoppingCartItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/personal": {
+      "get": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "personalInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "updateInfo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MallUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/{orderNo}/finish": {
+      "put": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "finishOrder",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/{orderNo}/cancel": {
+      "put": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "cancelOrder",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckillExecution/{seckillId}/{userId}/{md5}": {
+      "post": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "执行秒杀并返回结果",
+        "operationId": "execute",
+        "parameters": [
+          {
+            "name": "seckillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "md5",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSeckillSuccessVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/{seckillId}/exposer": {
+      "post": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "获取秒杀链接信息",
+        "operationId": "exposerUrl",
+        "parameters": [
+          {
+            "name": "seckillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultExposerVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/{seckillId}/checkStock": {
+      "post": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "检查秒杀商品库存",
+        "operationId": "seckillCheckStock",
+        "parameters": [
+          {
+            "name": "seckillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/orders/{seckillSuccessId}/{userId}/{seckillSecretKey}": {
+      "post": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "createSeckillOrder",
+        "parameters": [
+          {
+            "name": "seckillSuccessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "seckillSecretKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/register": {
+      "post": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "register",
+        "parameters": [
+          {
+            "name": "loginName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "verifyCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "orderList",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "createOrder",
+        "parameters": [
+          {
+            "name": "couponUserId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/logout": {
+      "post": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/login": {
+      "post": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "login",
+        "parameters": [
+          {
+            "name": "loginName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "verifyCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coupon/{couponId}": {
+      "post": {
+        "tags": [
+          "api-coupon-controller"
+        ],
+        "summary": "用户领取优惠券",
+        "operationId": "save",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "领取结果",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart/settle": {
+      "get": {
+        "tags": [
+          "api-shopping-cart-controller"
+        ],
+        "operationId": "settle",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/selectPayType": {
+      "get": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "selectPayType",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/{seckillId}": {
+      "get": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "秒杀商品详情",
+        "operationId": "seckillGoodsDetail",
+        "parameters": [
+          {
+            "name": "seckillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultNewBeeMallSeckillGoodsVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/time/now": {
+      "get": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "获取服务器时间戳",
+        "operationId": "getTimeNow",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seckill/list": {
+      "get": {
+        "tags": [
+          "秒杀接口"
+        ],
+        "summary": "秒杀商品列表",
+        "operationId": "secondKillGoodsList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListNewBeeMallSeckillGoodsVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/search": {
+      "get": {
+        "tags": [
+          "Goods"
+        ],
+        "summary": "商品搜索",
+        "description": "支持分类筛选、排序与关键词，返回分页数据",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/returnOrders/{orderNo}/{userId}": {
+      "get": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "returnOrderDetail",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/personal/addresses": {
+      "get": {
+        "tags": [
+          "api-personal-controller"
+        ],
+        "operationId": "personalAddresses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payPage": {
+      "get": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "payOrder",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/{orderNo}": {
+      "get": {
+        "tags": [
+          "api-order-controller"
+        ],
+        "operationId": "orderDetail",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/myCoupons": {
+      "get": {
+        "tags": [
+          "api-coupon-controller"
+        ],
+        "summary": "查询我的优惠券分页列表",
+        "operationId": "myCoupons",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回我的优惠券分页列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyCouponsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/index": {
+      "get": {
+        "tags": [
+          "Index"
+        ],
+        "summary": "首页数据聚合",
+        "description": "返回分类、轮播以及热门/新品/推荐商品列表",
+        "operationId": "index",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/goods/detail/{goodsId}": {
+      "get": {
+        "tags": [
+          "Goods"
+        ],
+        "summary": "商品详情",
+        "description": "返回单个商品详情信息",
+        "operationId": "detail",
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewBeeMallGoodsDetailVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coupons": {
+      "get": {
+        "tags": [
+          "api-coupon-controller"
+        ],
+        "summary": "查询可用优惠券列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "返回可用优惠券列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart/{newBeeMallShoppingCartItemId}": {
+      "delete": {
+        "tags": [
+          "api-shopping-cart-controller"
+        ],
+        "operationId": "deleteCartItem",
+        "parameters": [
+          {
+            "name": "newBeeMallShoppingCartItemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coupon/{couponUserId}": {
+      "delete": {
+        "tags": [
+          "api-coupon-controller"
+        ],
+        "summary": "删除我的优惠券",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "couponUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除结果",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NewBeeMallShoppingCartItem": {
+        "type": "object",
+        "properties": {
+          "cartItemId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "string",
+            "format": "byte"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "type": "object",
+            "description": "响应数据载荷，类型由泛型T决定"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "MallUser": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "loginName": {
+            "type": "string"
+          },
+          "passwordMd5": {
+            "type": "string"
+          },
+          "introduceSign": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "string",
+            "format": "byte"
+          },
+          "lockedFlag": {
+            "type": "string",
+            "format": "byte"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResultSeckillSuccessVO": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SeckillSuccessVO"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "SeckillSuccessVO": {
+        "type": "object",
+        "properties": {
+          "seckillSuccessId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "md5": {
+            "type": "string"
+          }
+        },
+        "description": "响应数据载荷，类型由泛型T决定"
+      },
+      "ExposerVO": {
+        "type": "object",
+        "properties": {
+          "seckillStatusEnum": {
+            "type": "string",
+            "enum": [
+              "NOT_START",
+              "START",
+              "STARTED_SHORTAGE_STOCK"
+            ]
+          },
+          "md5": {
+            "type": "string"
+          },
+          "seckillId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "now": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "start": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "end": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "description": "响应数据载荷，类型由泛型T决定"
+      },
+      "ResultExposerVO": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ExposerVO"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "ResultVoid": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "type": "object",
+            "description": "响应数据载荷，类型由泛型T决定"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "NewBeeMallSeckillGoodsVO": {
+        "type": "object",
+        "properties": {
+          "seckillId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string"
+          },
+          "goodsIntro": {
+            "type": "string"
+          },
+          "goodsDetailContent": {
+            "type": "string"
+          },
+          "goodsCoverImg": {
+            "type": "string"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seckillPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seckillBegin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "seckillEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "seckillBeginTime": {
+            "type": "string"
+          },
+          "seckillEndTime": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "endDate": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "description": "响应数据载荷，类型由泛型T决定"
+      },
+      "ResultNewBeeMallSeckillGoodsVO": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "$ref": "#/components/schemas/NewBeeMallSeckillGoodsVO"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "ResultLong": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "type": "integer",
+            "description": "响应数据载荷，类型由泛型T决定",
+            "format": "int64"
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "ResultListNewBeeMallSeckillGoodsVO": {
+        "type": "object",
+        "properties": {
+          "resultCode": {
+            "type": "integer",
+            "description": "业务状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "提示信息",
+            "example": "SUCCESS"
+          },
+          "data": {
+            "type": "array",
+            "description": "响应数据载荷，类型由泛型T决定",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallSeckillGoodsVO"
+            }
+          }
+        },
+        "description": "统一响应结果"
+      },
+      "GoodsCategory": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "format": "byte"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "categoryRank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "string",
+            "format": "byte"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createUser": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateUser": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallSearchGoodsVO": {
+        "type": "object",
+        "properties": {
+          "goodsId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string"
+          },
+          "goodsIntro": {
+            "type": "string"
+          },
+          "goodsCoverImg": {
+            "type": "string"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PageResultNewBeeMallSearchGoodsVO": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallSearchGoodsVO"
+            }
+          }
+        },
+        "description": "分页结果，列表元素为搜索商品VO"
+      },
+      "SearchPageCategoryVO": {
+        "type": "object",
+        "properties": {
+          "firstLevelCategoryName": {
+            "type": "string"
+          },
+          "secondLevelCategoryList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCategory"
+            }
+          },
+          "secondLevelCategoryName": {
+            "type": "string"
+          },
+          "thirdLevelCategoryList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCategory"
+            }
+          },
+          "currentCategoryName": {
+            "type": "string"
+          }
+        },
+        "description": "分类聚合信息（一级/二级/三级），用于搜索页筛选区展示"
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "goodsCategoryId": {
+            "type": "integer",
+            "description": "当前搜索的三级分类ID，可为空",
+            "format": "int64"
+          },
+          "searchPageCategoryVO": {
+            "$ref": "#/components/schemas/SearchPageCategoryVO"
+          },
+          "orderBy": {
+            "type": "string",
+            "description": "排序规则，例如：price、time 等，可为空"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词，可能为空字符串"
+          },
+          "pageResult": {
+            "$ref": "#/components/schemas/PageResultNewBeeMallSearchGoodsVO"
+          }
+        },
+        "description": "搜索页响应结构，包含分类筛选信息与分页结果"
+      },
+      "MyCouponsResponse": {
+        "type": "object",
+        "properties": {
+          "pageResult": {
+            "$ref": "#/components/schemas/PageResultNewBeeMallCouponVO"
+          },
+          "path": {
+            "type": "string",
+            "description": "路径标识"
+          },
+          "status": {
+            "type": "integer",
+            "description": "状态：0-全部，1-可用，2-不可用",
+            "format": "int32"
+          }
+        },
+        "description": "我的优惠券分页响应"
+      },
+      "NewBeeMallCouponVO": {
+        "type": "object",
+        "properties": {
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponUserId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponName": {
+            "type": "string"
+          },
+          "couponDesc": {
+            "type": "string"
+          },
+          "couponTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saleOut": {
+            "type": "boolean"
+          },
+          "useStatus": {
+            "type": "boolean"
+          },
+          "discount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "min": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "couponLimit": {
+            "type": "string",
+            "format": "byte"
+          },
+          "couponType": {
+            "type": "string",
+            "format": "byte"
+          },
+          "status": {
+            "type": "string",
+            "format": "byte"
+          },
+          "goodsType": {
+            "type": "string",
+            "format": "byte"
+          },
+          "goodsValue": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "couponStartTime": {
+            "type": "string",
+            "format": "date"
+          },
+          "couponEndTime": {
+            "type": "string",
+            "format": "date"
+          },
+          "hasReceived": {
+            "type": "boolean"
+          }
+        },
+        "description": "可用优惠券列表"
+      },
+      "PageResultNewBeeMallCouponVO": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallCouponVO"
+            }
+          }
+        },
+        "description": "分页结果（列表数据与分页元信息）"
+      },
+      "IndexResponse": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "description": "一级/二级/三级分类聚合列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexCategoryVO"
+            }
+          },
+          "carousels": {
+            "type": "array",
+            "description": "首页轮播图列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexCarouselVO"
+            }
+          },
+          "hotGoodses": {
+            "type": "array",
+            "description": "首页热销商品列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          },
+          "newGoodses": {
+            "type": "array",
+            "description": "首页新品商品列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          },
+          "recommendGoodses": {
+            "type": "array",
+            "description": "首页推荐商品列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          }
+        },
+        "description": "首页数据响应结构，包含分类、轮播图、各类推荐商品"
+      },
+      "NewBeeMallIndexCarouselVO": {
+        "type": "object",
+        "properties": {
+          "carouselUrl": {
+            "type": "string"
+          },
+          "redirectUrl": {
+            "type": "string"
+          }
+        },
+        "description": "首页轮播图列表"
+      },
+      "NewBeeMallIndexCategoryVO": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "secondLevelCategoryVOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecondLevelCategoryVO"
+            }
+          }
+        },
+        "description": "一级/二级/三级分类聚合列表"
+      },
+      "NewBeeMallIndexConfigGoodsVO": {
+        "type": "object",
+        "properties": {
+          "goodsId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string"
+          },
+          "goodsIntro": {
+            "type": "string"
+          },
+          "goodsCoverImg": {
+            "type": "string"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tag": {
+            "type": "string"
+          }
+        },
+        "description": "首页推荐商品列表"
+      },
+      "SecondLevelCategoryVO": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "thirdLevelCategoryVOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ThirdLevelCategoryVO"
+            }
+          }
+        }
+      },
+      "ThirdLevelCategoryVO": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string"
+          }
+        }
+      },
+      "NewBeeMallGoodsDetailVO": {
+        "type": "object",
+        "properties": {
+          "goodsId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string"
+          },
+          "goodsIntro": {
+            "type": "string"
+          },
+          "goodsCoverImg": {
+            "type": "string"
+          },
+          "goodsCarouselList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "originalPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "goodsDetailContent": {
+            "type": "string"
+          }
+        }
+      },
+      "CouponsResponse": {
+        "type": "object",
+        "properties": {
+          "coupons": {
+            "type": "array",
+            "description": "可用优惠券列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallCouponVO"
+            }
+          }
+        },
+        "description": "优惠券列表响应"
+      }
+    }
+  }
+}

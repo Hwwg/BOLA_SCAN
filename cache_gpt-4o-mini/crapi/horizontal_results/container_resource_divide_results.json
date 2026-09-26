@@ -1,0 +1,61 @@
+{
+    "ou_id": [],
+    "resource_id": [
+        {
+            "other/vehicle": [
+                "carId",
+                "id",
+                "uuid",
+                "vehicleId"
+            ]
+        },
+        {
+            "other/community": [
+                "authorid",
+                "id",
+                "postId",
+                "vehicleid"
+            ]
+        },
+        {
+            "other/shop/orders": [
+                "id",
+                "order_id",
+                "product_id"
+            ]
+        },
+        {
+            "other/mechanic": [
+                "id",
+                "mechanic_code",
+                "report_id"
+            ]
+        },
+        {
+            "other/merchant": [
+                "id"
+            ]
+        },
+        {
+            "other/user/videos": [
+                "id",
+                "video_id"
+            ]
+        },
+        {
+            "other/user": [
+                "email",
+                "id",
+                "video_id"
+            ]
+        },
+        {
+            "other/admin": [
+                "video_id"
+            ]
+        }
+    ],
+    "filterd_resource_id": [
+        "id"
+    ]
+}

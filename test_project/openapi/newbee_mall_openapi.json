@@ -1,0 +1,4869 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "新蜂商城接口文档",
+    "description": "swagger接口文档",
+    "version": "2.0"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "Inferred Url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "1.新蜂商城首页接口",
+      "description": "New Bee Mall Index API"
+    },
+    {
+      "name": "2.新蜂商城用户操作相关接口",
+      "description": "New Bee Mall Personal API"
+    },
+    {
+      "name": "3.新蜂商城分类页面接口",
+      "description": "New Bee Mall Goods Category API"
+    },
+    {
+      "name": "4.新蜂商城商品相关接口",
+      "description": "New Bee Mall Goods API"
+    },
+    {
+      "name": "5.新蜂商城购物车相关接口",
+      "description": "New Bee Mall Shopping Cart API"
+    },
+    {
+      "name": "6.新蜂商城个人地址相关接口",
+      "description": "New Bee Mall User Address API"
+    },
+    {
+      "name": "7.新蜂商城订单操作相关接口",
+      "description": "New Bee Mall Order API"
+    },
+    {
+      "name": "8-0.后台管理系统管理员模块接口",
+      "description": "New Bee Admin Manage User API"
+    },
+    {
+      "name": "8-1.后台管理系统轮播图模块接口",
+      "description": "New Bee Admin Carousel API"
+    },
+    {
+      "name": "8-2.后台管理系统分类模块接口",
+      "description": "New Bee Admin Goods Category API"
+    },
+    {
+      "name": "8-3.后台管理系统商品模块接口",
+      "description": "New Bee Admin Goods Info API"
+    },
+    {
+      "name": "8-4.后台管理系统首页配置模块接口",
+      "description": "New Bee Admin Index Config API"
+    },
+    {
+      "name": "8-5.后台管理系统订单模块接口",
+      "description": "New Bee Admin Order API"
+    },
+    {
+      "name": "8-6.后台管理系统注册用户模块接口",
+      "description": "New Bee Admin Registe User API"
+    },
+    {
+      "name": "8-7.后台管理系统文件上传接口",
+      "description": "New Bee Admin Upload API"
+    }
+  ],
+  "paths": {
+    "/manage-api/v1/carousels": {
+      "get": {
+        "tags": [
+          "8-1.后台管理系统轮播图模块接口"
+        ],
+        "summary": "轮播图列表",
+        "description": "轮播图列表",
+        "operationId": "listUsingGET",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "8-1.后台管理系统轮播图模块接口"
+        ],
+        "summary": "修改轮播图信息",
+        "description": "修改轮播图信息",
+        "operationId": "updateUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarouselEditParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "8-1.后台管理系统轮播图模块接口"
+        ],
+        "summary": "新增轮播图",
+        "description": "新增轮播图",
+        "operationId": "saveUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarouselAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "8-1.后台管理系统轮播图模块接口"
+        ],
+        "summary": "批量删除轮播图信息",
+        "description": "批量删除轮播图信息",
+        "operationId": "deleteUsingDELETE",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/carousels/{id}": {
+      "get": {
+        "tags": [
+          "8-1.后台管理系统轮播图模块接口"
+        ],
+        "summary": "获取单条轮播图信息",
+        "description": "根据id查询",
+        "operationId": "infoUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/categories": {
+      "get": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "商品分类列表",
+        "description": "根据级别和parentId查询",
+        "operationId": "listUsingGET_1",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "categoryLevel",
+            "in": "query",
+            "description": "分类级别",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "上级分类的id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "修改分类信息",
+        "description": "修改分类信息",
+        "operationId": "updateUsingPUT_1",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoodsCategoryEditParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "新增分类",
+        "description": "新增分类",
+        "operationId": "saveUsingPOST_1",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoodsCategoryAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "批量删除分类信息",
+        "description": "批量删除分类信息",
+        "operationId": "deleteUsingDELETE_1",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/categories/{id}": {
+      "get": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "获取单条分类信息",
+        "description": "根据id查询",
+        "operationId": "infoUsingGET_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/categories4Select": {
+      "get": {
+        "tags": [
+          "8-2.后台管理系统分类模块接口"
+        ],
+        "summary": "商品分类列表",
+        "description": "用于三级分类联动效果制作",
+        "operationId": "listForSelectUsingGET",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "categoryId",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/goods": {
+      "put": {
+        "tags": [
+          "8-3.后台管理系统商品模块接口"
+        ],
+        "summary": "修改商品信息",
+        "description": "修改商品信息",
+        "operationId": "updateUsingPUT_2",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoodsEditParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "8-3.后台管理系统商品模块接口"
+        ],
+        "summary": "新增商品信息",
+        "description": "新增商品信息",
+        "operationId": "saveUsingPOST_2",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoodsAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/goods/list": {
+      "get": {
+        "tags": [
+          "8-3.后台管理系统商品模块接口"
+        ],
+        "summary": "商品列表",
+        "description": "可根据名称和上架状态筛选",
+        "operationId": "listUsingGET_2",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "goodsName",
+            "in": "query",
+            "description": "商品名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "goodsSellStatus",
+            "in": "query",
+            "description": "上架状态 0-上架 1-下架",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/goods/status/{sellStatus}": {
+      "put": {
+        "tags": [
+          "8-3.后台管理系统商品模块接口"
+        ],
+        "summary": "批量修改销售状态",
+        "description": "批量修改销售状态",
+        "operationId": "deleteUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sellStatus",
+            "in": "path",
+            "description": "sellStatus",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/goods/{id}": {
+      "get": {
+        "tags": [
+          "8-3.后台管理系统商品模块接口"
+        ],
+        "summary": "获取单条商品信息",
+        "description": "根据id查询",
+        "operationId": "infoUsingGET_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/indexConfigs": {
+      "get": {
+        "tags": [
+          "8-4.后台管理系统首页配置模块接口"
+        ],
+        "summary": "首页配置列表",
+        "description": "首页配置列表",
+        "operationId": "listUsingGET_3",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "description": "1-搜索框热搜 2-搜索下拉框热搜 3-(首页)热销商品 4-(首页)新品上线 5-(首页)为你推荐",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "8-4.后台管理系统首页配置模块接口"
+        ],
+        "summary": "修改首页配置项",
+        "description": "修改首页配置项",
+        "operationId": "updateUsingPUT_3",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndexConfigEditParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "8-4.后台管理系统首页配置模块接口"
+        ],
+        "summary": "新增首页配置项",
+        "description": "新增首页配置项",
+        "operationId": "saveUsingPOST_3",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndexConfigAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "8-4.后台管理系统首页配置模块接口"
+        ],
+        "summary": "批量删除首页配置项信息",
+        "description": "批量删除首页配置项信息",
+        "operationId": "deleteUsingDELETE_2",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/indexConfigs/{id}": {
+      "get": {
+        "tags": [
+          "8-4.后台管理系统首页配置模块接口"
+        ],
+        "summary": "获取单条首页配置项信息",
+        "description": "根据id查询",
+        "operationId": "infoUsingGET_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/adminUser/login": {
+      "post": {
+        "tags": [
+          "8-0.后台管理系统管理员模块接口"
+        ],
+        "summary": "login",
+        "operationId": "loginUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLoginParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«string»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/adminUser/name": {
+      "put": {
+        "tags": [
+          "8-0.后台管理系统管理员模块接口"
+        ],
+        "summary": "nameUpdate",
+        "operationId": "nameUpdateUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAdminNameParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/adminUser/password": {
+      "put": {
+        "tags": [
+          "8-0.后台管理系统管理员模块接口"
+        ],
+        "summary": "passwordUpdate",
+        "operationId": "passwordUpdateUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAdminPasswordParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/adminUser/profile": {
+      "get": {
+        "tags": [
+          "8-0.后台管理系统管理员模块接口"
+        ],
+        "summary": "profile",
+        "operationId": "profileUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/logout": {
+      "delete": {
+        "tags": [
+          "8-0.后台管理系统管理员模块接口"
+        ],
+        "summary": "logout",
+        "operationId": "logoutUsingDELETE",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/orders": {
+      "get": {
+        "tags": [
+          "8-5.后台管理系统订单模块接口"
+        ],
+        "summary": "订单列表",
+        "description": "可根据订单号和订单状态筛选",
+        "operationId": "listUsingGET_4",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderNo",
+            "in": "query",
+            "description": "订单号",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderStatus",
+            "in": "query",
+            "description": "订单状态",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/orders/checkDone": {
+      "put": {
+        "tags": [
+          "8-5.后台管理系统订单模块接口"
+        ],
+        "summary": "修改订单状态为配货成功",
+        "description": "批量修改",
+        "operationId": "checkDoneUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/orders/checkOut": {
+      "put": {
+        "tags": [
+          "8-5.后台管理系统订单模块接口"
+        ],
+        "summary": "修改订单状态为已出库",
+        "description": "批量修改",
+        "operationId": "checkOutUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/orders/close": {
+      "put": {
+        "tags": [
+          "8-5.后台管理系统订单模块接口"
+        ],
+        "summary": "修改订单状态为商家关闭",
+        "description": "批量修改",
+        "operationId": "closeOrderUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/orders/{orderId}": {
+      "get": {
+        "tags": [
+          "8-5.后台管理系统订单模块接口"
+        ],
+        "summary": "订单详情接口",
+        "description": "传参为订单号",
+        "operationId": "orderDetailPageUsingGET",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "订单号",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«NewBeeMallOrderDetailVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/users": {
+      "get": {
+        "tags": [
+          "8-6.后台管理系统注册用户模块接口"
+        ],
+        "summary": "商城注册用户列表",
+        "description": "商城注册用户列表",
+        "operationId": "listUsingGET_5",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "lockStatus",
+            "in": "query",
+            "description": "用户状态",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/users/{lockStatus}": {
+      "put": {
+        "tags": [
+          "8-6.后台管理系统注册用户模块接口"
+        ],
+        "summary": "修改用户状态",
+        "description": "批量修改，用户禁用与解除禁用(0-未锁定 1-已锁定)",
+        "operationId": "lockUserUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lockStatus",
+            "in": "path",
+            "description": "lockStatus",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchIdParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/upload/file": {
+      "post": {
+        "tags": [
+          "8-7.后台管理系统文件上传接口"
+        ],
+        "summary": "单图上传",
+        "description": "file Name \"file\"",
+        "operationId": "uploadUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/manage-api/v1/upload/files": {
+      "post": {
+        "tags": [
+          "8-7.后台管理系统文件上传接口"
+        ],
+        "summary": "多图上传",
+        "description": "wangEditor图片上传",
+        "operationId": "uploadV2UsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/goods/detail/{goodsId}": {
+      "get": {
+        "tags": [
+          "4.新蜂商城商品相关接口"
+        ],
+        "summary": "商品详情接口",
+        "description": "传参为商品id",
+        "operationId": "goodsDetailUsingGET",
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "description": "商品id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«NewBeeMallGoodsDetailVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/search": {
+      "get": {
+        "tags": [
+          "4.新蜂商城商品相关接口"
+        ],
+        "summary": "商品搜索接口",
+        "description": "根据关键字和分类id进行搜索",
+        "operationId": "searchUsingGET",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "搜索关键字",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "goodsCategoryId",
+            "in": "query",
+            "description": "分类id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "orderBy",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«PageResult«List«NewBeeMallSearchGoodsVO»»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "tags": [
+          "3.新蜂商城分类页面接口"
+        ],
+        "summary": "获取分类数据",
+        "description": "分类页面使用",
+        "operationId": "getCategoriesUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«List«NewBeeMallIndexCategoryVO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/index-infos": {
+      "get": {
+        "tags": [
+          "1.新蜂商城首页接口"
+        ],
+        "summary": "获取首页数据",
+        "description": "轮播图、新品、推荐等",
+        "operationId": "indexInfoUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«IndexInfoVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/order": {
+      "get": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "订单列表接口",
+        "description": "传参为页码",
+        "operationId": "orderListUsingGET",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "订单状态:0.待支付 1.待确认 2.待发货 3:已发货 4.交易成功",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«PageResult«List«NewBeeMallOrderListVO»»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/order/{orderNo}": {
+      "get": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "订单详情接口",
+        "description": "传参为订单号",
+        "operationId": "orderDetailPageUsingGET_1",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "订单号",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«NewBeeMallOrderDetailVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/order/{orderNo}/cancel": {
+      "put": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "订单取消接口",
+        "description": "传参为订单号",
+        "operationId": "cancelOrderUsingPUT",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "订单号",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/order/{orderNo}/finish": {
+      "put": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "确认收货接口",
+        "description": "传参为订单号",
+        "operationId": "finishOrderUsingPUT",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "订单号",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/paySuccess": {
+      "get": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "模拟支付成功回调的接口",
+        "description": "传参为订单号和支付方式",
+        "operationId": "paySuccessUsingGET",
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "query",
+            "description": "订单号",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payType",
+            "in": "query",
+            "description": "支付方式",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/saveOrder": {
+      "post": {
+        "tags": [
+          "7.新蜂商城订单操作相关接口"
+        ],
+        "summary": "生成订单接口",
+        "description": "传参为地址id和待结算的购物项id数组",
+        "operationId": "saveOrderUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveOrderParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«string»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/user/info": {
+      "get": {
+        "tags": [
+          "2.新蜂商城用户操作相关接口"
+        ],
+        "summary": "获取用户信息",
+        "operationId": "getUserDetailUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«NewBeeMallUserVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "2.新蜂商城用户操作相关接口"
+        ],
+        "summary": "修改用户信息",
+        "operationId": "updateInfoUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MallUserUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/user/logins": {
+      "post": {
+        "tags": [
+          "2.新蜂商城用户操作相关接口"
+        ],
+        "summary": "登录接口",
+        "description": "返回token",
+        "operationId": "loginUsingPOST_1",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MallUserLoginParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«string»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/user/logout": {
+      "post": {
+        "tags": [
+          "2.新蜂商城用户操作相关接口"
+        ],
+        "summary": "登出接口",
+        "description": "清除token",
+        "operationId": "logoutUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«string»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/user/register": {
+      "post": {
+        "tags": [
+          "2.新蜂商城用户操作相关接口"
+        ],
+        "summary": "用户注册",
+        "operationId": "registerUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MallUserRegisterParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart": {
+      "get": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "购物车列表(网页移动端不分页)",
+        "operationId": "cartItemListUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«List«NewBeeMallShoppingCartItemVO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "修改购物项数据",
+        "description": "传参为购物项id、数量",
+        "operationId": "updateNewBeeMallShoppingCartItemUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCartItemParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "添加商品到购物车接口",
+        "description": "传参为商品id、数量",
+        "operationId": "saveNewBeeMallShoppingCartItemUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCartItemParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart/page": {
+      "get": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "购物车列表(每页默认5条)",
+        "description": "传参为页码",
+        "operationId": "cartItemPageListUsingGET",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "pageNumber",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«PageResult«List«NewBeeMallShoppingCartItemVO»»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart/settle": {
+      "get": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "根据购物项id数组查询购物项明细",
+        "description": "确认订单页面使用",
+        "operationId": "toSettleUsingGET",
+        "parameters": [
+          {
+            "name": "cartItemIds",
+            "in": "query",
+            "description": "cartItemIds",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«List«NewBeeMallShoppingCartItemVO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/shop-cart/{newBeeMallShoppingCartItemId}": {
+      "delete": {
+        "tags": [
+          "5.新蜂商城购物车相关接口"
+        ],
+        "summary": "删除购物项",
+        "description": "传参为购物项id",
+        "operationId": "updateNewBeeMallShoppingCartItemUsingDELETE",
+        "parameters": [
+          {
+            "name": "newBeeMallShoppingCartItemId",
+            "in": "path",
+            "description": "newBeeMallShoppingCartItemId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/address": {
+      "get": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "我的收货地址列表",
+        "operationId": "addressListUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«List«NewBeeMallUserAddressVO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "修改地址",
+        "operationId": "updateMallUserAddressUsingPUT",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMallUserAddressParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«boolean»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "添加地址",
+        "operationId": "saveUserAddressUsingPOST",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveMallUserAddressParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«boolean»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/address/default": {
+      "get": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "获取默认收货地址",
+        "description": "无传参",
+        "operationId": "getDefaultMallUserAddressUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/address/{addressId}": {
+      "get": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "获取收货地址详情",
+        "description": "传参为地址id",
+        "operationId": "getMallUserAddressUsingGET",
+        "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "description": "addressId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result«NewBeeMallUserAddressVO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "6.新蜂商城个人地址相关接口"
+        ],
+        "summary": "删除收货地址",
+        "description": "传参为地址id",
+        "operationId": "deleteAddressUsingDELETE",
+        "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "description": "addressId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录认证token",
+            "required": false,
+            "allowReserved": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdminLoginParam": {
+        "title": "AdminLoginParam",
+        "type": "object",
+        "properties": {
+          "passwordMd5": {
+            "type": "string",
+            "description": "用户密码(需要MD5加密)"
+          },
+          "userName": {
+            "type": "string",
+            "description": "登录名"
+          }
+        }
+      },
+      "BatchIdParam": {
+        "title": "BatchIdParam",
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      },
+      "CarouselAddParam": {
+        "title": "CarouselAddParam",
+        "type": "object",
+        "properties": {
+          "carouselRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "carouselUrl": {
+            "type": "string",
+            "description": "轮播图URL地址"
+          },
+          "redirectUrl": {
+            "type": "string",
+            "description": "轮播图跳转地址"
+          }
+        }
+      },
+      "CarouselEditParam": {
+        "title": "CarouselEditParam",
+        "type": "object",
+        "properties": {
+          "carouselId": {
+            "type": "integer",
+            "description": "待修改轮播图id",
+            "format": "int32"
+          },
+          "carouselRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "carouselUrl": {
+            "type": "string",
+            "description": "轮播图URL地址"
+          },
+          "redirectUrl": {
+            "type": "string",
+            "description": "轮播图跳转地址"
+          }
+        }
+      },
+      "GoodsAddParam": {
+        "title": "GoodsAddParam",
+        "type": "object",
+        "properties": {
+          "goodsCategoryId": {
+            "type": "integer",
+            "description": "分类id",
+            "format": "int64"
+          },
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品主图"
+          },
+          "goodsDetailContent": {
+            "type": "string",
+            "description": "商品详情"
+          },
+          "goodsIntro": {
+            "type": "string",
+            "description": "商品简介"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "goodsSellStatus": {
+            "type": "string",
+            "format": "byte"
+          },
+          "originalPrice": {
+            "type": "integer",
+            "description": "originalPrice",
+            "format": "int32"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "sellingPrice",
+            "format": "int32"
+          },
+          "stockNum": {
+            "type": "integer",
+            "description": "库存",
+            "format": "int32"
+          },
+          "tag": {
+            "type": "string",
+            "description": "商品标签"
+          }
+        }
+      },
+      "GoodsCategoryAddParam": {
+        "title": "GoodsCategoryAddParam",
+        "type": "object",
+        "properties": {
+          "categoryLevel": {
+            "type": "string",
+            "description": "分类层级",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "分类名称"
+          },
+          "categoryRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父类id",
+            "format": "int64"
+          }
+        }
+      },
+      "GoodsCategoryEditParam": {
+        "title": "GoodsCategoryEditParam",
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "description": "待修改分类id",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "description": "分类层级",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "分类名称"
+          },
+          "categoryRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父类id",
+            "format": "int64"
+          }
+        }
+      },
+      "GoodsEditParam": {
+        "title": "GoodsEditParam",
+        "type": "object",
+        "properties": {
+          "goodsCategoryId": {
+            "type": "integer",
+            "description": "分类id",
+            "format": "int64"
+          },
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品主图"
+          },
+          "goodsDetailContent": {
+            "type": "string",
+            "description": "商品详情"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "待修改商品id",
+            "format": "int64"
+          },
+          "goodsIntro": {
+            "type": "string",
+            "description": "商品简介"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "goodsSellStatus": {
+            "type": "string",
+            "format": "byte"
+          },
+          "originalPrice": {
+            "type": "integer",
+            "description": "originalPrice",
+            "format": "int32"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "sellingPrice",
+            "format": "int32"
+          },
+          "stockNum": {
+            "type": "integer",
+            "description": "库存",
+            "format": "int32"
+          },
+          "tag": {
+            "type": "string",
+            "description": "商品标签"
+          }
+        }
+      },
+      "IndexConfigAddParam": {
+        "title": "IndexConfigAddParam",
+        "type": "object",
+        "properties": {
+          "configName": {
+            "type": "string",
+            "description": "配置项名称"
+          },
+          "configRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "configType": {
+            "type": "string",
+            "description": "配置类别",
+            "format": "byte"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          }
+        }
+      },
+      "IndexConfigEditParam": {
+        "title": "IndexConfigEditParam",
+        "type": "object",
+        "properties": {
+          "configId": {
+            "type": "integer",
+            "description": "待修改配置id",
+            "format": "int64"
+          },
+          "configName": {
+            "type": "string",
+            "description": "配置的名称"
+          },
+          "configRank": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "configType": {
+            "type": "string",
+            "description": "配置类别",
+            "format": "byte"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          }
+        }
+      },
+      "IndexInfoVO": {
+        "title": "IndexInfoVO",
+        "type": "object",
+        "properties": {
+          "carousels": {
+            "type": "array",
+            "description": "轮播图(列表)",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexCarouselVO"
+            }
+          },
+          "hotGoodses": {
+            "type": "array",
+            "description": "首页热销商品(列表)",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          },
+          "newGoodses": {
+            "type": "array",
+            "description": "首页新品推荐(列表)",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          },
+          "recommendGoodses": {
+            "type": "array",
+            "description": "首页推荐商品(列表)",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexConfigGoodsVO"
+            }
+          }
+        }
+      },
+      "MallUserLoginParam": {
+        "title": "MallUserLoginParam",
+        "type": "object",
+        "properties": {
+          "loginName": {
+            "type": "string",
+            "description": "登录名"
+          },
+          "passwordMd5": {
+            "type": "string",
+            "description": "用户密码(需要MD5加密)"
+          }
+        }
+      },
+      "MallUserRegisterParam": {
+        "title": "MallUserRegisterParam",
+        "type": "object",
+        "properties": {
+          "loginName": {
+            "type": "string",
+            "description": "登录名"
+          },
+          "password": {
+            "type": "string",
+            "description": "用户密码"
+          }
+        }
+      },
+      "MallUserUpdateParam": {
+        "title": "MallUserUpdateParam",
+        "type": "object",
+        "properties": {
+          "introduceSign": {
+            "type": "string",
+            "description": "个性签名"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "passwordMd5": {
+            "type": "string",
+            "description": "用户密码(需要MD5加密)"
+          }
+        }
+      },
+      "NewBeeMallGoodsDetailVO": {
+        "title": "NewBeeMallGoodsDetailVO",
+        "type": "object",
+        "properties": {
+          "goodsCarouselList": {
+            "type": "array",
+            "description": "商品图片",
+            "items": {
+              "type": "string"
+            }
+          },
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品图片地址"
+          },
+          "goodsDetailContent": {
+            "type": "string",
+            "description": "商品详情字段"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          },
+          "goodsIntro": {
+            "type": "string",
+            "description": "商品简介"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "originalPrice": {
+            "type": "integer",
+            "description": "商品原价",
+            "format": "int32"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "商品价格",
+            "format": "int32"
+          },
+          "tag": {
+            "type": "string",
+            "description": "商品标签"
+          }
+        }
+      },
+      "NewBeeMallIndexCarouselVO": {
+        "title": "NewBeeMallIndexCarouselVO",
+        "type": "object",
+        "properties": {
+          "carouselUrl": {
+            "type": "string",
+            "description": "轮播图图片地址"
+          },
+          "redirectUrl": {
+            "type": "string",
+            "description": "轮播图点击后的跳转路径"
+          }
+        }
+      },
+      "NewBeeMallIndexCategoryVO": {
+        "title": "NewBeeMallIndexCategoryVO",
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "description": "当前一级分类id",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "description": "当前分类级别",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "当前一级分类名称"
+          },
+          "secondLevelCategoryVOS": {
+            "type": "array",
+            "description": "二级分类列表",
+            "items": {
+              "$ref": "#/components/schemas/SecondLevelCategoryVO"
+            }
+          }
+        }
+      },
+      "NewBeeMallIndexConfigGoodsVO": {
+        "title": "NewBeeMallIndexConfigGoodsVO",
+        "type": "object",
+        "properties": {
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品图片地址"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          },
+          "goodsIntro": {
+            "type": "string",
+            "description": "商品简介"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "商品价格",
+            "format": "int32"
+          },
+          "tag": {
+            "type": "string",
+            "description": "商品标签"
+          }
+        }
+      },
+      "NewBeeMallOrderDetailVO": {
+        "title": "NewBeeMallOrderDetailVO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "newBeeMallOrderItemVOS": {
+            "type": "array",
+            "description": "订单项列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallOrderItemVO"
+            }
+          },
+          "orderNo": {
+            "type": "string",
+            "description": "订单号"
+          },
+          "orderStatus": {
+            "type": "string",
+            "description": "订单状态码",
+            "format": "byte"
+          },
+          "orderStatusString": {
+            "type": "string",
+            "description": "订单状态"
+          },
+          "payStatus": {
+            "type": "string",
+            "description": "订单支付状态码",
+            "format": "byte"
+          },
+          "payTime": {
+            "type": "string",
+            "description": "订单支付时间",
+            "format": "date-time"
+          },
+          "payType": {
+            "type": "string",
+            "description": "订单支付方式",
+            "format": "byte"
+          },
+          "payTypeString": {
+            "type": "string",
+            "description": "订单支付方式"
+          },
+          "totalPrice": {
+            "type": "integer",
+            "description": "订单价格",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallOrderItemVO": {
+        "title": "NewBeeMallOrderItemVO",
+        "type": "object",
+        "properties": {
+          "goodsCount": {
+            "type": "integer",
+            "description": "商品数量",
+            "format": "int32"
+          },
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品图片"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "商品价格",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallOrderListVO": {
+        "title": "NewBeeMallOrderListVO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "newBeeMallOrderItemVOS": {
+            "type": "array",
+            "description": "订单项列表",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallOrderItemVO"
+            }
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderNo": {
+            "type": "string",
+            "description": "订单号"
+          },
+          "orderStatus": {
+            "type": "string",
+            "description": "订单状态码",
+            "format": "byte"
+          },
+          "orderStatusString": {
+            "type": "string",
+            "description": "订单状态"
+          },
+          "payType": {
+            "type": "string",
+            "description": "订单支付方式",
+            "format": "byte"
+          },
+          "totalPrice": {
+            "type": "integer",
+            "description": "订单价格",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallSearchGoodsVO": {
+        "title": "NewBeeMallSearchGoodsVO",
+        "type": "object",
+        "properties": {
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品图片地址"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          },
+          "goodsIntro": {
+            "type": "string",
+            "description": "商品简介"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "商品价格",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallShoppingCartItemVO": {
+        "title": "NewBeeMallShoppingCartItemVO",
+        "type": "object",
+        "properties": {
+          "cartItemId": {
+            "type": "integer",
+            "description": "购物项id",
+            "format": "int64"
+          },
+          "goodsCount": {
+            "type": "integer",
+            "description": "商品数量",
+            "format": "int32"
+          },
+          "goodsCoverImg": {
+            "type": "string",
+            "description": "商品图片"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          },
+          "goodsName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "description": "商品价格",
+            "format": "int32"
+          }
+        }
+      },
+      "NewBeeMallUserAddressVO": {
+        "title": "NewBeeMallUserAddressVO",
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "integer",
+            "description": "地址id",
+            "format": "int64"
+          },
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "defaultFlag": {
+            "type": "string",
+            "description": "是否默认地址 0-不是 1-是",
+            "format": "byte"
+          },
+          "detailAddress": {
+            "type": "string",
+            "description": "详细地址"
+          },
+          "provinceName": {
+            "type": "string",
+            "description": "省"
+          },
+          "regionName": {
+            "type": "string",
+            "description": "区/县"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "description": "收件人名称"
+          },
+          "userPhone": {
+            "type": "string",
+            "description": "收件人联系方式"
+          }
+        }
+      },
+      "NewBeeMallUserVO": {
+        "title": "NewBeeMallUserVO",
+        "type": "object",
+        "properties": {
+          "introduceSign": {
+            "type": "string",
+            "description": "个性签名"
+          },
+          "loginName": {
+            "type": "string",
+            "description": "用户登录名"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "用户昵称"
+          }
+        }
+      },
+      "PageResult«List«NewBeeMallOrderListVO»»": {
+        "title": "PageResult«List«NewBeeMallOrderListVO»»",
+        "type": "object",
+        "properties": {
+          "currPage": {
+            "type": "integer",
+            "description": "当前页数",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "description": "列表数据",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/NewBeeMallOrderListVO"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "总记录数",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          }
+        }
+      },
+      "PageResult«List«NewBeeMallSearchGoodsVO»»": {
+        "title": "PageResult«List«NewBeeMallSearchGoodsVO»»",
+        "type": "object",
+        "properties": {
+          "currPage": {
+            "type": "integer",
+            "description": "当前页数",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "description": "列表数据",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/NewBeeMallSearchGoodsVO"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "总记录数",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          }
+        }
+      },
+      "PageResult«List«NewBeeMallShoppingCartItemVO»»": {
+        "title": "PageResult«List«NewBeeMallShoppingCartItemVO»»",
+        "type": "object",
+        "properties": {
+          "currPage": {
+            "type": "integer",
+            "description": "当前页数",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "description": "列表数据",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/NewBeeMallShoppingCartItemVO"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "总记录数",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          }
+        }
+      },
+      "Result": {
+        "title": "Result",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "返回数据"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«IndexInfoVO»": {
+        "title": "Result«IndexInfoVO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/IndexInfoVO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«List«NewBeeMallIndexCategoryVO»»": {
+        "title": "Result«List«NewBeeMallIndexCategoryVO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallIndexCategoryVO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«List«NewBeeMallShoppingCartItemVO»»": {
+        "title": "Result«List«NewBeeMallShoppingCartItemVO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallShoppingCartItemVO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«List«NewBeeMallUserAddressVO»»": {
+        "title": "Result«List«NewBeeMallUserAddressVO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/NewBeeMallUserAddressVO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«NewBeeMallGoodsDetailVO»": {
+        "title": "Result«NewBeeMallGoodsDetailVO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/NewBeeMallGoodsDetailVO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«NewBeeMallOrderDetailVO»": {
+        "title": "Result«NewBeeMallOrderDetailVO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/NewBeeMallOrderDetailVO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«NewBeeMallUserAddressVO»": {
+        "title": "Result«NewBeeMallUserAddressVO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/NewBeeMallUserAddressVO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«NewBeeMallUserVO»": {
+        "title": "Result«NewBeeMallUserVO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/NewBeeMallUserVO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«PageResult«List«NewBeeMallOrderListVO»»»": {
+        "title": "Result«PageResult«List«NewBeeMallOrderListVO»»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/PageResult«List«NewBeeMallOrderListVO»»"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«PageResult«List«NewBeeMallSearchGoodsVO»»»": {
+        "title": "Result«PageResult«List«NewBeeMallSearchGoodsVO»»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/PageResult«List«NewBeeMallSearchGoodsVO»»"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«PageResult«List«NewBeeMallShoppingCartItemVO»»»": {
+        "title": "Result«PageResult«List«NewBeeMallShoppingCartItemVO»»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/PageResult«List«NewBeeMallShoppingCartItemVO»»"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«boolean»": {
+        "title": "Result«boolean»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "boolean",
+            "description": "返回数据",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "Result«string»": {
+        "title": "Result«string»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "返回数据"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "resultCode": {
+            "type": "integer",
+            "description": "返回码",
+            "format": "int32"
+          }
+        }
+      },
+      "SaveCartItemParam": {
+        "title": "SaveCartItemParam",
+        "type": "object",
+        "properties": {
+          "goodsCount": {
+            "type": "integer",
+            "description": "商品数量",
+            "format": "int32"
+          },
+          "goodsId": {
+            "type": "integer",
+            "description": "商品id",
+            "format": "int64"
+          }
+        }
+      },
+      "SaveMallUserAddressParam": {
+        "title": "SaveMallUserAddressParam",
+        "type": "object",
+        "properties": {
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "defaultFlag": {
+            "type": "string",
+            "description": "是否默认地址 0-不是 1-是",
+            "format": "byte"
+          },
+          "detailAddress": {
+            "type": "string",
+            "description": "详细地址"
+          },
+          "provinceName": {
+            "type": "string",
+            "description": "省"
+          },
+          "regionName": {
+            "type": "string",
+            "description": "区/县"
+          },
+          "userName": {
+            "type": "string",
+            "description": "收件人名称"
+          },
+          "userPhone": {
+            "type": "string",
+            "description": "收件人联系方式"
+          }
+        }
+      },
+      "SaveOrderParam": {
+        "title": "SaveOrderParam",
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "integer",
+            "description": "地址id",
+            "format": "int64"
+          },
+          "cartItemIds": {
+            "type": "array",
+            "description": "订单项id数组",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      },
+      "SecondLevelCategoryVO": {
+        "title": "SecondLevelCategoryVO",
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "description": "当前二级分类id",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "description": "当前分类级别",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "当前二级分类名称"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父级分类id",
+            "format": "int64"
+          },
+          "thirdLevelCategoryVOS": {
+            "type": "array",
+            "description": "三级分类列表",
+            "items": {
+              "$ref": "#/components/schemas/ThirdLevelCategoryVO"
+            }
+          }
+        }
+      },
+      "ThirdLevelCategoryVO": {
+        "title": "ThirdLevelCategoryVO",
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "description": "当前三级分类id",
+            "format": "int64"
+          },
+          "categoryLevel": {
+            "type": "string",
+            "description": "当前分类级别",
+            "format": "byte"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "当前三级分类名称"
+          }
+        }
+      },
+      "UpdateAdminNameParam": {
+        "title": "UpdateAdminNameParam",
+        "type": "object",
+        "properties": {
+          "loginUserName": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateAdminPasswordParam": {
+        "title": "UpdateAdminPasswordParam",
+        "type": "object",
+        "properties": {
+          "newPassword": {
+            "type": "string"
+          },
+          "originalPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateCartItemParam": {
+        "title": "UpdateCartItemParam",
+        "type": "object",
+        "properties": {
+          "cartItemId": {
+            "type": "integer",
+            "description": "购物项id",
+            "format": "int64"
+          },
+          "goodsCount": {
+            "type": "integer",
+            "description": "商品数量",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateMallUserAddressParam": {
+        "title": "UpdateMallUserAddressParam",
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "integer",
+            "description": "地址id",
+            "format": "int64"
+          },
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "defaultFlag": {
+            "type": "string",
+            "description": "是否默认地址 0-不是 1-是",
+            "format": "byte"
+          },
+          "detailAddress": {
+            "type": "string",
+            "description": "详细地址"
+          },
+          "provinceName": {
+            "type": "string",
+            "description": "省"
+          },
+          "regionName": {
+            "type": "string",
+            "description": "区/县"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "description": "收件人名称"
+          },
+          "userPhone": {
+            "type": "string",
+            "description": "收件人联系方式"
+          }
+        }
+      }
+    }
+  }
+}

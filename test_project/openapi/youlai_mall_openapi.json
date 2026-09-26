@@ -1,0 +1,6277 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Youlai Mall Combined API",
+    "version": "1.0.0",
+    "description": "Combined OpenAPI from: mall_oms, mall_pms, mall_sms, mall_ums"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    },
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    },
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    },
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "tags": [],
+  "paths": {
+    "/mall-oms/app-api/v1/carts/skuId/{skuId}": {
+      "put": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "更新购物车商品",
+        "operationId": "updateCartItem",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartItemDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "删除购物车商品",
+        "operationId": "removeCartItem",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/callback-api/v1/wx-pay/notify-refund-v3": {
+      "post": {
+        "tags": [
+          "App-微信支付回调接口"
+        ],
+        "operationId": "wxPayRefundNotify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WxPayResponseVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/callback-api/v1/wx-pay/notify-order-v3": {
+      "post": {
+        "tags": [
+          "App-微信支付回调接口"
+        ],
+        "operationId": "wxPayOrderNotify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WxPayResponseVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/orders/submit": {
+      "post": {
+        "tags": [
+          "APP-订单接口"
+        ],
+        "summary": "订单提交",
+        "operationId": "submitOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderSubmitForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/orders/payment": {
+      "post": {
+        "tags": [
+          "APP-订单接口"
+        ],
+        "summary": "订单支付",
+        "operationId": "payOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPaymentForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/orders/confirm": {
+      "post": {
+        "tags": [
+          "APP-订单接口"
+        ],
+        "summary": "订单确认",
+        "description": "进入订单确认页面有两个入口，1：立即购买；2：购物车结算",
+        "operationId": "confirmOrder",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOrderConfirmVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/carts": {
+      "get": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "查询购物车",
+        "operationId": "getCart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "添加购物车商品",
+        "operationId": "addCartItem",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "删除购物车",
+        "operationId": "deleteCart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/carts/_check": {
+      "patch": {
+        "tags": [
+          "App-购物车接口"
+        ],
+        "summary": "checked购物车商品",
+        "operationId": "check",
+        "parameters": [
+          {
+            "name": "checked",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/orders": {
+      "get": {
+        "tags": [
+          "APP-订单接口"
+        ],
+        "summary": "订单分页列表",
+        "operationId": "getOrderPage",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OrderPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOrderPageVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/api/v1/orders": {
+      "get": {
+        "tags": [
+          "Admin-订单管理"
+        ],
+        "summary": "订单分页列表",
+        "operationId": "getOrderPage_1",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OrderPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOmsOrderPageVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/api/v1/orders/{orderId}": {
+      "get": {
+        "tags": [
+          "Admin-订单管理"
+        ],
+        "summary": "订单详情",
+        "operationId": "getOrderDetail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-oms/app-api/v1/orders/{orderId}": {
+      "delete": {
+        "tags": [
+          "APP-订单接口"
+        ],
+        "summary": "订单删除",
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/skus/unlock": {
+      "put": {
+        "tags": [
+          "App-商品库存接口"
+        ],
+        "summary": "解锁库存",
+        "operationId": "unlockStock",
+        "parameters": [
+          {
+            "name": "orderToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/skus/lock": {
+      "put": {
+        "tags": [
+          "App-商品库存接口"
+        ],
+        "summary": "校验并锁定库存",
+        "operationId": "lockStock",
+        "parameters": [
+          {
+            "name": "orderToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LockSkuDTO"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/skus/deduct": {
+      "put": {
+        "tags": [
+          "App-商品库存接口"
+        ],
+        "summary": "扣减库存",
+        "operationId": "deductStock",
+        "parameters": [
+          {
+            "name": "orderSn",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/spu/{id}": {
+      "put": {
+        "tags": [
+          "Admin-商品SPU接口"
+        ],
+        "summary": "修改商品",
+        "operationId": "updateSpuById",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsSpuForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/sku/{skuId}": {
+      "get": {
+        "tags": [
+          "Admin-商品SKU接口"
+        ],
+        "summary": "商品SKU详情",
+        "operationId": "getSkuDetail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin-商品SKU接口"
+        ],
+        "summary": "修改SKU",
+        "operationId": "updateSku",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsSku"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/categories/{id}": {
+      "get": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "商品分类详情",
+        "operationId": "detail_1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "修改商品分类",
+        "operationId": "update",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "选择性修改商品分类",
+        "operationId": "patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/brands/{id}": {
+      "get": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "品牌详情",
+        "operationId": "getBrandList_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "修改品牌",
+        "operationId": "updateBrand",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsBrand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/spu": {
+      "post": {
+        "tags": [
+          "Admin-商品SPU接口"
+        ],
+        "summary": "新增商品",
+        "operationId": "addSpu",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsSpuForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/categories": {
+      "get": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "商品分类列表",
+        "operationId": "getCategoryList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListCategoryVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "新增商品分类",
+        "operationId": "addCategory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/brands": {
+      "get": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "品牌列表",
+        "operationId": "getBrandList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "新增品牌",
+        "operationId": "addBrand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsBrand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/attributes/batch": {
+      "post": {
+        "tags": [
+          "Admin-商品属性"
+        ],
+        "summary": "批量新增/修改",
+        "operationId": "saveBatch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PmsCategoryAttributeForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/spu/{spuId}": {
+      "get": {
+        "tags": [
+          "App-商品接口"
+        ],
+        "summary": "获取商品详情",
+        "operationId": "getSpuDetail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSpuDetailVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/spu/seckilling": {
+      "get": {
+        "tags": [
+          "App-商品接口"
+        ],
+        "summary": "获取秒杀商品列表",
+        "operationId": "listSeckillingSpu",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListSeckillingSpuVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/spu/pages": {
+      "get": {
+        "tags": [
+          "App-商品接口"
+        ],
+        "summary": "商品分页列表",
+        "operationId": "listPagedSpuForApp",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SpuPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultSpuPageVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/skus": {
+      "get": {
+        "tags": [
+          "App-商品库存接口"
+        ],
+        "summary": "获取商品库存列表",
+        "operationId": "getSkuInfoList",
+        "parameters": [
+          {
+            "name": "skuIds",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListSkuInfoDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/skus/{skuId}": {
+      "get": {
+        "tags": [
+          "App-商品库存接口"
+        ],
+        "summary": "获取商品库存信息",
+        "operationId": "getSkuInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSkuInfoDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/app-api/v1/categories": {
+      "get": {
+        "tags": [
+          "App-商品分类"
+        ],
+        "summary": "分类列表",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/spu/{id}/detail": {
+      "get": {
+        "tags": [
+          "Admin-商品SPU接口"
+        ],
+        "summary": "商品详情",
+        "operationId": "detail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/spu/page": {
+      "get": {
+        "tags": [
+          "Admin-商品SPU接口"
+        ],
+        "summary": "商品分页列表",
+        "operationId": "listPagedSpu",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SpuPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/categories/options": {
+      "get": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "商品分类级联列表",
+        "operationId": "getCategoryOptions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/brands/page": {
+      "get": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "品牌分页列表",
+        "operationId": "getBrandPage",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/BrandPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/attributes": {
+      "get": {
+        "tags": [
+          "Admin-商品属性"
+        ],
+        "summary": "属性列表",
+        "operationId": "getAttributeList",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/spu/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-商品SPU接口"
+        ],
+        "summary": "删除商品",
+        "operationId": "delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/categories/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-商品分类"
+        ],
+        "summary": "删除商品分类",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-pms/api/v1/brands/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-品牌接口"
+        ],
+        "summary": "删除品牌",
+        "operationId": "deleteBrands",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/coupons/{couponId}": {
+      "put": {
+        "tags": [
+          "Admin-优惠券管理"
+        ],
+        "summary": "修改优惠券",
+        "operationId": "updateCoupon",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouponForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/adverts/{id}": {
+      "get": {
+        "tags": [
+          "Admin-营销广告"
+        ],
+        "summary": "广告详情",
+        "operationId": "getAdvertDetail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin-营销广告"
+        ],
+        "summary": "修改广告",
+        "operationId": "updateAdvert",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsAdvert"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/coupons": {
+      "post": {
+        "tags": [
+          "Admin-优惠券管理"
+        ],
+        "summary": "新增优惠券",
+        "operationId": "saveCoupon",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouponForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/adverts": {
+      "post": {
+        "tags": [
+          "Admin-营销广告"
+        ],
+        "summary": "新增广告",
+        "operationId": "addAvert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsAdvert"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/app-api/v1/adverts/banners": {
+      "get": {
+        "tags": [
+          "App-营销广告"
+        ],
+        "summary": "APP首页广告横幅列表",
+        "operationId": "getBannerList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListBannerVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/coupons/{couponId}/form_data": {
+      "get": {
+        "tags": [
+          "Admin-优惠券管理"
+        ],
+        "summary": "优惠券表单数据",
+        "operationId": "getCouponFormData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultCouponForm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/coupons/page": {
+      "get": {
+        "tags": [
+          "Admin-优惠券管理"
+        ],
+        "summary": "优惠券分页列表",
+        "operationId": "getCouponPage",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CouponPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/adverts/page": {
+      "get": {
+        "tags": [
+          "Admin-营销广告"
+        ],
+        "summary": "广告分页列表",
+        "operationId": "getAdvertPage",
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AdvertPageQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultSmsAdvert"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/coupons/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-优惠券管理"
+        ],
+        "summary": "删除优惠券",
+        "operationId": "deleteCoupons",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-sms/api/v1/adverts/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-营销广告"
+        ],
+        "summary": "删除广告",
+        "operationId": "deleteAdverts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/{memberId}/balances/_deduct": {
+      "put": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "扣减会员余额",
+        "operationId": "deductBalance",
+        "parameters": [
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/addresses/{addressId}": {
+      "get": {
+        "tags": [
+          "App-会员地址"
+        ],
+        "summary": "获取地址详情",
+        "operationId": "getAddressDetail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultUmsAddress"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "App-会员地址"
+        ],
+        "summary": "修改地址",
+        "operationId": "updateAddress",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/api/v1/members/{memberId}": {
+      "put": {
+        "tags": [
+          "Admin-会员管理"
+        ],
+        "summary": "修改会员",
+        "operationId": "update",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UmsMember"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members": {
+      "post": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "新增会员",
+        "operationId": "addMember",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberRegisterDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultLong"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/view/history": {
+      "get": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "获取浏览历史",
+        "operationId": "getProductViewHistory",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSetProductHistoryVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "添加浏览历史",
+        "operationId": "addProductViewHistory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductHistoryVO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/addresses": {
+      "get": {
+        "tags": [
+          "App-会员地址"
+        ],
+        "summary": "获取当前会员地址列表",
+        "operationId": "listCurrentMemberAddresses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListMemberAddressDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "App-会员地址"
+        ],
+        "summary": "新增地址",
+        "operationId": "addAddress",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/api/v1/members/{memberId}/status": {
+      "patch": {
+        "tags": [
+          "Admin-会员管理"
+        ],
+        "summary": "修改会员状态",
+        "operationId": "updateMemberStatus",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UmsMember"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/{memberId}/openid": {
+      "get": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "根据会员ID获取openid",
+        "operationId": "getMemberById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/{memberId}/addresses": {
+      "get": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "获取会员地址列表",
+        "operationId": "listMemberAddress",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListMemberAddressDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/openid/{openid}": {
+      "get": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "根据 openid 获取会员认证信息",
+        "operationId": "getMemberByOpenid",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMemberAuthDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/members/me": {
+      "get": {
+        "tags": [
+          "App-会员管理"
+        ],
+        "summary": "获取登录会员信息",
+        "operationId": "getCurrMemberInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMemberVO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/api/v1/members": {
+      "get": {
+        "tags": [
+          "Admin-会员管理"
+        ],
+        "summary": "会员分页列表",
+        "operationId": "getMemberPage",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "nickName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultUmsMember"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/app-api/v1/addresses/{ids}": {
+      "delete": {
+        "tags": [
+          "App-会员地址"
+        ],
+        "summary": "删除地址",
+        "operationId": "deleteAddress",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall-ums/api/v1/members/{ids}": {
+      "delete": {
+        "tags": [
+          "Admin-会员管理"
+        ],
+        "summary": "删除会员",
+        "operationId": "delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "CartItemDto": {
+        "type": "object",
+        "properties": {
+          "skuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "checked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "WxPayResponseVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "skuId": {
+            "type": "integer",
+            "description": "SKU ID",
+            "format": "int64"
+          },
+          "skuSn": {
+            "type": "string",
+            "description": "SKU 编号"
+          },
+          "skuName": {
+            "type": "string",
+            "description": "SKU 名称"
+          },
+          "picUrl": {
+            "type": "string",
+            "description": "商品图片URL"
+          },
+          "price": {
+            "type": "integer",
+            "description": "商品价格(单位:分)",
+            "format": "int64"
+          },
+          "spuName": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "商品数量",
+            "format": "int32"
+          }
+        },
+        "description": "订单商品"
+      },
+      "OrderSubmitForm": {
+        "required": [
+          "orderItems",
+          "orderSource",
+          "orderToken",
+          "paymentAmount",
+          "shippingAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "orderToken": {
+            "type": "string",
+            "description": "订单确认页面签发的令牌(防止重复提交)"
+          },
+          "orderSource": {
+            "type": "string",
+            "description": "订单来源",
+            "enum": [
+              "APP",
+              "WEB"
+            ]
+          },
+          "orderItems": {
+            "type": "array",
+            "description": "订单商品明细",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "paymentAmount": {
+            "type": "integer",
+            "description": "应付金额(单位：分)",
+            "format": "int64"
+          },
+          "shippingAddress": {
+            "$ref": "#/components/schemas/ShippingAddress"
+          },
+          "remark": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "订单备注"
+          }
+        }
+      },
+      "ShippingAddress": {
+        "type": "object",
+        "properties": {
+          "consigneeName": {
+            "type": "string",
+            "description": "收货人姓名"
+          },
+          "consigneeMobile": {
+            "type": "string",
+            "description": "收货人手机号"
+          },
+          "province": {
+            "type": "string",
+            "description": "省份"
+          },
+          "city": {
+            "type": "string",
+            "description": "城市"
+          },
+          "district": {
+            "type": "string",
+            "description": "区域"
+          },
+          "detailAddress": {
+            "type": "string",
+            "description": "详细地址"
+          }
+        },
+        "description": "收获地址"
+      },
+      "ResultString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderPaymentForm": {
+        "type": "object",
+        "properties": {
+          "orderSn": {
+            "type": "string",
+            "description": "订单编号"
+          },
+          "appId": {
+            "type": "string",
+            "description": "小程序 AppId"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "description": "支付方式",
+            "enum": [
+              "WX_JSAPI",
+              "ALIPAY",
+              "BALANCE",
+              "WX_APP"
+            ]
+          }
+        },
+        "description": "订单支付表单对象"
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberAddressDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "consigneeName": {
+            "type": "string"
+          },
+          "consigneeMobile": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "detailAddress": {
+            "type": "string"
+          },
+          "defaulted": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "会员收获地址列表"
+      },
+      "OrderConfirmVO": {
+        "type": "object",
+        "properties": {
+          "orderToken": {
+            "type": "string",
+            "description": "订单防重提交令牌"
+          },
+          "orderItems": {
+            "type": "array",
+            "description": "订单商品",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemDTO"
+            }
+          },
+          "addresses": {
+            "type": "array",
+            "description": "会员收获地址列表",
+            "items": {
+              "$ref": "#/components/schemas/MemberAddressDTO"
+            }
+          }
+        },
+        "description": "订单确认响应对象"
+      },
+      "OrderItemDTO": {
+        "type": "object",
+        "properties": {
+          "skuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skuSn": {
+            "type": "string"
+          },
+          "skuName": {
+            "type": "string"
+          },
+          "picUrl": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "spuName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "订单商品"
+      },
+      "ResultOrderConfirmVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OrderConfirmVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderPageQuery": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "pageNum",
+            "format": "int32",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32",
+            "example": 10
+          },
+          "keywords": {
+            "type": "string",
+            "description": "关键字(订单编号/商品名称/会员姓名/会员手机号)"
+          },
+          "status": {
+            "type": "integer",
+            "description": "订单状态",
+            "format": "int32"
+          },
+          "beginDate": {
+            "type": "string",
+            "description": "开始时间(yyyy-MM-dd)",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "截止时间(yyyy-MM-dd)",
+            "format": "date-time"
+          }
+        },
+        "description": "订单分页查询对象"
+      },
+      "DataOrderPageVO": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderPageVO"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OrderPageVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "订单ID",
+            "format": "int64"
+          },
+          "orderSn": {
+            "type": "string",
+            "description": "订单编号"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "订单总金额(分)"
+          },
+          "paymentAmount": {
+            "type": "integer",
+            "description": "订单总金额(分)",
+            "format": "int64"
+          },
+          "paymentMethodLabel": {
+            "type": "string",
+            "description": "支付方式标签"
+          },
+          "status": {
+            "type": "integer",
+            "description": "订单状态",
+            "format": "int32"
+          },
+          "statusLabel": {
+            "type": "string",
+            "description": "订单状态标签"
+          },
+          "totalQuantity": {
+            "type": "integer",
+            "description": "商品总数",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "订单创建时间",
+            "format": "date-time"
+          },
+          "sourceLabel": {
+            "type": "string",
+            "description": "订单来源标签"
+          },
+          "remark": {
+            "type": "string",
+            "description": "订单备注"
+          },
+          "orderItems": {
+            "type": "array",
+            "description": "订单商品集合",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          }
+        },
+        "description": "App-订单分页视图对象"
+      },
+      "PageResultOrderPageVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataOrderPageVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "DataOmsOrderPageVO": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OmsOrderPageVO"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OmsOrderPageVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "订单ID",
+            "format": "int64"
+          },
+          "orderSn": {
+            "type": "string",
+            "description": "订单编号"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "订单总金额(分)"
+          },
+          "paymentAmount": {
+            "type": "integer",
+            "description": "订单总金额(分)",
+            "format": "int64"
+          },
+          "paymentMethodLabel": {
+            "type": "string",
+            "description": "支付方式标签"
+          },
+          "status": {
+            "type": "integer",
+            "description": "订单状态",
+            "format": "int32"
+          },
+          "statusLabel": {
+            "type": "string",
+            "description": "订单状态标签"
+          },
+          "totalQuantity": {
+            "type": "integer",
+            "description": "商品总数",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "订单创建时间",
+            "format": "date-time"
+          },
+          "sourceLabel": {
+            "type": "string",
+            "description": "订单来源标签"
+          },
+          "remark": {
+            "type": "string",
+            "description": "订单备注"
+          },
+          "orderItems": {
+            "type": "array",
+            "description": "订单商品集合",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          }
+        },
+        "description": "Admin-订单分页视图对象"
+      },
+      "PageResultOmsOrderPageVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataOmsOrderPageVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "LockSkuDTO": {
+        "type": "object",
+        "properties": {
+          "skuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PmsSku": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skuSn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "spuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "specIds": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lockedStock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "picUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "PmsSpuAttributeForm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "picUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "PmsSpuForm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "originPrice": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "picUrl": {
+            "type": "string"
+          },
+          "subPicUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "attrList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsSpuAttributeForm"
+            }
+          },
+          "specList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsSpuAttributeForm"
+            }
+          },
+          "skuList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsSku"
+            }
+          }
+        }
+      },
+      "PmsCategory": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visible": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PmsBrand": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Attribute": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "属性ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "属性名称"
+          }
+        },
+        "description": "属性集合"
+      },
+      "PmsCategoryAttributeForm": {
+        "required": [
+          "attributes",
+          "categoryId",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "description": "分类ID",
+            "format": "int64"
+          },
+          "type": {
+            "type": "integer",
+            "description": "属性type",
+            "format": "int32"
+          },
+          "attributes": {
+            "type": "array",
+            "description": "属性集合",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          }
+        },
+        "description": "属性表单"
+      },
+      "GoodsInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "商品ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "originPrice": {
+            "type": "integer",
+            "description": "商品原价（单位：分）",
+            "format": "int64"
+          },
+          "price": {
+            "type": "integer",
+            "description": "商品零售价（单位：分）",
+            "format": "int64"
+          },
+          "sales": {
+            "type": "integer",
+            "description": "销量",
+            "format": "int32"
+          },
+          "album": {
+            "type": "array",
+            "description": "商品图册",
+            "items": {
+              "type": "string",
+              "description": "商品图册"
+            }
+          },
+          "detail": {
+            "type": "string",
+            "description": "商品详情"
+          }
+        },
+        "description": "商品信息"
+      },
+      "ResultSpuDetailVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SpuDetailVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "Sku": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "库存单元ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "库存单元名称"
+          },
+          "specIds": {
+            "type": "string",
+            "description": "库存单元规格值ID集合，以英文逗号拼接"
+          },
+          "price": {
+            "type": "integer",
+            "description": "价格",
+            "format": "int64"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "库存",
+            "format": "int32"
+          },
+          "picUrl": {
+            "type": "string",
+            "description": "商品图片URL"
+          }
+        },
+        "description": "商品库存单元"
+      },
+      "Specification": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "规格名称",
+            "example": "颜色"
+          },
+          "values": {
+            "type": "array",
+            "description": "规格项列表",
+            "example": "黑,白",
+            "items": {
+              "$ref": "#/components/schemas/Value"
+            }
+          }
+        },
+        "description": "规格信息"
+      },
+      "SpuDetailVO": {
+        "type": "object",
+        "properties": {
+          "goodsInfo": {
+            "$ref": "#/components/schemas/GoodsInfo"
+          },
+          "attributeList": {
+            "type": "array",
+            "description": "商品属性列表",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "specList": {
+            "type": "array",
+            "description": "商品规格列表",
+            "items": {
+              "$ref": "#/components/schemas/Specification"
+            }
+          },
+          "skuList": {
+            "type": "array",
+            "description": "商品库存单元列表",
+            "items": {
+              "$ref": "#/components/schemas/Sku"
+            }
+          }
+        },
+        "description": "商品详情"
+      },
+      "Value": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "规格项ID",
+            "format": "int64"
+          },
+          "value": {
+            "type": "string",
+            "description": "规格项值"
+          }
+        },
+        "description": "规格项",
+        "example": "黑,白"
+      },
+      "ResultListSeckillingSpuVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeckillingSpuVO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "SeckillingSpuVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "商品ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "price": {
+            "type": "integer",
+            "description": "商品价格(单位：分)",
+            "format": "int64"
+          },
+          "picUrl": {
+            "type": "string",
+            "description": "图片地址"
+          }
+        },
+        "description": "商品分页对象"
+      },
+      "SpuPageQuery": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "pageNum",
+            "format": "int32",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32",
+            "example": 10
+          },
+          "keywords": {
+            "type": "string",
+            "description": "关键字"
+          },
+          "categoryId": {
+            "type": "integer",
+            "description": "categoryId",
+            "format": "int64"
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段名"
+          },
+          "sort": {
+            "type": "string",
+            "description": "排序规则(asc:升序;desc:降序)"
+          }
+        },
+        "description": "商品分页查询对象"
+      },
+      "DataSpuPageVO": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpuPageVO"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResultSpuPageVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataSpuPageVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "SpuPageVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "商品ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "price": {
+            "type": "integer",
+            "description": "商品价格(单位：分)",
+            "format": "int64"
+          },
+          "sales": {
+            "type": "integer",
+            "description": "销量",
+            "format": "int32"
+          },
+          "picUrl": {
+            "type": "string",
+            "description": "图片地址"
+          }
+        },
+        "description": "商品分页对象"
+      },
+      "ResultListSkuInfoDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuInfoDTO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "SkuInfoDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skuSn": {
+            "type": "string"
+          },
+          "skuName": {
+            "type": "string"
+          },
+          "picUrl": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "spuName": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultSkuInfoDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SkuInfoDTO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "DataObject": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataObject"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "CategoryVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visible": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ResultListCategoryVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryVO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "BrandPageQuery": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "pageNum",
+            "format": "int32",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32",
+            "example": 10
+          },
+          "keywords": {
+            "type": "string",
+            "description": "关键字"
+          }
+        },
+        "description": "品牌分页查询对象"
+      },
+      "CouponForm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "优惠券名称"
+          },
+          "type": {
+            "type": "integer",
+            "description": "优惠券类型(1:满减券;2:直减券;3:折扣券)",
+            "format": "int32"
+          },
+          "faceValueType": {
+            "type": "integer",
+            "description": "优惠券面值类型((1:金额;2:折扣)",
+            "format": "int32"
+          },
+          "faceValue": {
+            "type": "integer",
+            "description": "优惠券面值金额(单位:分)",
+            "format": "int64"
+          },
+          "discount": {
+            "type": "number",
+            "description": "优惠券折扣"
+          },
+          "code": {
+            "type": "string",
+            "description": "优惠券码"
+          },
+          "platform": {
+            "type": "integer",
+            "description": "使用平台(0-全平台;1-移动端;2-PC;)",
+            "format": "int32"
+          },
+          "circulation": {
+            "type": "integer",
+            "description": "发行量(-1:无限制)",
+            "format": "int32"
+          },
+          "minPoint": {
+            "type": "integer",
+            "description": "使用门槛(0:无门槛)",
+            "format": "int64"
+          },
+          "perLimit": {
+            "type": "integer",
+            "description": "每人限领张数(-1:不限制)",
+            "format": "int32"
+          },
+          "validityPeriodType": {
+            "type": "integer",
+            "description": "有效期类型(1:日期范围;2:固定天数)",
+            "format": "int32"
+          },
+          "validityDays": {
+            "type": "integer",
+            "description": "自领取之日起有效天数",
+            "format": "int32"
+          },
+          "validityBeginTime": {
+            "type": "string",
+            "description": "有效期开始时间",
+            "format": "date-time"
+          },
+          "validityEndTime": {
+            "type": "string",
+            "description": "有效期截止时间",
+            "format": "date-time"
+          },
+          "applicationScope": {
+            "type": "integer",
+            "description": "应用范围(0:全场通用;1:指定商品分类;2:指定商品)",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "spuCategoryIds": {
+            "type": "array",
+            "description": "优惠券适用categoryId集合",
+            "items": {
+              "type": "integer",
+              "description": "优惠券适用categoryId集合",
+              "format": "int64"
+            }
+          },
+          "spuIds": {
+            "type": "array",
+            "description": "优惠券适用商品列表",
+            "items": {
+              "type": "integer",
+              "description": "优惠券适用商品列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "优惠券表单对象"
+      },
+      "SmsAdvert": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "redirectUrl": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          }
+        }
+      },
+      "BannerVO": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "广告标题"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "横幅图片URL"
+          },
+          "redirectUrl": {
+            "type": "string",
+            "description": "跳转URL"
+          }
+        },
+        "description": "横幅视图对象"
+      },
+      "ResultListBannerVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BannerVO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultCouponForm": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CouponForm"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "CouponPageQuery": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "pageNum",
+            "format": "int32",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32",
+            "example": 10
+          },
+          "status": {
+            "type": "integer",
+            "description": "状态",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "description": "优惠券码"
+          }
+        },
+        "description": "优惠券分页查询对象"
+      },
+      "AdvertPageQuery": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "pageNum",
+            "format": "int32",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页记录数",
+            "format": "int32",
+            "example": 10
+          },
+          "keywords": {
+            "type": "string",
+            "description": "关键字"
+          }
+        },
+        "description": "广告分页查询对象"
+      },
+      "DataSmsAdvert": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsAdvert"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResultSmsAdvert": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataSmsAdvert"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "AddressForm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "地址ID",
+            "format": "int64"
+          },
+          "consigneeName": {
+            "type": "string",
+            "description": "收货人姓名"
+          },
+          "consigneeMobile": {
+            "pattern": "^1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$",
+            "type": "string",
+            "description": "收货人手机号"
+          },
+          "province": {
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "type": "string",
+            "description": "市"
+          },
+          "area": {
+            "type": "string",
+            "description": "区"
+          },
+          "detailAddress": {
+            "type": "string",
+            "description": "详细地址"
+          },
+          "defaulted": {
+            "type": "integer",
+            "description": "是否默认地址(1:是;0:否)",
+            "format": "int32"
+          }
+        },
+        "description": "地址表单对象"
+      },
+      "UmsAddress": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "consigneeName": {
+            "type": "string"
+          },
+          "consigneeMobile": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "detailAddress": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "defaulted": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UmsMember": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "avatarUrl": {
+            "type": "string"
+          },
+          "openid": {
+            "type": "string"
+          },
+          "sessionKey": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "balance": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "deleted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UmsAddress"
+            }
+          },
+          "point": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MemberRegisterDto": {
+        "type": "object",
+        "properties": {
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "avatarUrl": {
+            "type": "string"
+          },
+          "openid": {
+            "type": "string"
+          },
+          "sessionKey": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultLong": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductHistoryVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "picUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultListMemberAddressDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberAddressDTO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultSetProductHistoryVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductHistoryVO"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberAuthDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ResultMemberAuthDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MemberAuthDTO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "会员ID",
+            "format": "int64"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "nickName"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "description": "会员头像地址"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "会员手机号"
+          },
+          "balance": {
+            "type": "integer",
+            "description": "会员余额(单位:分)",
+            "format": "int64"
+          }
+        },
+        "description": "会员视图层对象"
+      },
+      "ResultMemberVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MemberVO"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultUmsAddress": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UmsAddress"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "DataUmsMember": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UmsMember"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResultUmsMember": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DataUmsMember"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "Authorization": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "tokenUrl": "http://example.test/youlai-auth/oauth2/token",
+            "refreshUrl": "http://example.test/youlai-auth/oauth2/token"
+          }
+        }
+      }
+    }
+  }
+}

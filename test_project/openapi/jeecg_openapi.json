@@ -1,0 +1,5644 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "JeecgBoot 后台服务API接口文档",
+    "description": "后台API接口",
+    "termsOfService": "NO terms of service",
+    "contact": {
+      "name": "北京国炬信息技术有限公司",
+      "url": "www.jeccg.com",
+      "email": "jeecgos@163.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "3.8.3"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "X-Access-Token": []
+    }
+  ],
+  "paths": {
+    "/jeecgboot/sys/tableWhiteList/edit": {
+      "put": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-编辑",
+        "operationId": "edit_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysTableWhiteList"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-编辑",
+        "operationId": "edit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysTableWhiteList"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/edit": {
+      "put": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-编辑",
+        "operationId": "edit_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysRoleIndex"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-编辑",
+        "operationId": "edit_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysRoleIndex"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/edit": {
+      "put": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-编辑",
+        "operationId": "edit_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartRole"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-编辑",
+        "operationId": "edit_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartRole"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/edit": {
+      "put": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-编辑",
+        "operationId": "edit_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartPermission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-编辑",
+        "operationId": "edit_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartPermission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/edit": {
+      "put": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-编辑",
+        "operationId": "edit_9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysPosition"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-编辑",
+        "operationId": "edit_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysPosition"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/formFile/edit": {
+      "put": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-编辑",
+        "operationId": "edit_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFormFile"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-编辑",
+        "operationId": "edit_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFormFile"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/edit": {
+      "put": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-编辑",
+        "operationId": "edit_13",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFillRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-编辑",
+        "operationId": "edit_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFillRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/edit": {
+      "put": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-编辑",
+        "operationId": "edit_15",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDataSource"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-编辑",
+        "operationId": "edit_14",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDataSource"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/edit": {
+      "put": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-编辑",
+        "operationId": "edit_17",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-编辑",
+        "operationId": "edit_16",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/edit": {
+      "put": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-编辑",
+        "operationId": "edit_19",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysCheckRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-编辑",
+        "operationId": "edit_18",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysCheckRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/version/saveVersion": {
+      "post": {
+        "tags": [
+          "app系统配置"
+        ],
+        "summary": "app系统配置-保存",
+        "operationId": "saveVersion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysAppVersion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/thirdLogin/bindingThirdPhone": {
+      "post": {
+        "summary": "手机号登录接口",
+        "operationId": "bindingThirdPhone",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JSONObject"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "default"
+        ]
+      }
+    },
+    "/jeecgboot/sys/tableWhiteList/add": {
+      "post": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-添加",
+        "operationId": "add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysTableWhiteList"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/add": {
+      "post": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-添加",
+        "operationId": "add_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysRoleIndex"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/add": {
+      "post": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-添加",
+        "operationId": "add_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartRole"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/add": {
+      "post": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-添加",
+        "operationId": "add_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDepartPermission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/scanLoginQrcode": {
+      "post": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "扫码登录二维码",
+        "operationId": "scanLoginQrcode",
+        "parameters": [
+          {
+            "name": "qrcodeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/add": {
+      "post": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-添加",
+        "operationId": "add_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysPosition"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/phoneLogin": {
+      "post": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "手机号登录接口",
+        "operationId": "phoneLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JSONObject"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultJSONObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jeecgboot/sys/login": {
+      "post": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "登录接口",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysLoginModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultJSONObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jeecgboot/sys/formFile/add": {
+      "post": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-添加",
+        "operationId": "add_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFormFile"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/add": {
+      "post": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-添加",
+        "operationId": "add_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysFillRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/add": {
+      "post": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-添加",
+        "operationId": "add_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysDataSource"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/appAddFile": {
+      "post": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论表-添加文件",
+        "operationId": "appAddFile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/add": {
+      "post": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-添加",
+        "operationId": "add_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/addText": {
+      "post": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论表-添加文本",
+        "operationId": "addText",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/addFile": {
+      "post": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论表-添加文件",
+        "operationId": "addFile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/add": {
+      "post": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-添加",
+        "operationId": "add_9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysCheckRule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/online/cgform/api/aigc": {
+      "post": {
+        "tags": [
+          "Online表单开发"
+        ],
+        "summary": "通过AI生成一个模块的表设计",
+        "operationId": "a",
+        "parameters": [
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/version/app3version": {
+      "get": {
+        "tags": [
+          "app系统配置"
+        ],
+        "summary": "app版本",
+        "operationId": "app3Version",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysAppVersion"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/tableWhiteList/queryById": {
+      "get": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-通过id查询",
+        "operationId": "queryById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/queryById": {
+      "get": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-通过id查询",
+        "operationId": "queryById_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/queryByCode": {
+      "get": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-通过code查询",
+        "operationId": "queryByCode",
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/list": {
+      "get": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-分页列表查询",
+        "operationId": "queryPageList",
+        "parameters": [
+          {
+            "name": "sysRoleIndex",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysRoleIndex"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/queryById": {
+      "get": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-通过id查询",
+        "operationId": "queryById_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/list": {
+      "get": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-分页列表查询",
+        "operationId": "queryPageList_1",
+        "parameters": [
+          {
+            "name": "sysDepartRole",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysDepartRole"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "deptId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/queryById": {
+      "get": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-通过id查询",
+        "operationId": "queryById_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/list": {
+      "get": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-分页列表查询",
+        "operationId": "queryPageList_2",
+        "parameters": [
+          {
+            "name": "sysDepartPermission",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysDepartPermission"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/randomImage/{key}": {
+      "get": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "获取验证码",
+        "operationId": "randomImage",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jeecgboot/sys/quartzJob/resume": {
+      "get": {
+        "tags": [
+          "定时任务接口"
+        ],
+        "summary": "启动定时任务",
+        "operationId": "resumeJob",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/quartzJob/pause": {
+      "get": {
+        "tags": [
+          "定时任务接口"
+        ],
+        "summary": "停止定时任务",
+        "operationId": "pauseJob",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/queryByIds": {
+      "get": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-通过多个id查询",
+        "operationId": "queryByIds",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/queryById": {
+      "get": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-通过id查询",
+        "operationId": "queryById_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/queryByCode": {
+      "get": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-通过code查询",
+        "operationId": "queryByCode_1",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/list": {
+      "get": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-分页列表查询",
+        "operationId": "queryPageList_3",
+        "parameters": [
+          {
+            "name": "sysPosition",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysPosition"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultIPageSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/getQrcodeToken": {
+      "get": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "获取用户扫码后保存的token",
+        "operationId": "getQrcodeToken",
+        "parameters": [
+          {
+            "name": "qrcodeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/getLoginQrcode": {
+      "get": {
+        "tags": [
+          "用户登录"
+        ],
+        "summary": "登录二维码",
+        "operationId": "getLoginQrcode",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/formFile/queryById": {
+      "get": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-通过id查询",
+        "operationId": "queryById_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/formFile/list": {
+      "get": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-分页列表查询",
+        "operationId": "queryPageList_4",
+        "parameters": [
+          {
+            "name": "sysFormFile",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysFormFile"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/queryById": {
+      "get": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-通过id查询",
+        "operationId": "queryById_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/list": {
+      "get": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-分页列表查询",
+        "operationId": "queryPageList_5",
+        "parameters": [
+          {
+            "name": "sysFillRule",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysFillRule"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/duplicate/check": {
+      "get": {
+        "tags": [
+          "重复校验"
+        ],
+        "summary": "重复校验接口",
+        "operationId": "doDuplicateCheck",
+        "parameters": [
+          {
+            "name": "duplicateCheckVo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DuplicateCheckVo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dictItem/dictItemCheck": {
+      "get": {
+        "tags": [
+          "数据字典"
+        ],
+        "summary": "字典重复校验接口",
+        "operationId": "doDictItemCheck",
+        "parameters": [
+          {
+            "name": "sysDictItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysDictItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/queryById": {
+      "get": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-通过id查询",
+        "operationId": "queryById_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/list": {
+      "get": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-分页列表查询",
+        "operationId": "queryPageList_6",
+        "parameters": [
+          {
+            "name": "sysDataSource",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysDataSource"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/queryById": {
+      "get": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-通过id查询",
+        "operationId": "queryById_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysComment"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/list": {
+      "get": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-分页列表查询",
+        "operationId": "queryPageList_7",
+        "parameters": [
+          {
+            "name": "sysComment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysComment"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultIPageSysComment"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/listByForm": {
+      "get": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-列表查询",
+        "operationId": "queryListByForm",
+        "parameters": [
+          {
+            "name": "sysComment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultIPageSysCommentVO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/fileList": {
+      "get": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-列表查询",
+        "operationId": "queryFileList",
+        "parameters": [
+          {
+            "name": "sysComment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultIPageSysCommentFileVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/queryById": {
+      "get": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-通过id查询",
+        "operationId": "queryById_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/list": {
+      "get": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-分页列表查询",
+        "operationId": "queryPageList_8",
+        "parameters": [
+          {
+            "name": "sysCheckRule",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysCheckRule"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/checkByCode": {
+      "get": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-通过Code校验传入的值",
+        "operationId": "checkByCode",
+        "parameters": [
+          {
+            "name": "ruleCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/tableWhiteList/delete": {
+      "delete": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-通过id删除",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/tableWhiteList/deleteBatch": {
+      "delete": {
+        "tags": [
+          "系统表白名单"
+        ],
+        "summary": "系统表白名单-批量删除",
+        "operationId": "deleteBatch",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/delete": {
+      "delete": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-通过id删除",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysRoleIndex/deleteBatch": {
+      "delete": {
+        "tags": [
+          "角色首页配置"
+        ],
+        "summary": "角色首页配置-批量删除",
+        "operationId": "deleteBatch_1",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/delete": {
+      "delete": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-通过id删除",
+        "operationId": "delete_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartRole/deleteBatch": {
+      "delete": {
+        "tags": [
+          "部门角色"
+        ],
+        "summary": "部门角色-批量删除",
+        "operationId": "deleteBatch_2",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/delete": {
+      "delete": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-通过id删除",
+        "operationId": "delete_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/sysDepartPermission/deleteBatch": {
+      "delete": {
+        "tags": [
+          "部门权限表"
+        ],
+        "summary": "部门权限表-批量删除",
+        "operationId": "deleteBatch_3",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/delete": {
+      "delete": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-通过id删除",
+        "operationId": "delete_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/position/deleteBatch": {
+      "delete": {
+        "tags": [
+          "职务表"
+        ],
+        "summary": "职务表-批量删除",
+        "operationId": "deleteBatch_4",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultSysPosition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/formFile/delete": {
+      "delete": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-通过id删除",
+        "operationId": "delete_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/formFile/deleteBatch": {
+      "delete": {
+        "tags": [
+          "表单评论文件"
+        ],
+        "summary": "表单评论文件-批量删除",
+        "operationId": "deleteBatch_5",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/delete": {
+      "delete": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-通过id删除",
+        "operationId": "delete_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/fillRule/deleteBatch": {
+      "delete": {
+        "tags": [
+          "填值规则"
+        ],
+        "summary": "填值规则-批量删除",
+        "operationId": "deleteBatch_6",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/delete": {
+      "delete": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-通过id删除",
+        "operationId": "delete_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/dataSource/deleteBatch": {
+      "delete": {
+        "tags": [
+          "多数据源管理"
+        ],
+        "summary": "多数据源管理-批量删除",
+        "operationId": "deleteBatch_7",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/delete": {
+      "delete": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-通过id删除",
+        "operationId": "delete_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/deleteOne": {
+      "delete": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-通过id删除",
+        "operationId": "deleteOne",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/comment/deleteBatch": {
+      "delete": {
+        "tags": [
+          "系统评论回复表"
+        ],
+        "summary": "系统评论回复表-批量删除",
+        "operationId": "deleteBatch_8",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/delete": {
+      "delete": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-通过id删除",
+        "operationId": "delete_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/jeecgboot/sys/checkRule/deleteBatch": {
+      "delete": {
+        "tags": [
+          "编码校验规则"
+        ],
+        "summary": "编码校验规则-批量删除",
+        "operationId": "deleteBatch_9",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Access-Token": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultObject": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "type": "object",
+            "description": "返回数据对象"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysTableWhiteList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "tableName": {
+            "type": "string",
+            "description": "允许的表名"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "允许的字段名"
+          },
+          "status": {
+            "type": "string",
+            "description": "状态"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          }
+        },
+        "description": "系统表白名单"
+      },
+      "SysRoleIndex": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "roleCode": {
+            "type": "string",
+            "description": "角色编码"
+          },
+          "url": {
+            "type": "string",
+            "description": "路由地址"
+          },
+          "component": {
+            "type": "string",
+            "description": "组件"
+          },
+          "route": {
+            "type": "boolean",
+            "description": "是否路由菜单"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "优先级",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "description": "状态"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人登录名称"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人登录名称"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新日期",
+            "format": "date-time"
+          },
+          "sysOrgCode": {
+            "type": "string",
+            "description": "所属部门"
+          },
+          "relationType": {
+            "type": "string",
+            "description": "关联类型"
+          }
+        },
+        "description": "角色首页配置"
+      },
+      "SysDepartRole": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "departId": {
+            "type": "string",
+            "description": "部门id"
+          },
+          "roleName": {
+            "type": "string",
+            "description": "部门角色名称"
+          },
+          "roleCode": {
+            "type": "string",
+            "description": "部门角色编码"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          }
+        },
+        "description": "部门角色"
+      },
+      "SysDepartPermission": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "departId": {
+            "type": "string",
+            "description": "部门id"
+          },
+          "permissionId": {
+            "type": "string",
+            "description": "权限id"
+          },
+          "dataRuleIds": {
+            "type": "string",
+            "description": "数据规则id"
+          }
+        },
+        "description": "部门权限表"
+      },
+      "SysPosition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "code": {
+            "type": "string",
+            "description": "职务编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "职务级别名称"
+          },
+          "postLevel": {
+            "type": "integer",
+            "description": "职务等级",
+            "format": "int32"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "公司id"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "修改人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "修改时间",
+            "format": "date-time"
+          },
+          "sysOrgCode": {
+            "type": "string",
+            "description": "组织机构编码"
+          },
+          "tenantId": {
+            "type": "integer",
+            "description": "租户ID",
+            "format": "int32"
+          }
+        },
+        "description": "职务级别表"
+      },
+      "ResultSysPosition": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SysPosition"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysFormFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "tableName": {
+            "type": "string",
+            "description": "表名"
+          },
+          "tableDataId": {
+            "type": "string",
+            "description": "数据id"
+          },
+          "fileId": {
+            "type": "string",
+            "description": "关联文件id"
+          },
+          "fileType": {
+            "type": "string",
+            "description": "文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人登录名称"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          }
+        },
+        "description": "表单评论文件"
+      },
+      "SysFillRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键ID"
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "规则名称"
+          },
+          "ruleCode": {
+            "type": "string",
+            "description": "规则Code"
+          },
+          "ruleClass": {
+            "type": "string",
+            "description": "规则实现类"
+          },
+          "ruleParams": {
+            "type": "string",
+            "description": "规则参数"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "修改人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "修改时间",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          }
+        },
+        "description": "填值规则"
+      },
+      "SysDataSource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "code": {
+            "type": "string",
+            "description": "数据源编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "数据源名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "dbType": {
+            "type": "string",
+            "description": "数据库类型"
+          },
+          "dbDriver": {
+            "type": "string",
+            "description": "驱动类"
+          },
+          "dbUrl": {
+            "type": "string",
+            "description": "数据源地址"
+          },
+          "dbName": {
+            "type": "string",
+            "description": "数据库名称"
+          },
+          "dbUsername": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "dbPassword": {
+            "type": "string",
+            "description": "密码"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新日期",
+            "format": "date-time"
+          },
+          "sysOrgCode": {
+            "type": "string",
+            "description": "所属部门"
+          },
+          "tenantId": {
+            "type": "integer",
+            "description": "租户ID",
+            "format": "int32"
+          }
+        },
+        "description": "多数据源管理"
+      },
+      "SysComment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "tableName": {
+            "type": "string",
+            "description": "表名"
+          },
+          "tableDataId": {
+            "type": "string",
+            "description": "数据id"
+          },
+          "fromUserId": {
+            "type": "string",
+            "description": "来源用户id"
+          },
+          "toUserId": {
+            "type": "string",
+            "description": "发送给用户id(允许为空)"
+          },
+          "commentId": {
+            "type": "string",
+            "description": "评论id(允许为空，不为空时，则为回复)"
+          },
+          "commentContent": {
+            "type": "string",
+            "description": "回复内容"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新日期",
+            "format": "date-time"
+          },
+          "tableId": {
+            "type": "string"
+          }
+        },
+        "description": "系统评论回复表"
+      },
+      "ResultString": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "type": "string",
+            "description": "返回数据对象"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysCheckRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "规则名称"
+          },
+          "ruleCode": {
+            "type": "string",
+            "description": "规则Code"
+          },
+          "ruleJson": {
+            "type": "string",
+            "description": "规则JSON"
+          },
+          "ruleDescription": {
+            "type": "string",
+            "description": "规则描述"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          }
+        },
+        "description": "编码校验规则"
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "type": "object",
+            "description": "返回数据对象"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysAppVersion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新日期",
+            "format": "date-time"
+          },
+          "sysOrgCode": {
+            "type": "string",
+            "description": "所属部门"
+          },
+          "appTitle": {
+            "type": "string",
+            "description": "标题"
+          },
+          "appLogo": {
+            "type": "string",
+            "description": "logo"
+          },
+          "carouselImgJson": {
+            "type": "string",
+            "description": "首页轮播图"
+          },
+          "routeImgJson": {
+            "type": "string",
+            "description": "首页菜单图"
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "版本"
+          },
+          "versionNum": {
+            "type": "integer",
+            "description": "版本编码",
+            "format": "int32"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "description": "app下载路径"
+          },
+          "wgtUrl": {
+            "type": "string",
+            "description": "热更新路径"
+          },
+          "updateNote": {
+            "type": "string",
+            "description": "更新内容"
+          }
+        },
+        "description": "app系统配置"
+      },
+      "JSONObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "innerMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "ResultJSONObject": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "empty": {
+                "type": "boolean"
+              },
+              "innerMap": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            },
+            "additionalProperties": {
+              "type": "object",
+              "description": "返回数据对象"
+            },
+            "description": "返回数据对象"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysLoginModel": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "账号"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "captcha": {
+            "type": "string",
+            "description": "验证码"
+          },
+          "checkKey": {
+            "type": "string",
+            "description": "验证码key"
+          }
+        },
+        "description": "登录对象"
+      },
+      "ResultSysAppVersion": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SysAppVersion"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "ResultListSysPosition": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "description": "返回数据对象",
+            "items": {
+              "$ref": "#/components/schemas/SysPosition"
+            }
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "IPageSysPosition": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int64",
+            "deprecated": true
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysPosition"
+            }
+          }
+        },
+        "description": "返回数据对象"
+      },
+      "ResultIPageSysPosition": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/IPageSysPosition"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "DuplicateCheckVo": {
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "表名",
+            "example": "sys_log"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "字段名",
+            "example": "id"
+          },
+          "fieldVal": {
+            "type": "string",
+            "description": "字段值",
+            "example": "1000"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据ID",
+            "example": "2000"
+          }
+        },
+        "description": "重复校验数据模型"
+      },
+      "SysDictItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "dictId": {
+            "type": "string"
+          },
+          "itemText": {
+            "type": "string"
+          },
+          "itemValue": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createBy": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "itemColor": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultSysComment": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SysComment"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "IPageSysComment": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int64",
+            "deprecated": true
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysComment"
+            }
+          }
+        },
+        "description": "返回数据对象"
+      },
+      "ResultIPageSysComment": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/IPageSysComment"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "IPageSysCommentVO": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int64",
+            "deprecated": true
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysCommentVO"
+            }
+          }
+        },
+        "description": "返回数据对象"
+      },
+      "ResultIPageSysCommentVO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/IPageSysCommentVO"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      },
+      "SysCommentFileVo": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "sysFormFileId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileSize": {
+            "type": "number",
+            "format": "double"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "storeType": {
+            "type": "string"
+          }
+        }
+      },
+      "SysCommentVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "tableDataId": {
+            "type": "string"
+          },
+          "fromUserId": {
+            "type": "string"
+          },
+          "commentContent": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建日期",
+            "format": "date-time"
+          },
+          "fileList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysCommentFileVo"
+            }
+          },
+          "toUserId": {
+            "type": "string"
+          },
+          "commentId": {
+            "type": "string"
+          },
+          "fromUserId_dictText": {
+            "type": "string"
+          },
+          "toUserId_dictText": {
+            "type": "string"
+          },
+          "fromUserAvatar": {
+            "type": "string"
+          },
+          "toUserAvatar": {
+            "type": "string"
+          }
+        }
+      },
+      "IPageSysCommentFileVo": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int64",
+            "deprecated": true
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysCommentFileVo"
+            }
+          }
+        },
+        "description": "返回数据对象"
+      },
+      "ResultIPageSysCommentFileVo": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "成功标志"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回处理消息"
+          },
+          "code": {
+            "type": "integer",
+            "description": "返回代码",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/IPageSysCommentFileVo"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        },
+        "description": "接口返回对象"
+      }
+    },
+    "securitySchemes": {
+      "X-Access-Token": {
+        "type": "apiKey",
+        "name": "X-Access-Token",
+        "in": "header"
+      }
+    }
+  }
+}

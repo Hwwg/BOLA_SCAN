@@ -1,0 +1,94 @@
+# Experiment caches and generated outputs
+cache*/
+backups/
+backup*/
+*_backup/
+horizontal_results/
+evaluation/outputs/
+evaluation/debug_cases/
+scripts/eval_*_result.json
+scripts/eval_*_summary.csv
+scripts/eval_*_summary.md
+scripts/eval_*_overview.csv
+scripts/eval_*_overview.html
+scripts/eval_*_overview.md
+scripts/eval_all_experiments_overview*
+scripts/eval_all_experiments_result*
+scripts/eval_all_experiments_summary*
+scripts/eval_keep_pra_mismatch_records.csv
+scripts/eval_debug_cases*/
+scripts/identifier_ground_truth_*.csv
+scripts/identifier_value.csv
+scripts/identifier_closed_set_*.csv
+scripts/llm_error_propagation*/
+scripts/project_api_samples/
+scripts/test_sets_mapping_parameters/
+scripts/version_drift_*
+scripts/sheet3_with_probe_multiid.csv
+scripts/*.xlsx
+scripts/denpendency_chain.csv
+scripts/llm_error_propagation_experiment.md
+
+# Logs and local run artifacts
+*.log
+*.bak
+*.bak*
+*_backup.py
+batch_depen_gen.log
+judgement_progress.json
+execution_progress.json
+llm_usage.json
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+node_modules/
+node_modules*/
+automated_click/node_modules/
+automated_click/backup/
+automated_click/*/
+!automated_click/config/
+!automated_click/llm/
+!automated_click/modules/
+!automated_click/prompt/
+!automated_click/storage/
+!automated_click/utils/
+
+# IDE/editor files
+.idea/
+.vscode/
+.trae/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Local environment secrets
+.env
+.env.*
+env.sh
+project.json
+
+# Ad-hoc local test assets
+test.png
+test_image.png
+
+# Duplicate local package files
+package 2.json
+package-lock 2.json

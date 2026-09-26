@@ -1,0 +1,2249 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "TIME-SEA ChatGPT API",
+    "description": "TIME-SEA ChatGPT 项目的 REST API 文档，提供聊天、绘图、用户管理等功能",
+    "contact": {
+      "name": "时间海",
+      "url": "https://github.com/dulaiduwang003",
+      "email": "dulaiduwang003@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "开发环境"
+    },
+    {
+      "url": "https://api.example.com",
+      "description": "生产环境"
+    }
+  ],
+  "tags": [
+    {
+      "name": "激励系统",
+      "description": "用户激励相关接口，包括签到、视频激励、兑换码等功能"
+    }
+  ],
+  "paths": {
+    "/user/wechat/bind": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "wechatBindEmail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeChatBindDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/upload/username": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "userUpdateName",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/upload/avatar": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "userUploadAvatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/stat/put/data": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "putStarDialogue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StarDialogueDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/star/delete/{id}": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "deleteStarById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/personality/put/config": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "putPersonalityGptConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalityDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/current/info": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "currentUserInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/callback/order": {
+      "post": {
+        "tags": [
+          "public-controller"
+        ],
+        "operationId": "alipayPullback",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pay/alipay/status/{orderId}": {
+      "post": {
+        "tags": [
+          "pay-controller"
+        ],
+        "operationId": "alipayIsSucceed",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pay/alipay/pay/{productId}": {
+      "post": {
+        "tags": [
+          "pay-controller"
+        ],
+        "operationId": "alipayPayQrCode",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inspirit/reward/video": {
+      "post": {
+        "tags": [
+          "激励系统"
+        ],
+        "summary": "视频激励",
+        "description": "观看视频广告获取奖励",
+        "operationId": "useVideoReward",
+        "responses": {
+          "400": {
+            "description": "视频激励失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "视频激励成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inspirit/reward/signIn": {
+      "post": {
+        "tags": [
+          "激励系统"
+        ],
+        "summary": "用户签到",
+        "description": "用户每日签到获取奖励",
+        "operationId": "userSignInReward",
+        "responses": {
+          "200": {
+            "description": "签到成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "签到失败，可能已经签到过了",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inspirit/exchange/{code}": {
+      "post": {
+        "tags": [
+          "激励系统"
+        ],
+        "summary": "使用兑换码",
+        "description": "输入兑换码获取相应奖励",
+        "operationId": "useExchangeCode",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "兑换码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ABC123"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "兑换失败，兑换码无效或已使用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "兑换成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/sd/wechat/image": {
+      "post": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "addSdWechatDrawingTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrawingSdTaskDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/sd/drawing/image": {
+      "post": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "addSdDrawingTask",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/DrawingSdTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/image/delete/{id}": {
+      "post": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "deleteImageById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/gpt/text": {
+      "post": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "addGptDrawingTextTaskQueue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrawingGptTextDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat/logout": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "wechatLogout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "wechatAuthLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeChatAuthLoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat/get/code": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "getWechatQcCode",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat/code/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "wechatAuthQrCodeLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeChatAuthQrCodeLoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/email/password/back": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "RetrieveEmailPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailCodeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/email/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "emailLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailLoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/email/enroll": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "emailEnroll",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailCodeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/user/put/data": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "updateUserById",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPutDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/server/put/terminal": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "putTerminalConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminalConfigDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/server/put/config": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "heavyLoadServerConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerConfigDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/sd/put/data": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "putSdModel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrawingSdDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/sd/delete/{id}": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "deleteDrawingById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/put/announcement": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "putAnnouncement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnouncementDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/product/put/data": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "productsShelf",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShelvesProductDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/product/delete/{id}": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "productsDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/exchange/delete/{id}": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "deleteExchangeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/exchange/build": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "buildExchangeCode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutExchangeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/drawing/status/{id}": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "putDrawingStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/stat/get/data": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getStarDetailById",
+        "parameters": [
+          {
+            "name": "starId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/star/page": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getStarPage",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/star/get/web": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUserStarWeb",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/personality/get/config": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getPersonalityGptConfig",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/drawing/page": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUserOpsPage",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/get/wechat/status": {
+      "get": {
+        "tags": [
+          "public-controller"
+        ],
+        "operationId": "getWechatAppStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/get/announcement": {
+      "get": {
+        "tags": [
+          "public-controller"
+        ],
+        "operationId": "getAnnouncement",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pay/product/list": {
+      "get": {
+        "tags": [
+          "pay-controller"
+        ],
+        "operationId": "getProductList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pay/orders/page": {
+      "get": {
+        "tags": [
+          "pay-controller"
+        ],
+        "operationId": "tippingOrdersPages",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/status/{drawingId}": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "isDrawingSucceed",
+        "parameters": [
+          {
+            "name": "drawingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/sd/get/model": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "getSdModelList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/sd/connectivity": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "sdConnectivity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/random/get/ops": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "getPublicRandomOps",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/image/page": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "getUserOpsPage_1",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "isPublic",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drawing/image/data/{drawingId}": {
+      "get": {
+        "tags": [
+          "drawing-controller"
+        ],
+        "operationId": "getDrawingResult",
+        "parameters": [
+          {
+            "name": "drawingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat/code/result": {
+      "get": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "isQrCodeLoginSucceed",
+        "parameters": [
+          {
+            "name": "verifyCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/email/code/{email}": {
+      "get": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "getEmailLoginCode",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/user/get/page": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getUserPages",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/user/get/count": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getPlatformCount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/server/get/terminal": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getTerminalConfig",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/server/get/config": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getServerConfig",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/sd/page/model": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getSdModelPages",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/product/get/page": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getProductPages",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/orders/page": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getOrdersPages",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/exchange/get/page": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "redemptionCodePage",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/drawing/page": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getDrawingPage",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WeChatBindDto": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "StarDialogueDto": {
+        "required": [
+          "answer",
+          "issue"
+        ],
+        "type": "object",
+        "properties": {
+          "starId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "issue": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      },
+      "PersonalityDto": {
+        "required": [
+          "answer",
+          "max_tokens",
+          "model",
+          "openAiUrl",
+          "openKey",
+          "questions",
+          "speed",
+          "temperature",
+          "top_p"
+        ],
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "top_p": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "max_tokens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperature": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "openKey": {
+            "type": "string"
+          },
+          "openAiUrl": {
+            "type": "string"
+          },
+          "questions": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "speed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DrawingSdTaskDto": {
+        "required": [
+          "env",
+          "height",
+          "modelName",
+          "prompt",
+          "sampler_index",
+          "steps",
+          "width"
+        ],
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "string",
+            "format": "binary"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modelName": {
+            "type": "string"
+          },
+          "steps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sampler_index": {
+            "type": "string"
+          },
+          "env": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negative_prompt": {
+            "type": "string"
+          }
+        }
+      },
+      "DrawingGptTextDto": {
+        "required": [
+          "prompt",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          }
+        }
+      },
+      "WeChatAuthLoginDto": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "WeChatAuthQrCodeLoginDto": {
+        "required": [
+          "code",
+          "verifyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "verifyCode": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailCodeDto": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailLoginDto": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      },
+      "UserPutDto": {
+        "required": [
+          "frequency",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "frequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TerminalConfigDto": {
+        "required": [
+          "enableGptPlus",
+          "enableProxy",
+          "enableSensitive",
+          "enableWechatAppMain",
+          "proxyIp",
+          "proxyPort",
+          "sensitiveWords",
+          "wechatAppEnv"
+        ],
+        "type": "object",
+        "properties": {
+          "proxyIp": {
+            "type": "string"
+          },
+          "proxyPort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wechatAppEnv": {
+            "type": "string"
+          },
+          "sensitiveWords": {
+            "type": "string"
+          },
+          "enableSensitive": {
+            "type": "boolean"
+          },
+          "enableGptPlus": {
+            "type": "boolean"
+          },
+          "enableWechatAppMain": {
+            "type": "boolean"
+          },
+          "enableProxy": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServerConfigDto": {
+        "required": [
+          "conversationUuid",
+          "gptFrequency",
+          "gptPlusFrequency",
+          "gptTextImageFrequency",
+          "incentiveFrequency",
+          "newBingCookie",
+          "openAiPlusUrl",
+          "openAiUrl",
+          "openKey",
+          "openPlusKey",
+          "organizationUuid",
+          "sdImageFrequency",
+          "sdUrl",
+          "sessionKey",
+          "signInFrequency",
+          "videoFrequency"
+        ],
+        "type": "object",
+        "properties": {
+          "sdUrl": {
+            "type": "string"
+          },
+          "openAiUrl": {
+            "type": "string"
+          },
+          "openAiPlusUrl": {
+            "type": "string"
+          },
+          "openKey": {
+            "type": "string"
+          },
+          "openPlusKey": {
+            "type": "string"
+          },
+          "gptPlusFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "newBingCookie": {
+            "type": "string"
+          },
+          "incentiveFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "videoFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "signInFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sdImageFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "gptFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "gptTextImageFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "organizationUuid": {
+            "type": "string"
+          },
+          "conversationUuid": {
+            "type": "string"
+          },
+          "sessionKey": {
+            "type": "string"
+          }
+        }
+      },
+      "DrawingSdDto": {
+        "required": [
+          "modelName",
+          "textName"
+        ],
+        "type": "object",
+        "properties": {
+          "modelName": {
+            "type": "string"
+          },
+          "textName": {
+            "type": "string"
+          }
+        }
+      },
+      "AnnouncementDto": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "string"
+          }
+        }
+      },
+      "ShelvesProductDto": {
+        "required": [
+          "frequency",
+          "productName",
+          "productPrice"
+        ],
+        "type": "object",
+        "properties": {
+          "productName": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productPrice": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "PutExchangeDto": {
+        "required": [
+          "buildFrequency",
+          "buildQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "buildFrequency": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buildQuantity": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

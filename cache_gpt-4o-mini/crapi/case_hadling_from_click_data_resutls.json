@@ -1,0 +1,144 @@
+{
+    "Other": {
+        "GET /": {},
+        "GET /static/js/main.8c78208c.js": {},
+        "GET /static/css/main.dd33429d.css": {},
+        "GET /manifest.json": {
+            "short_name": "React App",
+            "name": "Create React App Sample",
+            "icons.src": "images/favicon.ico",
+            "icons.sizes": "64x64 32x32 24x24 16x16",
+            "icons.type": "image/x-icon",
+            "start_url": ".",
+            "display": "standalone",
+            "theme_color": "#000000",
+            "background_color": "#ffffff"
+        },
+        "GET /images/favicon.ico": {},
+        "GET image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='a' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M10 0H0v10' fill='none' stroke='rgba(255,255,255,0.1)'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M0 0h100v100H0z'/%3E%3C/svg%3E": {},
+        "GET image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xml:space='preserve'%20viewBox='0%200%201000%201000'%3e%3crect%20width='100%25'%20height='100%25'%20fill='%23fff'/%3e%3cg%3e%3crect%20width='45'%20height='30'%20x='-22.5'%20y='-15'%20rx='1.5'%20ry='1.5'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2337547a;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20-99%20362)%20scale(3.4003)'/%3e%3cpath%20d='M0%2075q14%200%2014%2017%200%2016-14%2016Z'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2398b0ca;fill-rule:nonzero;opacity:1'%20transform='rotate(180%20106%20386)%20scale(3.4003)'/%3e%3crect%20width='25'%20height='4'%20x='-12.5'%20y='-2'%20rx='.2'%20ry='.2'%20style='stroke:%2346648c;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2346648c;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20-46%20282)%20scale(3.4003)'/%3e%3cpath%20d='M19%2065h4l5%204v1H14v-1Z'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2346648c;fill-rule:nonzero;opacity:1'%20transform='translate(165%20150)%20scale(3.4003)'/%3e%3crect%20width='25'%20height='2'%20x='-12.5'%20y='-1'%20rx='.1'%20ry='.1'%20style='stroke:%2398b0ca;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2398b0ca;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20-3%20240)%20scale(3.4003)'/%3e%3ccircle%20r='7.5'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23a478fc;fill-rule:nonzero;opacity:1'%20transform='translate(236%20175)%20scale(3.4003)'/%3e%3crect%20width='45'%20height='30'%20x='-22.5'%20y='-15'%20rx='1.5'%20ry='1.5'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2337547a;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20139%20600)%20scale(3.4003)'/%3e%3cpath%20d='M184%2075q14%200%2014%2017%200%2016-14%2016Z'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2398b0ca;fill-rule:nonzero;opacity:1'%20transform='translate(165%20150)%20scale(3.4003)'/%3e%3crect%20width='25'%20height='4'%20x='-12.5'%20y='-2'%20rx='.2'%20ry='.2'%20style='stroke:%2346648c;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2346648c;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20219%20548)%20scale(3.4003)'/%3e%3cpath%20d='M175%2065h4l5%204v1h-14v-1Z'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2346648c;fill-rule:nonzero;opacity:1'%20transform='translate(165%20150)%20scale(3.4003)'/%3e%3crect%20width='25'%20height='2'%20x='-12.5'%20y='-1'%20rx='.1'%20ry='.1'%20style='stroke:%2398b0ca;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2398b0ca;fill-rule:nonzero;opacity:1'%20transform='rotate(90%20262%20505)%20scale(3.4003)'/%3e%3ccircle%20r='7.5'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23a478fc;fill-rule:nonzero;opacity:1'%20transform='translate(767%20175)%20scale(3.4003)'/%3e%3crect%20width='116.7'%20height='70'%20x='-58.4'%20y='-35'%20rx='31.5'%20ry='31.5'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2371c9fc;fill-rule:nonzero;opacity:1'%20transform='translate(502%20877)%20scale(3.4003)'/%3e%3crect%20width='60'%20height='20'%20x='-30'%20y='-10'%20rx='3'%20ry='3'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2337547a;fill-rule:nonzero;opacity:1'%20transform='translate(502%20728)%20scale(3.4003)'/%3e%3ccircle%20r='75'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%2371c9fc;fill-rule:nonzero;opacity:1'%20transform='translate(502%20473)%20scale(3.4003)'/%3e%3crect%20width='129.4'%20height='82.3'%20x='-64.7'%20y='-41.1'%20rx='37'%20ry='37'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23fff;fill-rule:nonzero;opacity:1'%20transform='translate(502%20464)%20scale(3.4003)'/%3e%3crect%20width='108'%20height='68.6'%20x='-54'%20y='-34.3'%20rx='30.9'%20ry='30.9'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23162334;fill-rule:nonzero;opacity:1'%20transform='translate(502%20464)%20scale(3.4003)'/%3e%3ccircle%20r='19.4'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23a478fc;fill-rule:nonzero;opacity:1'%20transform='translate(415%20464)%20scale(3.4003)'/%3e%3ccircle%20r='19.4'%20style='stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23a478fc;fill-rule:nonzero;opacity:1'%20transform='translate(591%20464)%20scale(3.4003)'/%3e%3crect%20width='96'%20height='53.2'%20x='-48'%20y='-26.6'%20rx='23.9'%20ry='23.9'%20style='stroke:%23162334;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;is-custom-font:none;font-file-url:none;fill:%23162334;fill-rule:nonzero;opacity:1'%20transform='translate(503%20875)%20scale(3.4003)'/%3e%3cpath%20stroke-linecap='round'%20d='m68%20215%207-15M81%20222l-7-22M81%20222l7-14M101%20208H87M114%20219l-7-24M113%20219l13-22M131%20214l-5-17M148%20214h-18M69%20214H51M100%20209l7-15'%20style='stroke:%23a478fc;stroke-width:3;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:10;is-custom-font:none;font-file-url:none;fill:none;fill-rule:nonzero;opacity:1'%20transform='translate(165%20150)%20scale(3.4003)'/%3e%3c/g%3e%3c/svg%3e": {},
+        "GET image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%20viewBox='0%200%2042%2042'%3e%3cpath%20style='fill:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke:%23b00000;stroke-opacity:1;stroke-miterlimit:4'%20d='M17%209a8%208%200%200%201-8%208%208%208%200%200%201-8-8%208%208%200%200%201%208-8%208%208%200%200%201%208%208Zm0%200'%20transform='rotate(.086)%20scale(1.77778)'/%3e%3cpath%20style='fill:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke:%23b00000;stroke-opacity:1;stroke-miterlimit:10'%20d='M14.66%2014.66%203.34%203.34'%20transform='rotate(.086)%20scale(1.77778)'/%3e%3c/svg%3e": {},
+        "GET /static/media/chatbot.a61725c2f5501ec93ec086b78faf4499.svg": {},
+        "GET /%F0%9F%A4%96": {},
+        "GET /chatbot/genai/state": {
+            "initialized": "false",
+            "message": "Model needs to be initialized"
+        },
+        "GET /static/media/default_profile_pic.ef3972048d3c6a3e08d1.png": {},
+        "POST /identity/api/auth/verify": {
+            "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0QHFxLmNvbSIsImlhdCI6MTc3NTQ5NTQ1NSwiZXhwIjoxNzc2MTAwMjU1LCJyb2xlIjoidXNlciJ9.CVaCf3WQRU7evqUJJ8Q_PERQkHpSnEc8yZLOlGTpSmRz8Ss6ra0Wntw-d7GfwEYy6d3uEekjcxtnnp6lu_QhJwO55Wxy1-JZPl92r9a623t0QycdSTS3llL0vg2KCAKDndRvDdrqfomUvwVKgtAJQTAO7VQI5F329CET790I41YbsaEG8Itm8810TbSu7dm31NdfnvwKXnQ0uwdd7sLdxk9bokOKuUBrUCAXio6AFCzr3QZb9NX5Xr4HhyfbbdFMBHGM0-Ff8wCjr3pWQLwq_x76UNxu8xzbQFJsjFAROp3mURaWnHDabPsR8YBxhWEtvYWTuj4CHy4lMYlN7Neg3Q",
+            "message": "The token is a valid JWT token",
+            "status": 200
+        },
+        "GET /verify-vehicle": {},
+        "GET /workshop/api/shop/products": {
+            "limit": "30",
+            "offset": "0",
+            "products.id": 2,
+            "products.name": "Wheel",
+            "products.price": "10.00",
+            "products.image_url": "images/wheel.svg",
+            "credit": 100.0,
+            "next_offset": null,
+            "previous_offset": null,
+            "count": 2
+        },
+        "GET /static/js/742.7db48f2d.chunk.js": {},
+        "GET /maps-api-v3/embed/js/64/7d/intl/zh_cn/init_embed.js": {},
+        "GET /maps/api/js": {
+            "key": "AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y",
+            "libraries": "geometry,search",
+            "v": "weekly",
+            "loading": "async",
+            "language": "zh_CN",
+            "callback": "onApiLoad"
+        },
+        "GET /maps/embed": {
+            "origin": "mfe",
+            "pb": "!1m2!2m1!1s32.778889,-91.919243"
+        },
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/search.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/geometry.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/main.js": {},
+        "GET /maps/api/mapsjs/gen_204": {
+            "csp_test": "true"
+        },
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/common.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/util.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/map.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/places.js": {},
+        "GET image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2069%2029%22%3E%3Cg%20fill%3D%22%23fff%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20opacity%3D%22.6%22%3E%3Cpath%20d%3D%22m17.4706%207.33616.5412-.54112-.5519-.53011c-1.3636-1.30974-3.2017-2.31971-5.7591-2.31971-4.6137%200-8.50262%203.75517-8.50262%208.39578%200%204.6407%203.88892%208.3958%208.50262%208.3958%202.4704%200%204.3765-.8188%205.8732-2.3679%201.5695-1.5729%202.0216-3.7363%202.0216-5.4119%200-.5232-.044-1.0254-.1295-1.4529l-.1206-.6029h-8.3947v3.5942h4.8301c-.1724.5966-.4321%201.0286-.7491%201.3461-.6288.6214-1.5823%201.3094-3.331%201.3094-2.65245%200-4.73598-2.1312-4.73598-4.8099%200-2.67861%202.08353-4.80981%204.73598-4.80981%201.4362%200%202.4752.5607%203.257%201.29229l.5298.49574.513-.51303z%22/%3E%3Cpath%20d%3D%22M24.8656%2020.7286c3.089%200%205.6036-2.4192%205.6036-5.6692%200-3.2681-2.5162-5.66929-5.6036-5.66929-3.0873%200-5.6035%202.40119-5.6035%205.66929%200%203.25%202.5145%205.6692%205.6035%205.6692Zm0-7.9004c1.014%200%201.9766.837%201.9766%202.2312%200%201.3805-.9653%202.2311-1.9766%202.2311-1.0099%200-1.9765-.8574-1.9765-2.2311%200-1.3874.9639-2.2312%201.9765-2.2312Z%22/%3E%3Cpath%20d%3D%22M35.7511%2017.2905h-.0042c-1.0099%200-1.9766-.8574-1.9766-2.2311%200-1.3874.964-2.2312%201.9766-2.2312%201.0139%200%201.9765.837%201.9765%202.2312%200%201.3845-.968%202.2368-1.9723%202.2311Zm-.0124%203.4381c3.089%200%205.6035-2.4192%205.6035-5.6692%200-3.2681-2.5162-5.66929-5.6035-5.66929-3.0874%200-5.6036%202.40119-5.6036%205.66929%200%203.2508%202.5236%205.6692%205.6036%205.6692Z%22/%3E%3Cpath%20d%3D%22M51.953%2010.4357v-.74997h-3.5531v.12253c-.55-.26178-1.2022-.42639-1.9191-.42639-2.8837%200-5.464%202.51793-5.464%205.69393%200%202.1269%201.164%203.9479%202.8033%204.9137l-.0658.0273-1.8806.7802-.6929.2874.2876.6928c.6228%201.5004%202.2776%203.3697%205.0535%203.3697%201.4105%200%202.787-.4145%203.814-1.4093%201.0332-1.0009%201.6171-2.4965%201.6171-4.4653zm-7.2194%209.9844-.0002-.0005c.5552.2005%201.1446.309%201.7474.309.6808%200%201.3058-.1467%201.841-.3891-.0876.3891-.2417.671-.4252.8682-.2812.3022-.7202.5011-1.3747.5011-.91190000000001%200-1.5201-.6476-1.7883-1.2887Zm1.9361-7.5919c.9722%200%201.878.8483%201.878%202.2558%200%201.3796-.8956%202.2147-1.878%202.2147-1.0428%200-1.993-.8738-1.993-2.2147%200-1.3754.9595-2.2558%201.993-2.2558Zm9.069-7.60737v-.75h-3.6599V20.4412h3.6599z%22/%3E%3Cpath%20d%3D%22m63.9128%2016.0614-.6183-.4122-.4179.6145c-.4562.6709-1.0102%201.0432-1.8025%201.0432-.4306%200-.7595-.0981-1.0197-.2622-.07-.0441-.1383-.0951-.2046-.1536l5.6999-2.3625.6825-.283L65.9596%2013.5589l-.219-.5514c-.4528-1.2075-1.8899-3.60918-4.9128-3.60918-2.9833%200-5.3244%202.36358-5.3244%205.66928%200%203.1475%202.3222%205.6693%205.5625%205.6693%202.6043%200%204.1111-1.5991%204.7283-2.5156l.421-.625L65.5882%2017.1783zm-2.5667-3.2103-1.9353.8015c.3795-.5743%201.0107-.8572%201.4909-.8572.1653%200%20.3136.0207.4444.0557Z%22/%3E%3C/g%3E%3Cpath%20fill%3D%22%234285f4%22%20d%3D%22M11.7008%2019.9868c-4.21304%200-7.75262-3.4328-7.75262-7.6458%200-4.21297%203.53958-7.64578%207.75262-7.64578%202.3323%200%203.9912.91159%205.2395%202.11061l-1.47%201.47003c-.8952-.83767-2.1106-1.49467-3.7695-1.49467-3.07972%200-5.48598%202.48016-5.48598%205.55981%200%203.0797%202.40626%205.5599%205.48598%205.5599%201.9956%200%203.1289-.8048%203.8598-1.5275.5995-.5996.9855-1.4537%201.1333-2.628h-4.9931v-2.0942h7.0298c.0739.3695.115.8212.115%201.3058%200%201.5685-.427%203.5067-1.8067%204.8864-1.3469%201.3961-3.0551%202.1434-5.3381%202.1434%22/%3E%3Cpath%20fill%3D%22%23e94235%22%20d%3D%22M29.7192%2015.0594c0%202.8333-2.1763%204.9192-4.8536%204.9192-2.6772%200-4.8535-2.0859-4.8535-4.9192%200-2.8498%202.1763-4.9193%204.8535-4.9193%202.6773%200%204.8536%202.0695%204.8536%204.9193m-2.127%200c0-1.7739-1.2648-2.9812-2.7266-2.9812s-2.7265%201.2155-2.7265%202.9812c0%201.7492%201.2647%202.9811%202.7265%202.9811s2.7266-1.2237%202.7266-2.9811%22/%3E%3Cpath%20fill%3D%22%23fabb05%22%20d%3D%22M40.5922%2015.0594c0%202.8333-2.1763%204.9192-4.8535%204.9192-2.6691%200-4.8536-2.0859-4.8536-4.9192%200-2.8498%202.1763-4.9193%204.8536-4.9193%202.6772%200%204.8535%202.0695%204.8535%204.9193m-2.1188%200c0-1.7739-1.2647-2.9812-2.7265-2.9812s-2.7266%201.2155-2.7266%202.9812c0%201.7492%201.2648%202.9811%202.7266%202.9811%201.4618.0082%202.7265-1.2237%202.7265-2.9811%22/%3E%3Cpath%20fill%3D%22%234285f4%22%20d%3D%22M51.203%2010.4357v8.8366c0%203.6382-2.1435%205.1246-4.6811%205.1246-2.3899%200-3.8188-1.6014-4.3609-2.9072l1.8807-.7802c.3367.8048%201.158%201.7493%202.4802%201.7493%201.626%200%202.628-1.0101%202.628-2.8908v-.7063h-.074c-.4845.5995-1.4207%201.1169-2.5951%201.1169-2.4637%200-4.714-2.1434-4.714-4.9028%200-2.7758%202.2585-4.9439%204.714-4.9439%201.1744%200%202.1106.5256%202.5951%201.1004h.074v-.7966zm-1.9053%204.6483c0-1.7328-1.158-3.0058-2.628-3.0058-1.4947%200-2.743%201.2647-2.743%203.0058%200%201.7164%201.2483%202.9647%202.743%202.9647%201.47%200%202.628-1.2483%202.628-2.9647%22/%3E%3Cpath%20fill%3D%22%2334a853%22%20d%3D%22M54.9887%205.22083V19.6912h-2.1599V5.22083z%22/%3E%3Cpath%20fill%3D%22%23e94235%22%20d%3D%22m63.4968%2016.6854%201.6754%201.1169c-.5421.8049-1.8478%202.1846-4.1063%202.1846-2.8004%200-4.8125-2.1599-4.8125-4.9193%200-2.9237%202.0367-4.9193%204.5744-4.9193%202.554%200%203.8023%202.0285%204.213%203.129l.2217.5584-6.5782%202.7266c.501.9855%201.2894%201.4946%202.3898%201.4946%201.1005%200%201.8643-.5502%202.4227-1.3715m-5.1656-1.7739%204.4019-1.8231c-.2464-.616-.9691-1.043-1.8314-1.043-1.1005%200-2.628.9691-2.5705%202.8661%22/%3E%3C/svg%3E": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/onion.js": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/search_impl.js": {},
+        "GET /mapfiles/openhand_8_8.cur": {},
+        "GET /maps-api-v3/api/js/64/7d/intl/zh_cn/log.js": {},
+        "POST /$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo": {
+            "array_item": [
+                [
+                    32.76801879711541,
+                    -91.99263346147546
+                ],
+                [
+                    32.79038949352817,
+                    -91.84614148174029
+                ]
+            ]
+        },
+        "OPTIONS /$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo": {},
+        "GET /maps/vt": {
+            "pb": "!1m5!1m4!1i15!2i8017!3i13223!4i256!2m3!1e0!2sm!3i773537428!2m3!1e2!2sspotlit!5i1!3m13!2szh-CN!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m14!299174093m13!14m12!1m8!1m2!1y0!2y17012501287969614158!2s/fake_latlng_mid!4m2!1x327788890!2x3375774866!8b1!2b0!6b0!8b0",
+            "key": "AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y",
+            "token": "56600"
+        },
+        "GET /shop": {},
+        "GET /images/wheel.svg": {},
+        "GET /images/seat.svg": {},
+        "GET /dashboard": {}
+    },
+    "other/auth": {
+        "POST /identity/api/auth/login": {
+            "email": "1234@qq.com",
+            "password": "As119801222@",
+            "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0QHFxLmNvbSIsImlhdCI6MTc3NTQ5NTQ1NSwiZXhwIjoxNzc2MTAwMjU1LCJyb2xlIjoidXNlciJ9.CVaCf3WQRU7evqUJJ8Q_PERQkHpSnEc8yZLOlGTpSmRz8Ss6ra0Wntw-d7GfwEYy6d3uEekjcxtnnp6lu_QhJwO55Wxy1-JZPl92r9a623t0QycdSTS3llL0vg2KCAKDndRvDdrqfomUvwVKgtAJQTAO7VQI5F329CET790I41YbsaEG8Itm8810TbSu7dm31NdfnvwKXnQ0uwdd7sLdxk9bokOKuUBrUCAXio6AFCzr3QZb9NX5Xr4HhyfbbdFMBHGM0-Ff8wCjr3pWQLwq_x76UNxu8xzbQFJsjFAROp3mURaWnHDabPsR8YBxhWEtvYWTuj4CHy4lMYlN7Neg3Q",
+            "type": "Bearer",
+            "message": "Login successful",
+            "mfaRequired": false
+        }
+    },
+    "other/user": {
+        "GET /identity/api/v2/user/dashboard": {
+            "id": 9,
+            "name": "huagn",
+            "email": "1234@qq.com",
+            "number": "1111111111",
+            "picture_url": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc=",
+            "video_url": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc=",
+            "video_name": "test.txt",
+            "available_credit": 100.0,
+            "video_id": 7,
+            "role": "ROLE_USER"
+        }
+    },
+    "other/vehicle": {
+        "GET /identity/api/v2/vehicle/vehicles": {}
+    },
+    "other/community": {
+        "GET /community/api/v2/community/posts/recent": {
+            "limit": "30",
+            "offset": "0",
+            "posts.id": "VHxXcxnxaYbBeEK57BTWxm",
+            "posts.title": "Title 3",
+            "posts.content": "This is a test comment.",
+            "posts.author.nickname": "testtest",
+            "posts.author.email": "12@qq.com",
+            "posts.author.vehicleid": "",
+            "posts.author.profile_pic_url": "data:image/jpeg;base64,dGVzdCBmaWxlIGNvbnRlbnQgZm9yIHZ1bG5lcmFiaWxpdHkgc2Nhbm5pbmc=",
+            "posts.author.created_at": "2026-03-28T09:39:19.347Z",
+            "posts.authorid": 11,
+            "posts.CreatedAt": "2026-03-28T09:39:19.347Z",
+            "next_offset": 30,
+            "previous_offset": null,
+            "total": 30
+        }
+    }
+}

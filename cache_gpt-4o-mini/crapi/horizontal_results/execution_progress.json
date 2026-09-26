@@ -1,0 +1,11 @@
+{
+    "step1_grouping_secs": 7.559468166999977,
+    "step1_5_refine_groups_secs": 49.24511620899989,
+    "step1_8_api_tagging_secs": 5.478340458000048,
+    "step2_param_normalize_secs": 7.2777637079998385,
+    "step3_dependency_chain_secs": 0.19849754199981362,
+    "step4_case_generation_secs": 0.603894500000024,
+    "step4_5_container_divide_secs": 10.108632124999986,
+    "total_secs": 80.4728963340001,
+    "mode": "depen-gen-with-container-divide"
+}

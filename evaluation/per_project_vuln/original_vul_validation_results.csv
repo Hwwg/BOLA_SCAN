@@ -1,0 +1,73 @@
+id,Project,type,Api,parameters,label_result_v1,label_result_v2,label_result_v3
+1,TIME_SEA_PLUS,TIP,POST /pay/alipay/status/{orderId} ,orderId,1,1,1
+2,newbee-mall-plus,TIP,DELETE /api/v1/coupon/{couponUserId},couponUserId,0,0,0
+3,newbee-mall-plus,SIDP-side,POST /seckillExecution/24/15/1ff1de774005f8da13f42943881c655f,userId,0,1,1
+4,mall-swarm,TIP,POST /cart/update/attr,id,1,1,1
+5,mall-swarm,TIP,GET /order/detail/{orderId},orderId,1,1,1
+6,mall-swarm,TIP,POST /order/cancelOrder,orderId,0,1,1
+7,mall-swarm,TIP,POST /order/cancelUserOrder,orderId,1,1,1
+8,mall-swarm,TIP,GET /alipay/query,outTradeNo,0,0,0
+9,mall-swarm,TIP,POST /order/paySuccess,orderId,1,1,1
+10,mall-swarm,TIP,POST /member/readHistory/delete HTTP/1.1,ids,1,1,1
+11,mall-swarm,TIP,POST /member/address/update/{id},memberId,1,1,1
+12,ctfd,TIP,DELETE /api/v1/awards/{award_id},award_id,0,0,0
+13,gin-vue-blog,TIP,POST /category,id,0,0,0
+14,newbee_mall,TIP,DELETE /api/v1/shop-cart/{newBeeMallShoppingCartItemId},newBeeMallShoppingCartItemId,0,0,0
+15,newbee_mall,TIP,GET /api/v1/goods/detail/{goodsId},goodsId,0,0,0
+16,youlai-mall,TIP,GET /mall-ums/app-api/v1/addresses/{addressId},addressId,1,1,1
+17,youlai-mall,SIDP-side,PUT /mall-ums/app-api/v1/addresses/{addressId},id,1,1,1
+18,youlai-mall,TIP,DELETE /mall-ums/app-api/v1/addresses/{ids},ids,1,1,1
+19,youlai-mall,TIP,GET /mall-ums/app-api/v1/members/{memberId}/openid,memberId,1,1,1
+20,youlai-mall,TIP,PUT /mall-ums/app-api/v1/members/{memberId}/balances/_deduct,memberId,1,1,1
+21,youlai-mall,TIP,DELETE /mall-oms/app-api/v1/orders/{orderId},orderId,1,1,1
+22,youlai-mall,TIP,POST /mall-oms/app-api/v1/orders/payment,orderSn,1,1,1
+23,youlai-mall,TIP,GET /mall-ums/app-api/v1/members/openid/{openid},openid,1,1,1
+24,youlai-mall,TIP,PUT /mall-ums/app-api/v1/members/{memberId}/balances/_deduct,memberId,1,1,1
+25,youlai-mall,TIP,GET /mall-ums/app-api/v1/members/mobile/{mobile},mobile,1,0,1
+26,youlai-mall,TIP,POST /mall-ums/app-api/v1/members/openid/{openid},openid,1,1,1
+27,youlai-mall,TIP,DELETE /mall-oms/app-api/v1/carts/skuId/{skuId},skuId,0,0,0
+28,youlai-mall,TIP,DELETE /mall-oms/app-api/v1/orders/{orderId},orderId,1,1,1
+29,youlai-mall,TIP,POST /mall-oms/app-api/v1/orders/payment,orderSn,1,1,1
+30,JeecgBoot,SIDP-side,GET /sys/sysDepartRole/list?deptId,deptId,1,1,1
+31,JeecgBoot,SIDP-side,GET /sys/sysDepartRole/getDeptRoleList?departId=...&userId=,departId,1,1,1
+32,JeecgBoot,SIDP-side,GET /sys/sysDepartRole/getDeptRoleByUserId?userId=...&departId=...,userId; departId,1,1,1
+33,JeecgBoot,SIDP-side,GET /sys/sysDepartRole/datarule/{permissionId}/{departId}/{roleId},permissionId; departId; roleId,1,1,1
+34,JeecgBoot,SIDP-side,GET /sys/sysDepartPermission/datarule/{permissionId}/{departId},permissionId; departId,1,1,1
+35,JeecgBoot,SIDP-side,GET /sys/sysDepartPermission/list?departId=...&pageNo=1&pageSize=10,departId,1,1,1
+36,JeecgBoot,SIDP-side,GET /sys/permission/queryDepartPermission?departId=...,departId,1,1,1
+37,JeecgBoot,SIDP-side,DELETE /jeecgboot/sys/comment/delete,id,0,0,0
+38,JeecgBoot,SIDP-side,GET /sys/position/getPositionUserList?positionId=...&pageNo=1&pageSize=10,positionId,1,1,1
+39,JeecgBoot,SIDP-side,POST /jeecgboot/sys/position/savePositionUser?positionId=...&userIds=...,positionId; userIds,1,1,1
+40,JeecgBoot,SIDP-side,DELETE /jeecgboot/sys/checkRule/delete,id,0,0,0
+41,JeecgBoot,SIDP-side,DELETE /jeecgboot/sys/position/removePositionUser?positionId=...&userIds=...,positionId; userIds,1,1,1
+42,JeecgBoot,SIDP-side,POST /jeecgboot/sys/sysDepartPermission/datarule,departId,1,1,1
+43,JeecgBoot,SIDP-side,POST /jeecgboot/sys/sysDepartRole/datarule,roleId,1,1,1
+44,JeecgBoot,SIDP-side,POST /jeecgboot/sys/sysDepartPermission/saveDeptRolePermission,roleId,1,1,1
+45,gin_vue_admin,TIP,GET /customer/customer ,ID,1,1,1
+46,gin_vue_admin,TIP,PUT /customer/customer,ID,1,1,1
+47,gin-vue-admin,TIP,DELETE /info/deleteInfo,ID,0,0,0
+48,gin_vue_admin,TIP,DELETE /customer/customer,ID,1,1,1
+49,gin_vue_admin,TIP,GET /sysOperationRecord/findSysOperationRecord,ID,1,1,1
+50,gin-vue-admin,TIP,DELETE /sysDictionary/deleteSysDictionary,ID,0,0,0
+51,gin_vue_admin,TIP,POST /fileUploadAndDownload/editFileName,ID,1,1,1
+52,gin_vue_admin,TIP,DELETE /sysOperationRecord/deleteSysOperationRecord,ID,1,1,1
+53,gin_vue_admin,TIP,DELETE /sysOperationRecord/deleteSysOperationRecordByIds,ids,1,1,1
+54,pybbs,TIP,GET /api/user/{username},username,1,1,1
+55,openemr,TIP,PUT /api/patient/{pid}/encounter/{eid}/soap_note/{sid},sid,1,1,1
+56,openemr,TIP,PUT /api/patient/{pid}/encounter/{eid}/vital/{vid},vid,1,1,1
+57,openemr,TIP,DELETE /apis/default/api/patient/{pid}/message/{mid},mid,0,0,0
+58,openemr,TIP,DELETE /api/patient/{pid}/appointment/{eid},eid,1,1,1
+59,openemr,TIP,PUT /api/patient/{pid}/dental_issue/{did},did,1,1,1
+60,openemr,TIP,DELETE /apis/default/api/patient/{pid}/dental_issue/{did},did,0,0,0
+61,openemr,TIP,PUT /api/patient/{pid}/surgery/{sid},sid,1,1,1
+62,openemr,TIP,DELETE /apis/default/api/patient/{pid}/medication/{mid},mid,0,0,0
+63,openemr,TIP,PUT /api/patient/{puuid}/medical_problem/{muuid},muuid,1,1,1
+64,mall,TIP,POST /cart/update/attr HTTP/1.1,id,0,1,1
+65,mall,TIP,GET /order/detail/{orderId},orderId,1,1,1
+66,mall,TIP,GET /alipay/query,outTradeNo,0,0,0
+67,mall,TIP,POST /order/cancelOrder,orderId,1,1,1
+68,mall,TIP,POST /order/cancelUserOrder,orderId,1,1,1
+69,mall,TIP,GET /brand/detail/{brandId},brandId,0,0,0
+70,mall,TIP,POST /order/paySuccess,orderId,1,1,1
+71,mall,TIP,POST /member/readHistory/delete HTTP/1.1,ids,1,1,1
+72,mall,TIP,POST /member/address/update/{id},memberId,1,1,1

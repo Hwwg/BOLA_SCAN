@@ -1,0 +1,5463 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "mall前台系统",
+    "description": "mall前台相关接口文档",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://github.com/macrozheng/mall-learning"
+    },
+    "version": "v1.0.0"
+  },
+  "externalDocs": {
+    "description": "SpringBoot实战电商项目mall（60K+Star）全套文档",
+    "url": "http://www.macrozheng.com"
+  },
+  "servers": [
+    {
+      "url": "http://example.test",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "OmsPortalOrderReturnApplyController",
+      "description": "申请退货管理"
+    },
+    {
+      "name": "UmsMemberCouponController",
+      "description": "用户优惠券管理"
+    },
+    {
+      "name": "UmsMemberReceiveAddressController",
+      "description": "会员收货地址管理"
+    },
+    {
+      "name": "PortalBrandController",
+      "description": "前台品牌管理"
+    },
+    {
+      "name": "MemberAttentionController",
+      "description": "会员关注品牌管理"
+    },
+    {
+      "name": "OmsCartItemController",
+      "description": "购物车管理"
+    },
+    {
+      "name": "OmsPortalOrderController",
+      "description": "订单管理"
+    },
+    {
+      "name": "MemberReadHistoryController",
+      "description": "会员商品浏览记录管理"
+    },
+    {
+      "name": "MemberCollectionController",
+      "description": "会员收藏管理"
+    },
+    {
+      "name": "PmsPortalProductController",
+      "description": "前台商品管理"
+    },
+    {
+      "name": "AlipayController",
+      "description": "支付宝支付相关接口"
+    },
+    {
+      "name": "UmsMemberController",
+      "description": "会员登录注册管理"
+    },
+    {
+      "name": "HomeController",
+      "description": "首页内容管理"
+    }
+  ],
+  "paths": {
+    "/sso/updatePassword": {
+      "post": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "修改密码",
+        "operationId": "updatePassword",
+        "parameters": [
+          {
+            "name": "telephone",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/sso/register": {
+      "post": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "会员注册",
+        "operationId": "register",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "telephone",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/sso/logout": {
+      "post": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "登出功能",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/sso/login": {
+      "post": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "会员登录",
+        "operationId": "login",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/returnApply/create": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderReturnApplyController"
+        ],
+        "summary": "申请退货",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmsOrderReturnApplyParam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/paySuccess": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "用户支付成功的回调",
+        "operationId": "paySuccess",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "payType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/generateOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "根据购物车信息生成订单",
+        "operationId": "generateOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderParam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/generateConfirmOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "根据购物车信息生成确认单信息",
+        "operationId": "generateConfirmOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultConfirmOrderResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/deleteOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "用户删除订单",
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/confirmReceiveOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "用户确认收货",
+        "operationId": "confirmReceiveOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/cancelUserOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "用户取消订单",
+        "operationId": "cancelUserOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/cancelTimeOutOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "自动取消超时订单",
+        "operationId": "cancelTimeOutOrder",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/cancelOrder": {
+      "post": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "取消单个超时订单",
+        "operationId": "cancelOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/readHistory/delete": {
+      "post": {
+        "tags": [
+          "MemberReadHistoryController"
+        ],
+        "summary": "删除浏览记录",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/readHistory/create": {
+      "post": {
+        "tags": [
+          "MemberReadHistoryController"
+        ],
+        "summary": "创建浏览记录",
+        "operationId": "create_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberReadHistory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/readHistory/clear": {
+      "post": {
+        "tags": [
+          "MemberReadHistoryController"
+        ],
+        "summary": "清空除浏览记录",
+        "operationId": "clear",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/productCollection/delete": {
+      "post": {
+        "tags": [
+          "MemberCollectionController"
+        ],
+        "summary": "删除收藏商品",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/productCollection/clear": {
+      "post": {
+        "tags": [
+          "MemberCollectionController"
+        ],
+        "summary": "清空收藏列表",
+        "operationId": "clear_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/productCollection/add": {
+      "post": {
+        "tags": [
+          "MemberCollectionController"
+        ],
+        "summary": "添加商品收藏",
+        "operationId": "add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberProductCollection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/coupon/add/{couponId}": {
+      "post": {
+        "tags": [
+          "UmsMemberCouponController"
+        ],
+        "summary": "领取指定优惠券",
+        "operationId": "add_1",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/attention/delete": {
+      "post": {
+        "tags": [
+          "MemberAttentionController"
+        ],
+        "summary": "取消关注",
+        "operationId": "delete_2",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/attention/clear": {
+      "post": {
+        "tags": [
+          "MemberAttentionController"
+        ],
+        "summary": "清空关注列表",
+        "operationId": "clear_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/attention/add": {
+      "post": {
+        "tags": [
+          "MemberAttentionController"
+        ],
+        "summary": "添加品牌关注",
+        "operationId": "add_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberBrandAttention"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/address/update/{id}": {
+      "post": {
+        "tags": [
+          "UmsMemberReceiveAddressController"
+        ],
+        "summary": "修改收货地址",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UmsMemberReceiveAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/address/delete/{id}": {
+      "post": {
+        "tags": [
+          "UmsMemberReceiveAddressController"
+        ],
+        "summary": "删除收货地址",
+        "operationId": "delete_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/address/add": {
+      "post": {
+        "tags": [
+          "UmsMemberReceiveAddressController"
+        ],
+        "summary": "添加收货地址",
+        "operationId": "add_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UmsMemberReceiveAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/update/attr": {
+      "post": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "修改购物车中商品的规格",
+        "operationId": "updateAttr",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmsCartItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/delete": {
+      "post": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "删除购物车中的某个商品",
+        "operationId": "delete_4",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/clear": {
+      "post": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "清空购物车",
+        "operationId": "clear_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/add": {
+      "post": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "添加商品到购物车",
+        "operationId": "add_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmsCartItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/alipay/notify": {
+      "post": {
+        "tags": [
+          "AlipayController"
+        ],
+        "summary": "支付宝异步回调",
+        "description": "必须为POST请求，执行成功返回success，执行失败返回failure",
+        "operationId": "notify",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/sso/info": {
+      "get": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "获取会员信息",
+        "operationId": "info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/sso/getAuthCode": {
+      "get": {
+        "tags": [
+          "UmsMemberController"
+        ],
+        "summary": "获取验证码",
+        "operationId": "getAuthCode",
+        "parameters": [
+          {
+            "name": "telephone",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/product/search": {
+      "get": {
+        "tags": [
+          "PmsPortalProductController"
+        ],
+        "summary": "综合搜索、筛选、排序",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "productCategoryId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "排序字段:0->按相关度；1->按新品；2->按销量；3->价格从低到高；4->价格从高到低",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "enum": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPagePmsProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/product/detail/{id}": {
+      "get": {
+        "tags": [
+          "PmsPortalProductController"
+        ],
+        "summary": "获取前台商品详情",
+        "operationId": "detail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultPmsPortalProductDetail"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/product/categoryTreeList": {
+      "get": {
+        "tags": [
+          "PmsPortalProductController"
+        ],
+        "summary": "以树形结构获取所有商品分类",
+        "operationId": "categoryTreeList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsProductCategoryNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/list": {
+      "get": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "按状态分页获取用户订单列表",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "订单状态：-1->全部；0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": -1,
+              "enum": [
+                "-1",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPageOmsOrderDetail"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/order/detail/{orderId}": {
+      "get": {
+        "tags": [
+          "OmsPortalOrderController"
+        ],
+        "summary": "根据ID获取订单详情",
+        "operationId": "detail_1",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultOmsOrderDetail"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/readHistory/list": {
+      "get": {
+        "tags": [
+          "MemberReadHistoryController"
+        ],
+        "summary": "分页获取用户浏览记录",
+        "operationId": "list_1",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPageMemberReadHistory"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/productCollection/list": {
+      "get": {
+        "tags": [
+          "MemberCollectionController"
+        ],
+        "summary": "显示收藏列表",
+        "operationId": "list_2",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPageMemberProductCollection"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/productCollection/detail": {
+      "get": {
+        "tags": [
+          "MemberCollectionController"
+        ],
+        "summary": "显示收藏商品详情",
+        "operationId": "detail_2",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultMemberProductCollection"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/coupon/list": {
+      "get": {
+        "tags": [
+          "UmsMemberCouponController"
+        ],
+        "summary": "获取会员优惠券列表",
+        "operationId": "list_3",
+        "parameters": [
+          {
+            "name": "useStatus",
+            "in": "query",
+            "description": "优惠券筛选类型:0->未使用；1->已使用；2->已过期",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                "0",
+                "1",
+                "2"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListSmsCoupon"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/coupon/listHistory": {
+      "get": {
+        "tags": [
+          "UmsMemberCouponController"
+        ],
+        "summary": "获取会员优惠券历史列表",
+        "operationId": "listHistory",
+        "parameters": [
+          {
+            "name": "useStatus",
+            "in": "query",
+            "description": "优惠券筛选类型:0->未使用；1->已使用；2->已过期",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                "0",
+                "1",
+                "2"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListSmsCouponHistory"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/coupon/listByProduct/{productId}": {
+      "get": {
+        "tags": [
+          "UmsMemberCouponController"
+        ],
+        "summary": "获取当前商品相关优惠券",
+        "operationId": "listByProduct",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListSmsCoupon"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/coupon/list/cart/{type}": {
+      "get": {
+        "tags": [
+          "UmsMemberCouponController"
+        ],
+        "summary": "获取登录会员购物车的相关优惠券",
+        "operationId": "listCart",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "使用可用:0->不可用；1->可用",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "enum": [
+                "0",
+                "1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListSmsCouponHistoryDetail"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/attention/list": {
+      "get": {
+        "tags": [
+          "MemberAttentionController"
+        ],
+        "summary": "显示关注列表",
+        "operationId": "list_4",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPageMemberBrandAttention"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/attention/detail": {
+      "get": {
+        "tags": [
+          "MemberAttentionController"
+        ],
+        "summary": "显示关注品牌详情",
+        "operationId": "detail_3",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultMemberBrandAttention"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/address/{id}": {
+      "get": {
+        "tags": [
+          "UmsMemberReceiveAddressController"
+        ],
+        "summary": "获取收货地址详情",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultUmsMemberReceiveAddress"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/member/address/list": {
+      "get": {
+        "tags": [
+          "UmsMemberReceiveAddressController"
+        ],
+        "summary": "显示所有收货地址",
+        "operationId": "list_5",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListUmsMemberReceiveAddress"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/subjectList": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "根据分类获取专题",
+        "operationId": "getSubjectList",
+        "parameters": [
+          {
+            "name": "cateId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 4
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListCmsSubject"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/recommendProductList": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "分页获取推荐商品",
+        "operationId": "recommendProductList",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 4
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/productCateList/{parentId}": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "获取首页商品分类",
+        "operationId": "getProductCateList",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsProductCategory"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/newProductList": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "分页获取新品推荐商品",
+        "operationId": "newProductList",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 6
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/hotProductList": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "分页获取人气推荐商品",
+        "operationId": "hotProductList",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 6
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/home/content": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "summary": "首页内容页信息展示",
+        "operationId": "content",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultHomeContentResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/update/quantity": {
+      "get": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "修改购物车中某个商品的数量",
+        "operationId": "updateQuantity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/list": {
+      "get": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "获取某个会员的购物车列表",
+        "operationId": "list_6",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListOmsCartItem"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/list/promotion": {
+      "get": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "获取某个会员的购物车列表,包括促销信息",
+        "operationId": "listPromotion",
+        "parameters": [
+          {
+            "name": "cartIds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListCartPromotionItem"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/cart/getProduct/{productId}": {
+      "get": {
+        "tags": [
+          "OmsCartItemController"
+        ],
+        "summary": "获取购物车中某个商品的规格,用于重选规格",
+        "operationId": "getCartProduct",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCartProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/brand/recommendList": {
+      "get": {
+        "tags": [
+          "PortalBrandController"
+        ],
+        "summary": "分页获取推荐品牌",
+        "operationId": "recommendList",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 6
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultListPmsBrand"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/brand/productList": {
+      "get": {
+        "tags": [
+          "PortalBrandController"
+        ],
+        "summary": "分页获取品牌相关商品",
+        "operationId": "productList",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 6
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultCommonPagePmsProduct"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/brand/detail/{brandId}": {
+      "get": {
+        "tags": [
+          "PortalBrandController"
+        ],
+        "summary": "获取品牌详情",
+        "operationId": "detail_4",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultPmsBrand"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/alipay/webPay": {
+      "get": {
+        "tags": [
+          "AlipayController"
+        ],
+        "summary": "支付宝手机网站支付",
+        "operationId": "webPay",
+        "parameters": [
+          {
+            "name": "aliPayParam",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AliPayParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/alipay/query": {
+      "get": {
+        "tags": [
+          "AlipayController"
+        ],
+        "summary": "支付宝统一收单线下交易查询",
+        "description": "订单支付成功返回交易状态：TRADE_SUCCESS",
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "outTradeNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tradeNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultString"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/alipay/pay": {
+      "get": {
+        "tags": [
+          "AlipayController"
+        ],
+        "summary": "支付宝电脑网站支付",
+        "operationId": "pay",
+        "parameters": [
+          {
+            "name": "aliPayParam",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AliPayParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CommonResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "OmsOrderReturnApplyParam": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "title": "订单id",
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "title": "退货商品id",
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderSn": {
+            "title": "订单编号",
+            "type": "string"
+          },
+          "memberUsername": {
+            "title": "会员用户名",
+            "type": "string"
+          },
+          "returnName": {
+            "title": "退货人姓名",
+            "type": "string"
+          },
+          "returnPhone": {
+            "title": "退货人电话",
+            "type": "string"
+          },
+          "productPic": {
+            "title": "商品图片",
+            "type": "string"
+          },
+          "productName": {
+            "title": "商品名称",
+            "type": "string"
+          },
+          "productBrand": {
+            "title": "商品品牌",
+            "type": "string"
+          },
+          "productAttr": {
+            "title": "商品销售属性：颜色：红色；尺码：xl;",
+            "type": "string"
+          },
+          "productCount": {
+            "title": "退货数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productPrice": {
+            "title": "商品单价",
+            "type": "number"
+          },
+          "productRealPrice": {
+            "title": "商品实际支付单价",
+            "type": "number"
+          },
+          "reason": {
+            "title": "原因",
+            "type": "string"
+          },
+          "description": {
+            "title": "描述",
+            "type": "string"
+          },
+          "proofPics": {
+            "title": "凭证图片，以逗号隔开",
+            "type": "string"
+          }
+        }
+      },
+      "OrderParam": {
+        "type": "object",
+        "properties": {
+          "memberReceiveAddressId": {
+            "title": "收货地址ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "title": "优惠券ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "useIntegration": {
+            "title": "使用的积分数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "payType": {
+            "title": "支付方式",
+            "type": "integer",
+            "format": "int32"
+          },
+          "cartIds": {
+            "title": "被选中的购物车商品ID",
+            "type": "array",
+            "items": {
+              "title": "被选中的购物车商品ID",
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      },
+      "CalcAmount": {
+        "type": "object",
+        "properties": {
+          "totalAmount": {
+            "type": "number"
+          },
+          "freightAmount": {
+            "type": "number"
+          },
+          "promotionAmount": {
+            "type": "number"
+          },
+          "payAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "CartPromotionItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productSkuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "title": "购买数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "title": "添加到购物车的价格",
+            "type": "number"
+          },
+          "productPic": {
+            "title": "商品主图",
+            "type": "string"
+          },
+          "productName": {
+            "title": "商品名称",
+            "type": "string"
+          },
+          "productSubTitle": {
+            "title": "商品副标题（卖点）",
+            "type": "string"
+          },
+          "productSkuCode": {
+            "title": "商品sku条码",
+            "type": "string"
+          },
+          "memberNickname": {
+            "title": "会员昵称",
+            "type": "string"
+          },
+          "createDate": {
+            "title": "创建时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifyDate": {
+            "title": "修改时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleteStatus": {
+            "title": "是否删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCategoryId": {
+            "title": "商品分类",
+            "type": "integer",
+            "format": "int64"
+          },
+          "productBrand": {
+            "type": "string"
+          },
+          "productSn": {
+            "type": "string"
+          },
+          "productAttr": {
+            "title": "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]",
+            "type": "string"
+          },
+          "promotionMessage": {
+            "type": "string"
+          },
+          "reduceAmount": {
+            "type": "number"
+          },
+          "realStock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "integration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "growth": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CommonResultConfirmOrderResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ConfirmOrderResult"
+          }
+        }
+      },
+      "ConfirmOrderResult": {
+        "type": "object",
+        "properties": {
+          "cartPromotionItemList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartPromotionItem"
+            }
+          },
+          "memberReceiveAddressList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UmsMemberReceiveAddress"
+            }
+          },
+          "couponHistoryDetailList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCouponHistoryDetail"
+            }
+          },
+          "integrationConsumeSetting": {
+            "$ref": "#/components/schemas/UmsIntegrationConsumeSetting"
+          },
+          "memberIntegration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calcAmount": {
+            "$ref": "#/components/schemas/CalcAmount"
+          }
+        }
+      },
+      "SmsCoupon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "title": "优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券",
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "platform": {
+            "title": "使用平台：0->全部；1->移动；2->PC",
+            "type": "integer",
+            "format": "int32"
+          },
+          "count": {
+            "title": "数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "title": "金额",
+            "type": "number"
+          },
+          "perLimit": {
+            "title": "每人限领张数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "minPoint": {
+            "title": "使用门槛；0表示无门槛",
+            "type": "number"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "useType": {
+            "title": "使用类型：0->全场通用；1->指定分类；2->指定商品",
+            "type": "integer",
+            "format": "int32"
+          },
+          "note": {
+            "title": "备注",
+            "type": "string"
+          },
+          "publishCount": {
+            "title": "发行数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "useCount": {
+            "title": "已使用数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "receiveCount": {
+            "title": "领取数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "enableTime": {
+            "title": "可以领取的日期",
+            "type": "string",
+            "format": "date-time"
+          },
+          "code": {
+            "title": "优惠码",
+            "type": "string"
+          },
+          "memberLevel": {
+            "title": "可领取的会员类型：0->无限时",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SmsCouponHistoryDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponCode": {
+            "type": "string"
+          },
+          "memberNickname": {
+            "title": "领取人昵称",
+            "type": "string"
+          },
+          "getType": {
+            "title": "获取类型：0->后台赠送；1->主动获取",
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "useStatus": {
+            "title": "使用状态：0->未使用；1->已使用；2->已过期",
+            "type": "integer",
+            "format": "int32"
+          },
+          "useTime": {
+            "title": "使用时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "orderId": {
+            "title": "订单编号",
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderSn": {
+            "title": "订单号码",
+            "type": "string"
+          },
+          "coupon": {
+            "$ref": "#/components/schemas/SmsCoupon"
+          },
+          "productRelationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCouponProductRelation"
+            }
+          },
+          "categoryRelationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCouponProductCategoryRelation"
+            }
+          }
+        }
+      },
+      "SmsCouponProductCategoryRelation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productCategoryName": {
+            "title": "产品分类名称",
+            "type": "string"
+          },
+          "parentCategoryName": {
+            "title": "父分类名称",
+            "type": "string"
+          }
+        }
+      },
+      "SmsCouponProductRelation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "title": "商品名称",
+            "type": "string"
+          },
+          "productSn": {
+            "title": "商品编码",
+            "type": "string"
+          }
+        }
+      },
+      "UmsIntegrationConsumeSetting": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "deductionPerAmount": {
+            "title": "每一元需要抵扣的积分数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxPercentPerOrder": {
+            "title": "每笔订单最高抵用百分比",
+            "type": "integer",
+            "format": "int32"
+          },
+          "useUnit": {
+            "title": "每次使用积分最小单位100",
+            "type": "integer",
+            "format": "int32"
+          },
+          "couponStatus": {
+            "title": "是否可以和优惠券同用；0->不可以；1->可以",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UmsMemberReceiveAddress": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "title": "收货人名称",
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "defaultStatus": {
+            "title": "是否为默认",
+            "type": "integer",
+            "format": "int32"
+          },
+          "postCode": {
+            "title": "邮政编码",
+            "type": "string"
+          },
+          "province": {
+            "title": "省份/直辖市",
+            "type": "string"
+          },
+          "city": {
+            "title": "城市",
+            "type": "string"
+          },
+          "region": {
+            "title": "区",
+            "type": "string"
+          },
+          "detailAddress": {
+            "title": "详细地址(街道)",
+            "type": "string"
+          }
+        }
+      },
+      "MemberReadHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberNickname": {
+            "type": "string"
+          },
+          "memberIcon": {
+            "type": "string"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "productPic": {
+            "type": "string"
+          },
+          "productSubTitle": {
+            "type": "string"
+          },
+          "productPrice": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MemberProductCollection": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberNickname": {
+            "type": "string"
+          },
+          "memberIcon": {
+            "type": "string"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "productPic": {
+            "type": "string"
+          },
+          "productSubTitle": {
+            "type": "string"
+          },
+          "productPrice": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MemberBrandAttention": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberNickname": {
+            "type": "string"
+          },
+          "memberIcon": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "brandName": {
+            "type": "string"
+          },
+          "brandLogo": {
+            "type": "string"
+          },
+          "brandCity": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OmsCartItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productSkuId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "title": "购买数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "title": "添加到购物车的价格",
+            "type": "number"
+          },
+          "productPic": {
+            "title": "商品主图",
+            "type": "string"
+          },
+          "productName": {
+            "title": "商品名称",
+            "type": "string"
+          },
+          "productSubTitle": {
+            "title": "商品副标题（卖点）",
+            "type": "string"
+          },
+          "productSkuCode": {
+            "title": "商品sku条码",
+            "type": "string"
+          },
+          "memberNickname": {
+            "title": "会员昵称",
+            "type": "string"
+          },
+          "createDate": {
+            "title": "创建时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifyDate": {
+            "title": "修改时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleteStatus": {
+            "title": "是否删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCategoryId": {
+            "title": "商品分类",
+            "type": "integer",
+            "format": "int64"
+          },
+          "productBrand": {
+            "type": "string"
+          },
+          "productSn": {
+            "type": "string"
+          },
+          "productAttr": {
+            "title": "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]",
+            "type": "string"
+          }
+        }
+      },
+      "CommonPagePmsProduct": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProduct"
+            }
+          }
+        }
+      },
+      "CommonResultCommonPagePmsProduct": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommonPagePmsProduct"
+          }
+        }
+      },
+      "PmsProduct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "feightTemplateId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productAttributeCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pic": {
+            "type": "string"
+          },
+          "productSn": {
+            "title": "货号",
+            "type": "string"
+          },
+          "deleteStatus": {
+            "title": "删除状态：0->未删除；1->已删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "publishStatus": {
+            "title": "上架状态：0->下架；1->上架",
+            "type": "integer",
+            "format": "int32"
+          },
+          "newStatus": {
+            "title": "新品状态:0->不是新品；1->新品",
+            "type": "integer",
+            "format": "int32"
+          },
+          "recommandStatus": {
+            "title": "推荐状态；0->不推荐；1->推荐",
+            "type": "integer",
+            "format": "int32"
+          },
+          "verifyStatus": {
+            "title": "审核状态：0->未审核；1->审核通过",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "title": "排序",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sale": {
+            "title": "销量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number"
+          },
+          "promotionPrice": {
+            "title": "促销价格",
+            "type": "number"
+          },
+          "giftGrowth": {
+            "title": "赠送的成长值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "giftPoint": {
+            "title": "赠送的积分",
+            "type": "integer",
+            "format": "int32"
+          },
+          "usePointLimit": {
+            "title": "限制使用的积分数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "subTitle": {
+            "title": "副标题",
+            "type": "string"
+          },
+          "originalPrice": {
+            "title": "市场价",
+            "type": "number"
+          },
+          "stock": {
+            "title": "库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "lowStock": {
+            "title": "库存预警值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "unit": {
+            "title": "单位",
+            "type": "string"
+          },
+          "weight": {
+            "title": "商品重量，默认为克",
+            "type": "number"
+          },
+          "previewStatus": {
+            "title": "是否为预告商品：0->不是；1->是",
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceIds": {
+            "title": "以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮",
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "albumPics": {
+            "title": "画册图片，连产品图片限制为5张，以逗号分割",
+            "type": "string"
+          },
+          "detailTitle": {
+            "type": "string"
+          },
+          "promotionStartTime": {
+            "title": "促销开始时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionEndTime": {
+            "title": "促销结束时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionPerLimit": {
+            "title": "活动限购数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionType": {
+            "title": "促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购",
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandName": {
+            "title": "品牌名称",
+            "type": "string"
+          },
+          "productCategoryName": {
+            "title": "商品分类名称",
+            "type": "string"
+          },
+          "description": {
+            "title": "商品描述",
+            "type": "string"
+          },
+          "detailDesc": {
+            "type": "string"
+          },
+          "detailHtml": {
+            "title": "产品详情网页内容",
+            "type": "string"
+          },
+          "detailMobileHtml": {
+            "title": "移动端网页详情",
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultPmsPortalProductDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PmsPortalProductDetail"
+          }
+        }
+      },
+      "PmsBrand": {
+        "title": "商品品牌",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstLetter": {
+            "title": "首字母",
+            "type": "string"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "factoryStatus": {
+            "title": "是否为品牌制造商：0->不是；1->是",
+            "type": "integer",
+            "format": "int32"
+          },
+          "showStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCount": {
+            "title": "产品数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCommentCount": {
+            "title": "产品评论数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "logo": {
+            "title": "品牌logo",
+            "type": "string"
+          },
+          "bigPic": {
+            "title": "专区大图",
+            "type": "string"
+          },
+          "brandStory": {
+            "title": "品牌故事",
+            "type": "string"
+          }
+        }
+      },
+      "PmsPortalProductDetail": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/PmsProduct"
+          },
+          "brand": {
+            "$ref": "#/components/schemas/PmsBrand"
+          },
+          "productAttributeList": {
+            "title": "商品属性与参数",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductAttribute"
+            }
+          },
+          "productAttributeValueList": {
+            "title": "手动录入的商品属性与参数值",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductAttributeValue"
+            }
+          },
+          "skuStockList": {
+            "title": "商品的sku库存信息",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsSkuStock"
+            }
+          },
+          "productLadderList": {
+            "title": "商品阶梯价格设置",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductLadder"
+            }
+          },
+          "productFullReductionList": {
+            "title": "商品满减价格设置",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductFullReduction"
+            }
+          },
+          "couponList": {
+            "title": "商品可用优惠券",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCoupon"
+            }
+          }
+        }
+      },
+      "PmsProductAttribute": {
+        "title": "商品属性与参数",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productAttributeCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "selectType": {
+            "title": "属性选择类型：0->唯一；1->单选；2->多选",
+            "type": "integer",
+            "format": "int32"
+          },
+          "inputType": {
+            "title": "属性录入方式：0->手工录入；1->从列表中选取",
+            "type": "integer",
+            "format": "int32"
+          },
+          "inputList": {
+            "title": "可选值列表，以逗号隔开",
+            "type": "string"
+          },
+          "sort": {
+            "title": "排序字段：最高的可以单独上传图片",
+            "type": "integer",
+            "format": "int32"
+          },
+          "filterType": {
+            "title": "分类筛选样式：1->普通；1->颜色",
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchType": {
+            "title": "检索类型；0->不需要进行检索；1->关键字检索；2->范围检索",
+            "type": "integer",
+            "format": "int32"
+          },
+          "relatedStatus": {
+            "title": "相同属性产品是否关联；0->不关联；1->关联",
+            "type": "integer",
+            "format": "int32"
+          },
+          "handAddStatus": {
+            "title": "是否支持手动新增；0->不支持；1->支持",
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "title": "属性的类型；0->规格；1->参数",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PmsProductAttributeValue": {
+        "title": "手动录入的商品属性与参数值",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productAttributeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "value": {
+            "title": "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开",
+            "type": "string"
+          }
+        }
+      },
+      "PmsProductFullReduction": {
+        "title": "商品满减价格设置",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fullPrice": {
+            "type": "number"
+          },
+          "reducePrice": {
+            "type": "number"
+          }
+        }
+      },
+      "PmsProductLadder": {
+        "title": "商品阶梯价格设置",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "count": {
+            "title": "满足的商品数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "discount": {
+            "title": "折扣",
+            "type": "number"
+          },
+          "price": {
+            "title": "折后价格",
+            "type": "number"
+          }
+        }
+      },
+      "PmsSkuStock": {
+        "title": "商品的sku库存信息",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skuCode": {
+            "title": "sku编码",
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "stock": {
+            "title": "库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "lowStock": {
+            "title": "预警库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pic": {
+            "title": "展示图片",
+            "type": "string"
+          },
+          "sale": {
+            "title": "销量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionPrice": {
+            "title": "单品促销价格",
+            "type": "number"
+          },
+          "lockStock": {
+            "title": "锁定库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "spData": {
+            "title": "商品销售属性，json格式",
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultListPmsProductCategoryNode": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductCategoryNode"
+            }
+          }
+        }
+      },
+      "PmsProductCategoryNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parentId": {
+            "title": "上机分类的编号：0表示一级分类",
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "level": {
+            "title": "分类级别：0->1级；1->2级",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productUnit": {
+            "type": "string"
+          },
+          "navStatus": {
+            "title": "是否显示在导航栏：0->不显示；1->显示",
+            "type": "integer",
+            "format": "int32"
+          },
+          "showStatus": {
+            "title": "显示状态：0->不显示；1->显示",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "icon": {
+            "title": "图标",
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "description": {
+            "title": "描述",
+            "type": "string"
+          }
+        }
+      },
+      "CommonPageOmsOrderDetail": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OmsOrderDetail"
+            }
+          }
+        }
+      },
+      "CommonResultCommonPageOmsOrderDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommonPageOmsOrderDetail"
+          }
+        }
+      },
+      "OmsOrderDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "订单id",
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderSn": {
+            "title": "订单编号",
+            "type": "string"
+          },
+          "createTime": {
+            "title": "提交时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "memberUsername": {
+            "title": "用户帐号",
+            "type": "string"
+          },
+          "totalAmount": {
+            "title": "订单总金额",
+            "type": "number"
+          },
+          "payAmount": {
+            "title": "应付金额（实际支付金额）",
+            "type": "number"
+          },
+          "freightAmount": {
+            "title": "运费金额",
+            "type": "number"
+          },
+          "promotionAmount": {
+            "title": "促销优化金额（促销价、满减、阶梯价）",
+            "type": "number"
+          },
+          "integrationAmount": {
+            "title": "积分抵扣金额",
+            "type": "number"
+          },
+          "couponAmount": {
+            "title": "优惠券抵扣金额",
+            "type": "number"
+          },
+          "discountAmount": {
+            "title": "管理员后台调整订单使用的折扣金额",
+            "type": "number"
+          },
+          "payType": {
+            "title": "支付方式：0->未支付；1->支付宝；2->微信",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceType": {
+            "title": "订单来源：0->PC订单；1->app订单",
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "title": "订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单",
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderType": {
+            "title": "订单类型：0->正常订单；1->秒杀订单",
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryCompany": {
+            "title": "物流公司(配送方式)",
+            "type": "string"
+          },
+          "deliverySn": {
+            "title": "物流单号",
+            "type": "string"
+          },
+          "autoConfirmDay": {
+            "title": "自动确认时间（天）",
+            "type": "integer",
+            "format": "int32"
+          },
+          "integration": {
+            "title": "可以获得的积分",
+            "type": "integer",
+            "format": "int32"
+          },
+          "growth": {
+            "title": "可以活动的成长值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionInfo": {
+            "title": "活动信息",
+            "type": "string"
+          },
+          "billType": {
+            "title": "发票类型：0->不开发票；1->电子发票；2->纸质发票",
+            "type": "integer",
+            "format": "int32"
+          },
+          "billHeader": {
+            "title": "发票抬头",
+            "type": "string"
+          },
+          "billContent": {
+            "title": "发票内容",
+            "type": "string"
+          },
+          "billReceiverPhone": {
+            "title": "收票人电话",
+            "type": "string"
+          },
+          "billReceiverEmail": {
+            "title": "收票人邮箱",
+            "type": "string"
+          },
+          "receiverName": {
+            "title": "收货人姓名",
+            "type": "string"
+          },
+          "receiverPhone": {
+            "title": "收货人电话",
+            "type": "string"
+          },
+          "receiverPostCode": {
+            "title": "收货人邮编",
+            "type": "string"
+          },
+          "receiverProvince": {
+            "title": "省份/直辖市",
+            "type": "string"
+          },
+          "receiverCity": {
+            "title": "城市",
+            "type": "string"
+          },
+          "receiverRegion": {
+            "title": "区",
+            "type": "string"
+          },
+          "receiverDetailAddress": {
+            "title": "详细地址",
+            "type": "string"
+          },
+          "note": {
+            "title": "订单备注",
+            "type": "string"
+          },
+          "confirmStatus": {
+            "title": "确认收货状态：0->未确认；1->已确认",
+            "type": "integer",
+            "format": "int32"
+          },
+          "deleteStatus": {
+            "title": "删除状态：0->未删除；1->已删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "useIntegration": {
+            "title": "下单时使用的积分",
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentTime": {
+            "title": "支付时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deliveryTime": {
+            "title": "发货时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "receiveTime": {
+            "title": "确认收货时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "commentTime": {
+            "title": "评价时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifyTime": {
+            "title": "修改时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "orderItemList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OmsOrderItem"
+            }
+          }
+        }
+      },
+      "OmsOrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderId": {
+            "title": "订单id",
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderSn": {
+            "title": "订单编号",
+            "type": "string"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productPic": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "productBrand": {
+            "type": "string"
+          },
+          "productSn": {
+            "type": "string"
+          },
+          "productPrice": {
+            "title": "销售价格",
+            "type": "number"
+          },
+          "productQuantity": {
+            "title": "购买数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productSkuId": {
+            "title": "商品sku编号",
+            "type": "integer",
+            "format": "int64"
+          },
+          "productSkuCode": {
+            "title": "商品sku条码",
+            "type": "string"
+          },
+          "productCategoryId": {
+            "title": "商品分类id",
+            "type": "integer",
+            "format": "int64"
+          },
+          "promotionName": {
+            "title": "商品促销名称",
+            "type": "string"
+          },
+          "promotionAmount": {
+            "title": "商品促销分解金额",
+            "type": "number"
+          },
+          "couponAmount": {
+            "title": "优惠券优惠分解金额",
+            "type": "number"
+          },
+          "integrationAmount": {
+            "title": "积分优惠分解金额",
+            "type": "number"
+          },
+          "realAmount": {
+            "title": "该商品经过优惠后的分解金额",
+            "type": "number"
+          },
+          "giftIntegration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "giftGrowth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productAttr": {
+            "title": "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]",
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultOmsOrderDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OmsOrderDetail"
+          }
+        }
+      },
+      "CommonPageMemberReadHistory": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberReadHistory"
+            }
+          }
+        }
+      },
+      "CommonResultCommonPageMemberReadHistory": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommonPageMemberReadHistory"
+          }
+        }
+      },
+      "CommonPageMemberProductCollection": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberProductCollection"
+            }
+          }
+        }
+      },
+      "CommonResultCommonPageMemberProductCollection": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommonPageMemberProductCollection"
+          }
+        }
+      },
+      "CommonResultMemberProductCollection": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MemberProductCollection"
+          }
+        }
+      },
+      "CommonResultListSmsCoupon": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCoupon"
+            }
+          }
+        }
+      },
+      "CommonResultListSmsCouponHistory": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCouponHistory"
+            }
+          }
+        }
+      },
+      "SmsCouponHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "memberId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "couponCode": {
+            "type": "string"
+          },
+          "memberNickname": {
+            "title": "领取人昵称",
+            "type": "string"
+          },
+          "getType": {
+            "title": "获取类型：0->后台赠送；1->主动获取",
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "useStatus": {
+            "title": "使用状态：0->未使用；1->已使用；2->已过期",
+            "type": "integer",
+            "format": "int32"
+          },
+          "useTime": {
+            "title": "使用时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "orderId": {
+            "title": "订单编号",
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderSn": {
+            "title": "订单号码",
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultListSmsCouponHistoryDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsCouponHistoryDetail"
+            }
+          }
+        }
+      },
+      "CommonPageMemberBrandAttention": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberBrandAttention"
+            }
+          }
+        }
+      },
+      "CommonResultCommonPageMemberBrandAttention": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommonPageMemberBrandAttention"
+          }
+        }
+      },
+      "CommonResultMemberBrandAttention": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MemberBrandAttention"
+          }
+        }
+      },
+      "CommonResultUmsMemberReceiveAddress": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UmsMemberReceiveAddress"
+          }
+        }
+      },
+      "CommonResultListUmsMemberReceiveAddress": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UmsMemberReceiveAddress"
+            }
+          }
+        }
+      },
+      "CmsSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "pic": {
+            "title": "专题主图",
+            "type": "string"
+          },
+          "productCount": {
+            "title": "关联产品数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "recommendStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "collectCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commentCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "albumPics": {
+            "title": "画册图片用逗号分割",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "showStatus": {
+            "title": "显示状态：0->不显示；1->显示",
+            "type": "integer",
+            "format": "int32"
+          },
+          "forwardCount": {
+            "title": "转发数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "title": "专题分类名称",
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultListCmsSubject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CmsSubject"
+            }
+          }
+        }
+      },
+      "CommonResultListPmsProduct": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProduct"
+            }
+          }
+        }
+      },
+      "CommonResultListPmsProductCategory": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductCategory"
+            }
+          }
+        }
+      },
+      "PmsProductCategory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parentId": {
+            "title": "上机分类的编号：0表示一级分类",
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "level": {
+            "title": "分类级别：0->1级；1->2级",
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productUnit": {
+            "type": "string"
+          },
+          "navStatus": {
+            "title": "是否显示在导航栏：0->不显示；1->显示",
+            "type": "integer",
+            "format": "int32"
+          },
+          "showStatus": {
+            "title": "显示状态：0->不显示；1->显示",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "icon": {
+            "title": "图标",
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "description": {
+            "title": "描述",
+            "type": "string"
+          }
+        }
+      },
+      "CommonResultHomeContentResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/HomeContentResult"
+          }
+        }
+      },
+      "FlashPromotionProduct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "feightTemplateId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productAttributeCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pic": {
+            "type": "string"
+          },
+          "productSn": {
+            "title": "货号",
+            "type": "string"
+          },
+          "deleteStatus": {
+            "title": "删除状态：0->未删除；1->已删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "publishStatus": {
+            "title": "上架状态：0->下架；1->上架",
+            "type": "integer",
+            "format": "int32"
+          },
+          "newStatus": {
+            "title": "新品状态:0->不是新品；1->新品",
+            "type": "integer",
+            "format": "int32"
+          },
+          "recommandStatus": {
+            "title": "推荐状态；0->不推荐；1->推荐",
+            "type": "integer",
+            "format": "int32"
+          },
+          "verifyStatus": {
+            "title": "审核状态：0->未审核；1->审核通过",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "title": "排序",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sale": {
+            "title": "销量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number"
+          },
+          "promotionPrice": {
+            "title": "促销价格",
+            "type": "number"
+          },
+          "giftGrowth": {
+            "title": "赠送的成长值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "giftPoint": {
+            "title": "赠送的积分",
+            "type": "integer",
+            "format": "int32"
+          },
+          "usePointLimit": {
+            "title": "限制使用的积分数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "subTitle": {
+            "title": "副标题",
+            "type": "string"
+          },
+          "originalPrice": {
+            "title": "市场价",
+            "type": "number"
+          },
+          "stock": {
+            "title": "库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "lowStock": {
+            "title": "库存预警值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "unit": {
+            "title": "单位",
+            "type": "string"
+          },
+          "weight": {
+            "title": "商品重量，默认为克",
+            "type": "number"
+          },
+          "previewStatus": {
+            "title": "是否为预告商品：0->不是；1->是",
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceIds": {
+            "title": "以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮",
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "albumPics": {
+            "title": "画册图片，连产品图片限制为5张，以逗号分割",
+            "type": "string"
+          },
+          "detailTitle": {
+            "type": "string"
+          },
+          "promotionStartTime": {
+            "title": "促销开始时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionEndTime": {
+            "title": "促销结束时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionPerLimit": {
+            "title": "活动限购数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionType": {
+            "title": "促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购",
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandName": {
+            "title": "品牌名称",
+            "type": "string"
+          },
+          "productCategoryName": {
+            "title": "商品分类名称",
+            "type": "string"
+          },
+          "description": {
+            "title": "商品描述",
+            "type": "string"
+          },
+          "detailDesc": {
+            "type": "string"
+          },
+          "detailHtml": {
+            "title": "产品详情网页内容",
+            "type": "string"
+          },
+          "detailMobileHtml": {
+            "title": "移动端网页详情",
+            "type": "string"
+          },
+          "flashPromotionPrice": {
+            "type": "number"
+          },
+          "flashPromotionCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flashPromotionLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "HomeContentResult": {
+        "type": "object",
+        "properties": {
+          "advertiseList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsHomeAdvertise"
+            }
+          },
+          "brandList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsBrand"
+            }
+          },
+          "homeFlashPromotion": {
+            "$ref": "#/components/schemas/HomeFlashPromotion"
+          },
+          "newProductList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProduct"
+            }
+          },
+          "hotProductList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProduct"
+            }
+          },
+          "subjectList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CmsSubject"
+            }
+          }
+        }
+      },
+      "HomeFlashPromotion": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nextStartTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nextEndTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FlashPromotionProduct"
+            }
+          }
+        }
+      },
+      "SmsHomeAdvertise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "title": "轮播位置：0->PC首页轮播；1->app首页轮播",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pic": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "title": "上下线状态：0->下线；1->上线",
+            "type": "integer",
+            "format": "int32"
+          },
+          "clickCount": {
+            "title": "点击数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderCount": {
+            "title": "下单数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "title": "链接地址",
+            "type": "string"
+          },
+          "note": {
+            "title": "备注",
+            "type": "string"
+          },
+          "sort": {
+            "title": "排序",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CommonResultListOmsCartItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OmsCartItem"
+            }
+          }
+        }
+      },
+      "CommonResultListCartPromotionItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartPromotionItem"
+            }
+          }
+        }
+      },
+      "CartProduct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "feightTemplateId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productAttributeCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pic": {
+            "type": "string"
+          },
+          "productSn": {
+            "title": "货号",
+            "type": "string"
+          },
+          "deleteStatus": {
+            "title": "删除状态：0->未删除；1->已删除",
+            "type": "integer",
+            "format": "int32"
+          },
+          "publishStatus": {
+            "title": "上架状态：0->下架；1->上架",
+            "type": "integer",
+            "format": "int32"
+          },
+          "newStatus": {
+            "title": "新品状态:0->不是新品；1->新品",
+            "type": "integer",
+            "format": "int32"
+          },
+          "recommandStatus": {
+            "title": "推荐状态；0->不推荐；1->推荐",
+            "type": "integer",
+            "format": "int32"
+          },
+          "verifyStatus": {
+            "title": "审核状态：0->未审核；1->审核通过",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "title": "排序",
+            "type": "integer",
+            "format": "int32"
+          },
+          "sale": {
+            "title": "销量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number"
+          },
+          "promotionPrice": {
+            "title": "促销价格",
+            "type": "number"
+          },
+          "giftGrowth": {
+            "title": "赠送的成长值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "giftPoint": {
+            "title": "赠送的积分",
+            "type": "integer",
+            "format": "int32"
+          },
+          "usePointLimit": {
+            "title": "限制使用的积分数",
+            "type": "integer",
+            "format": "int32"
+          },
+          "subTitle": {
+            "title": "副标题",
+            "type": "string"
+          },
+          "originalPrice": {
+            "title": "市场价",
+            "type": "number"
+          },
+          "stock": {
+            "title": "库存",
+            "type": "integer",
+            "format": "int32"
+          },
+          "lowStock": {
+            "title": "库存预警值",
+            "type": "integer",
+            "format": "int32"
+          },
+          "unit": {
+            "title": "单位",
+            "type": "string"
+          },
+          "weight": {
+            "title": "商品重量，默认为克",
+            "type": "number"
+          },
+          "previewStatus": {
+            "title": "是否为预告商品：0->不是；1->是",
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceIds": {
+            "title": "以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮",
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "albumPics": {
+            "title": "画册图片，连产品图片限制为5张，以逗号分割",
+            "type": "string"
+          },
+          "detailTitle": {
+            "type": "string"
+          },
+          "promotionStartTime": {
+            "title": "促销开始时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionEndTime": {
+            "title": "促销结束时间",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionPerLimit": {
+            "title": "活动限购数量",
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionType": {
+            "title": "促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购",
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandName": {
+            "title": "品牌名称",
+            "type": "string"
+          },
+          "productCategoryName": {
+            "title": "商品分类名称",
+            "type": "string"
+          },
+          "description": {
+            "title": "商品描述",
+            "type": "string"
+          },
+          "detailDesc": {
+            "type": "string"
+          },
+          "detailHtml": {
+            "title": "产品详情网页内容",
+            "type": "string"
+          },
+          "detailMobileHtml": {
+            "title": "移动端网页详情",
+            "type": "string"
+          },
+          "productAttributeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsProductAttribute"
+            }
+          },
+          "skuStockList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsSkuStock"
+            }
+          }
+        }
+      },
+      "CommonResultCartProduct": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CartProduct"
+          }
+        }
+      },
+      "CommonResultListPmsBrand": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PmsBrand"
+            }
+          }
+        }
+      },
+      "CommonResultPmsBrand": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PmsBrand"
+          }
+        }
+      },
+      "AliPayParam": {
+        "type": "object",
+        "properties": {
+          "outTradeNo": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "CommonResultString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

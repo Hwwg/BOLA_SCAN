@@ -1,0 +1,52 @@
+{
+  "context": "click-BUTTON-按钮-Vehicle Service Hist-1",
+  "timestamp": "2026-04-29T08:20:59.656Z",
+  "count": 2,
+  "requests": [
+    {
+      "id": "8mfhyaqt76d",
+      "type": "request",
+      "url": "http://example.test/workshop/api/merchant/service_requests/896480MP7DZHB9D69",
+      "method": "GET",
+      "resourceType": "fetch",
+      "headers": {
+        "authorization": "Bearer <REDACTED_TOKEN>",
+        "referer": "http://example.test/vehicle-service-dashboard?VIN=896480MP7DZHB9D69",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "content-type": "application/json"
+      },
+      "timestamp": 1777450689237,
+      "context": "click-BUTTON-按钮-Vehicle Service Hist-1",
+      "signature": "GET|/workshop/api/merchant/service_requests/896480MP7DZHB9D69|"
+    },
+    {
+      "id": "x306bjofzys",
+      "requestId": "bmbm54bd8ph",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:10 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=1dc8ceb3-b2e2-4abf-afb1-876cb328e20d; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450690149,
+      "context": "click-BUTTON-按钮-Vehicle Service Hist-1",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

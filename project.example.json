@@ -1,0 +1,38 @@
+{
+  "projects": {
+    "crapi": {
+      "project_name": "crapi",
+      "model": "gpt-4o-mini",
+      "openapi_doc": "cache_gpt-4o-mini/crapi/crapi_openapi.json",
+      "url": "http://example.test/",
+      "login_url": "http://example.test/",
+      "click_account": {
+        "username": "attacker@example.com",
+        "password": "replace-with-password",
+        "fallback_auth": {
+          "token": "replace-with-token",
+          "token_header": "Authorization",
+          "token_prefix": "Bearer "
+        },
+        "options": {
+          "depth": 2,
+          "mode": "desktop",
+          "format": "json",
+          "fast_mode": false,
+          "parallel_pages": 3
+        }
+      },
+      "test_account": {
+        "auth": {
+          "Authorization": "Bearer replace-with-attacker-token"
+        }
+      },
+      "data_account": {
+        "auth": {
+          "Authorization": "Bearer replace-with-victim-token"
+        }
+      },
+      "api_path_blacklist": []
+    }
+  }
+}

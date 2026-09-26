@@ -1,0 +1,35 @@
+{
+  "context": "click-SPAN-按钮-Vehicle Service Hist-2",
+  "timestamp": "2026-04-29T08:20:59.657Z",
+  "count": 1,
+  "requests": [
+    {
+      "id": "y9fps17aqyr",
+      "requestId": "bmbm54bd8ph",
+      "type": "response",
+      "url": "http://example.test/chatbot/genai/state",
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Wed, 29 Apr 2026 08:18:11 GMT",
+        "server": "openresty/1.27.1.2",
+        "transfer-encoding": "chunked",
+        "set-cookie": "chat_session_id=05d622db-be09-4d38-a0a0-c8425c8ad8f5; Secure; HttpOnly; Path=/",
+        "vary": "Origin"
+      },
+      "method": "GET",
+      "contentType": "application/json",
+      "timestamp": 1777450691669,
+      "context": "click-SPAN-按钮-Vehicle Service Hist-2",
+      "size": 66,
+      "body": "{\"initialized\":\"false\",\"message\":\"Model needs to be initialized\"}\n",
+      "jsonData": {
+        "initialized": "false",
+        "message": "Model needs to be initialized"
+      },
+      "isListQuery": false
+    }
+  ]
+}

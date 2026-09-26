@@ -1,0 +1,5821 @@
+{
+  "basePath": "/api/v1/api/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "APISimpleErrorResponse": {
+      "properties": {
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "success": {
+          "default": false,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "title": "APISimpleErrorResponse",
+      "type": "object"
+    },
+    "APISimpleSuccessResponse": {
+      "properties": {
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "title": "APISimpleSuccessResponse",
+      "type": "object"
+    },
+    "AwardDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "category": {
+              "title": "Category",
+              "type": "string"
+            },
+            "date": {
+              "format": "date-time",
+              "title": "Date",
+              "type": "string"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "icon": {
+              "title": "Icon",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "requirements": {
+              "title": "Requirements",
+              "type": "object"
+            },
+            "team_id": {
+              "title": "Team Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            },
+            "value": {
+              "title": "Value",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Awards",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "AwardDetailedSuccessResponse",
+      "type": "object"
+    },
+    "AwardListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "category": {
+                "title": "Category",
+                "type": "string"
+              },
+              "date": {
+                "format": "date-time",
+                "title": "Date",
+                "type": "string"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "icon": {
+                "title": "Icon",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "requirements": {
+                "title": "Requirements",
+                "type": "object"
+              },
+              "team_id": {
+                "title": "Team Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "user_id": {
+                "title": "User Id",
+                "type": "integer"
+              },
+              "value": {
+                "title": "Value",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Awards",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "AwardListSuccessResponse",
+      "type": "object"
+    },
+    "ChallengeDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "attribution": {
+              "title": "Attribution",
+              "type": "string"
+            },
+            "category": {
+              "title": "Category",
+              "type": "string"
+            },
+            "connection_info": {
+              "title": "Connection Info",
+              "type": "string"
+            },
+            "decay": {
+              "title": "Decay",
+              "type": "integer"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "function": {
+              "title": "Function",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "initial": {
+              "title": "Initial",
+              "type": "integer"
+            },
+            "logic": {
+              "title": "Logic",
+              "type": "string"
+            },
+            "max_attempts": {
+              "title": "Max Attempts",
+              "type": "integer"
+            },
+            "minimum": {
+              "title": "Minimum",
+              "type": "integer"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "next_id": {
+              "title": "Next Id",
+              "type": "integer"
+            },
+            "requirements": {
+              "title": "Requirements",
+              "type": "object"
+            },
+            "solved_by_me": {
+              "title": "Solved By Me",
+              "type": "boolean"
+            },
+            "solves": {
+              "title": "Solves",
+              "type": "integer"
+            },
+            "state": {
+              "title": "State",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "value": {
+              "title": "Value",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Challenges",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ChallengeDetailedSuccessResponse",
+      "type": "object"
+    },
+    "ChallengeListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "attribution": {
+                "title": "Attribution",
+                "type": "string"
+              },
+              "category": {
+                "title": "Category",
+                "type": "string"
+              },
+              "connection_info": {
+                "title": "Connection Info",
+                "type": "string"
+              },
+              "decay": {
+                "title": "Decay",
+                "type": "integer"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "function": {
+                "title": "Function",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "initial": {
+                "title": "Initial",
+                "type": "integer"
+              },
+              "logic": {
+                "title": "Logic",
+                "type": "string"
+              },
+              "max_attempts": {
+                "title": "Max Attempts",
+                "type": "integer"
+              },
+              "minimum": {
+                "title": "Minimum",
+                "type": "integer"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "next_id": {
+                "title": "Next Id",
+                "type": "integer"
+              },
+              "requirements": {
+                "title": "Requirements",
+                "type": "object"
+              },
+              "solved_by_me": {
+                "title": "Solved By Me",
+                "type": "boolean"
+              },
+              "solves": {
+                "title": "Solves",
+                "type": "integer"
+              },
+              "state": {
+                "title": "State",
+                "type": "string"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "value": {
+                "title": "Value",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Challenges",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ChallengeListSuccessResponse",
+      "type": "object"
+    },
+    "CommentDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "author_id": {
+              "title": "Author Id",
+              "type": "integer"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "date": {
+              "format": "date-time",
+              "title": "Date",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Comments",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "CommentDetailedSuccessResponse",
+      "type": "object"
+    },
+    "CommentListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "author_id": {
+                "title": "Author Id",
+                "type": "integer"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "date": {
+                "format": "date-time",
+                "title": "Date",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Comments",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "CommentListSuccessResponse",
+      "type": "object"
+    },
+    "ConfigDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "key": {
+              "title": "Key",
+              "type": "string"
+            },
+            "value": {
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Configs",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ConfigDetailedSuccessResponse",
+      "type": "object"
+    },
+    "ConfigListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "key": {
+                "title": "Key",
+                "type": "string"
+              },
+              "value": {
+                "title": "Value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Configs",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ConfigListSuccessResponse",
+      "type": "object"
+    },
+    "FileDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "location": {
+              "title": "Location",
+              "type": "string"
+            },
+            "sha1sum": {
+              "title": "Sha1Sum",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Files",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "FileDetailedSuccessResponse",
+      "type": "object"
+    },
+    "FileListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "location": {
+                "title": "Location",
+                "type": "string"
+              },
+              "sha1sum": {
+                "title": "Sha1Sum",
+                "type": "string"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Files",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "FileListSuccessResponse",
+      "type": "object"
+    },
+    "FlagDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "challenge_id": {
+              "title": "Challenge Id",
+              "type": "integer"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "data": {
+              "title": "Data",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Flags",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "FlagDetailedSuccessResponse",
+      "type": "object"
+    },
+    "FlagListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "challenge_id": {
+                "title": "Challenge Id",
+                "type": "integer"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "data": {
+                "title": "Data",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Flags",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "FlagListSuccessResponse",
+      "type": "object"
+    },
+    "HintDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "challenge_id": {
+              "title": "Challenge Id",
+              "type": "integer"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "cost": {
+              "title": "Cost",
+              "type": "integer"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "requirements": {
+              "title": "Requirements",
+              "type": "object"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Hints",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "HintDetailedSuccessResponse",
+      "type": "object"
+    },
+    "HintListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "challenge_id": {
+                "title": "Challenge Id",
+                "type": "integer"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "cost": {
+                "title": "Cost",
+                "type": "integer"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "requirements": {
+                "title": "Requirements",
+                "type": "object"
+              },
+              "title": {
+                "title": "Title",
+                "type": "string"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Hints",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "HintListSuccessResponse",
+      "type": "object"
+    },
+    "NotificationDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "date": {
+              "format": "date-time",
+              "title": "Date",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "team_id": {
+              "title": "Team Id",
+              "type": "integer"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Notifications",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "NotificationDetailedSuccessResponse",
+      "type": "object"
+    },
+    "NotificationListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "date": {
+                "format": "date-time",
+                "title": "Date",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "team_id": {
+                "title": "Team Id",
+                "type": "integer"
+              },
+              "title": {
+                "title": "Title",
+                "type": "string"
+              },
+              "user_id": {
+                "title": "User Id",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Notifications",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "NotificationListSuccessResponse",
+      "type": "object"
+    },
+    "PageDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "auth_required": {
+              "title": "Auth Required",
+              "type": "boolean"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "draft": {
+              "title": "Draft",
+              "type": "boolean"
+            },
+            "format": {
+              "title": "Format",
+              "type": "string"
+            },
+            "hidden": {
+              "title": "Hidden",
+              "type": "boolean"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "link_target": {
+              "title": "Link Target",
+              "type": "string"
+            },
+            "route": {
+              "title": "Route",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Pages",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "PageDetailedSuccessResponse",
+      "type": "object"
+    },
+    "PageListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "auth_required": {
+                "title": "Auth Required",
+                "type": "boolean"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "draft": {
+                "title": "Draft",
+                "type": "boolean"
+              },
+              "format": {
+                "title": "Format",
+                "type": "string"
+              },
+              "hidden": {
+                "title": "Hidden",
+                "type": "boolean"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "link_target": {
+                "title": "Link Target",
+                "type": "string"
+              },
+              "route": {
+                "title": "Route",
+                "type": "string"
+              },
+              "title": {
+                "title": "Title",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Pages",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "PageListSuccessResponse",
+      "type": "object"
+    },
+    "SolutionDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "challenge_id": {
+              "title": "Challenge Id",
+              "type": "integer"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "state": {
+              "title": "State",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Solutions",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "SolutionDetailedSuccessResponse",
+      "type": "object"
+    },
+    "SolutionListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "challenge_id": {
+                "title": "Challenge Id",
+                "type": "integer"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "state": {
+                "title": "State",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Solutions",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "SolutionListSuccessResponse",
+      "type": "object"
+    },
+    "SubmissionDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "challenge_id": {
+              "title": "Challenge Id",
+              "type": "integer"
+            },
+            "date": {
+              "format": "date-time",
+              "title": "Date",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "ip": {
+              "title": "Ip",
+              "type": "string"
+            },
+            "provided": {
+              "title": "Provided",
+              "type": "string"
+            },
+            "team_id": {
+              "title": "Team Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Submissions",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "SubmissionDetailedSuccessResponse",
+      "type": "object"
+    },
+    "SubmissionListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "challenge_id": {
+                "title": "Challenge Id",
+                "type": "integer"
+              },
+              "date": {
+                "format": "date-time",
+                "title": "Date",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "ip": {
+                "title": "Ip",
+                "type": "string"
+              },
+              "provided": {
+                "title": "Provided",
+                "type": "string"
+              },
+              "team_id": {
+                "title": "Team Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "user_id": {
+                "title": "User Id",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Submissions",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "meta": {
+          "properties": {
+            "pagination": {
+              "properties": {
+                "next": {
+                  "title": "Next",
+                  "type": "integer"
+                },
+                "page": {
+                  "title": "Page",
+                  "type": "integer"
+                },
+                "pages": {
+                  "title": "Pages",
+                  "type": "integer"
+                },
+                "per_page": {
+                  "title": "Per Page",
+                  "type": "integer"
+                },
+                "prev": {
+                  "title": "Prev",
+                  "type": "integer"
+                },
+                "total": {
+                  "title": "Total",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "page",
+                "next",
+                "prev",
+                "pages",
+                "per_page",
+                "total"
+              ],
+              "title": "Pagination",
+              "type": "object"
+            }
+          },
+          "required": [
+            "pagination"
+          ],
+          "title": "Meta",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "title": "SubmissionListSuccessResponse",
+      "type": "object"
+    },
+    "TagDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "challenge_id": {
+              "title": "Challenge Id",
+              "type": "integer"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "value": {
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Tags",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TagDetailedSuccessResponse",
+      "type": "object"
+    },
+    "TagListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "challenge_id": {
+                "title": "Challenge Id",
+                "type": "integer"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "value": {
+                "title": "Value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Tags",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TagListSuccessResponse",
+      "type": "object"
+    },
+    "TeamDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "affiliation": {
+              "title": "Affiliation",
+              "type": "string"
+            },
+            "banned": {
+              "title": "Banned",
+              "type": "boolean"
+            },
+            "bracket_id": {
+              "title": "Bracket Id",
+              "type": "integer"
+            },
+            "captain_id": {
+              "title": "Captain Id",
+              "type": "integer"
+            },
+            "country": {
+              "title": "Country",
+              "type": "string"
+            },
+            "created": {
+              "format": "date-time",
+              "title": "Created",
+              "type": "string"
+            },
+            "email": {
+              "title": "Email",
+              "type": "string"
+            },
+            "hidden": {
+              "title": "Hidden",
+              "type": "boolean"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "oauth_id": {
+              "title": "Oauth Id",
+              "type": "integer"
+            },
+            "password": {
+              "title": "Password",
+              "type": "string"
+            },
+            "secret": {
+              "title": "Secret",
+              "type": "string"
+            },
+            "website": {
+              "title": "Website",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Teams",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TeamDetailedSuccessResponse",
+      "type": "object"
+    },
+    "TeamListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "affiliation": {
+                "title": "Affiliation",
+                "type": "string"
+              },
+              "banned": {
+                "title": "Banned",
+                "type": "boolean"
+              },
+              "bracket_id": {
+                "title": "Bracket Id",
+                "type": "integer"
+              },
+              "captain_id": {
+                "title": "Captain Id",
+                "type": "integer"
+              },
+              "country": {
+                "title": "Country",
+                "type": "string"
+              },
+              "created": {
+                "format": "date-time",
+                "title": "Created",
+                "type": "string"
+              },
+              "email": {
+                "title": "Email",
+                "type": "string"
+              },
+              "hidden": {
+                "title": "Hidden",
+                "type": "boolean"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "oauth_id": {
+                "title": "Oauth Id",
+                "type": "integer"
+              },
+              "password": {
+                "title": "Password",
+                "type": "string"
+              },
+              "secret": {
+                "title": "Secret",
+                "type": "string"
+              },
+              "website": {
+                "title": "Website",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Teams",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "meta": {
+          "properties": {
+            "pagination": {
+              "properties": {
+                "next": {
+                  "title": "Next",
+                  "type": "integer"
+                },
+                "page": {
+                  "title": "Page",
+                  "type": "integer"
+                },
+                "pages": {
+                  "title": "Pages",
+                  "type": "integer"
+                },
+                "per_page": {
+                  "title": "Per Page",
+                  "type": "integer"
+                },
+                "prev": {
+                  "title": "Prev",
+                  "type": "integer"
+                },
+                "total": {
+                  "title": "Total",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "page",
+                "next",
+                "prev",
+                "pages",
+                "per_page",
+                "total"
+              ],
+              "title": "Pagination",
+              "type": "object"
+            }
+          },
+          "required": [
+            "pagination"
+          ],
+          "title": "Meta",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "title": "TeamListSuccessResponse",
+      "type": "object"
+    },
+    "TokenDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "created": {
+              "format": "date-time",
+              "title": "Created",
+              "type": "string"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "expiration": {
+              "format": "date-time",
+              "title": "Expiration",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            },
+            "value": {
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Tokens",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TokenDetailedSuccessResponse",
+      "type": "object"
+    },
+    "TokenListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "created": {
+                "format": "date-time",
+                "title": "Created",
+                "type": "string"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "expiration": {
+                "format": "date-time",
+                "title": "Expiration",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "user_id": {
+                "title": "User Id",
+                "type": "integer"
+              },
+              "value": {
+                "title": "Value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Tokens",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TokenListSuccessResponse",
+      "type": "object"
+    },
+    "TopicDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "value": {
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Topics",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TopicDetailedSuccessResponse",
+      "type": "object"
+    },
+    "TopicListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "value": {
+                "title": "Value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Topics",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "TopicListSuccessResponse",
+      "type": "object"
+    },
+    "UnlockDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "date": {
+              "format": "date-time",
+              "title": "Date",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "target": {
+              "title": "Target",
+              "type": "integer"
+            },
+            "team_id": {
+              "title": "Team Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Unlocks",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "UnlockDetailedSuccessResponse",
+      "type": "object"
+    },
+    "UnlockListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "date": {
+                "format": "date-time",
+                "title": "Date",
+                "type": "string"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "target": {
+                "title": "Target",
+                "type": "integer"
+              },
+              "team_id": {
+                "title": "Team Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "user_id": {
+                "title": "User Id",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Unlocks",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "UnlockListSuccessResponse",
+      "type": "object"
+    },
+    "UserDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "affiliation": {
+              "title": "Affiliation",
+              "type": "string"
+            },
+            "banned": {
+              "title": "Banned",
+              "type": "boolean"
+            },
+            "bracket_id": {
+              "title": "Bracket Id",
+              "type": "integer"
+            },
+            "change_password": {
+              "title": "Change Password",
+              "type": "boolean"
+            },
+            "country": {
+              "title": "Country",
+              "type": "string"
+            },
+            "created": {
+              "format": "date-time",
+              "title": "Created",
+              "type": "string"
+            },
+            "email": {
+              "title": "Email",
+              "type": "string"
+            },
+            "hidden": {
+              "title": "Hidden",
+              "type": "boolean"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "language": {
+              "title": "Language",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "oauth_id": {
+              "title": "Oauth Id",
+              "type": "integer"
+            },
+            "password": {
+              "title": "Password",
+              "type": "string"
+            },
+            "secret": {
+              "title": "Secret",
+              "type": "string"
+            },
+            "team_id": {
+              "title": "Team Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "verified": {
+              "title": "Verified",
+              "type": "boolean"
+            },
+            "website": {
+              "title": "Website",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Users",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "UserDetailedSuccessResponse",
+      "type": "object"
+    },
+    "UserListSuccessResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "properties": {
+              "affiliation": {
+                "title": "Affiliation",
+                "type": "string"
+              },
+              "banned": {
+                "title": "Banned",
+                "type": "boolean"
+              },
+              "bracket_id": {
+                "title": "Bracket Id",
+                "type": "integer"
+              },
+              "change_password": {
+                "title": "Change Password",
+                "type": "boolean"
+              },
+              "country": {
+                "title": "Country",
+                "type": "string"
+              },
+              "created": {
+                "format": "date-time",
+                "title": "Created",
+                "type": "string"
+              },
+              "email": {
+                "title": "Email",
+                "type": "string"
+              },
+              "hidden": {
+                "title": "Hidden",
+                "type": "boolean"
+              },
+              "id": {
+                "title": "Id",
+                "type": "integer"
+              },
+              "language": {
+                "title": "Language",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "oauth_id": {
+                "title": "Oauth Id",
+                "type": "integer"
+              },
+              "password": {
+                "title": "Password",
+                "type": "string"
+              },
+              "secret": {
+                "title": "Secret",
+                "type": "string"
+              },
+              "team_id": {
+                "title": "Team Id",
+                "type": "integer"
+              },
+              "type": {
+                "title": "Type",
+                "type": "string"
+              },
+              "verified": {
+                "title": "Verified",
+                "type": "boolean"
+              },
+              "website": {
+                "title": "Website",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "title": "Users",
+            "type": "object"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "meta": {
+          "properties": {
+            "pagination": {
+              "properties": {
+                "next": {
+                  "title": "Next",
+                  "type": "integer"
+                },
+                "page": {
+                  "title": "Page",
+                  "type": "integer"
+                },
+                "pages": {
+                  "title": "Pages",
+                  "type": "integer"
+                },
+                "per_page": {
+                  "title": "Per Page",
+                  "type": "integer"
+                },
+                "prev": {
+                  "title": "Prev",
+                  "type": "integer"
+                },
+                "total": {
+                  "title": "Total",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "page",
+                "next",
+                "prev",
+                "pages",
+                "per_page",
+                "total"
+              ],
+              "title": "Pagination",
+              "type": "object"
+            }
+          },
+          "required": [
+            "pagination"
+          ],
+          "title": "Meta",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "title": "UserListSuccessResponse",
+      "type": "object"
+    },
+    "ValuelessTokenDetailedSuccessResponse": {
+      "properties": {
+        "data": {
+          "properties": {
+            "created": {
+              "format": "date-time",
+              "title": "Created",
+              "type": "string"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "expiration": {
+              "format": "date-time",
+              "title": "Expiration",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "Tokens",
+          "type": "object"
+        },
+        "success": {
+          "default": true,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ValuelessTokenDetailedSuccessResponse",
+      "type": "object"
+    }
+  },
+  "info": {
+    "description": "CTFd 平台 API 文档 - 自动导出",
+    "title": "API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/awards": {
+      "get": {
+        "description": "Endpoint to list Award objects in bulk",
+        "operationId": "get_award_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "value",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "icon",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "name",
+              "description",
+              "category",
+              "icon"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AwardListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "awards"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create an Award object",
+        "operationId": "post_award_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AwardListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "awards"
+        ]
+      }
+    },
+    "/api/v1/awards/{award_id}": {
+      "delete": {
+        "description": "Endpoint to delete an Award object",
+        "operationId": "delete_award",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "awards"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Award object",
+        "operationId": "get_award",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AwardDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "awards"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "An Award ID",
+          "in": "path",
+          "name": "award_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/brackets": {
+      "get": {
+        "operationId": "get_bracket_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "name",
+              "description",
+              "type"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "brackets"
+        ]
+      },
+      "post": {
+        "operationId": "post_bracket_list",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "brackets"
+        ]
+      }
+    },
+    "/api/v1/brackets/{bracket_id}": {
+      "delete": {
+        "operationId": "delete_bracket",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "brackets"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "bracket_id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "patch": {
+        "operationId": "patch_bracket",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "brackets"
+        ]
+      }
+    },
+    "/api/v1/challenges": {
+      "get": {
+        "description": "Endpoint to get Challenge objects in bulk",
+        "operationId": "get_challenge_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "max_attempts",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "value",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "name",
+              "description",
+              "category",
+              "type",
+              "state"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChallengeListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Challenge object",
+        "operationId": "post_challenge_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChallengeDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      }
+    },
+    "/api/v1/challenges/attempt": {
+      "post": {
+        "operationId": "post_challenge_attempt",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      }
+    },
+    "/api/v1/challenges/types": {
+      "get": {
+        "operationId": "get_challenge_types",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      }
+    },
+    "/api/v1/challenges/{challenge_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Challenge object",
+        "operationId": "delete_challenge",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Challenge object",
+        "operationId": "get_challenge",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChallengeDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Challenge object",
+        "operationId": "patch_challenge",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChallengeDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      }
+    },
+    "/api/v1/challenges/{challenge_id}/files": {
+      "get": {
+        "operationId": "get_challenge_files",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/flags": {
+      "get": {
+        "operationId": "get_challenge_flags",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/hints": {
+      "get": {
+        "operationId": "get_challenge_hints",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/ratings": {
+      "get": {
+        "operationId": "get_challenge_ratings",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Get paginated ratings for a challenge",
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "put_challenge_ratings",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Create or update a rating for a challenge",
+        "tags": [
+          "challenges"
+        ]
+      }
+    },
+    "/api/v1/challenges/{challenge_id}/requirements": {
+      "get": {
+        "operationId": "get_challenge_requirements",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/solves": {
+      "get": {
+        "operationId": "get_challenge_solves",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/tags": {
+      "get": {
+        "operationId": "get_challenge_tags",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/challenges/{challenge_id}/topics": {
+      "get": {
+        "operationId": "get_challenge_topics",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "challenges"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "challenge_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/comments": {
+      "get": {
+        "description": "Endpoint to list Comment objects in bulk",
+        "operationId": "get_comment_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "page_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "content"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommentListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "comments"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Comment object",
+        "operationId": "post_comment_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommentDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/api/v1/comments/{comment_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Comment object",
+        "operationId": "delete_comment",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "comments"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "comment_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/configs": {
+      "get": {
+        "description": "Endpoint to get Config objects in bulk",
+        "operationId": "get_config_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "key",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "value",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "key",
+              "value"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfigListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "patch": {
+        "description": "Endpoint to get patch Config objects in bulk",
+        "operationId": "patch_config_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to get create a Config object",
+        "operationId": "post_config_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfigDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      }
+    },
+    "/api/v1/configs/fields": {
+      "get": {
+        "operationId": "get_field_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "description"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "post": {
+        "operationId": "post_field_list",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      }
+    },
+    "/api/v1/configs/fields/{field_id}": {
+      "delete": {
+        "operationId": "delete_field",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "get": {
+        "operationId": "get_field",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "field_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "operationId": "patch_field",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      }
+    },
+    "/api/v1/configs/{config_key}": {
+      "delete": {
+        "description": "Endpoint to delete a Config object",
+        "operationId": "delete_config",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Config object",
+        "operationId": "get_config",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfigDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "config_key",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Config object",
+        "operationId": "patch_config",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfigDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "configs"
+        ]
+      }
+    },
+    "/api/v1/exports/raw": {
+      "post": {
+        "operationId": "post_export_list",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "exports"
+        ]
+      }
+    },
+    "/api/v1/files": {
+      "get": {
+        "description": "Endpoint to get file objects in bulk",
+        "operationId": "get_files_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "type",
+              "location"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "files"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Endpoint to get file objects in bulk",
+        "operationId": "post_files_list",
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "challenge",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "page_id",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "page",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "solution_id",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "solution",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "description": "The file to upload",
+            "in": "formData",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "files"
+        ]
+      }
+    },
+    "/api/v1/files/{file_id}": {
+      "delete": {
+        "description": "Endpoint to delete a file object",
+        "operationId": "delete_files_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "files"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific file object",
+        "operationId": "get_files_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "files"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "file_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/flags": {
+      "get": {
+        "description": "Endpoint to list Flag objects in bulk",
+        "operationId": "get_flag_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "data",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "type",
+              "content",
+              "data"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FlagListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Flag object",
+        "operationId": "post_flag_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FlagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      }
+    },
+    "/api/v1/flags/types": {
+      "get": {
+        "operationId": "get_flag_types",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      }
+    },
+    "/api/v1/flags/types/{type_name}": {
+      "get": {
+        "operationId": "get_flag_type",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "type_name",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/flags/{flag_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Flag object",
+        "operationId": "delete_flag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Flag object",
+        "operationId": "get_flag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FlagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "flag_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Flag object",
+        "operationId": "patch_flag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FlagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "flags"
+        ]
+      }
+    },
+    "/api/v1/hints": {
+      "get": {
+        "description": "Endpoint to list Hint objects in bulk",
+        "operationId": "get_hint_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "cost",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "type",
+              "content"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HintListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "hints"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Hint object",
+        "operationId": "post_hint_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HintDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "hints"
+        ]
+      }
+    },
+    "/api/v1/hints/{hint_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Tag object",
+        "operationId": "delete_hint",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "hints"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Hint object",
+        "operationId": "get_hint",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HintDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "hints"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "hint_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Hint object",
+        "operationId": "patch_hint",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HintDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "hints"
+        ]
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "description": "Endpoint to get notification objects in bulk",
+        "operationId": "get_notificantion_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "title",
+              "content"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "since_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "notifications"
+        ]
+      },
+      "head": {
+        "description": "Endpoint to get statistics for notification objects in bulk",
+        "operationId": "head_notificantion_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "title",
+              "content"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "since_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "notifications"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a notification object",
+        "operationId": "post_notificantion_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/api/v1/notifications/{notification_id}": {
+      "delete": {
+        "description": "Endpoint to delete a notification object",
+        "operationId": "delete_notification",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "notifications"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific notification object",
+        "operationId": "get_notification",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "notifications"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "A Notification ID",
+          "in": "path",
+          "name": "notification_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/pages": {
+      "get": {
+        "description": "Endpoint to get page objects in bulk",
+        "operationId": "get_page_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "route",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "draft",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "hidden",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "auth_required",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "title",
+              "route",
+              "content"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PageListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "pages"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a page object",
+        "operationId": "post_page_list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Pages",
+            "schema": {
+              "properties": {
+                "auth_required": {
+                  "type": "boolean"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "draft": {
+                  "type": "boolean"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "hidden": {
+                  "type": "boolean"
+                },
+                "link_target": {
+                  "type": "string"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              },
+              "title": "Pages",
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PageDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/api/v1/pages/{page_id}": {
+      "delete": {
+        "description": "Endpoint to delete a page object",
+        "operationId": "delete_page_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "pages"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to read a page object",
+        "operationId": "get_page_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PageDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "pages"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID of a page object",
+          "in": "path",
+          "name": "page_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a page object",
+        "operationId": "patch_page_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PageDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/api/v1/scoreboard": {
+      "get": {
+        "operationId": "get_scoreboard_list",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "scoreboard"
+        ]
+      }
+    },
+    "/api/v1/scoreboard/top/{count}": {
+      "get": {
+        "operationId": "get_scoreboard_detail",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "scoreboard"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "How many top teams to return",
+          "in": "path",
+          "name": "count",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/api/v1/shares": {
+      "post": {
+        "operationId": "post_share",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "shares"
+        ]
+      }
+    },
+    "/api/v1/solutions": {
+      "get": {
+        "description": "Endpoint to get solution objects in bulk",
+        "operationId": "get_solution_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "state"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolutionListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "solutions"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a solution object",
+        "operationId": "post_solution_list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Solutions",
+            "schema": {
+              "properties": {
+                "challenge_id": {
+                  "type": "integer"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                }
+              },
+              "title": "Solutions",
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolutionDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "solutions"
+        ]
+      }
+    },
+    "/api/v1/solutions/{solution_id}": {
+      "delete": {
+        "description": "Endpoint to delete a solution object",
+        "operationId": "delete_solution",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "solutions"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a solution object",
+        "operationId": "get_solution",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolutionDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "solutions"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "A Solution ID",
+          "in": "path",
+          "name": "solution_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a solution object",
+        "operationId": "patch_solution",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolutionDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "solutions"
+        ]
+      }
+    },
+    "/api/v1/statistics/challenges/solves": {
+      "get": {
+        "operationId": "get_challenge_solve_statistics",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      }
+    },
+    "/api/v1/statistics/challenges/solves/percentages": {
+      "get": {
+        "operationId": "get_challenge_solve_percentages",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      }
+    },
+    "/api/v1/statistics/challenges/{column}": {
+      "get": {
+        "operationId": "get_challenge_property_counts",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "column",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/statistics/scores/distribution": {
+      "get": {
+        "operationId": "get_scores_distribution",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      }
+    },
+    "/api/v1/statistics/submissions/{column}": {
+      "get": {
+        "operationId": "get_submission_property_counts",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "column",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/statistics/teams": {
+      "get": {
+        "operationId": "get_team_statistics",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      }
+    },
+    "/api/v1/statistics/users": {
+      "get": {
+        "operationId": "get_user_statistics",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      }
+    },
+    "/api/v1/statistics/users/{column}": {
+      "get": {
+        "operationId": "get_user_property_counts",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "statistics"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "column",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/submissions": {
+      "get": {
+        "description": "Endpoint to get submission objects in bulk",
+        "operationId": "get_submissions_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "ip",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "provided",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "challenge_id",
+              "user_id",
+              "team_id",
+              "ip",
+              "provided",
+              "type"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SubmissionListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "submissions"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a submission object. Users should interact with the attempt endpoint to submit flags.",
+        "operationId": "post_submissions_list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Submissions",
+            "schema": {
+              "properties": {
+                "challenge_id": {
+                  "type": "integer"
+                },
+                "date": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "ip": {
+                  "type": "string"
+                },
+                "provided": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                }
+              },
+              "title": "Submissions",
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SubmissionListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "submissions"
+        ]
+      }
+    },
+    "/api/v1/submissions/{submission_id}": {
+      "delete": {
+        "description": "Endpoint to delete a submission object",
+        "operationId": "delete_submission",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "submissions"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a submission object",
+        "operationId": "get_submission",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SubmissionDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "submissions"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "A Submission ID",
+          "in": "path",
+          "name": "submission_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a submission object",
+        "operationId": "patch_submission",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SubmissionDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "submissions"
+        ]
+      }
+    },
+    "/api/v1/tags": {
+      "get": {
+        "description": "Endpoint to list Tag objects in bulk",
+        "operationId": "get_tag_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "challenge_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "value",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "challenge_id",
+              "value"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tags"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Tag object",
+        "operationId": "post_tag_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tags"
+        ]
+      }
+    },
+    "/api/v1/tags/{tag_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Tag object",
+        "operationId": "delete_tag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "tags"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Tag object",
+        "operationId": "get_tag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tags"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "A Tag ID",
+          "in": "path",
+          "name": "tag_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Tag object",
+        "operationId": "patch_tag",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tags"
+        ]
+      }
+    },
+    "/api/v1/teams": {
+      "get": {
+        "description": "Endpoint to get Team objects in bulk",
+        "operationId": "get_team_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "affiliation",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "bracket",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "name",
+              "website",
+              "country",
+              "bracket",
+              "affiliation",
+              "email"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Team object",
+        "operationId": "post_team_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/me": {
+      "delete": {
+        "description": "Endpoint to disband your current team. Can only be used if the team has performed no actions in the CTF.",
+        "operationId": "delete_team_private",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get the current user's Team object",
+        "operationId": "get_team_private",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Current Team",
+          "in": "query",
+          "name": "team_id",
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit the current user's Team object",
+        "operationId": "patch_team_private",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/me/awards": {
+      "get": {
+        "operationId": "get_team_private_awards",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/me/fails": {
+      "get": {
+        "operationId": "get_team_private_fails",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/me/members": {
+      "post": {
+        "operationId": "post_team_private_members",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/me/solves": {
+      "get": {
+        "operationId": "get_team_private_solves",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/{team_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Team object",
+        "operationId": "delete_team_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Team object",
+        "operationId": "get_team_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Team ID",
+          "in": "path",
+          "name": "team_id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific Team object",
+        "operationId": "patch_team_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/{team_id}/awards": {
+      "get": {
+        "operationId": "get_team_public_awards",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Team ID",
+          "in": "path",
+          "name": "team_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/teams/{team_id}/fails": {
+      "get": {
+        "operationId": "get_team_public_fails",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Team ID",
+          "in": "path",
+          "name": "team_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/teams/{team_id}/members": {
+      "delete": {
+        "operationId": "delete_team_members",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "get": {
+        "operationId": "get_team_members",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Team ID",
+          "in": "path",
+          "name": "team_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "post_team_members",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      }
+    },
+    "/api/v1/teams/{team_id}/solves": {
+      "get": {
+        "operationId": "get_team_public_solves",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "teams"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Team ID",
+          "in": "path",
+          "name": "team_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/tokens": {
+      "get": {
+        "description": "Endpoint to get token objects in bulk",
+        "operationId": "get_token_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TokenListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tokens"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a token object",
+        "operationId": "post_token_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TokenDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tokens"
+        ]
+      }
+    },
+    "/api/v1/tokens/{token_id}": {
+      "delete": {
+        "description": "Endpoint to delete an existing token object",
+        "operationId": "delete_token_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "tokens"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get an existing token object",
+        "operationId": "get_token_detail",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ValuelessTokenDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "tokens"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "A Token ID",
+          "in": "path",
+          "name": "token_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/topics": {
+      "delete": {
+        "description": "Endpoint to delete a specific Topic object of a specific type",
+        "operationId": "delete_topic_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "in": "query",
+            "name": "target_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "topics"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to list Topic objects in bulk",
+        "operationId": "get_topic_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "value",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "value"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TopicListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "topics"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a Topic object",
+        "operationId": "post_topic_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TopicDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "topics"
+        ]
+      }
+    },
+    "/api/v1/topics/{topic_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific Topic object",
+        "operationId": "delete_topic",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "topics"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific Topic object",
+        "operationId": "get_topic",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TopicDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "topics"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "topic_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/unlocks": {
+      "get": {
+        "description": "Endpoint to get unlock objects in bulk",
+        "operationId": "get_unlock_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "target",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "target",
+              "type"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UnlockListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "unlocks"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create an unlock object. Used to unlock hints.",
+        "operationId": "post_unlock_list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UnlockDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "unlocks"
+        ]
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "description": "Endpoint to get User objects in bulk",
+        "operationId": "get_user_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "affiliation",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "bracket",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "enum": [
+              "name",
+              "website",
+              "country",
+              "bracket",
+              "affiliation",
+              "email"
+            ],
+            "in": "query",
+            "name": "field",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserListSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "post": {
+        "description": "Endpoint to create a User object",
+        "operationId": "post_user_list",
+        "parameters": [
+          {
+            "description": "Whether to send the created user an email with their credentials",
+            "in": "query",
+            "name": "notify",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "description": "Endpoint to get the User object for the current user",
+        "operationId": "get_user_private",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "description": "Endpoint to edit the User object for the current user",
+        "operationId": "patch_user_private",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/me/awards": {
+      "get": {
+        "operationId": "get_user_private_awards",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "User ID",
+          "in": "query",
+          "name": "user_id",
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/users/me/fails": {
+      "get": {
+        "operationId": "get_user_private_fails",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/me/solves": {
+      "get": {
+        "operationId": "get_user_private_solves",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/me/submissions": {
+      "get": {
+        "operationId": "get_user_private_submissions",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}": {
+      "delete": {
+        "description": "Endpoint to delete a specific User object",
+        "operationId": "delete_user_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "get": {
+        "description": "Endpoint to get a specific User object",
+        "operationId": "get_user_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "User ID",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "patch": {
+        "description": "Endpoint to edit a specific User object",
+        "operationId": "patch_user_public",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDetailedSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "An error occured processing the provided or stored data",
+            "schema": {
+              "$ref": "#/definitions/APISimpleErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}/awards": {
+      "get": {
+        "operationId": "get_user_public_awards",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "User ID or 'me'",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/users/{user_id}/email": {
+      "parameters": [
+        {
+          "description": "User ID",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "post": {
+        "description": "Endpoint to email a User object",
+        "operationId": "post_user_emails",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APISimpleSuccessResponse"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}/fails": {
+      "get": {
+        "operationId": "get_user_public_fails",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "User ID",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/api/v1/users/{user_id}/solves": {
+      "get": {
+        "operationId": "get_user_public_solves",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "User ID",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "responses": {
+    "MaskError": {
+      "description": "When any error occurs on mask"
+    },
+    "ParseError": {
+      "description": "When a mask can't be parsed"
+    }
+  },
+  "security": [
+    {
+      "AccessToken": []
+    }
+  ],
+  "securityDefinitions": {
+    "AccessToken": {
+      "description": "Generate access token in the settings page of your user account.",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Endpoint to retrieve Challenges",
+      "name": "challenges"
+    },
+    {
+      "description": "Endpoint to retrieve Tags",
+      "name": "tags"
+    },
+    {
+      "description": "Endpoint to retrieve Topics",
+      "name": "topics"
+    },
+    {
+      "description": "Endpoint to retrieve Awards",
+      "name": "awards"
+    },
+    {
+      "description": "Endpoint to retrieve Hints",
+      "name": "hints"
+    },
+    {
+      "description": "Endpoint to retrieve Flags",
+      "name": "flags"
+    },
+    {
+      "description": "Endpoint to retrieve Submission",
+      "name": "submissions"
+    },
+    {
+      "description": "Endpoint to retrieve scores",
+      "name": "scoreboard"
+    },
+    {
+      "description": "Endpoint to retrieve Teams",
+      "name": "teams"
+    },
+    {
+      "description": "Endpoint to retrieve Users",
+      "name": "users"
+    },
+    {
+      "description": "Endpoint to retrieve Statistics",
+      "name": "statistics"
+    },
+    {
+      "description": "Endpoint to retrieve Files",
+      "name": "files"
+    },
+    {
+      "description": "Endpoint to retrieve Notifications",
+      "name": "notifications"
+    },
+    {
+      "description": "Endpoint to retrieve Configs",
+      "name": "configs"
+    },
+    {
+      "description": "Endpoint to retrieve Pages",
+      "name": "pages"
+    },
+    {
+      "description": "Endpoint to retrieve Unlocks",
+      "name": "unlocks"
+    },
+    {
+      "description": "Endpoint to retrieve Tokens",
+      "name": "tokens"
+    },
+    {
+      "description": "Endpoint to retrieve Comments",
+      "name": "comments"
+    },
+    {
+      "description": "Endpoint to create Share links",
+      "name": "shares"
+    },
+    {
+      "description": "Endpoint to retrieve Brackets",
+      "name": "brackets"
+    },
+    {
+      "description": "Endpoint to retrieve Exports",
+      "name": "exports"
+    },
+    {
+      "description": "Endpoint to retrieve and create Solutions",
+      "name": "solutions"
+    }
+  ]
+}
